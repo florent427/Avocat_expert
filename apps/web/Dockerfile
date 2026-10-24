@@ -3,7 +3,7 @@
 # Un certificat d'autorité supplémentaire peut être fourni au seul moment de
 # la construction : --secret id=extra_ca,src=<fichier.pem>.
 
-FROM public.ecr.aws/docker/library/node:22-bookworm-slim@sha256:de170b39439eb0e5a3444ad7d60b015614a381e10fecae2e30ec9e735122f38d AS build
+FROM public.ecr.aws/docker/library/node:26-bookworm-slim@sha256:28147155d47dc31abe0a46e0d12b59b2fb3d0a2dcc5dc65fce76a074180b16fe AS build
 ENV NEXT_TELEMETRY_DISABLED=1
 WORKDIR /app
 COPY package.json package-lock.json ./
@@ -13,7 +13,7 @@ RUN --mount=type=secret,id=extra_ca,required=false \
 COPY . .
 RUN npm run build
 
-FROM public.ecr.aws/docker/library/node:22-bookworm-slim@sha256:de170b39439eb0e5a3444ad7d60b015614a381e10fecae2e30ec9e735122f38d AS runtime
+FROM public.ecr.aws/docker/library/node:26-bookworm-slim@sha256:28147155d47dc31abe0a46e0d12b59b2fb3d0a2dcc5dc65fce76a074180b16fe AS runtime
 ENV NODE_ENV=production NEXT_TELEMETRY_DISABLED=1 PORT=3000 HOSTNAME=0.0.0.0
 # npm, corepack et yarn sont inutiles à l'exécution (et porteurs de vulnérabilités) : retirés.
 RUN rm -rf /usr/local/lib/node_modules/npm /usr/local/lib/node_modules/corepack /opt/yarn-* \
