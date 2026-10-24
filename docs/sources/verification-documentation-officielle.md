@@ -63,6 +63,17 @@ jusqu'à leur reprise par les mesures réglementaires »), `DATE_DEBUT` et
 attributs `debut` d'éléments `VIGUEUR_DIFF`, `VERSION_A_VENIR`. Interprété
 comme « date non fixée » (ADR 0016) ; à confirmer par la DILA.
 
+Analyse du stock `Freemium_legi_global_20250713-140000.tar.gz` (SHA-256
+`f862b4a2…3d4eca`, 1,1 Go, 9,5 Go de XML) par les parseurs du connecteur, le
+2026-10-24 : 1 750 418 articles, 144 551 versions de textes, 144 551 plans,
+236 589 sections, 280 936 fichiers d'index ELI (`legi/global/eli/…/versions.xml`,
+correspondances ELI → versions, non ingérés) ; aucune liste de suppression
+dans le stock. Écarts à la DTD constatés : `ETAT` vide (229 644 articles,
+généralement avec début et fin à `2999-01-01`), `NUM` vide (25 121 articles),
+`CONTEXTE/TEXTE` sans `cid` (4 sections), état `DEPLACE` (18 articles) absent
+de la liste de la DTD, sentinelle `2222-01-01`. Traitements : ADR 0016,
+migration 0009.
+
 Conséquences appliquées dans le code : chemin source inclus dans la
 connaissance enregistrée ; retrait appliqué au seul chemin exact ; attribution
 (source, URL, archive horodatée) portée par chaque `SourceReference`.
