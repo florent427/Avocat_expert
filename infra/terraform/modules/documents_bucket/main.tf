@@ -7,7 +7,27 @@ variable "kms_key_arn" {
 }
 
 resource "aws_s3_bucket" "this" {
+  #checkov:skip=CKV_AWS_18:accès journalisés par les événements de données CloudTrail (module audit), plus précis que les journaux d'accès S3
+  #checkov:skip=CKV2_AWS_62:notifications ajoutées avec l'analyse antivirale des pièces (backlog SEC-04)
+  #checkov:skip=CKV_AWS_144:pas de réplication inter-région : données hébergées en France (eu-west-3) ; sauvegarde par versionnement
   bucket = var.name
+}
+
+resource "aws_s3_bucket_lifecycle_configuration" "this" {
+  bucket = aws_s3_bucket.this.id
+  rule {
+    id     = "versions-et-envois-incomplets"
+    status = "Enabled"
+    filter {}
+    abort_incomplete_multipart_upload {
+      days_after_initiation = 7
+    }
+    # La conservation des pièces relève de la politique de chaque cabinet ;
+    # les versions remplacées ou effacées sont purgées après 30 jours.
+    noncurrent_version_expiration {
+      noncurrent_days = 30
+    }
+  }
 }
 
 resource "aws_s3_bucket_public_access_block" "this" {

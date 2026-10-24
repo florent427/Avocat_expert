@@ -1,0 +1,6 @@
+# Exemple : copier en staging.tfvars (non versionné) et compléter.
+image_tag           = "0000000"
+certificate_arn     = "arn:aws:acm:eu-west-3:000000000000:certificate/00000000-0000-0000-0000-000000000000"
+app_host            = "app.recette.example.invalid"
+auth_host           = "auth.recette.example.invalid"
+budget_alert_emails = ["exploitation@example.invalid"]
