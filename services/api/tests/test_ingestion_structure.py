@@ -193,10 +193,34 @@ def test_newest_copy_wins_within_one_delivery(
             tar.addfile(info, io.BytesIO(data))
     _, stats = ingest_legi(conn, archive, enforce_order=False)
     assert (stats.superseded, stats.stale_duplicate) == (1, 1)
+    assert stats.by_kind["ARTICLE"]["stale_duplicate"] == 1
     current = conn.execute(
         "SELECT source_path, source_mtime IS NOT NULL FROM provision_version WHERE official_id = %s AND sys_to IS NULL",
         (official_id,),
     ).fetchone()
     assert current is not None and "code_non_vigueur" in current[0] and current[1]
+    _, stats = ingest_legi(conn, legi_fixtures, enforce_order=False)  # restauration
+    assert stats.superseded == 1
+
+
+def test_newest_section_copy_wins_within_one_delivery(
+    conn: psycopg.Connection[Any], legi_fixtures: Path, tmp_path: Path
+) -> None:
+    # Même règle pour les nœuds de structure (défaut constaté sur le stock : la
+    # copie périmée d'un plan de texte était écrite, bloquée par l'index unique).
+    import io
+
+    source = next(legi_fixtures.rglob("LEGISCTA000006195891.xml"))
+    data = source.read_bytes()
+    relative = "x/" + source.relative_to(legi_fixtures).as_posix()
+    newer = relative.replace("code_et_TNC_en_vigueur/code_en_vigueur", "code_et_TNC_non_vigueur/code_non_vigueur")
+    archive = tmp_path / "livraison-de-test.tar.gz"
+    with tarfile.open(archive, "w:gz") as tar:
+        for name, mtime in ((newer, 1_711_911_554), (relative, 1_711_052_384)):
+            info = tarfile.TarInfo(name)
+            info.size, info.mtime = len(data), mtime
+            tar.addfile(info, io.BytesIO(data))
+    _, stats = ingest_legi(conn, archive, enforce_order=False)
+    assert stats.by_kind["SECTION"]["superseded"] == 1 and stats.by_kind["SECTION"]["stale_duplicate"] == 1
     _, stats = ingest_legi(conn, legi_fixtures, enforce_order=False)  # restauration
     assert stats.superseded == 1

@@ -424,7 +424,7 @@ class _Store:
         outcome, previous = self._close_or_keep(
             "document_version", "official_id = %s", (t.official_id,), t.source_path, t.source_file_sha256, new_id
         )
-        if outcome == "unchanged":
+        if outcome in ("unchanged", "stale_duplicate"):
             return outcome
         if previous is not None:
             self.conn.execute(
@@ -498,7 +498,7 @@ class _Store:
             n.source_file_sha256,
             new_id,
         )
-        if outcome == "unchanged":
+        if outcome in ("unchanged", "stale_duplicate"):
             return outcome
         if previous is not None:
             self.conn.execute(
