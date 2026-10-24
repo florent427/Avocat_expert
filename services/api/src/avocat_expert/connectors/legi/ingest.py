@@ -132,7 +132,8 @@ def _sha256_file(path: Path) -> str | None:
 
 
 def _link_rows(owner: uuid.UUID, links: Iterable[LegiLink]) -> list[tuple[Any, ...]]:
-    return [
+    """Liens d'une version, dédoublonnés (un même lien peut figurer deux fois dans LIENS)."""
+    rows = [
         (
             owner,
             link.link_type,
@@ -144,6 +145,7 @@ def _link_rows(owner: uuid.UUID, links: Iterable[LegiLink]) -> list[tuple[Any, .
         )
         for link in links
     ]
+    return list(dict.fromkeys(rows))
 
 
 Parsed = LegiArticle | LegiTextVersion | LegiStructureNode
@@ -392,7 +394,7 @@ class _Store:
             cur.executemany(
                 """INSERT INTO legal_reference (from_version_id, link_type, direction, target_official_id,
                                                 target_text_id, target_label, target_date)
-                   VALUES (%s, %s, %s, %s, %s, %s, %s) ON CONFLICT DO NOTHING""",
+                   VALUES (%s, %s, %s, %s, %s, %s, %s)""",
                 _link_rows(new_id, a.links),
             )
         return outcome
@@ -482,7 +484,7 @@ class _Store:
             cur.executemany(
                 """INSERT INTO document_reference (from_document_version_id, link_type, direction,
                                                    target_official_id, target_text_id, target_label, target_date)
-                   VALUES (%s, %s, %s, %s, %s, %s, %s) ON CONFLICT DO NOTHING""",
+                   VALUES (%s, %s, %s, %s, %s, %s, %s)""",
                 _link_rows(new_id, t.links),
             )
         return "superseded" if previous is not None else "inserted"

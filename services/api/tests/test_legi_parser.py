@@ -156,3 +156,20 @@ def test_streamed_tar_reading_with_many_members(legi_fixtures: Path, tmp_path: P
     entries = list(reader.entries())
     assert len(entries) == 3000 and reader.ignored == 1
     assert entries[-1].path == "legi/global/a/article/LEGI/ARTI/002999/LEGIARTI000000002999.xml"
+
+
+def test_duplicate_links_are_written_once() -> None:
+    import uuid
+
+    from avocat_expert.connectors.legi.ingest import _link_rows
+    from avocat_expert.connectors.legi.parser import LegiLink
+
+    link = LegiLink(
+        link_type="CITATION",
+        direction="source",
+        target_official_id="LEGIARTI000006903823",
+        target_text_id="LEGITEXT000006072050",
+        target_label="Code du travail - art. L5422-1",
+        target_date=None,
+    )
+    assert len(_link_rows(uuid.uuid4(), [link, link])) == 1
