@@ -32,4 +32,5 @@ AVX_DATABASE_URL=... AVX_LEXVERIF_BIN=... uv run python -m avocat_expert.evaluat
 Les métriques sont calculées séparément : rappel@k, MRR, précision@k
 (sous-estimée : seules les versions annotées comptent comme pertinentes),
 exactitude des blocages, intégrité des citations (contrôles déterministes 1 à
-4), conformité temporelle des versions citées, et ventilation par catégorie.
+4), conformité temporelle des versions citées, intégrité structurelle des
+extraits (pas de phrase introductive orpheline, pas d'item isolé), et ventilation par catégorie.

@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import pytest
 
+from avocat_expert.search.excerpt import select_excerpt
 from avocat_expert.search.query import parse_query, terms_of
-from avocat_expert.search.service import select_excerpt
 
 
 @pytest.mark.parametrize(
@@ -28,8 +28,7 @@ def test_terms_fold_accents_and_drop_stopwords() -> None:
     assert terms_of("Les conditions d'éligibilité à l'allocation") == ("conditions", "eligibilite", "allocation")
 
 
-def test_excerpt_is_a_literal_contiguous_window() -> None:
-    text = "Premier alinéa sans rapport avec la question posée.\n1° Court :\nL'allocation est versée sous condition de ressources.\nAutre."
+def test_excerpt_is_literal() -> None:
+    text = "Premier alinéa sans rapport avec la question posée.\nL'allocation est versée sous condition de ressources.\nAutre."
     excerpt = select_excerpt(text, terms_of("allocation versée"))
-    assert excerpt in text
-    assert "allocation est versée" in excerpt
+    assert excerpt == "L'allocation est versée sous condition de ressources."

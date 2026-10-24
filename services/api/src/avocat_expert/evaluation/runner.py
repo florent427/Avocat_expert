@@ -21,6 +21,7 @@ from avocat_expert.answer.extractive import ExtractiveAnswerService
 from avocat_expert.config import get_settings
 from avocat_expert.contracts.common import CheckOutcome, SupportStatus
 from avocat_expert.contracts.services import AnswerRequest, SourcedAnswer
+from avocat_expert.search.excerpt import ELISION, is_item
 from avocat_expert.search.ports import DisabledSemanticSearcher
 from avocat_expert.search.service import HybridSearchService, PostgresLexicalSearcher
 from avocat_expert.storage.corpus import CorpusRepository
@@ -58,7 +59,15 @@ class CaseResult:
     citations_total: int = 0
     citations_intact: int = 0
     citations_in_force: int = 0
+    citations_structured: int = 0
     notes: list[str] = field(default_factory=list)
+
+
+def structurally_complete(quote: str) -> bool:
+    """Un extrait ne commence pas par un item d'énumération et ne s'arrête pas
+    sur une phrase introductive (« … : ») privée de sa suite."""
+    lines = [line for line in quote.split("\n") if line.strip() and line != ELISION]
+    return bool(lines) and not is_item(lines[0]) and not lines[-1].rstrip().endswith(":")
 
 
 def load_cases(path: Path) -> list[Case]:
@@ -75,6 +84,8 @@ def evaluate_case(case: Case, answer: SourcedAnswer) -> CaseResult:
         outcomes = {c.check: c.outcome for c in statement.verification.checks}
         if all(outcomes.get(name) is CheckOutcome.OK for name in DETERMINISTIC_CHECKS):
             result.citations_intact += 1
+        if statement.quote is not None and structurally_complete(statement.quote):
+            result.citations_structured += 1
         ref = statement.citation
         if ref.valid_from <= answer.as_of and (ref.valid_to is None or answer.as_of < ref.valid_to):
             result.citations_in_force += 1
@@ -125,6 +136,9 @@ def summarise(results: list[CaseResult]) -> dict[str, Any]:
             if citations
             else None,
             "conformite_temporelle": round(sum(r.citations_in_force for r in results) / citations, 4)
+            if citations
+            else None,
+            "integrite_structurelle_des_extraits": round(sum(r.citations_structured for r in results) / citations, 4)
             if citations
             else None,
         },

@@ -12,14 +12,13 @@ from dataclasses import dataclass, field
 from datetime import date
 
 from avocat_expert.contracts.services import ChannelStatus, SearchHit, SearchResponse
+from avocat_expert.search.excerpt import select_excerpt
 from avocat_expert.search.ports import LexicalSearcher, SemanticSearcher
-from avocat_expert.search.query import ParsedQuery, fold, parse_query, terms_of
+from avocat_expert.search.query import ParsedQuery, fold, parse_query
 from avocat_expert.storage.corpus import CorpusRepository, LexicalHit, VersionRecord
 
 RRF_K = 60
 EXACT_MATCH_BONUS = 1.0
-MIN_EXCERPT_CHARS = 40
-MAX_WINDOW_LINES = 3
 
 
 @dataclass(frozen=True)
@@ -37,33 +36,6 @@ class _Candidate:
     version: VersionRecord
     score: float = 0.0
     matched_by: list[str] = field(default_factory=list)
-
-
-def select_excerpt(text: str, query_terms: tuple[str, ...]) -> str:
-    """Fenêtre d'au plus trois paragraphes consécutifs recouvrant le mieux les
-    termes de la requête. Le texte est restitué littéralement (jamais réécrit)."""
-    lines = [line for line in text.split("\n") if line.strip()]
-    if not lines:
-        return ""
-    prefixes = {t[:5] for t in query_terms}
-
-    def line_score(line: str) -> int:
-        return sum(1 for t in set(terms_of(line)) if t[:5] in prefixes)
-
-    scores = [line_score(line) for line in lines]
-    best: tuple[int, int, int] = (-1, 0, 1)
-    for start in range(len(lines)):
-        for size in range(1, MAX_WINDOW_LINES + 1):
-            end = start + size
-            if end > len(lines):
-                break
-            if size > 1 and len("\n".join(lines[start : end - 1])) >= MIN_EXCERPT_CHARS:
-                break  # inutile d'élargir une fenêtre déjà suffisante
-            window_score = sum(scores[start:end])
-            if window_score > best[0]:
-                best = (window_score, start, end)
-    _, start, end = best
-    return "\n".join(lines[start:end])
 
 
 class HybridSearchService:

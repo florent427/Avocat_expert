@@ -170,3 +170,26 @@ dev/recette sans données réelles ; compte PISTE bac à sable ; Keycloak ;
 référent juridique = porteur du projet. Conditions 1 et 4 du §8 remplies ;
 condition 2 engagée (DEC-01 partielle, DEC-05 en cours) ; condition 3 :
 CI verte depuis l'exécution n° 2.
+
+## 10. Correction du choix des extraits (2026-10-24)
+
+Constat (pré-avis de relecture juridique) : 12 extraits sur 30 dans le
+corpus d'évaluation s'arrêtaient à une phrase introductive (« … : ») sans
+l'énumération qui porte la règle, ou isolaient un item (« 5° … ») de sa phrase
+introductive. Les contrôles déterministes passaient (passage littéral
+présent), mais l'extrait ne fondait rien. Aucune métrique ne le détectait.
+
+Correction : `search/excerpt.py` lit l'article comme un arbre (parties I.-,
+alinéas, 1°, a), tirets) et cite toujours une phrase introductive avec son
+énumération ; au-delà de 1 800 caractères, il conserve la phrase introductive
+et les items pertinents complets, avec des élisions « […] » vérifiées par
+lexverif.
+
+Résultats : intégrité structurelle des extraits 0,60 → **1,0** (nouvelle
+métrique de l'évaluation, exigée en test) ; rappel et MRR inchangés
+(0,9231) ; longueur moyenne des extraits 619 → 1 161 caractères. Tests :
+73 réussis (14 nouveaux, dont une vérification par le moteur Rust de tous les
+extraits produits sur les 40 articles réels pour 9 requêtes).
+
+Reste ouvert : citations parasites issues du canal lexical (ex. L125-2 C.
+assur. sur une question de fiscalité) — backlog SRCH-04.

@@ -25,5 +25,6 @@ def test_seed_corpus(conn: psycopg.Connection[Any], lexverif_bin: str) -> None:
     assert report["cas_valides_juridiquement"] == 0
     assert report["citations"]["integrite_controles_deterministes"] == 1.0
     assert report["citations"]["conformite_temporelle"] == 1.0
+    assert report["citations"]["integrite_structurelle_des_extraits"] == 1.0
     assert report["blocages"]["exactitude"] == 1.0
     assert {e["id"] for e in report["echecs"]} == KNOWN_FAILURES
