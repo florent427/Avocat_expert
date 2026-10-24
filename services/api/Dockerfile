@@ -28,7 +28,10 @@ ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 \
     PATH="/app/.venv/bin:$PATH" \
     AVX_LEXVERIF_BIN=/usr/local/bin/lexverif \
     AVX_MIGRATIONS_DIR=/app/migrations
-RUN useradd --system --uid 10001 --no-create-home --shell /usr/sbin/nologin avx
+# Outils d'installation inutiles à l'exécution (et porteurs de vulnérabilités) : retirés.
+RUN python -m pip uninstall -y pip \
+    && rm -rf /usr/local/lib/python3.13/ensurepip \
+    && useradd --system --uid 10001 --no-create-home --shell /usr/sbin/nologin avx
 WORKDIR /app
 COPY --from=pybuild /app/.venv /app/.venv
 COPY services/api/migrations ./migrations

@@ -23,6 +23,7 @@ class Settings(BaseSettings):
     auth_mode: Literal["dev_token", "oidc"] = "dev_token"
     #: Empreinte SHA-256 (hex) du jeton de développement ; jamais le jeton en clair.
     dev_token_sha256: str = ""
+    otel_exporter_endpoint: str = ""
     oidc_issuer: str = ""
     oidc_audience: str = ""
 

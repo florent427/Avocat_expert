@@ -8,7 +8,7 @@ from datetime import UTC, date, datetime
 from typing import Annotated, Any
 
 import psycopg
-from fastapi import Depends, FastAPI, HTTPException, status
+from fastapi import Depends, FastAPI, HTTPException, Request, Response, status
 from fastapi.middleware.cors import CORSMiddleware
 
 from avocat_expert import __version__
@@ -23,6 +23,7 @@ from avocat_expert.contracts.services import (
     SearchResponse,
     SourcedAnswer,
 )
+from avocat_expert.observability.telemetry import configure_tracing, set_attributes, span
 from avocat_expert.observability.traces import Step, Trace, Usage, persist_trace, sha256_json
 from avocat_expert.search.ports import DisabledSemanticSearcher
 from avocat_expert.search.service import HybridSearchService, PostgresLexicalSearcher
@@ -64,6 +65,23 @@ def create_app() -> FastAPI:
         description="Recherche juridique sourcée — tranche verticale V1 (non destinée à la production).",
     )
     settings = get_settings()
+    configure_tracing(settings.otel_exporter_endpoint, settings.environment)
+
+    @app.middleware("http")
+    async def trace_requests(request: Request, call_next: Any) -> Response:
+        # Attributs : méthode, gabarit de route et statut uniquement (jamais l'URL ni le corps).
+        with span("http.request", **{"http.request.method": request.method}) as current:
+            response: Response = await call_next(request)
+            route = request.scope.get("route")
+            set_attributes(
+                current,
+                **{
+                    "http.route": getattr(route, "path", "inconnue"),
+                    "http.response.status_code": response.status_code,
+                },
+            )
+            return response
+
     if settings.environment in ("local", "test"):
         app.add_middleware(
             CORSMiddleware,
@@ -104,10 +122,19 @@ def create_app() -> FastAPI:
         trace = Trace(operation="answer", input_text=body.question, legal_as_of=body.as_of or today())
         trace.routing = {"mode": "EXTRACTIF", "agents": [], "motif": "tranche verticale sans modèle génératif"}
         started = datetime.now(UTC)
-        try:
-            result = ExtractiveAnswerService(search_service, verifier).answer(body, today())
-        except VerificationUnavailable as exc:
-            raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, str(exc)) from exc
+        with span("answer", **{"avx.operation": "answer", "avx.question_length": len(body.question)}) as current:
+            try:
+                result = ExtractiveAnswerService(search_service, verifier).answer(body, today())
+            except VerificationUnavailable as exc:
+                raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, str(exc)) from exc
+            set_attributes(
+                current,
+                **{
+                    "avx.status": result.status.value,
+                    "avx.statements": len(result.statements),
+                    "avx.blocked": result.status.value == "BLOQUEE",
+                },
+            )
         finished = datetime.now(UTC)
         trace.steps.append(
             Step(
