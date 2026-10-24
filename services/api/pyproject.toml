@@ -37,6 +37,10 @@ packages = ["src/avocat_expert"]
 [tool.uv]
 # Chaîne d'approvisionnement : aucune version publiée depuis moins de deux semaines.
 exclude-newer = "2026-10-10T00:00:00Z"
+# Exceptions de sécurité (correctif postérieur à la date limite) :
+# certifi — GHSA-6q48-6c7w-9gw2 (racines emSign compromises), corrigé en 2026.10.19.
+exclude-newer-package = { certifi = "2026-10-21T00:00:00Z" }
+constraint-dependencies = ["certifi>=2026.10.19"]
 
 [tool.ruff]
 line-length = 120

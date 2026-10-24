@@ -46,6 +46,12 @@ aucune ressource cloud créée, aucun coût engagé.
    supprimait les scopes par défaut. Mappeur d'audience placé sur le client.
 5. **14 vulnérabilités HIGH** dans les outils d'installation des images de
    base (pip, npm) : retirés des images d'exécution.
+6. **Vulnérabilité CRITIQUE** détectée par la CI (exécution n° 12) :
+   `certifi` 2026.7.22, entré avec l'exportateur OpenTelemetry
+   (GHSA-6q48-6c7w-9gw2, racines emSign compromises). Le contrôle bloquant a
+   arrêté le job. Correction : `certifi` 2026.10.19, par exception ciblée à la
+   règle des 14 jours (`exclude-newer-package`, contrainte de version
+   minimale), documentée dans `pyproject.toml`.
 
 ## 4. Limites et risques
 
