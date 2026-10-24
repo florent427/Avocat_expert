@@ -6,7 +6,7 @@ from datetime import datetime
 
 import pytest
 
-from avocat_expert.connectors.legi.remote import RemoteError, _checked, parse_index, plan
+from avocat_expert.connectors.legi.remote import RemoteError, _checked, freshness, parse_index, plan
 
 from .conftest import REPO_ROOT
 
@@ -61,3 +61,13 @@ def test_no_stock_means_no_first_integration() -> None:
 def test_network_egress_is_restricted_to_the_official_host(url: str) -> None:
     with pytest.raises(RemoteError, match="hors du périmètre"):
         _checked(url)
+
+
+def test_freshness_reports_pending_deliveries_and_lag() -> None:
+    archives = parse_index(INDEX.read_text("utf-8"))
+    late = freshness(archives, datetime(2025, 7, 15, 20, 57, 1))
+    assert not late.up_to_date and late.pending == ("LEGI_20261023-215041.tar.gz",)
+    assert late.lag_days is not None and late.lag_days > 465
+    current = freshness(archives, datetime(2026, 10, 23, 21, 50, 41))
+    assert current.up_to_date and current.lag_days == 0
+    assert not freshness(archives, None).up_to_date  # corpus vide

@@ -76,6 +76,7 @@ class ArchiveReader:
     def __init__(self, location: Path) -> None:
         self.location = location
         self.withdrawals = []
+        self._skip_remaining = 0
 
     def _skip(self, path: str) -> None:
         # Index ELI (legi/global/eli/…/versions.xml) : correspondances entre
@@ -85,11 +86,21 @@ class ArchiveReader:
         else:
             self.ignored += 1
 
-    def entries(self) -> Iterator[ArchiveEntry]:
+    def entries(self, skip: int = 0) -> Iterator[ArchiveEntry]:
+        """Fichiers XML de la livraison. Les ``skip`` premiers (reprise après
+        incident) sont produits sans leur contenu (``data`` vide) : seul leur
+        chemin sert à vérifier le point de reprise."""
+        self._skip_remaining = skip
         if self.location.is_dir():
             yield from self._from_directory()
         else:
             yield from self._from_tar()
+
+    def _skipping(self) -> bool:
+        if self._skip_remaining > 0:
+            self._skip_remaining -= 1
+            return True
+        return False
 
     def _classify(self, path: str) -> EntryKind | None:
         for pattern, kind in _KINDS:
@@ -111,7 +122,7 @@ class ArchiveReader:
             elif file.stat().st_size > MAX_MEMBER_BYTES:
                 self.oversized += 1
             else:
-                yield ArchiveEntry(relative, file.read_bytes(), kind)
+                yield ArchiveEntry(relative, b"" if self._skipping() else file.read_bytes(), kind)
 
     def _from_tar(self) -> Iterator[ArchiveEntry]:
         with tarfile.open(self.location, mode="r|gz") as archive:
@@ -134,6 +145,9 @@ class ArchiveReader:
                 kind = self._classify("/" + relative)
                 if kind is None:
                     self._skip("/" + relative)
+                    continue
+                if self._skipping():
+                    yield ArchiveEntry(relative, b"", kind)
                     continue
                 handle = archive.extractfile(member)
                 if handle is not None:

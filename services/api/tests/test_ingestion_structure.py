@@ -101,16 +101,16 @@ def test_interrupted_ingestion_resumes_after_last_batch(
     conn: psycopg.Connection[Any], legi_fixtures: Path, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     archive = _tar(legi_fixtures, tmp_path)
-    original = ingest_module._Store.entry
+    original = ingest_module._Store.store
     calls = {"n": 0}
 
-    def failing(self: Any, entry: Any) -> str:
+    def failing(self: Any, item: Any) -> str:
         calls["n"] += 1
         if calls["n"] == 25:
             raise ConnectionError("coupure simulée")
-        return original(self, entry)
+        return original(self, item)
 
-    monkeypatch.setattr(ingest_module._Store, "entry", failing)
+    monkeypatch.setattr(ingest_module._Store, "store", failing)
     with pytest.raises(ConnectionError):
         ingest_legi(conn, archive, batch_size=10)
     failed = conn.execute(
@@ -118,7 +118,7 @@ def test_interrupted_ingestion_resumes_after_last_batch(
     ).fetchone()
     assert failed is not None and failed[1:3] == ("FAILED", 20)  # deux lots validés, le troisième annulé
 
-    monkeypatch.setattr(ingest_module._Store, "entry", original)
+    monkeypatch.setattr(ingest_module._Store, "store", original)
     run_id, stats = ingest_legi(conn, archive, batch_size=10)
     assert run_id == failed[0]
     assert stats.files_seen == FIXTURE_FILES and stats.unchanged == FIXTURE_FILES
@@ -131,14 +131,14 @@ def test_inconsistent_resume_point_is_refused(
 ) -> None:
     archive = _tar(legi_fixtures, tmp_path)
 
-    def failing(self: Any, entry: Any) -> str:
+    def failing(self: Any, item: Any) -> str:
         raise ConnectionError("coupure simulée")
 
-    original = ingest_module._Store.entry
-    monkeypatch.setattr(ingest_module._Store, "entry", failing)
+    original = ingest_module._Store.store
+    monkeypatch.setattr(ingest_module._Store, "store", failing)
     with pytest.raises(ConnectionError):
         ingest_legi(conn, archive, batch_size=10)
-    monkeypatch.setattr(ingest_module._Store, "entry", original)
+    monkeypatch.setattr(ingest_module._Store, "store", original)
     # Simule un point de reprise enregistré pour une autre archive de même empreinte.
     conn.execute(
         """UPDATE ingestion_run SET files_committed = 3, last_committed_path = 'legi/autre.xml'
@@ -150,3 +150,23 @@ def test_inconsistent_resume_point_is_refused(
     conn.execute("UPDATE ingestion_run SET files_committed = 0 WHERE status = 'FAILED'")
     _, stats = ingest_legi(conn, archive, batch_size=10)
     assert stats.files_seen == FIXTURE_FILES
+
+
+def test_same_article_twice_in_one_batch(conn: psycopg.Connection[Any], legi_fixtures: Path, tmp_path: Path) -> None:
+    # Changement de branche livré avec l'ancien fichier dans le même lot : l'ordre
+    # de lecture fait foi, la seconde lecture remplace la première.
+    official_id = "LEGIARTI000006792617"
+    source = next(legi_fixtures.rglob(f"{official_id}.xml"))
+    relative = source.relative_to(legi_fixtures).as_posix()
+    for branch in ("code_et_TNC_en_vigueur/code_en_vigueur", "code_et_TNC_non_vigueur/code_non_vigueur"):
+        target = tmp_path / relative.replace("code_et_TNC_en_vigueur/code_en_vigueur", branch)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy(source, target)
+    _, stats = ingest_legi(conn, tmp_path, enforce_order=False, batch_size=100)
+    assert (stats.unchanged, stats.superseded) == (1, 1)
+    current = conn.execute(
+        "SELECT source_path FROM provision_version WHERE official_id = %s AND sys_to IS NULL", (official_id,)
+    ).fetchone()
+    assert current is not None and "code_non_vigueur" in current[0]
+    _, stats = ingest_legi(conn, legi_fixtures)  # restauration
+    assert stats.superseded == 1

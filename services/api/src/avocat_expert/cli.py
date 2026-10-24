@@ -20,6 +20,18 @@ def _connect() -> psycopg.Connection[tuple[object, ...]]:
     return psycopg.connect(url, autocommit=True)
 
 
+def _last_applied(conn: psycopg.Connection[tuple[object, ...]]) -> datetime | None:
+    from avocat_expert.connectors.legi import SOURCE_CODE
+
+    row = conn.execute(
+        """SELECT max(r.archive_timestamp) FROM ingestion_run r JOIN legal_source s ON s.id = r.source_id
+           WHERE s.code = %s AND r.status = 'SUCCEEDED'""",
+        (SOURCE_CODE,),
+    ).fetchone()
+    value = row[0] if row else None
+    return value if isinstance(value, datetime) else None
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="avx")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -39,6 +51,7 @@ def main(argv: list[str] | None = None) -> int:
     sync.add_argument("--max", type=int, default=None, help="nombre maximal de livraisons à appliquer")
     sync.add_argument("--simulation", action="store_true", help="afficher le plan sans rien télécharger ni ingérer")
     sync.add_argument("--lot", type=int, default=1000, help="nombre de fichiers par transaction")
+    sub.add_parser("fraicheur-legi", help="écart entre le corpus et les livraisons LEGI publiées (code 3 si en retard)")
     ask = sub.add_parser("answer", help="réponse sourcée extractive")
     ask.add_argument("question")
     ask.add_argument("--as-of", type=date.fromisoformat)
@@ -60,19 +73,22 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps({"run_id": str(run_id), **stats.as_dict()}, ensure_ascii=False))
         return 0 if stats.rejected == 0 else 1
 
+    if args.command == "fraicheur-legi":
+        from avocat_expert.connectors.legi.remote import fetch_index, freshness
+
+        with _connect() as conn:
+            last = _last_applied(conn)
+        report = freshness(fetch_index(), last)
+        print(json.dumps(report.as_dict(), ensure_ascii=False))
+        return 0 if report.up_to_date else 3
+
     if args.command == "sync-legi":
-        from avocat_expert.connectors.legi import SOURCE_CODE
         from avocat_expert.connectors.legi.ingest import ingest_legi
         from avocat_expert.connectors.legi.remote import download, fetch_index, plan
 
         with _connect() as conn:
-            row = conn.execute(
-                """SELECT max(r.archive_timestamp) FROM ingestion_run r JOIN legal_source s ON s.id = r.source_id
-                   WHERE s.code = %s AND r.status = 'SUCCEEDED'""",
-                (SOURCE_CODE,),
-            ).fetchone()
-            last_applied = row[0] if row else None
-            todo = plan(fetch_index(), last_applied if isinstance(last_applied, datetime) else None)
+            last_applied = _last_applied(conn)
+            todo = plan(fetch_index(), last_applied)
             if args.max is not None:
                 todo = todo[: args.max]
             print(json.dumps({"derniere_livraison": str(last_applied), "a_appliquer": [a.name for a in todo]}))

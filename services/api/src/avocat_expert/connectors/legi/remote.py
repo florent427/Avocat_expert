@@ -124,3 +124,36 @@ def sha256(path: Path) -> str:
         for chunk in iter(lambda: handle.read(1 << 20), b""):
             digest.update(chunk)
     return digest.hexdigest()
+
+
+@dataclass(frozen=True)
+class Freshness:
+    """Écart entre le corpus et les livraisons publiées (ING-10)."""
+
+    last_applied: datetime | None
+    latest_published: datetime | None
+    pending: tuple[str, ...]
+    lag_days: float | None
+
+    @property
+    def up_to_date(self) -> bool:
+        return self.last_applied is not None and not self.pending
+
+    def as_dict(self) -> dict[str, object]:
+        return {
+            "derniere_livraison_integree": None if self.last_applied is None else self.last_applied.isoformat(),
+            "derniere_livraison_publiee": None if self.latest_published is None else self.latest_published.isoformat(),
+            "livraisons_en_attente": len(self.pending),
+            "premiere_en_attente": self.pending[0] if self.pending else None,
+            "retard_jours": self.lag_days,
+            "a_jour": self.up_to_date,
+        }
+
+
+def freshness(available: list[RemoteArchive], last_applied: datetime | None) -> Freshness:
+    pending = plan(available, last_applied)
+    latest = max((a.timestamp for a in available), default=None)
+    lag = None
+    if latest is not None and last_applied is not None:
+        lag = round(max((latest - last_applied).total_seconds(), 0) / 86400, 2)
+    return Freshness(last_applied, latest, tuple(a.name for a in pending), lag)

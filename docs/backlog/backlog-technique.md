@@ -50,7 +50,7 @@ P0 = bloquant pour la phase suivante · P1 = nécessaire avant bêta · P2 = apr
 | ING-07 | CELLAR/EUR-Lex (SPARQL + REST CELLAR vérifiés) | P1 |
 | ING-08 | Qualification territoriale (outre-mer, Alsace-Moselle) avec validation juriste | P1 |
 | ING-09 | Exploitation du graphe de références (résolution des cibles, transferts) | P1 |
-| ING-10 | Supervision de fraîcheur (dernier delta ingéré, écarts) | P1 |
+| ING-10 | ✅ `avx fraicheur-legi` : dernière livraison intégrée et publiée, livraisons en attente, retard en jours, code retour 3 si en retard ; reste : alarme CloudWatch en recette | — |
 
 ## Phase D — recherche et évaluation
 | ID | Tâche | Prio |

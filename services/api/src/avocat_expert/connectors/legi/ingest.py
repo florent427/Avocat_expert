@@ -145,8 +145,23 @@ def _link_rows(owner: uuid.UUID, links: Iterable[LegiLink]) -> list[tuple[Any, .
     ]
 
 
+Parsed = LegiArticle | LegiTextVersion | LegiStructureNode
+
+_ARTICLE_STATE = """SELECT official_id, id, text_sha256, source_status, valid_from, valid_to, end_undetermined,
+                           dates_unknown, source_file_sha256, source_path, withdrawn_from_source
+                    FROM provision_version WHERE official_id = ANY(%s) AND sys_to IS NULL FOR UPDATE"""
+
+
 class _Store:
-    """Écritures d'une ingestion ; caches des identifiants de textes et de dispositions."""
+    """Écritures d'une ingestion.
+
+    Performance (mesurée sur le stock : environ 200 fichiers/s avec une requête
+    synchrone par lecture) : l'état courant des éléments d'un lot, les textes et
+    les dispositions sont lus en une requête par lot (``prefetch``) ; les
+    identifiants des nouvelles lignes sont générés côté client et les écritures
+    envoyées en mode pipeline. Le verrou d'ingestion de la source garantit
+    qu'aucune autre écriture ne s'intercale.
+    """
 
     def __init__(self, conn: psycopg.Connection[Any], run_id: uuid.UUID, source_id: uuid.UUID) -> None:
         self.conn = conn
@@ -154,12 +169,78 @@ class _Store:
         self.source_id = source_id
         self._documents: dict[str, uuid.UUID] = {}
         self._provisions: dict[tuple[uuid.UUID, str], uuid.UUID] = {}
+        self._articles: dict[str, tuple[Any, ...] | None] = {}
+        self._nodes: dict[tuple[str, str], tuple[Any, ...] | None] = {}
+        self._prefetched_documents: set[uuid.UUID] = set()
 
     def forget_caches(self) -> None:
         # Après une annulation de transaction, des identifiants mis en cache
         # peuvent désigner des lignes qui n'existent plus.
         self._documents.clear()
         self._provisions.clear()
+        self._articles.clear()
+        self._nodes.clear()
+        self._prefetched_documents.clear()
+
+    def prefetch(self, items: list[Parsed]) -> None:
+        """Charge en une requête par catégorie l'état courant des éléments du lot."""
+        self._articles.clear()
+        self._nodes.clear()
+        articles = [i for i in items if isinstance(i, LegiArticle)]
+        versions = [i for i in items if isinstance(i, LegiTextVersion)]
+        nodes = [i for i in items if isinstance(i, LegiStructureNode)]
+
+        cids = {a.text_official_id for a in articles} | {t.document_cid for t in versions}
+        cids |= {n.document_cid for n in nodes}
+        missing = [c for c in cids if c not in self._documents]
+        if missing:
+            for doc_id, cid, title in self.conn.execute(
+                "SELECT id, official_id, title FROM legal_document WHERE official_id = ANY(%s)", (missing,)
+            ).fetchall():
+                if title != cid:  # titre provisoire : laissé au chemin d'écriture, qui le remplace
+                    self._documents[cid] = doc_id
+
+        ids = [a.official_id for a in articles]
+        if ids:
+            self._articles = dict.fromkeys(ids)
+            for row in self.conn.execute(_ARTICLE_STATE, (ids,)).fetchall():
+                self._articles[row[0]] = row[1:]
+
+        for table, keys in (
+            ("document_version", [("", t.official_id) for t in versions]),
+            ("structure_node_version", [(n.kind, n.official_id) for n in nodes]),
+        ):
+            if not keys:
+                continue
+            for key in keys:
+                self._nodes[(table, key[0] + key[1])] = None
+            kind_sql = "''" if table == "document_version" else "kind"
+            for row in self.conn.execute(
+                f"SELECT {kind_sql} || official_id, id, source_path, source_file_sha256, withdrawn_from_source "  # noqa: S608
+                f"FROM {table} WHERE official_id = ANY(%s) AND sys_to IS NULL FOR UPDATE",
+                ([k[1] for k in keys],),
+            ).fetchall():
+                if (table, row[0]) in self._nodes:
+                    self._nodes[(table, row[0])] = row[1:]
+
+        wanted = {
+            (self._documents[a.text_official_id], a.number, a.unnumbered_key or "")
+            for a in articles
+            if a.text_official_id in self._documents
+        }
+        self._prefetched_documents = {w[0] for w in wanted}
+        wanted = {w for w in wanted if (w[0], w[1] or f"~{w[2]}") not in self._provisions}
+        if wanted:
+            docs, numbers, keys = (list(column) for column in zip(*wanted, strict=True))
+            for prov_id, doc_id, number, key in self.conn.execute(
+                """SELECT p.id, p.document_id, p.number, coalesce(p.unnumbered_key, '')
+                   FROM provision p
+                   JOIN unnest(%s::uuid[], %s::text[], %s::text[]) AS w(document_id, number, k)
+                     ON p.document_id = w.document_id AND p.kind = 'ARTICLE' AND p.number = w.number
+                    AND coalesce(p.unnumbered_key, '') = w.k""",
+                (docs, numbers, keys),
+            ).fetchall():
+                self._provisions[(doc_id, number or f"~{key}")] = prov_id
 
     def document(self, cid: str, nature: str, title: str | None) -> uuid.UUID:
         cached = self._documents.get(cid)
@@ -186,26 +267,35 @@ class _Store:
         cached = self._provisions.get(key)
         if cached is not None:
             return cached
-        row = self.conn.execute(
-            """INSERT INTO provision (document_id, kind, number, unnumbered_key) VALUES (%s, 'ARTICLE', %s, %s)
-               ON CONFLICT (document_id, kind, number, (coalesce(unnumbered_key, '')))
-               DO UPDATE SET number = EXCLUDED.number
-               RETURNING id""",
-            (document_id, number, unnumbered_key),
-        ).fetchone()
-        provision_id = _returned_id(row)
+        if document_id in self._prefetched_documents:
+            # Absente du préchargement : création, identifiant client, sans aller-retour.
+            provision_id = uuid.uuid4()
+            self.conn.execute(
+                "INSERT INTO provision (id, document_id, kind, number, unnumbered_key) "
+                "VALUES (%s, %s, 'ARTICLE', %s, %s)",
+                (provision_id, document_id, number, unnumbered_key),
+            )
+        else:
+            provision_id = _returned_id(
+                self.conn.execute(
+                    """INSERT INTO provision (document_id, kind, number, unnumbered_key) VALUES (%s, 'ARTICLE', %s, %s)
+                       ON CONFLICT (document_id, kind, number, (coalesce(unnumbered_key, '')))
+                       DO UPDATE SET number = EXCLUDED.number
+                       RETURNING id""",
+                    (document_id, number, unnumbered_key),
+                ).fetchone()
+            )
         self._provisions[key] = provision_id
         return provision_id
 
     def article(self, a: LegiArticle) -> str:
         document_id = self.document(a.text_official_id, a.text_nature, a.text_title)
         provision_id = self._provision(document_id, a.number, a.unnumbered_key)
-        current = self.conn.execute(
-            """SELECT id, text_sha256, source_status, valid_from, valid_to, end_undetermined, dates_unknown,
-                      source_file_sha256, source_path, withdrawn_from_source
-               FROM provision_version WHERE official_id = %s AND sys_to IS NULL FOR UPDATE""",
-            (a.official_id,),
-        ).fetchone()
+        if a.official_id in self._articles:
+            current = self._articles[a.official_id]
+        else:
+            row = self.conn.execute(_ARTICLE_STATE, ([a.official_id],)).fetchone()
+            current = row[1:] if row else None
         if current is not None:
             text_sha, status, valid_from, valid_to, end_undetermined, unknown, source_sha, source_path, withdrawn = (
                 current[1:]
@@ -231,6 +321,19 @@ class _Store:
                 (new_id, current[0]),
             )
             outcome = "superseded"
+        # Un même identifiant peut reparaître dans le lot (changement de branche).
+        self._articles[a.official_id] = (
+            new_id,
+            a.content_sha256,
+            a.status,
+            a.period.valid_from,
+            a.period.valid_to,
+            a.period.end_undetermined,
+            a.period.dates_unknown,
+            a.source_file_sha256,
+            a.source_path,
+            False,
+        )
         self.conn.execute(
             """INSERT INTO provision_version (
                  id, provision_id, official_id, source_status, valid_from, valid_to, end_undetermined,
@@ -275,26 +378,33 @@ class _Store:
             )
         return outcome
 
-    def _close_or_keep(self, table: str, key_sql: str, key: tuple[Any, ...], path: str, sha: str) -> tuple[str, Any]:
-        current = self.conn.execute(
-            f"SELECT id, source_path, source_file_sha256, withdrawn_from_source FROM {table} "  # noqa: S608 — noms fixes
-            f"WHERE {key_sql} AND sys_to IS NULL FOR UPDATE",
-            key,
-        ).fetchone()
+    def _close_or_keep(
+        self, table: str, key_sql: str, key: tuple[Any, ...], path: str, sha: str, new_id: uuid.UUID
+    ) -> tuple[str, Any]:
+        cache_key = (table, "".join(str(k) for k in key) if table != "document_version" else str(key[0]))
+        if cache_key in self._nodes:
+            current = self._nodes[cache_key]
+        else:
+            current = self.conn.execute(
+                f"SELECT id, source_path, source_file_sha256, withdrawn_from_source FROM {table} "  # noqa: S608
+                f"WHERE {key_sql} AND sys_to IS NULL FOR UPDATE",
+                key,
+            ).fetchone()
+        if current is not None and current[1] == path and current[2] == sha and not current[3]:
+            return "unchanged", None
+        self._nodes[cache_key] = (new_id, path, sha, False)
         if current is None:
             return "inserted", None
-        if current[1] == path and current[2] == sha and not current[3]:
-            return "unchanged", None
         return "superseded", current[0]
 
     def text_version(self, t: LegiTextVersion) -> str:
         document_id = self.document(t.document_cid, t.nature, t.title_full or t.title)
+        new_id = uuid.uuid4()
         outcome, previous = self._close_or_keep(
-            "document_version", "official_id = %s", (t.official_id,), t.source_path, t.source_file_sha256
+            "document_version", "official_id = %s", (t.official_id,), t.source_path, t.source_file_sha256, new_id
         )
         if outcome == "unchanged":
             return outcome
-        new_id = uuid.uuid4()
         if previous is not None:
             self.conn.execute(
                 "UPDATE document_version SET sys_to = clock_timestamp(), superseded_by = %s WHERE id = %s",
@@ -357,16 +467,17 @@ class _Store:
 
     def structure_node(self, n: LegiStructureNode) -> str:
         document_id = self.document(n.document_cid, n.document_nature, n.document_title)
+        new_id = uuid.uuid4()
         outcome, previous = self._close_or_keep(
             "structure_node_version",
             "kind = %s AND official_id = %s",
             (n.kind, n.official_id),
             n.source_path,
             n.source_file_sha256,
+            new_id,
         )
         if outcome == "unchanged":
             return outcome
-        new_id = uuid.uuid4()
         if previous is not None:
             self.conn.execute(
                 "UPDATE structure_node_version SET sys_to = clock_timestamp(), superseded_by = %s WHERE id = %s",
@@ -420,14 +531,22 @@ class _Store:
             )
         return "superseded" if previous is not None else "inserted"
 
-    def entry(self, entry: ArchiveEntry) -> str:
+    @staticmethod
+    def parse(entry: ArchiveEntry) -> Parsed:
         if entry.kind == "ARTICLE":
-            return self.article(parse_article(entry.data, entry.path))
+            return parse_article(entry.data, entry.path)
         if entry.kind == "TEXT_VERSION":
-            return self.text_version(parse_text_version(entry.data, entry.path))
+            return parse_text_version(entry.data, entry.path)
         if entry.kind == "TEXT_STRUCT":
-            return self.structure_node(parse_text_structure(entry.data, entry.path))
-        return self.structure_node(parse_section(entry.data, entry.path))
+            return parse_text_structure(entry.data, entry.path)
+        return parse_section(entry.data, entry.path)
+
+    def store(self, item: Parsed) -> str:
+        if isinstance(item, LegiArticle):
+            return self.article(item)
+        if isinstance(item, LegiTextVersion):
+            return self.text_version(item)
+        return self.structure_node(item)
 
     def withdrawal(self, w: Withdrawal) -> bool:
         # L'entrée de retrait est un chemin sans extension (observé dans les deltas réels).
@@ -563,7 +682,7 @@ def _ingest_locked(
     try:
         batch: list[ArchiveEntry] = []
         index = 0
-        for entry in reader.entries():
+        for entry in reader.entries(skip=skip):
             index += 1
             if index <= skip:
                 if index == skip and entry.path != expected_last:
@@ -613,17 +732,21 @@ def _commit_batch(
 ) -> IngestionStats:
     """Traite un lot dans une transaction ; renvoie les statistiques validées."""
     working = stats.copy()
+    parsed: list[tuple[ArchiveEntry, Parsed | None]] = []
+    for entry in batch:
+        working.files_seen += 1
+        try:
+            parsed.append((entry, store.parse(entry)))
+        except LegiFormatError as exc:
+            working.count(entry.kind, "rejected")
+            working.errors.append(f"{entry.path}: {exc}")
     try:
         with store.conn.transaction():
-            for entry in batch:
-                working.files_seen += 1
-                try:
-                    outcome = store.entry(entry)
-                except LegiFormatError as exc:
-                    working.count(entry.kind, "rejected")
-                    working.errors.append(f"{entry.path}: {exc}")
-                    continue
-                working.count(entry.kind, outcome)
+            store.prefetch([item for _, item in parsed if item is not None])
+            with store.conn.pipeline():
+                for entry, item in parsed:
+                    if item is not None:
+                        working.count(entry.kind, store.store(item))
             store.conn.execute(
                 "UPDATE ingestion_run SET files_committed = %s, last_committed_path = %s, stats = %s WHERE id = %s",
                 (committed, batch[-1].path, Jsonb(working.as_dict()), run_id),
