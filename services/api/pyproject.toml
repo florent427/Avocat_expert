@@ -1,0 +1,65 @@
+[project]
+name = "avocat-expert-api"
+version = "0.1.0"
+description = "Avocat Expert — services backend (ingestion, recherche, réponse sourcée, vérification)"
+requires-python = ">=3.12"
+license = { text = "Propriétaire — tous droits réservés" }
+dependencies = [
+  "defusedxml>=0.7.1",
+  "fastapi>=0.115",
+  "psycopg[binary]>=3.2",
+  "pydantic>=2.9",
+  "pydantic-settings>=2.6",
+  "uvicorn>=0.32",
+]
+
+[project.scripts]
+avx = "avocat_expert.cli:main"
+
+[dependency-groups]
+dev = [
+  "httpx>=0.28",
+  "mypy>=1.13",
+  "pytest>=8.3",
+  "ruff>=0.8",
+]
+
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/avocat_expert"]
+
+[tool.uv]
+# Chaîne d'approvisionnement : aucune version publiée depuis moins de deux semaines.
+exclude-newer = "2026-10-10T00:00:00Z"
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "S", "BLE", "SIM", "RUF"]
+ignore = ["RUF001", "RUF002", "RUF003", "SIM905"]  # typographie française ; listes de mots
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101", "S105", "S603", "S607", "E501"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+packages = ["avocat_expert"]
+mypy_path = "src"
+
+[[tool.mypy.overrides]]
+module = ["defusedxml.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+markers = [
+  "db: nécessite une base PostgreSQL (variable AVX_TEST_DATABASE_URL)",
+  "engine: nécessite le binaire Rust lexverif (variable LEXVERIF_BIN)",
+]

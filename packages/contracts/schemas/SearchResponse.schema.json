@@ -1,0 +1,180 @@
+{
+  "$defs": {
+    "ChannelStatus": {
+      "additionalProperties": false,
+      "properties": {
+        "channel": {
+          "title": "Channel",
+          "type": "string"
+        },
+        "detail": {
+          "title": "Detail",
+          "type": "string"
+        },
+        "enabled": {
+          "title": "Enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "channel",
+        "enabled",
+        "detail"
+      ],
+      "title": "ChannelStatus",
+      "type": "object"
+    },
+    "SearchHit": {
+      "additionalProperties": false,
+      "properties": {
+        "excerpt": {
+          "description": "Extrait littéral du texte de la version",
+          "title": "Excerpt",
+          "type": "string"
+        },
+        "matched_by": {
+          "description": "Canaux ayant produit le résultat : identifiant, lexical, sémantique",
+          "items": {
+            "type": "string"
+          },
+          "title": "Matched By",
+          "type": "array"
+        },
+        "reference": {
+          "$ref": "#/$defs/SourceReference"
+        },
+        "score": {
+          "title": "Score",
+          "type": "number"
+        }
+      },
+      "required": [
+        "reference",
+        "excerpt",
+        "score",
+        "matched_by"
+      ],
+      "title": "SearchHit",
+      "type": "object"
+    },
+    "SourceReference": {
+      "additionalProperties": false,
+      "description": "Référence traçable vers une version précise d'une source officielle.",
+      "properties": {
+        "connector_version": {
+          "title": "Connector Version",
+          "type": "string"
+        },
+        "document_official_id": {
+          "title": "Document Official Id",
+          "type": "string"
+        },
+        "document_title": {
+          "title": "Document Title",
+          "type": "string"
+        },
+        "official_id": {
+          "description": "Identifiant officiel de la version citée, ex. LEGIARTI…",
+          "title": "Official Id",
+          "type": "string"
+        },
+        "provision_number": {
+          "title": "Provision Number",
+          "type": "string"
+        },
+        "source_archive": {
+          "description": "Nom (horodaté) de l'archive livrée par la source",
+          "title": "Source Archive",
+          "type": "string"
+        },
+        "source_code": {
+          "description": "Code de la source, ex. DILA_LEGI",
+          "title": "Source Code",
+          "type": "string"
+        },
+        "source_file_sha256": {
+          "title": "Source File Sha256",
+          "type": "string"
+        },
+        "source_path": {
+          "title": "Source Path",
+          "type": "string"
+        },
+        "source_status": {
+          "description": "Statut brut publié par la source",
+          "title": "Source Status",
+          "type": "string"
+        },
+        "valid_from": {
+          "format": "date",
+          "title": "Valid From",
+          "type": "string"
+        },
+        "valid_to": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "None : pas de date de fin connue",
+          "title": "Valid To"
+        }
+      },
+      "required": [
+        "source_code",
+        "official_id",
+        "document_official_id",
+        "document_title",
+        "provision_number",
+        "valid_from",
+        "valid_to",
+        "source_status",
+        "source_path",
+        "source_file_sha256",
+        "source_archive",
+        "connector_version"
+      ],
+      "title": "SourceReference",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "as_of": {
+      "format": "date",
+      "title": "As Of",
+      "type": "string"
+    },
+    "channels": {
+      "items": {
+        "$ref": "#/$defs/ChannelStatus"
+      },
+      "title": "Channels",
+      "type": "array"
+    },
+    "hits": {
+      "items": {
+        "$ref": "#/$defs/SearchHit"
+      },
+      "title": "Hits",
+      "type": "array"
+    },
+    "ranking": {
+      "description": "Méthode de classement effectivement utilisée",
+      "title": "Ranking",
+      "type": "string"
+    }
+  },
+  "required": [
+    "as_of",
+    "hits",
+    "channels",
+    "ranking"
+  ],
+  "title": "SearchResponse",
+  "type": "object"
+}

@@ -1,0 +1,435 @@
+{
+  "$defs": {
+    "AgentName": {
+      "enum": [
+        "orchestrateur",
+        "qualification",
+        "recherche_legislative",
+        "jurisprudence",
+        "analyse_factuelle",
+        "chronologie_preuves",
+        "procedure",
+        "argumentation_favorable",
+        "contradiction",
+        "synthese",
+        "verificateur",
+        "redaction"
+      ],
+      "title": "AgentName",
+      "type": "string"
+    },
+    "AgentUsage": {
+      "additionalProperties": false,
+      "properties": {
+        "cache_read_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Cache Read Tokens",
+          "type": "integer"
+        },
+        "cache_write_tokens": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Cache Write Tokens",
+          "type": "integer"
+        },
+        "calls": {
+          "minimum": 0,
+          "title": "Calls",
+          "type": "integer"
+        },
+        "duration_ms": {
+          "minimum": 0,
+          "title": "Duration Ms",
+          "type": "integer"
+        },
+        "estimated_cost_micro_eur": {
+          "minimum": 0,
+          "title": "Estimated Cost Micro Eur",
+          "type": "integer"
+        },
+        "input_tokens": {
+          "minimum": 0,
+          "title": "Input Tokens",
+          "type": "integer"
+        },
+        "model": {
+          "title": "Model",
+          "type": "string"
+        },
+        "output_tokens": {
+          "minimum": 0,
+          "title": "Output Tokens",
+          "type": "integer"
+        },
+        "provider": {
+          "title": "Provider",
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider",
+        "model",
+        "input_tokens",
+        "output_tokens",
+        "calls",
+        "duration_ms",
+        "estimated_cost_micro_eur"
+      ],
+      "title": "AgentUsage",
+      "type": "object"
+    },
+    "CheckOutcome": {
+      "enum": [
+        "OK",
+        "ECHEC",
+        "INDETERMINE",
+        "NON_EVALUE"
+      ],
+      "title": "CheckOutcome",
+      "type": "string"
+    },
+    "CitationCheck": {
+      "additionalProperties": false,
+      "properties": {
+        "check": {
+          "title": "Check",
+          "type": "string"
+        },
+        "detail": {
+          "title": "Detail",
+          "type": "string"
+        },
+        "outcome": {
+          "$ref": "#/$defs/CheckOutcome"
+        }
+      },
+      "required": [
+        "check",
+        "outcome",
+        "detail"
+      ],
+      "title": "CitationCheck",
+      "type": "object"
+    },
+    "CitationVerification": {
+      "additionalProperties": false,
+      "properties": {
+        "checks": {
+          "items": {
+            "$ref": "#/$defs/CitationCheck"
+          },
+          "title": "Checks",
+          "type": "array"
+        },
+        "contract_version": {
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "engine_version": {
+          "title": "Engine Version",
+          "type": "string"
+        },
+        "official_id": {
+          "title": "Official Id",
+          "type": "string"
+        },
+        "quote_end": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Quote End"
+        },
+        "quote_start": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Quote Start"
+        },
+        "uncertainties": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Uncertainties",
+          "type": "array"
+        },
+        "verdict": {
+          "$ref": "#/$defs/Verdict"
+        },
+        "version_in_force_at_date": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Version In Force At Date"
+        }
+      },
+      "required": [
+        "official_id",
+        "verdict",
+        "checks",
+        "uncertainties",
+        "engine_version",
+        "contract_version"
+      ],
+      "title": "CitationVerification",
+      "type": "object"
+    },
+    "Claim": {
+      "additionalProperties": false,
+      "description": "Affirmation produite par un agent, toujours typée et rattachée à ses sources.",
+      "properties": {
+        "citations": {
+          "items": {
+            "$ref": "#/$defs/SourceReference"
+          },
+          "title": "Citations",
+          "type": "array"
+        },
+        "kind": {
+          "$ref": "#/$defs/ClaimKind"
+        },
+        "quotes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Quotes",
+          "type": "array"
+        },
+        "statement": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Statement",
+          "type": "string"
+        },
+        "support": {
+          "$ref": "#/$defs/SupportStatus"
+        },
+        "uncertainty": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Uncertainty"
+        }
+      },
+      "required": [
+        "kind",
+        "statement",
+        "support"
+      ],
+      "title": "Claim",
+      "type": "object"
+    },
+    "ClaimKind": {
+      "description": "Nature d'une affirmation : le système ne mélange jamais ces catégories.",
+      "enum": [
+        "FAIT",
+        "HYPOTHESE",
+        "DROIT_APPLICABLE",
+        "INTERPRETATION",
+        "RECOMMANDATION"
+      ],
+      "title": "ClaimKind",
+      "type": "string"
+    },
+    "SourceReference": {
+      "additionalProperties": false,
+      "description": "Référence traçable vers une version précise d'une source officielle.",
+      "properties": {
+        "connector_version": {
+          "title": "Connector Version",
+          "type": "string"
+        },
+        "document_official_id": {
+          "title": "Document Official Id",
+          "type": "string"
+        },
+        "document_title": {
+          "title": "Document Title",
+          "type": "string"
+        },
+        "official_id": {
+          "description": "Identifiant officiel de la version citée, ex. LEGIARTI…",
+          "title": "Official Id",
+          "type": "string"
+        },
+        "provision_number": {
+          "title": "Provision Number",
+          "type": "string"
+        },
+        "source_archive": {
+          "description": "Nom (horodaté) de l'archive livrée par la source",
+          "title": "Source Archive",
+          "type": "string"
+        },
+        "source_code": {
+          "description": "Code de la source, ex. DILA_LEGI",
+          "title": "Source Code",
+          "type": "string"
+        },
+        "source_file_sha256": {
+          "title": "Source File Sha256",
+          "type": "string"
+        },
+        "source_path": {
+          "title": "Source Path",
+          "type": "string"
+        },
+        "source_status": {
+          "description": "Statut brut publié par la source",
+          "title": "Source Status",
+          "type": "string"
+        },
+        "valid_from": {
+          "format": "date",
+          "title": "Valid From",
+          "type": "string"
+        },
+        "valid_to": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "None : pas de date de fin connue",
+          "title": "Valid To"
+        }
+      },
+      "required": [
+        "source_code",
+        "official_id",
+        "document_official_id",
+        "document_title",
+        "provision_number",
+        "valid_from",
+        "valid_to",
+        "source_status",
+        "source_path",
+        "source_file_sha256",
+        "source_archive",
+        "connector_version"
+      ],
+      "title": "SourceReference",
+      "type": "object"
+    },
+    "SupportStatus": {
+      "enum": [
+        "FONDEE",
+        "INCERTAINE",
+        "BLOQUEE"
+      ],
+      "title": "SupportStatus",
+      "type": "string"
+    },
+    "Verdict": {
+      "enum": [
+        "CONFORME",
+        "INCERTAIN",
+        "NON_CONFORME"
+      ],
+      "title": "Verdict",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "agent": {
+      "$ref": "#/$defs/AgentName"
+    },
+    "agent_version": {
+      "title": "Agent Version",
+      "type": "string"
+    },
+    "claims": {
+      "items": {
+        "$ref": "#/$defs/Claim"
+      },
+      "title": "Claims",
+      "type": "array"
+    },
+    "finished_at": {
+      "format": "date-time",
+      "title": "Finished At",
+      "type": "string"
+    },
+    "open_questions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Open Questions",
+      "type": "array"
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "OK",
+        "PARTIEL",
+        "ECHEC",
+        "BLOQUE"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "task_id": {
+      "format": "uuid",
+      "title": "Task Id",
+      "type": "string"
+    },
+    "usage": {
+      "items": {
+        "$ref": "#/$defs/AgentUsage"
+      },
+      "title": "Usage",
+      "type": "array"
+    },
+    "verifications": {
+      "items": {
+        "$ref": "#/$defs/CitationVerification"
+      },
+      "title": "Verifications",
+      "type": "array"
+    }
+  },
+  "required": [
+    "task_id",
+    "agent",
+    "agent_version",
+    "status",
+    "claims",
+    "started_at",
+    "finished_at"
+  ],
+  "title": "AgentResult",
+  "type": "object"
+}

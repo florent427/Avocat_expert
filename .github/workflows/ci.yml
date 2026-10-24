@@ -1,0 +1,123 @@
+name: CI
+
+on:
+  push:
+    branches: ["main", "ccr-*"]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  engine:
+    name: Moteur Rust (lexverif)
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: engine
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Formatage
+        run: cargo fmt --all -- --check
+      - name: Clippy
+        run: cargo clippy --all-targets --locked -- -D warnings
+      - name: Tests
+        run: cargo test --locked
+
+  backend:
+    name: Backend Python (API, ingestion, recherche)
+    runs-on: ubuntu-24.04
+    services:
+      postgres:
+        image: pgvector/pgvector:0.8.7-pg16
+        env:
+          POSTGRES_PASSWORD: ci-only-not-a-secret
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      AVX_TEST_DATABASE_URL: postgresql://postgres:ci-only-not-a-secret@localhost:5432/postgres
+      LEXVERIF_BIN: ${{ github.workspace }}/engine/target/debug/lexverif
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Construction de lexverif
+        working-directory: engine
+        run: cargo build --locked
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+      - name: Dépendances
+        working-directory: services/api
+        run: uv sync --locked
+      - name: Lint et formatage
+        working-directory: services/api
+        run: |
+          uv run ruff check src tests scripts
+          uv run ruff format --check src tests scripts
+      - name: Typage
+        working-directory: services/api
+        run: uv run mypy
+      - name: Schémas des contrats à jour
+        working-directory: services/api
+        run: uv run python scripts/export_schemas.py --check
+      - name: Tests (base PostgreSQL réelle et moteur Rust ; aucun test ignoré toléré)
+        working-directory: services/api
+        run: |
+          uv run pytest -rs | tee pytest.log
+          ! grep -q "SKIPPED" pytest.log
+
+  web:
+    name: Application web
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: apps/web
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: apps/web/package-lock.json
+      - run: npm ci
+      - name: Audit des dépendances
+        run: npm audit --audit-level=high
+      - run: npm run typecheck
+      - run: npm run build
+
+  terraform:
+    name: Terraform (validation, sans apply)
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: infra/terraform
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e # v4.0.1
+        with:
+          terraform_version: 1.16.7
+      - run: terraform fmt -recursive -check
+      - working-directory: infra/terraform/envs/staging
+        run: |
+          terraform init -backend=false -input=false
+          terraform validate
+
+  secrets:
+    name: Détection de secrets
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - name: gitleaks
+        env:
+          GITLEAKS_VERSION: 8.30.1
+        run: |
+          curl -sSfL -o gitleaks.tar.gz "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+          curl -sSfL -o checksums.txt "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_checksums.txt"
+          grep "gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz" checksums.txt | sha256sum -c -
+          tar -xzf gitleaks.tar.gz gitleaks
+          ./gitleaks git --redact --exit-code 1 .

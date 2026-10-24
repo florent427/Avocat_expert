@@ -1,0 +1,41 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "as_of": {
+      "format": "date",
+      "title": "As Of",
+      "type": "string"
+    },
+    "official_id": {
+      "maxLength": 64,
+      "title": "Official Id",
+      "type": "string"
+    },
+    "quote": {
+      "maxLength": 20000,
+      "minLength": 1,
+      "title": "Quote",
+      "type": "string"
+    },
+    "territory": {
+      "anyOf": [
+        {
+          "maxLength": 32,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Territory"
+    }
+  },
+  "required": [
+    "official_id",
+    "quote",
+    "as_of"
+  ],
+  "title": "CitationVerificationRequest",
+  "type": "object"
+}

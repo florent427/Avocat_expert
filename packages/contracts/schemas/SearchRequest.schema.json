@@ -1,0 +1,37 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "as_of": {
+      "anyOf": [
+        {
+          "format": "date",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Date d'appréciation ; défaut : date du jour",
+      "title": "As Of"
+    },
+    "limit": {
+      "default": 10,
+      "maximum": 50,
+      "minimum": 1,
+      "title": "Limit",
+      "type": "integer"
+    },
+    "query": {
+      "maxLength": 2000,
+      "minLength": 2,
+      "title": "Query",
+      "type": "string"
+    }
+  },
+  "required": [
+    "query"
+  ],
+  "title": "SearchRequest",
+  "type": "object"
+}

@@ -1,0 +1,124 @@
+{
+  "$defs": {
+    "CheckOutcome": {
+      "enum": [
+        "OK",
+        "ECHEC",
+        "INDETERMINE",
+        "NON_EVALUE"
+      ],
+      "title": "CheckOutcome",
+      "type": "string"
+    },
+    "CitationCheck": {
+      "additionalProperties": false,
+      "properties": {
+        "check": {
+          "title": "Check",
+          "type": "string"
+        },
+        "detail": {
+          "title": "Detail",
+          "type": "string"
+        },
+        "outcome": {
+          "$ref": "#/$defs/CheckOutcome"
+        }
+      },
+      "required": [
+        "check",
+        "outcome",
+        "detail"
+      ],
+      "title": "CitationCheck",
+      "type": "object"
+    },
+    "Verdict": {
+      "enum": [
+        "CONFORME",
+        "INCERTAIN",
+        "NON_CONFORME"
+      ],
+      "title": "Verdict",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "checks": {
+      "items": {
+        "$ref": "#/$defs/CitationCheck"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "contract_version": {
+      "title": "Contract Version",
+      "type": "string"
+    },
+    "engine_version": {
+      "title": "Engine Version",
+      "type": "string"
+    },
+    "official_id": {
+      "title": "Official Id",
+      "type": "string"
+    },
+    "quote_end": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Quote End"
+    },
+    "quote_start": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Quote Start"
+    },
+    "uncertainties": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Uncertainties",
+      "type": "array"
+    },
+    "verdict": {
+      "$ref": "#/$defs/Verdict"
+    },
+    "version_in_force_at_date": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Version In Force At Date"
+    }
+  },
+  "required": [
+    "official_id",
+    "verdict",
+    "checks",
+    "uncertainties",
+    "engine_version",
+    "contract_version"
+  ],
+  "title": "CitationVerification",
+  "type": "object"
+}

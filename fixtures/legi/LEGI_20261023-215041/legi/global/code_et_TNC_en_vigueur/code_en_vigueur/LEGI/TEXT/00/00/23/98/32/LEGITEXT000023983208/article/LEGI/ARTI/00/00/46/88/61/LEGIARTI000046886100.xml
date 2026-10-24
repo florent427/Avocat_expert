@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ARTICLE>
+<META>
+<META_COMMUN>
+<ID>LEGIARTI000046886100</ID>
+<ANCIEN_ID/>
+<ORIGINE>LEGI</ORIGINE>
+<URL>article/LEGI/ARTI/00/00/46/88/61/LEGIARTI000046886100.xml</URL>
+<NATURE>Article</NATURE>
+</META_COMMUN>
+<META_SPEC>
+<META_ARTICLE>
+
+<NUM>D251-1</NUM>
+
+<ETAT>MODIFIE</ETAT>
+
+<DATE_DEBUT>2023-01-01</DATE_DEBUT>
+<DATE_FIN>2023-10-10</DATE_FIN>
+
+
+
+<TYPE>AUTONOME</TYPE>
+</META_ARTICLE>
+</META_SPEC>
+</META>
+<CONTEXTE>
+<TEXTE autorite="" cid="LEGITEXT000023983208" date_publi="2999-01-01" date_signature="2999-01-01" ministere="" nature="CODE" nor="" num="" num_parution_jo="">
+<TITRE_TXT c_titre_court="Code de l'énergie" debut="2011-06-01" fin="2999-01-01" id_txt="LEGITEXT000023983208">Code de l'énergie</TITRE_TXT>
+<TM>
+<TITRE_TM debut="2016-01-01" fin="2999-01-01" id="LEGISCTA000031747285">Partie réglementaire </TITRE_TM>
+<TM>
+<TITRE_TM debut="2016-01-01" fin="2999-01-01" id="LEGISCTA000031747945">LIVRE II : LA MAÎTRISE DE LA DEMANDE D'ÉNERGIE ET LE DÉVELOPPEMENT DES ÉNERGIES RENOUVELABLES</TITRE_TM>
+<TM>
+<TITRE_TM debut="2016-01-01" fin="2999-01-01" id="LEGISCTA000031748197">TITRE V : LES MESURES PARTICULIÈRES AUX VÉHICULES</TITRE_TM>
+<TM>
+<TITRE_TM debut="2016-01-01" fin="2999-01-01" id="LEGISCTA000031748199">Chapitre unique</TITRE_TM>
+<TM>
+<TITRE_TM debut="2016-01-01" fin="2017-02-19" id="LEGISCTA000031748201">Section unique :  Aides à l'achat ou à la location de véhicules automobiles peu polluants</TITRE_TM>
+<TITRE_TM debut="2017-02-19" fin="2999-01-01" id="LEGISCTA000034064145">Section unique : Aides à l'achat ou à la location de véhicules peu polluants</TITRE_TM>
+<TM>
+<TITRE_TM debut="2016-01-01" fin="2999-01-01" id="LEGISCTA000031748203">Sous-section 1 : Conditions d'attribution</TITRE_TM>
+</TM>
+</TM>
+</TM>
+</TM>
+</TM>
+</TM>
+</TEXTE>
+</CONTEXTE>
+
+<VERSIONS>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2016-01-01" etat="MODIFIE" fin="2016-01-04" id="LEGIARTI000031748205" num="D251-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2016-01-04" etat="MODIFIE" fin="2017-01-01" id="LEGIARTI000031830292" num="D251-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2017-01-01" etat="MODIFIE" fin="2017-02-19" id="LEGIARTI000033832282" num="D251-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2017-02-19" etat="MODIFIE" fin="2018-01-01" id="LEGIARTI000034064137" num="D251-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2018-01-01" etat="MODIFIE" fin="2019-01-01" id="LEGIARTI000036467060" num="D251-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2019-01-01" etat="MODIFIE" fin="2020-03-05" id="LEGIARTI000038030475" num="D251-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2020-03-05" etat="MODIFIE" fin="2020-06-01" id="LEGIARTI000041949165" num="D251-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2020-06-01" etat="MODIFIE" fin="2021-01-21" id="LEGIARTI000041685045" num="D251-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE_MORT_NE">
+<LIEN_ART debut="2021-01-01" etat="MODIFIE_MORT_NE" fin="2020-12-08" id="LEGIARTI000041949126" num="D251-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2021-01-21" etat="MODIFIE" fin="2022-04-28" id="LEGIARTI000043016462" num="D251-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE_MORT_NE">
+<LIEN_ART debut="2022-01-01" etat="MODIFIE_MORT_NE" fin="2021-12-31" id="LEGIARTI000045217800" num="D251-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2022-04-28" etat="MODIFIE" fin="2022-07-01" id="LEGIARTI000045680183" num="D251-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2022-07-01" etat="MODIFIE" fin="2023-01-01" id="LEGIARTI000045217850" num="D251-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE_MORT_NE">
+<LIEN_ART debut="2023-01-01" etat="MODIFIE_MORT_NE" fin="2022-12-31" id="LEGIARTI000046878086" num="D251-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE_MORT_NE">
+<LIEN_ART debut="2023-01-01" etat="MODIFIE_MORT_NE" fin="2022-12-31" id="LEGIARTI000046908358" num="D251-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2023-01-01" etat="MODIFIE" fin="2023-10-10" id="LEGIARTI000046886100" num="D251-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2023-10-10" etat="MODIFIE" fin="2023-10-10" id="LEGIARTI000048090098" num="D251-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE_MORT_NE">
+<LIEN_ART debut="2023-10-10" etat="MODIFIE_MORT_NE" fin="2023-10-09" id="LEGIARTI000048170646" num="D251-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2023-10-10" etat="MODIFIE" fin="2024-02-14" id="LEGIARTI000048173002" num="D251-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2024-02-14" etat="MODIFIE" fin="2024-12-02" id="LEGIARTI000049133395" num="D251-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2024-12-02" etat="MODIFIE" fin="2025-07-01" id="LEGIARTI000050696626" num="D251-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="VIGUEUR">
+<LIEN_ART debut="2025-07-01" etat="VIGUEUR" fin="2999-01-01" id="LEGIARTI000051831141" num="D251-1" origine="LEGI"/>
+</VERSION>
+</VERSIONS>
+<NOTA>
+<CONTENU>
+<p>Conformément au premier alinéa de l’article 5 du décret n° 2022-1761 du 30 décembre 2022, ces dispositions entrent en vigueur le 1er janvier 2023. Se reporter aux modalités d’application prévues à l’article 2 dudit décret.</p>
+</CONTENU>
+</NOTA>
+<BLOC_TEXTUEL>
+<CONTENU>
+<p>I.-Une aide, dite bonus écologique pour les voitures particulières neuves, est attribuée à toute personne physique majeure justifiant d'un domicile en France ou à toute personne morale justifiant d'un établissement en France et à toute administration de l'Etat qui acquiert ou qui prend en location, dans le cadre d'un contrat d'une durée supérieure ou égale à deux ans, un véhicule automobile terrestre à moteur qui, à la date de sa facturation ou à la date de versement du premier loyer prévu par le contrat de location du véhicule : </p>
+<p>1° Appartient : </p>
+<p>a) Soit à la catégorie des voitures particulières au sens de l'article R. 311-1 du code de la route ou à une catégorie de véhicules faisant l'objet d'une mesure des émissions de dioxyde de carbone en application du règlement (CE) n° 715/2007 du Parlement européen et du Conseil du 20 juin 2007 ; </p>
+<p>b) Soit à la catégorie M2 au sens de l'article R. 311-1 du code de la route bénéficiant de la dérogation de poids prévue au IV de l'article R. 312-4 du code de la route et d'un poids total autorisé en charge inférieur ou égal à 3,5 tonnes ; </p>
+<p>2° N'a pas fait l'objet précédemment d'une première immatriculation en France ou à l'étranger ; </p>
+<p>3° Est immatriculé en France dans une série définitive ; </p>
+<p>4° N'est pas cédé par l'acquéreur ou le titulaire d'un contrat de location dans l'année suivant sa première immatriculation ni avant d'avoir parcouru au moins 6 000 kilomètres ; </p>
+<p>5° Utilise l'électricité, l'hydrogène ou une combinaison des deux comme source exclusive d'énergie ; </p>
+<p>6° Vérifie les conditions additionnelles suivantes : </p>
+<p>a) Son coût d'acquisition est inférieur ou égal à 47 000 euros toutes taxes comprises, incluant le cas échéant le coût d'acquisition ou de location de la batterie ; </p>
+<p>b) Sa masse en ordre de marche, telle que définie à l'article 2 du règlement (UE) n° 1230/2012 de la Commission du 12 décembre 2012, est inférieure à 2 400 kg. </p>
+<p>Une personne physique ne peut en bénéficier qu'une fois tous les trois ans. </p>
+<p>II.-Le montant de l'aide prévue au I du présent article est fixé à 27 % du coût d'acquisition toutes taxes comprises, augmenté le cas échéant du coût de la batterie si celle-ci est prise en location, dans la limite de 5 000 euros si le véhicule est acquis ou loué par une personne physique ou de 3 000 euros si le véhicule est acquis ou loué par une personne morale. </p>
+<p>Ce montant est majoré de 2 000 euros lorsque le véhicule est acquis ou loué par une personne physique dont le revenu fiscal de référence par part est inférieur ou égal à 14 089 euros.</p>
+</CONTENU>
+</BLOC_TEXTUEL>
+<LIENS>
+<LIEN cidtexte="JORFTEXT000030001632" datesignatexte="2014-12-30" id="LEGIARTI000034064802" naturetexte="ARRETE" nortexte="DEVR1430747A" num="1" numtexte="" sens="cible" typelien="CITATION">ARRÊTÉ du 30 décembre 2014 - art. 1 (Ab)</LIEN>
+<LIEN cidtexte="JORFTEXT000030001603" datesignatexte="2014-12-29" id="LEGIARTI000054891428" naturetexte="ARRETE" nortexte="DEVR1428328A" num="3-7-3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 29 décembre 2014 - art. 3-7-3 (VD)</LIEN>
+<LIEN cidtexte="JORFTEXT000033748558" datesignatexte="2016-12-30" id="LEGIARTI000033836882" naturetexte="ARRETE" nortexte="DEVR1638413A" num="1" numtexte="" sens="cible" typelien="CITATION">Arrêté du 30 décembre 2016 - art. 1</LIEN>
+<LIEN cidtexte="JORFTEXT000033748388" datesignatexte="2016-12-30" id="LEGIARTI000033827658" naturetexte="DECRET" nortexte="DEVR1634598D" num="2" numtexte="2016-1980" sens="cible" typelien="CITATION">Décret n°2016-1980 du 30 décembre 2016 - art. 2 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000036340821" datesignatexte="2017-12-29" id="LEGIARTI000051409441" naturetexte="ARRETE" nortexte="TRER1733443A" num="1" numtexte="" sens="cible" typelien="CITATION">Arrêté du 29 décembre 2017 - art. 1 (VD)</LIEN>
+<LIEN cidtexte="JORFTEXT000036340821" datesignatexte="2017-12-29" id="LEGIARTI000051686295" naturetexte="ARRETE" nortexte="TRER1733443A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 29 décembre 2017 - art. 3 (VD)</LIEN>
+<LIEN cidtexte="JORFTEXT000036340821" datesignatexte="2017-12-29" id="LEGIARTI000051409427" naturetexte="ARRETE" nortexte="TRER1733443A" num="4" numtexte="" sens="cible" typelien="CITATION">Arrêté du 29 décembre 2017 - art. 4 (VD)</LIEN>
+<LIEN cidtexte="JORFTEXT000036340682" datesignatexte="2017-12-29" id="LEGIARTI000036464640" naturetexte="DECRET" nortexte="TRER1733433D" num="2" numtexte="2017-1851" sens="cible" typelien="CITATION">Décret n°2017-1851 du 29 décembre 2017 - art. 2 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000041938774" datesignatexte="2020-05-30" id="LEGITEXT000041941217" naturetexte="DECRET" nortexte="TRER2013154D" num="" numtexte="2020-656" sens="cible" typelien="CITATION">Décret n°2020-656 du 30 mai 2020 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000041938774" datesignatexte="2020-05-30" id="LEGIARTI000042203837" naturetexte="DECRET" nortexte="TRER2013154D" num="3" numtexte="2020-656" sens="cible" typelien="CITATION">Décret n°2020-656 du 30 mai 2020 - art. 3 (M)</LIEN>
+
+<LIEN cidtexte="JORFTEXT000042620071" datesignatexte="2020-12-07" id="LEGIARTI000042621456" naturetexte="DECRET" nortexte="TRER2026738D" num="5" numtexte="2020-1526" sens="cible" typelien="CITATION">Décret n°2020-1526 du 7 décembre 2020 - art. 5 (Ab)</LIEN>
+<LIEN cidtexte="JORFTEXT000043014941" datesignatexte="2021-01-19" id="LEGIARTI000043015844" naturetexte="DECRET" nortexte="TRER2035997D" num="3" numtexte="2021-37" sens="cible" typelien="CITATION">Décret n°2021-37 du 19 janvier 2021 - art. 3 (Ab)</LIEN>
+<LIEN cidtexte="JORFTEXT000044162840" datesignatexte="2021-09-28" id="LEGIARTI000054453252" naturetexte="ARRETE" nortexte="TRER2128327A" num="Annexe III" numtexte="" sens="cible" typelien="CITATION">Arrêté du 28 septembre 2021 - art. Annexe III (VT)</LIEN>
+<LIEN cidtexte="JORFTEXT000044613558" datesignatexte="2021-12-29" id="LEGIARTI000044840187" naturetexte="DECRET" nortexte="TRER2138377D" num="4" numtexte="2021-1866" sens="cible" typelien="CITATION">Décret n°2021-1866 du 29 décembre 2021 - art. 4 (Ab)</LIEN>
+<LIEN cidtexte="JORFTEXT000046113775" datesignatexte="2022-07-29" id="LEGIARTI000046121069" naturetexte="DECRET" nortexte="ENER2220874D" num="2" numtexte="2022-1085" sens="cible" typelien="CITATION">Décret n°2022-1085 du 29 juillet 2022 - art. 2 (Ab)</LIEN>
+<LIEN cidtexte="JORFTEXT000046745030" datesignatexte="2022-12-08" id="LEGIARTI000046746320" naturetexte="ARRETE" nortexte="TRER2234788A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 8 décembre 2022 - art. (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000046768377" datesignatexte="2022-12-04" id="LEGITEXT000046769585" naturetexte="ARRETE" nortexte="ENER2234249A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 4 décembre 2022 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000046768377" datesignatexte="2022-12-04" id="LEGIARTI000046769600" naturetexte="ARRETE" nortexte="ENER2234249A" num="1" numtexte="" sens="cible" typelien="CITATION">Arrêté du 4 décembre 2022 - art. 1</LIEN>
+<LIEN cidtexte="JORFTEXT000046848201" datesignatexte="2022-12-30" id="LEGITEXT000046865095" naturetexte="DECRET" nortexte="ENER2236413D" num="" numtexte="2022-1761" sens="cible" typelien="CITATION">Décret n°2022-1761 du 30 décembre 2022 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000046848201" datesignatexte="2022-12-30" id="LEGIARTI000046865116" naturetexte="DECRET" nortexte="ENER2236413D" num="1" numtexte="2022-1761" sens="cible" typelien="CITATION">Décret n°2022-1761 du 30 décembre 2022 - art. 1</LIEN>
+<LIEN cidtexte="JORFTEXT000046848201" datesignatexte="2022-12-30" id="LEGIARTI000046865116" naturetexte="DECRET" nortexte="ENER2236413D" num="1" numtexte="2022-1761" sens="cible" typelien="MODIFIE">Décret n°2022-1761 du 30 décembre 2022 - art. 1</LIEN>
+<LIEN cidtexte="JORFTEXT000046848201" datesignatexte="2022-12-30" id="LEGIARTI000046865112" naturetexte="DECRET" nortexte="ENER2236413D" num="2" numtexte="2022-1761" sens="cible" typelien="CITATION">Décret n°2022-1761 du 30 décembre 2022 - art. 2 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000048088891" datesignatexte="2023-09-19" id="LEGITEXT000048090038" naturetexte="ARRETE" nortexte="ENER2324850A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 19 septembre 2023 (Ab)</LIEN>
+<LIEN cidtexte="JORFTEXT000048088891" datesignatexte="2023-09-19" id="LEGIARTI000048090076" naturetexte="ARRETE" nortexte="ENER2324850A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 19 septembre 2023 - art. (Ab)</LIEN>
+<LIEN cidtexte="JORFTEXT000048088891" datesignatexte="2023-09-19" id="LEGIARTI000048090049" naturetexte="ARRETE" nortexte="ENER2324850A" num="1" numtexte="" sens="cible" typelien="CITATION">Arrêté du 19 septembre 2023 - art. 1 (Ab)</LIEN>
+<LIEN cidtexte="JORFTEXT000048088891" datesignatexte="2023-09-19" id="LEGIARTI000048090072" naturetexte="ARRETE" nortexte="ENER2324850A" num="13" numtexte="" sens="cible" typelien="CITATION">Arrêté du 19 septembre 2023 - art. 13 (Ab)</LIEN>
+<LIEN cidtexte="JORFTEXT000048088866" datesignatexte="2023-09-19" id="LEGIARTI000048089405" naturetexte="DECRET" nortexte="ENER2324847D" num="2" numtexte="2023-886" sens="cible" typelien="CITATION">Décret n°2023-886 du 19 septembre 2023 - art. 2 (Ab)</LIEN>
+<LIEN cidtexte="JORFTEXT000048167407" datesignatexte="2023-10-07" id="LEGITEXT000048170676" naturetexte="ARRETE" nortexte="ENER2326562A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 7 octobre 2023 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000048167407" datesignatexte="2023-10-07" id="LEGIARTI000051908911" naturetexte="ARRETE" nortexte="ENER2326562A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 7 octobre 2023 - art. (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000048167407" datesignatexte="2023-10-07" id="LEGIARTI000051908920" naturetexte="ARRETE" nortexte="ENER2326562A" num="1" numtexte="" sens="cible" typelien="CITATION">Arrêté du 7 octobre 2023 - art. 1 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000048167407" datesignatexte="2023-10-07" id="LEGIARTI000051908916" naturetexte="ARRETE" nortexte="ENER2326562A" num="13" numtexte="" sens="cible" typelien="CITATION">Arrêté du 7 octobre 2023 - art. 13 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000048167356" datesignatexte="2023-10-07" id="LEGIARTI000048168689" naturetexte="DECRET" nortexte="ENER2324763D" num="1" numtexte="2023-929" sens="cible" typelien="CITATION">Décret n°2023-929 du 7 octobre 2023 - art. 1</LIEN>
+<LIEN cidtexte="JORFTEXT000048167376" datesignatexte="2023-10-07" id="LEGIARTI000048168808" naturetexte="DECRET" nortexte="ENER2326561D" num="2" numtexte="2023-930" sens="cible" typelien="CITATION">Décret n°2023-930 du 7 octobre 2023 - art. 2 (VD)</LIEN>
+<LIEN cidtexte="JORFTEXT000048567223" datesignatexte="2023-12-14" id="LEGITEXT000048568611" naturetexte="ARRETE" nortexte="ENER2333856A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 14 décembre 2023 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000048567223" datesignatexte="2023-12-14" id="LEGIARTI000055010689" naturetexte="ARRETE" nortexte="ENER2333856A" num="1" numtexte="" sens="cible" typelien="CITATION">Arrêté du 14 décembre 2023 - art. 1 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000048567193" datesignatexte="2023-12-14" id="LEGITEXT000048568319" naturetexte="DECRET" nortexte="ENER2328735D" num="" numtexte="2023-1183" sens="cible" typelien="CITATION">Décret n°2023-1183 du 14 décembre 2023 (V)</LIEN>
+
+<LIEN cidtexte="JORFTEXT000049097815" datesignatexte="2024-02-05" id="LEGITEXT000049098461" naturetexte="ARRETE" nortexte="TRER2403362A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 5 février 2024 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000049130533" datesignatexte="2024-02-12" id="LEGIARTI000049131148" naturetexte="DECRET" nortexte="TRER2404270D" num="2" numtexte="2024-102" sens="cible" typelien="CITATION">Décret n°2024-102 du 12 février 2024 - art. 2 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000049283345" datesignatexte="2024-03-14" id="LEGITEXT000049284409" naturetexte="ARRETE" nortexte="TRER2407578A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 14 mars 2024 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000049418881" datesignatexte="2024-04-15" id="LEGITEXT000049420800" naturetexte="ARRETE" nortexte="TRER2410419A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 15 avril 2024 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000049564706" datesignatexte="2024-05-21" id="LEGITEXT000049568004" naturetexte="ARRETE" nortexte="TRER2413113A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 21 mai 2024 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000049708207" datesignatexte="2024-06-13" id="LEGITEXT000049712964" naturetexte="ARRETE" nortexte="TRER2415848A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 13 juin 2024 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000049990305" datesignatexte="2024-07-15" id="LEGITEXT000049999580" naturetexte="ARRETE" nortexte="TRER2419233A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 15 juillet 2024 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000050126304" datesignatexte="2024-08-21" id="LEGITEXT000050126380" naturetexte="ARRETE" nortexte="TRER2422378A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 21 août 2024 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000050316633" datesignatexte="2024-10-07" id="LEGITEXT000050317818" naturetexte="ARRETE" nortexte="TECR2424628A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 7 octobre 2024 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000050510681" datesignatexte="2024-11-18" id="LEGITEXT000050520562" naturetexte="ARRETE" nortexte="TECR2430475A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 18 novembre 2024 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000050971032" datesignatexte="2025-01-13" id="LEGITEXT000050971605" naturetexte="ARRETE" nortexte="TECR2500889A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 13 janvier 2025 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000051022980" datesignatexte="2025-01-23" id="LEGITEXT000051023838" naturetexte="ARRETE" nortexte="TECR2502031A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 23 janvier 2025 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000051249862" datesignatexte="2025-02-25" id="LEGITEXT000051251190" naturetexte="ARRETE" nortexte="TECR2505415A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 25 février 2025 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000051254024" datesignatexte="2025-02-25" id="LEGIARTI000051257105" naturetexte="ARRETE" nortexte="TSSS2505703A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 25 février 2025 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000051401544" datesignatexte="2025-03-25" id="LEGIARTI000051403279" naturetexte="ARRETE" nortexte="TECR2427076A" num="1" numtexte="" sens="cible" typelien="CITATION">Arrêté du 25 mars 2025 - art. 1</LIEN>
+<LIEN cidtexte="JORFTEXT000051430552" datesignatexte="2025-04-04" id="LEGITEXT000051434068" naturetexte="ARRETE" nortexte="TECR2510594A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 4 avril 2025 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000051564166" datesignatexte="2025-05-05" id="LEGITEXT000051565850" naturetexte="ARRETE" nortexte="TECR2513051A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 5 mai 2025 (V)</LIEN>
+
+<LIEN cidtexte="JORFTEXT000051760382" datesignatexte="2025-06-18" id="LEGITEXT000051762004" naturetexte="ARRETE" nortexte="TECR2516118A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 18 juin 2025 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000051783198" datesignatexte="2025-06-20" id="LEGIARTI000051785617" naturetexte="ARRETE" nortexte="ECOR2517130A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 20 juin 2025 - art. (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000051795569" datesignatexte="2025-06-24" id="LEGITEXT000051796847" naturetexte="DECRET" nortexte="ECOE2511635D" num="" numtexte="2025-574" sens="cible" typelien="CITATION">Décret n°2025-574 du 24 juin 2025 (V)</LIEN>
+
+
+
+
+
+
+<LIEN cidtexte="JORFTEXT000051901126" datesignatexte="2025-07-16" id="LEGITEXT000051906254" naturetexte="ARRETE" nortexte="TECR2520245A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 16 juillet 2025 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000052138408" datesignatexte="2025-08-26" id="LEGITEXT000052139133" naturetexte="ARRETE" nortexte="TECR2523366A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 26 août 2025 (V)</LIEN>
+
+
+
+
+<LIEN cidtexte="JORFTEXT000052212572" datesignatexte="2025-09-08" id="LEGIARTI000052230685" naturetexte="ARRETE" nortexte="ECOR2524330A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 8 septembre 2025 - art. (V)</LIEN>
+
+<LIEN cidtexte="JORFTEXT000052340337" datesignatexte="2025-10-01" id="LEGITEXT000052340997" naturetexte="ARRETE" nortexte="ECOR2526777A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 1er octobre 2025 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000052456845" datesignatexte="2025-10-29" id="LEGITEXT000052463006" naturetexte="ARRETE" nortexte="TECR2529843A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 29 octobre 2025 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000052987290" datesignatexte="2025-12-03" id="LEGITEXT000052988570" naturetexte="ARRETE" nortexte="TECR2533668A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 3 décembre 2025 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000053174751" datesignatexte="2025-12-26" id="LEGITEXT000053189628" naturetexte="DECRET" nortexte="ECOE2524418D" num="" numtexte="2025-1334" sens="cible" typelien="CITATION">Décret n°2025-1334 du 26 décembre 2025 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000053368382" datesignatexte="2026-01-14" id="LEGITEXT000053370031" naturetexte="ARRETE" nortexte="TECR2600913A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 14 janvier 2026 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000053505442" datesignatexte="2026-02-18" id="LEGITEXT000053506206" naturetexte="ARRETE" nortexte="TECR2604668A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 18 février 2026 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000053700521" datesignatexte="2026-03-18" id="LEGITEXT000053702130" naturetexte="ARRETE" nortexte="TECR2607454A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 18 mars 2026 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000053900988" datesignatexte="2026-04-15" id="LEGITEXT000053902295" naturetexte="ARRETE" nortexte="TECR2610217A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 15 avril 2026 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000054100864" datesignatexte="2026-05-13" id="LEGITEXT000054102415" naturetexte="ARRETE" nortexte="TECR2612614A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 13 mai 2026 (V)</LIEN>
+
+<LIEN cidtexte="JORFTEXT000054110613" datesignatexte="2026-05-18" id="LEGIARTI000054111455" naturetexte="ARRETE" nortexte="ECOR2611173A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 18 mai 2026 - art.</LIEN>
+<LIEN cidtexte="JORFTEXT000054268421" datesignatexte="2026-06-17" id="LEGITEXT000054270388" naturetexte="ARRETE" nortexte="TECR2616216A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 17 juin 2026 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000054427080" datesignatexte="2026-07-15" id="LEGITEXT000054428076" naturetexte="ARRETE" nortexte="TECR2619068A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 15 juillet 2026 (V)</LIEN>
+
+
+
+<LIEN cidtexte="JORFTEXT000054708447" datesignatexte="2026-08-17" id="LEGITEXT000054710944" naturetexte="ARRETE" nortexte="TECR2622128A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 17 août 2026 (V)</LIEN>
+
+<LIEN cidtexte="JORFTEXT000054850674" datesignatexte="2026-09-16" id="LEGITEXT000054851320" naturetexte="ARRETE" nortexte="TECR2624317A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 16 septembre 2026 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000055009148" datesignatexte="2026-10-22" id="LEGITEXT000055010637" naturetexte="ARRETE" nortexte="TECR2628100A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 22 octobre 2026 (V)</LIEN>
+
+<LIEN cidtexte="LEGITEXT000006074228" datesignatexte="2999-01-01" id="LEGIARTI000006841575" naturetexte="CODE" nortexte="" num="R311-1" numtexte="" sens="source" typelien="CITATION">Code de la route. - art. R311-1</LIEN>
+<LIEN cidtexte="LEGITEXT000006074228" datesignatexte="2999-01-01" id="LEGIARTI000006841586" naturetexte="CODE" nortexte="" num="R312-4" numtexte="" sens="source" typelien="CITATION">Code de la route. - art. R312-4</LIEN>
+<LIEN cidtexte="LEGITEXT000006074220" datesignatexte="2999-01-01" id="LEGIARTI000053216983" naturetexte="CODE" nortexte="" num="D224-15-12 F" numtexte="" sens="cible" typelien="CITATION">Code de l'environnement - art. D224-15-12 F (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006074220" datesignatexte="2999-01-01" id="LEGIARTI000053216976" naturetexte="CODE" nortexte="" num="D224-15-12 G" numtexte="" sens="cible" typelien="CITATION">Code de l'environnement - art. D224-15-12 G (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000023983208" datesignatexte="2999-01-01" id="LEGIARTI000048568862" naturetexte="CODE" nortexte="" num="D251-1-2" numtexte="" sens="cible" typelien="CITATION">Code de l'énergie - art. D251-1-2 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000023983208" datesignatexte="2999-01-01" id="LEGIARTI000050696617" naturetexte="CODE" nortexte="" num="D251-1-5" numtexte="" sens="cible" typelien="CITATION">Code de l'énergie - art. D251-1-5 (Ab)</LIEN>
+<LIEN cidtexte="LEGITEXT000023983208" datesignatexte="2999-01-01" id="LEGIARTI000051831150" naturetexte="CODE" nortexte="" num="D251-1-A" numtexte="" sens="cible" typelien="CITATION">Code de l'énergie - art. D251-1-A (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000023983208" datesignatexte="2999-01-01" id="LEGIARTI000049133502" naturetexte="CODE" nortexte="" num="D251-11" numtexte="" sens="cible" typelien="CITATION">Code de l'énergie - art. D251-11 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000023983208" datesignatexte="2999-01-01" id="LEGIARTI000050696538" naturetexte="CODE" nortexte="" num="D251-13" numtexte="" sens="cible" typelien="CITATION">Code de l'énergie - art. D251-13 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000023983208" datesignatexte="2999-01-01" id="LEGIARTI000031748207" naturetexte="CODE" nortexte="" num="D251-2" numtexte="" sens="cible" typelien="CITATION">Code de l'énergie - art. D251-2 (Ab)</LIEN>
+<LIEN cidtexte="LEGITEXT000023983208" datesignatexte="2999-01-01" id="LEGIARTI000049133473" naturetexte="CODE" nortexte="" num="D251-3" numtexte="" sens="cible" typelien="CITATION">Code de l'énergie - art. D251-3 (VT)</LIEN>
+<LIEN cidtexte="LEGITEXT000023983208" datesignatexte="2999-01-01" id="LEGIARTI000045680145" naturetexte="CODE" nortexte="" num="D251-3-1" numtexte="" sens="cible" typelien="CITATION">Code de l'énergie - art. D251-3-1 (Ab)</LIEN>
+<LIEN cidtexte="LEGITEXT000023983208" datesignatexte="2999-01-01" id="LEGIARTI000043857297" naturetexte="CODE" nortexte="" num="D251-5" numtexte="" sens="cible" typelien="CITATION">Code de l'énergie - art. D251-5 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000023983208" datesignatexte="2999-01-01" id="LEGIARTI000043857284" naturetexte="CODE" nortexte="" num="D251-6" numtexte="" sens="cible" typelien="CITATION">Code de l'énergie - art. D251-6 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000023983208" datesignatexte="2999-01-01" id="LEGIARTI000049133548" naturetexte="CODE" nortexte="" num="D251-6-1" numtexte="" sens="cible" typelien="CITATION">Code de l'énergie - art. D251-6-1 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000023983208" datesignatexte="2999-01-01" id="LEGIARTI000049133528" naturetexte="CODE" nortexte="" num="D251-7" numtexte="" sens="cible" typelien="CITATION">Code de l'énergie - art. D251-7 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000023983208" datesignatexte="2999-01-01" id="LEGIARTI000050696574" naturetexte="CODE" nortexte="" num="D251-8" numtexte="" sens="cible" typelien="CITATION">Code de l'énergie - art. D251-8 (Ab)</LIEN>
+<LIEN cidtexte="LEGITEXT000023983208" datesignatexte="2999-01-01" id="LEGIARTI000043857253" naturetexte="CODE" nortexte="" num="D251-9" numtexte="" sens="cible" typelien="CITATION">Code de l'énergie - art. D251-9 (M)</LIEN>
+</LIENS>
+</ARTICLE>

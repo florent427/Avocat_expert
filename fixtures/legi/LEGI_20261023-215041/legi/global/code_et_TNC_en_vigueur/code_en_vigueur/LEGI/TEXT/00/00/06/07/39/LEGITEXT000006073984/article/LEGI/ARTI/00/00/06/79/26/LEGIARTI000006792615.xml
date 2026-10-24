@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ARTICLE>
+<META>
+<META_COMMUN>
+<ID>LEGIARTI000006792615</ID>
+<ANCIEN_ID>AHAXXXXXXXX1X125L02AXXAA</ANCIEN_ID>
+<ORIGINE>LEGI</ORIGINE>
+<URL>article/LEGI/ARTI/00/00/06/79/26/LEGIARTI000006792615.xml</URL>
+<NATURE>Article</NATURE>
+</META_COMMUN>
+<META_SPEC>
+<META_ARTICLE>
+
+<NUM>L125-2</NUM>
+
+<ETAT>MODIFIE</ETAT>
+
+<DATE_DEBUT>1985-08-15</DATE_DEBUT>
+<DATE_FIN>2003-07-31</DATE_FIN>
+
+
+
+<TYPE>AUTONOME</TYPE>
+</META_ARTICLE>
+</META_SPEC>
+</META>
+<CONTEXTE>
+<TEXTE autorite="" cid="LEGITEXT000006073984" date_publi="2999-01-01" date_signature="2999-01-01" ministere="" nature="CODE" nor="" num="" num_parution_jo="">
+<TITRE_TXT c_titre_court="Code des assurances" debut="1976-07-11" fin="2999-01-01" id_txt="LEGITEXT000006073984">Code des assurances</TITRE_TXT>
+<TM>
+<TITRE_TM debut="1976-07-16" fin="2999-01-01" id="LEGISCTA000006107964">Partie législative</TITRE_TM>
+<TM>
+<TITRE_TM debut="1976-07-21" fin="2999-01-01" id="LEGISCTA000006128391">Livre Ier : Le contrat</TITRE_TM>
+<TM>
+<TITRE_TM debut="1976-07-21" fin="2012-07-01" id="LEGISCTA000006142679">Titre II : Règles relatives aux assurances de dommages non maritimes</TITRE_TM>
+<TITRE_TM debut="2012-07-01" fin="2999-01-01" id="LEGISCTA000024376800">Titre II : Règles relatives aux assurances de dommages</TITRE_TM>
+<TM>
+<TITRE_TM debut="1985-08-15" fin="2999-01-01" id="LEGISCTA000006157250">Chapitre V : L'assurance des risques de catastrophes naturelles.</TITRE_TM>
+</TM>
+</TM>
+</TM>
+</TM>
+</TEXTE>
+</CONTEXTE>
+
+<VERSIONS>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="1985-08-15" etat="MODIFIE" fin="2003-07-31" id="LEGIARTI000006792615" num="L125-2" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2003-07-31" etat="MODIFIE" fin="2004-08-17" id="LEGIARTI000006792616" num="L125-2" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2004-08-17" etat="MODIFIE" fin="2023-01-01" id="LEGIARTI000006792617" num="L125-2" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2023-01-01" etat="MODIFIE" fin="2024-01-01" id="LEGIARTI000044607736" num="L125-2" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2024-01-01" etat="MODIFIE" fin="2026-05-28" id="LEGIARTI000047109081" num="L125-2" origine="LEGI"/>
+</VERSION>
+<VERSION etat="VIGUEUR">
+<LIEN_ART debut="2026-05-28" etat="VIGUEUR" fin="2999-01-01" id="LEGIARTI000054141744" num="L125-2" origine="LEGI"/>
+</VERSION>
+</VERSIONS>
+<NOTA>
+<CONTENU/>
+</NOTA>
+<BLOC_TEXTUEL>
+<CONTENU>
+<br/>   Les entreprises d'assurance doivent insérer dans les contrats mentionnés à l'article L. 125-1 une clause étendant leur garantie aux dommages visés au troisième alinéa dudit article.<br/>
+<br/>   La garantie ainsi instituée ne peut excepter aucun des biens mentionnés au contrat ni opérer d'autre abattement que ceux qui seront fixés dans les clauses types prévues à l'article L. 125-3.<br/>
+<br/>   Elle est couverte par une prime ou cotisation additionnelle, individualisée dans l'avis d'échéance du contrat visé à l'article L. 125-1 et calculée à partir d'un taux unique défini par arrêté pour chaque catégorie de contrat. Ce taux est appliqué au montant de la prime ou cotisation principale ou au montant des capitaux assurés, selon la catégorie de contrat.<br/>
+<br/>   Les indemnisations résultant de cette garantie doivent être attribuées dans un délai de trois mois à compter de la date de remise de l'état estimatif des biens endommagés ou des pertes subies, sans préjudice de dispositions contractuelles plus favorables, ou de la date de publication, lorsque celle-ci est postérieure, de la décision administrative constatant l'état de catastrophe naturelle.<br/>
+</CONTENU>
+</BLOC_TEXTUEL>
+<LIENS>
+<LIEN cidtexte="JORFTEXT000000305911" datesignatexte="1976-07-16" id="JORFTEXT000000305911" naturetexte="DECRET" nortexte="" num="" numtexte="76-666" sens="source" typelien="CODIFICATION">Décret 76-666 1976-07-16</LIEN>
+<LIEN cidtexte="JORFTEXT000000682301" datesignatexte="1985-08-02" id="JORFTEXT000000682301" naturetexte="DECRET" nortexte="" num="" numtexte="85-863" sens="source" typelien="CREATION">Décret 85-863 1985-08-02 art. 1 JORF 15 août 1985</LIEN>
+<LIEN cidtexte="JORFTEXT000000551804" datesignatexte="1995-02-02" id="LEGIARTI000006848428" naturetexte="LOI" nortexte="ENVX9400049L" num="13" numtexte="95-101" sens="cible" typelien="CITATION">Loi n°95-101 du 2 février 1995 - art. 13 (Ab)</LIEN>
+<LIEN cidtexte="JORFTEXT000000781906" datesignatexte="2002-12-30" id="LEGIARTI000006321653" naturetexte="LOI" nortexte="ECOX0200157L" num="75" numtexte="2002-1576" sens="cible" typelien="CITATION">Loi - art. 75 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000000236167" datesignatexte="2003-04-14" id="LEGIARTI000006218536" naturetexte="DECRET" nortexte="DEVP0310036D" num="1" numtexte="2003-350" sens="cible" typelien="CITATION">Décret n°2003-350 du 14 avril 2003 - art. 1 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000000236167" datesignatexte="2003-04-14" id="LEGIARTI000006218537" naturetexte="DECRET" nortexte="DEVP0310036D" num="2" numtexte="2003-350" sens="cible" typelien="CITATION">Décret n°2003-350 du 14 avril 2003 - art. 2 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000019344754" datesignatexte="2008-08-12" id="LEGIARTI000019346878" naturetexte="ARRETE" nortexte="ECET0819128A" num="1" numtexte="" sens="cible" typelien="CITATION">Arrêté du 12 août 2008 - art. 1 (Ab)</LIEN>
+<LIEN cidtexte="JORFTEXT000020414064" datesignatexte="2009-03-04" id="LEGIARTI000020414756" naturetexte="ARRETE" nortexte="DEVP0900412A" num="1" numtexte="" sens="cible" typelien="CITATION">Arrêté du 4 mars 2009 - art. 1 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000043458697" datesignatexte="2021-04-29" id="LEGIARTI000043460365" naturetexte="DECRET" nortexte="TREP2101756D" num="1" numtexte="2021-518" sens="cible" typelien="CITATION">Décret n°2021-518 du 29 avril 2021 - art. 1</LIEN>
+<LIEN cidtexte="JORFTEXT000046362782" datesignatexte="2022-10-01" id="LEGIARTI000046363287" naturetexte="DECRET" nortexte="TREP2132891D" num="1" numtexte="2022-1289" sens="cible" typelien="CITATION">Décret n°2022-1289 du 1er octobre 2022 - art. 1</LIEN>
+
+
+<LIEN cidtexte="JORFTEXT000047663262" datesignatexte="2023-04-25" id="LEGIARTI000048069560" naturetexte="ARRETE" nortexte="IOME2311008A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 25 avril 2023 - art. 3 (V)</LIEN>
+
+<LIEN cidtexte="JORFTEXT000047792855" datesignatexte="2023-06-19" id="LEGIARTI000047794050" naturetexte="ARRETE" nortexte="IOME2316196A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 19 juin 2023 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000047792877" datesignatexte="2023-06-30" id="LEGIARTI000047794216" naturetexte="ARRETE" nortexte="IOME2318044A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 30 juin 2023 - art. 3 (V)</LIEN>
+
+
+<LIEN cidtexte="JORFTEXT000048067913" datesignatexte="2023-07-22" id="LEGIARTI000048069261" naturetexte="ARRETE" nortexte="IOME2316198A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 22 juillet 2023 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000048104777" datesignatexte="2023-07-23" id="LEGIARTI000048105230" naturetexte="ARRETE" nortexte="IOME2318045A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 23 juillet 2023 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000048147966" datesignatexte="2023-07-25" id="LEGIARTI000048148932" naturetexte="ARRETE" nortexte="IOME2320254A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 25 juillet 2023 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000048147986" datesignatexte="2023-09-25" id="LEGIARTI000048148959" naturetexte="ARRETE" nortexte="IOME2325523A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 25 septembre 2023 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000048226851" datesignatexte="2023-09-18" id="LEGIARTI000048228560" naturetexte="ARRETE" nortexte="IOME2324728A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 18 septembre 2023 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000048226897" datesignatexte="2023-09-19" id="LEGIARTI000048228606" naturetexte="ARRETE" nortexte="IOME2324730A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 19 septembre 2023 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000048297062" datesignatexte="2023-10-16" id="LEGIARTI000048300748" naturetexte="ARRETE" nortexte="IOME2327460A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 16 octobre 2023 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000048297084" datesignatexte="2023-10-17" id="LEGIARTI000048300778" naturetexte="ARRETE" nortexte="IOME2327461A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 17 octobre 2023 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000048307097" datesignatexte="2023-10-27" id="LEGIARTI000048308664" naturetexte="ARRETE" nortexte="IOME2328840A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 27 octobre 2023 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000048393151" datesignatexte="2023-11-14" id="LEGIARTI000048395089" naturetexte="ARRETE" nortexte="IOME2330533A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 14 novembre 2023 - art. 3 (V)</LIEN>
+
+
+<LIEN cidtexte="JORFTEXT000048550761" datesignatexte="2023-11-30" id="LEGIARTI000048552130" naturetexte="ARRETE" nortexte="IOME2332866A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 30 novembre 2023 - art. 3 (V)</LIEN>
+
+<LIEN cidtexte="JORFTEXT000048678932" datesignatexte="2023-12-18" id="LEGIARTI000049056589" naturetexte="ARRETE" nortexte="IOME2333648A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 18 décembre 2023 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000048865409" datesignatexte="2023-12-22" id="LEGIARTI000049056652" naturetexte="ARRETE" nortexte="IOME2335302A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 22 décembre 2023 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000048991056" datesignatexte="2024-01-19" id="LEGIARTI000048998626" naturetexte="ARRETE" nortexte="IOME2401804A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 19 janvier 2024 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000048998796" datesignatexte="2024-01-16" id="LEGIARTI000049000409" naturetexte="ARRETE" nortexte="IOME2400974A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 16 janvier 2024 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000049053850" datesignatexte="2024-01-18" id="LEGIARTI000049054932" naturetexte="ARRETE" nortexte="IOME2400969A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 18 janvier 2024 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000049053874" datesignatexte="2024-01-19" id="LEGIARTI000049054845" naturetexte="ARRETE" nortexte="IOME2400970A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 19 janvier 2024 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000049079195" datesignatexte="2024-01-31" id="LEGIARTI000049080348" naturetexte="ARRETE" nortexte="TREP2403092A" num="7" numtexte="" sens="cible" typelien="CITATION">Arrêté du 31 janvier 2024 - art. 7 (Ab)</LIEN>
+<LIEN cidtexte="JORFTEXT000049079166" datesignatexte="2024-01-31" id="LEGIARTI000049080319" naturetexte="ARRETE" nortexte="TREP2335064A" num="7" numtexte="" sens="cible" typelien="CITATION">Arrêté du 31 janvier 2024 - art. 7 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000049079195" datesignatexte="2024-01-31" id="LEGIARTI000049080350" naturetexte="ARRETE" nortexte="TREP2403092A" num="8" numtexte="" sens="cible" typelien="CITATION">Arrêté du 31 janvier 2024 - art. 8 (Ab)</LIEN>
+<LIEN cidtexte="JORFTEXT000049079166" datesignatexte="2024-01-31" id="LEGIARTI000049404737" naturetexte="ARRETE" nortexte="TREP2335064A" num="8" numtexte="" sens="cible" typelien="CITATION">Arrêté du 31 janvier 2024 - art. 8 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000049092407" datesignatexte="2024-02-05" id="LEGIARTI000049092786" naturetexte="DECRET" nortexte="ECOT2325879D" num="3" numtexte="2024-82" sens="cible" typelien="CITATION">Décret n°2024-82 du 5 février 2024 - art. 3</LIEN>
+<LIEN cidtexte="JORFTEXT000049111654" datesignatexte="2024-01-30" id="LEGIARTI000049113731" naturetexte="ARRETE" nortexte="IOME2402725A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 30 janvier 2024 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000049111676" datesignatexte="2024-01-31" id="LEGIARTI000049113753" naturetexte="ARRETE" nortexte="IOME2334295A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 31 janvier 2024 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000049184269" datesignatexte="2024-02-12" id="LEGIARTI000049186492" naturetexte="ARRETE" nortexte="IOME2403657A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 12 février 2024 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000049190880" datesignatexte="2024-02-13" id="LEGIARTI000049196229" naturetexte="ARRETE" nortexte="IOME2403659A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 13 février 2024 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000049253235" datesignatexte="2024-03-07" id="LEGIARTI000049255404" naturetexte="ARRETE" nortexte="IOME2407004A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 7 mars 2024 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000049375511" datesignatexte="2024-03-18" id="LEGIARTI000049383426" naturetexte="ARRETE" nortexte="IOME2407754A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 18 mars 2024 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000049375535" datesignatexte="2024-03-19" id="LEGIARTI000049383450" naturetexte="ARRETE" nortexte="IOME2407755A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 19 mars 2024 - art. 3 (V)</LIEN>
+
+<LIEN cidtexte="JORFTEXT000049477833" datesignatexte="2024-04-15" id="LEGIARTI000049484168" naturetexte="ARRETE" nortexte="IOME2410378A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 15 avril 2024 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000049477863" datesignatexte="2024-04-16" id="LEGIARTI000049484203" naturetexte="ARRETE" nortexte="IOME2410383A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 16 avril 2024 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000049629946" datesignatexte="2024-04-29" id="LEGIARTI000049633301" naturetexte="ARRETE" nortexte="IOME2411920A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 29 avril 2024 - art. 3 (V)</LIEN>
+
+<LIEN cidtexte="JORFTEXT000049707802" datesignatexte="2024-06-05" id="LEGIARTI000049708449" naturetexte="ARRETE" nortexte="IOME2415152A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 5 juin 2024 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000049797859" datesignatexte="2024-06-17" id="LEGIARTI000049813537" naturetexte="ARRETE" nortexte="IOME2415880A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 17 juin 2024 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000049858629" datesignatexte="2024-06-18" id="LEGIARTI000049860110" naturetexte="ARRETE" nortexte="IOME2415881A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 18 juin 2024 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000049891990" datesignatexte="2024-07-04" id="LEGIARTI000049897857" naturetexte="ARRETE" nortexte="IOME2418595A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 4 juillet 2024 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000050069497" datesignatexte="2024-07-22" id="LEGIARTI000050072333" naturetexte="ARRETE" nortexte="IOME2420215A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 22 juillet 2024 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000050069521" datesignatexte="2024-07-23" id="LEGIARTI000050072360" naturetexte="ARRETE" nortexte="IOME2420217A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 23 juillet 2024 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000050126179" datesignatexte="2024-08-01" id="LEGIARTI000050126433" naturetexte="ARRETE" nortexte="IOME2421328A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 1er août 2024 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000050278250" datesignatexte="2024-09-23" id="LEGIARTI000050284791" naturetexte="ARRETE" nortexte="INTE2424582A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 23 septembre 2024 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000050373949" datesignatexte="2024-09-24" id="LEGIARTI000050377680" naturetexte="ARRETE" nortexte="INTE2424583A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 24 septembre 2024 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000050397283" datesignatexte="2024-10-23" id="LEGIARTI000050399872" naturetexte="ARRETE" nortexte="INTE2428153A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 23 octobre 2024 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000050428510" datesignatexte="2024-10-14" id="LEGIARTI000050430600" naturetexte="ARRETE" nortexte="INTE2427051A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 14 octobre 2024 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000050443324" datesignatexte="2024-10-31" id="LEGIARTI000050444227" naturetexte="ARRETE" nortexte="INTE2428510A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 31 octobre 2024 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000050454816" datesignatexte="2024-09-25" id="LEGIARTI000050455404" naturetexte="ARRETE" nortexte="INTE2424585A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 25 septembre 2024 - art. 3 (V)</LIEN>
+
+
+
+<LIEN cidtexte="JORFTEXT000050797571" datesignatexte="2024-12-19" id="LEGIARTI000050797642" naturetexte="ARRETE" nortexte="INTE2434565A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 19 décembre 2024 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000050805109" datesignatexte="2024-12-16" id="LEGIARTI000050807413" naturetexte="ARRETE" nortexte="INTE2433751A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 16 décembre 2024 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000050805134" datesignatexte="2024-12-17" id="LEGIARTI000050810631" naturetexte="ARRETE" nortexte="INTE2433750A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 17 décembre 2024 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000051138864" datesignatexte="2025-01-20" id="LEGIARTI000051140443" naturetexte="ARRETE" nortexte="INTE2501371A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 20 janvier 2025 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000051145773" datesignatexte="2025-02-06" id="LEGIARTI000051148948" naturetexte="ARRETE" nortexte="INTE2503788A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 6 février 2025 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000051194641" datesignatexte="2025-02-13" id="LEGIARTI000051195556" naturetexte="ARRETE" nortexte="INTE2504355A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 13 février 2025 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000051244878" datesignatexte="2025-01-21" id="LEGIARTI000051245400" naturetexte="ARRETE" nortexte="INTE2501376A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 21 janvier 2025 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000051249384" datesignatexte="2025-02-25" id="LEGIARTI000051250657" naturetexte="ARRETE" nortexte="INTE2505372A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 25 février 2025 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000051270668" datesignatexte="2025-02-24" id="LEGIARTI000051274907" naturetexte="ARRETE" nortexte="INTE2505371A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 24 février 2025 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000051312531" datesignatexte="2025-03-07" id="LEGIARTI000051313341" naturetexte="ARRETE" nortexte="INTE2506758A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 7 mars 2025 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000051401106" datesignatexte="2025-03-21" id="LEGIARTI000051404261" naturetexte="ARRETE" nortexte="INTE2508630A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 21 mars 2025 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000051421044" datesignatexte="2025-03-24" id="LEGIARTI000051422189" naturetexte="ARRETE" nortexte="INTE2508631A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 24 mars 2025 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000051421071" datesignatexte="2025-03-25" id="LEGIARTI000051422216" naturetexte="ARRETE" nortexte="INTE2508632A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 25 mars 2025 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000051520731" datesignatexte="2025-04-23" id="LEGIARTI000051523698" naturetexte="ARRETE" nortexte="INTE2511308A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 23 avril 2025 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000051528487" datesignatexte="2025-04-22" id="LEGIARTI000051531059" naturetexte="ARRETE" nortexte="INTE2511307A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 22 avril 2025 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000051656064" datesignatexte="2025-05-19" id="LEGIARTI000051658376" naturetexte="ARRETE" nortexte="INTE2514336A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 19 mai 2025 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000051656089" datesignatexte="2025-05-20" id="LEGIARTI000051658401" naturetexte="ARRETE" nortexte="INTE2514342A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 20 mai 2025 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000051669604" datesignatexte="2025-05-28" id="LEGIARTI000051670945" naturetexte="ARRETE" nortexte="INTE2515511A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 28 mai 2025 - art. 3 (V)</LIEN>
+
+<LIEN cidtexte="JORFTEXT000051806126" datesignatexte="2025-06-24" id="LEGIARTI000051817473" naturetexte="ARRETE" nortexte="INTE2517857A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 24 juin 2025 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000051836654" datesignatexte="2025-07-01" id="LEGITEXT000051839025" naturetexte="ARRETE" nortexte="ECOT2513618A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 1er juillet 2025 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000051836458" datesignatexte="2025-07-01" id="LEGITEXT000051837998" naturetexte="DECRET" nortexte="ECOT2513612D" num="" numtexte="2025-613" sens="cible" typelien="CITATION">Décret n°2025-613 du 1er juillet 2025 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000051884011" datesignatexte="2025-07-10" id="LEGIARTI000051888492" naturetexte="ARRETE" nortexte="INTE2519693A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 10 juillet 2025 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000051900685" datesignatexte="2025-07-09" id="LEGIARTI000051902475" naturetexte="ARRETE" nortexte="INTE2519692A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 9 juillet 2025 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000052289682" datesignatexte="2025-09-15" id="LEGIARTI000052290989" naturetexte="ARRETE" nortexte="INTE2525618A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 15 septembre 2025 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000052289711" datesignatexte="2025-09-16" id="LEGIARTI000052291018" naturetexte="ARRETE" nortexte="INTE2525631A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 16 septembre 2025 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000052294751" datesignatexte="2025-09-25" id="LEGIARTI000052298854" naturetexte="ARRETE" nortexte="INTE2526475A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 25 septembre 2025 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000052422213" datesignatexte="2025-10-15" id="LEGIARTI000052422831" naturetexte="ARRETE" nortexte="INTE2527884A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 15 octobre 2025 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000052422247" datesignatexte="2025-10-16" id="LEGIARTI000052422865" naturetexte="ARRETE" nortexte="INTE2527885A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 16 octobre 2025 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000052971664" datesignatexte="2025-11-24" id="LEGIARTI000052973773" naturetexte="ARRETE" nortexte="INTE2532307A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 24 novembre 2025 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000052971695" datesignatexte="2025-11-25" id="LEGIARTI000052973814" naturetexte="ARRETE" nortexte="INTE2532309A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 25 novembre 2025 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000053014937" datesignatexte="2025-12-11" id="LEGIARTI000053016636" naturetexte="ARRETE" nortexte="INTE2534309A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 11 décembre 2025 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000053019310" datesignatexte="2025-12-12" id="LEGIARTI000053025375" naturetexte="ARRETE" nortexte="INTE2534330A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 12 décembre 2025 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000053398028" datesignatexte="2026-01-19" id="LEGIARTI000053400095" naturetexte="ARRETE" nortexte="INTE2601369A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 19 janvier 2026 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000053403220" datesignatexte="2026-01-14" id="LEGITEXT000053405765" naturetexte="ARRETE" nortexte="TECP2531116A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 14 janvier 2026 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000053568303" datesignatexte="2026-02-24" id="LEGIARTI000053569946" naturetexte="ARRETE" nortexte="INTE2605429A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 24 février 2026 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000053586381" datesignatexte="2026-02-13" id="LEGIARTI000053587904" naturetexte="ARRETE" nortexte="INTE2604313A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 13 février 2026 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000053613102" datesignatexte="2026-03-03" id="LEGIARTI000053614455" naturetexte="ARRETE" nortexte="INTE2606204A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 3 mars 2026 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000053684950" datesignatexte="2026-03-13" id="LEGIARTI000053685775" naturetexte="ARRETE" nortexte="INTE2606207A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 13 mars 2026 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000053876314" datesignatexte="2026-04-03" id="LEGIARTI000053877895" naturetexte="ARRETE" nortexte="INTE2609024A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 3 avril 2026 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000054100685" datesignatexte="2026-05-11" id="LEGIARTI000054102511" naturetexte="ARRETE" nortexte="INTE2612297A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 11 mai 2026 - art. 3 (V)</LIEN>
+
+<LIEN cidtexte="JORFTEXT000054245373" datesignatexte="2026-06-12" id="LEGIARTI000054249725" naturetexte="ARRETE" nortexte="INTE2615534A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 12 juin 2026 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000054435561" datesignatexte="2026-07-10" id="LEGIARTI000054437963" naturetexte="ARRETE" nortexte="INTE2618641A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 10 juillet 2026 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000054659014" datesignatexte="2026-08-09" id="LEGITEXT000054659335" naturetexte="ARRETE" nortexte="VLOL2427997A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 9 août 2026 (V)</LIEN>
+
+<LIEN cidtexte="JORFTEXT000054877080" datesignatexte="2026-09-11" id="LEGIARTI000054877665" naturetexte="ARRETE" nortexte="INTE2623922A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 11 septembre 2026 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000055008972" datesignatexte="2026-10-16" id="LEGIARTI000055010134" naturetexte="ARRETE" nortexte="INTE2627286A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 16 octobre 2026 - art. 3 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006069577" datesignatexte="2999-01-01" id="LEGIARTI000006306789" naturetexte="CODE" nortexte="" num="1635 bis AD" numtexte="" sens="cible" typelien="CITATION">CODE GENERAL DES IMPOTS, CGI. - art. 1635 bis AD (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000006074220" datesignatexte="2999-01-01" id="LEGIARTI000047522748" naturetexte="CODE" nortexte="" num="D561-12-7" numtexte="" sens="cible" typelien="CITATION">Code de l'environnement - art. D561-12-7 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006074220" datesignatexte="2999-01-01" id="LEGIARTI000047810693" naturetexte="CODE" nortexte="" num="L125-5" numtexte="" sens="cible" typelien="CITATION">Code de l'environnement - art. L125-5 (VD)</LIEN>
+<LIEN cidtexte="LEGITEXT000006074220" datesignatexte="2999-01-01" id="LEGIARTI000048849397" naturetexte="CODE" nortexte="" num="L561-1" numtexte="" sens="cible" typelien="CITATION">Code de l'environnement - art. L561-1 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006074220" datesignatexte="2999-01-01" id="LEGIARTI000052092238" naturetexte="CODE" nortexte="" num="L561-3" numtexte="" sens="cible" typelien="CITATION">Code de l'environnement - art. L561-3 (VD)</LIEN>
+<LIEN cidtexte="LEGITEXT000006074220" datesignatexte="2999-01-01" id="LEGIARTI000049492548" naturetexte="CODE" nortexte="" num="R125-24" numtexte="" sens="cible" typelien="CITATION">Code de l'environnement - art. R125-24 (VD)</LIEN>
+<LIEN cidtexte="LEGITEXT000006074096" datesignatexte="2999-01-01" id="LEGIARTI000054659675" naturetexte="CODE" nortexte="" num="R125-40" numtexte="" sens="cible" typelien="CITATION">Code de la construction et de l'habitation. - art. R125-40</LIEN>
+<LIEN cidtexte="LEGITEXT000006074096" datesignatexte="2999-01-01" id="LEGIARTI000050726126" naturetexte="CODE" nortexte="" num="R132-9" numtexte="" sens="cible" typelien="CITATION">Code de la construction et de l'habitation. - art. R132-9 (VD)</LIEN>
+<LIEN cidtexte="LEGITEXT000006073984" datesignatexte="2999-01-01" id="LEGIARTI000006792610" naturetexte="CODE" nortexte="" num="L125-1" numtexte="" sens="source" typelien="CITATION">Code des assurances - art. L125-1 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000006073984" datesignatexte="2999-01-01" id="LEGIARTI000006792618" naturetexte="CODE" nortexte="" num="L125-3" numtexte="" sens="source" typelien="CITATION">Code des assurances - art. L125-3 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006073984" datesignatexte="2999-01-01" id="LEGIARTI000054141795" naturetexte="CODE" nortexte="" num="L125-6" numtexte="" sens="cible" typelien="CITATION">Code des assurances - art. L125-6 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006073984" datesignatexte="2999-01-01" id="LEGIARTI000053548380" naturetexte="CODE" nortexte="" num="L194-1" numtexte="" sens="cible" typelien="CITATION">Code des assurances - art. L194-1 (VD)</LIEN>
+<LIEN cidtexte="LEGITEXT000006073984" datesignatexte="2999-01-01" id="LEGIARTI000006811943" naturetexte="CODE" nortexte="" num="R125-4" numtexte="" sens="cible" typelien="CITATION">Code des assurances - art. R*125-4 (Ab)</LIEN>
+<LIEN cidtexte="LEGITEXT000006073984" datesignatexte="2999-01-01" id="LEGIARTI000049094128" naturetexte="CODE" nortexte="" num="R125-7" numtexte="" sens="cible" typelien="CITATION">Code des assurances - art. R125-7 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006073984" datesignatexte="2999-01-01" id="LEGIARTI000006812329" naturetexte="CODE" nortexte="" num="R250-2" numtexte="" sens="cible" typelien="CITATION">Code des assurances - art. R250-2 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006073984" datesignatexte="2999-01-01" id="LEGIARTI000036768865" naturetexte="CODE" nortexte="" num="R250-3" numtexte="" sens="cible" typelien="CITATION">Code des assurances - art. R250-3 (V)</LIEN>
+</LIENS>
+</ARTICLE>

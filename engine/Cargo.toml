@@ -1,0 +1,21 @@
+[workspace]
+resolver = "2"
+members = ["crates/lexverif"]
+
+[workspace.package]
+edition = "2021"
+license = "UNLICENSED"
+publish = false
+rust-version = "1.82"
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[workspace.lints.clippy]
+unwrap_used = "deny"
+expect_used = "deny"
+panic = "deny"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1

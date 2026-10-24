@@ -1,0 +1,49 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "as_of": {
+      "anyOf": [
+        {
+          "format": "date",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "As Of"
+    },
+    "max_sources": {
+      "default": 3,
+      "maximum": 10,
+      "minimum": 1,
+      "title": "Max Sources",
+      "type": "integer"
+    },
+    "question": {
+      "maxLength": 4000,
+      "minLength": 3,
+      "title": "Question",
+      "type": "string"
+    },
+    "territory": {
+      "anyOf": [
+        {
+          "maxLength": 32,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Territory"
+    }
+  },
+  "required": [
+    "question"
+  ],
+  "title": "AnswerRequest",
+  "type": "object"
+}

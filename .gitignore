@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+pytest.log
+
+# Rust
+engine/target/
+
+# Node / Next.js
+node_modules/
+.next/
+*.tsbuildinfo
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+
+# Secrets et environnements locaux
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Données : aucun document client ni dump complet dans le dépôt
+data/
+*.tar.gz

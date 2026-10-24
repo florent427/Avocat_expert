@@ -1,0 +1,17 @@
+# Environnement local de développement. Mots de passe factices, réservés au poste local.
+# NB : non exécuté dans l'environnement de développement initial (Docker indisponible).
+services:
+  postgres:
+    image: pgvector/pgvector:0.8.7-pg16
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: avocat_expert
+    ports: ["127.0.0.1:5432:5432"]
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      retries: 10
+
+volumes:
+  pgdata:

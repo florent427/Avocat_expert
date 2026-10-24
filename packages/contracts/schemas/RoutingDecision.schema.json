@@ -1,0 +1,94 @@
+{
+  "$defs": {
+    "AgentName": {
+      "enum": [
+        "orchestrateur",
+        "qualification",
+        "recherche_legislative",
+        "jurisprudence",
+        "analyse_factuelle",
+        "chronologie_preuves",
+        "procedure",
+        "argumentation_favorable",
+        "contradiction",
+        "synthese",
+        "verificateur",
+        "redaction"
+      ],
+      "title": "AgentName",
+      "type": "string"
+    },
+    "ComplexityAssessment": {
+      "additionalProperties": false,
+      "properties": {
+        "level": {
+          "enum": [
+            "SIMPLE",
+            "INTERMEDIAIRE",
+            "COMPLEXE"
+          ],
+          "title": "Level",
+          "type": "string"
+        },
+        "requires_case_law": {
+          "title": "Requires Case Law",
+          "type": "boolean"
+        },
+        "requires_documents": {
+          "title": "Requires Documents",
+          "type": "boolean"
+        },
+        "requires_procedure": {
+          "title": "Requires Procedure",
+          "type": "boolean"
+        },
+        "signals": {
+          "description": "Indices observés justifiant le niveau",
+          "items": {
+            "type": "string"
+          },
+          "title": "Signals",
+          "type": "array"
+        }
+      },
+      "required": [
+        "level",
+        "signals",
+        "requires_case_law",
+        "requires_procedure",
+        "requires_documents"
+      ],
+      "title": "ComplexityAssessment",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "agents": {
+      "description": "Agents retenus, dans l'ordre d'exécution",
+      "items": {
+        "$ref": "#/$defs/AgentName"
+      },
+      "title": "Agents",
+      "type": "array"
+    },
+    "assessment": {
+      "$ref": "#/$defs/ComplexityAssessment"
+    },
+    "skipped": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Agent écarté -> motif",
+      "title": "Skipped",
+      "type": "object"
+    }
+  },
+  "required": [
+    "assessment",
+    "agents",
+    "skipped"
+  ],
+  "title": "RoutingDecision",
+  "type": "object"
+}

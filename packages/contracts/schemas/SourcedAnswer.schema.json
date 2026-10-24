@@ -1,0 +1,439 @@
+{
+  "$defs": {
+    "ChannelStatus": {
+      "additionalProperties": false,
+      "properties": {
+        "channel": {
+          "title": "Channel",
+          "type": "string"
+        },
+        "detail": {
+          "title": "Detail",
+          "type": "string"
+        },
+        "enabled": {
+          "title": "Enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "channel",
+        "enabled",
+        "detail"
+      ],
+      "title": "ChannelStatus",
+      "type": "object"
+    },
+    "CheckOutcome": {
+      "enum": [
+        "OK",
+        "ECHEC",
+        "INDETERMINE",
+        "NON_EVALUE"
+      ],
+      "title": "CheckOutcome",
+      "type": "string"
+    },
+    "CitationCheck": {
+      "additionalProperties": false,
+      "properties": {
+        "check": {
+          "title": "Check",
+          "type": "string"
+        },
+        "detail": {
+          "title": "Detail",
+          "type": "string"
+        },
+        "outcome": {
+          "$ref": "#/$defs/CheckOutcome"
+        }
+      },
+      "required": [
+        "check",
+        "outcome",
+        "detail"
+      ],
+      "title": "CitationCheck",
+      "type": "object"
+    },
+    "CitationVerification": {
+      "additionalProperties": false,
+      "properties": {
+        "checks": {
+          "items": {
+            "$ref": "#/$defs/CitationCheck"
+          },
+          "title": "Checks",
+          "type": "array"
+        },
+        "contract_version": {
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "engine_version": {
+          "title": "Engine Version",
+          "type": "string"
+        },
+        "official_id": {
+          "title": "Official Id",
+          "type": "string"
+        },
+        "quote_end": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Quote End"
+        },
+        "quote_start": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Quote Start"
+        },
+        "uncertainties": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Uncertainties",
+          "type": "array"
+        },
+        "verdict": {
+          "$ref": "#/$defs/Verdict"
+        },
+        "version_in_force_at_date": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Version In Force At Date"
+        }
+      },
+      "required": [
+        "official_id",
+        "verdict",
+        "checks",
+        "uncertainties",
+        "engine_version",
+        "contract_version"
+      ],
+      "title": "CitationVerification",
+      "type": "object"
+    },
+    "ClaimKind": {
+      "description": "Nature d'une affirmation : le système ne mélange jamais ces catégories.",
+      "enum": [
+        "FAIT",
+        "HYPOTHESE",
+        "DROIT_APPLICABLE",
+        "INTERPRETATION",
+        "RECOMMANDATION"
+      ],
+      "title": "ClaimKind",
+      "type": "string"
+    },
+    "SearchHit": {
+      "additionalProperties": false,
+      "properties": {
+        "excerpt": {
+          "description": "Extrait littéral du texte de la version",
+          "title": "Excerpt",
+          "type": "string"
+        },
+        "matched_by": {
+          "description": "Canaux ayant produit le résultat : identifiant, lexical, sémantique",
+          "items": {
+            "type": "string"
+          },
+          "title": "Matched By",
+          "type": "array"
+        },
+        "reference": {
+          "$ref": "#/$defs/SourceReference"
+        },
+        "score": {
+          "title": "Score",
+          "type": "number"
+        }
+      },
+      "required": [
+        "reference",
+        "excerpt",
+        "score",
+        "matched_by"
+      ],
+      "title": "SearchHit",
+      "type": "object"
+    },
+    "SearchResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "as_of": {
+          "format": "date",
+          "title": "As Of",
+          "type": "string"
+        },
+        "channels": {
+          "items": {
+            "$ref": "#/$defs/ChannelStatus"
+          },
+          "title": "Channels",
+          "type": "array"
+        },
+        "hits": {
+          "items": {
+            "$ref": "#/$defs/SearchHit"
+          },
+          "title": "Hits",
+          "type": "array"
+        },
+        "ranking": {
+          "description": "Méthode de classement effectivement utilisée",
+          "title": "Ranking",
+          "type": "string"
+        }
+      },
+      "required": [
+        "as_of",
+        "hits",
+        "channels",
+        "ranking"
+      ],
+      "title": "SearchResponse",
+      "type": "object"
+    },
+    "SourceReference": {
+      "additionalProperties": false,
+      "description": "Référence traçable vers une version précise d'une source officielle.",
+      "properties": {
+        "connector_version": {
+          "title": "Connector Version",
+          "type": "string"
+        },
+        "document_official_id": {
+          "title": "Document Official Id",
+          "type": "string"
+        },
+        "document_title": {
+          "title": "Document Title",
+          "type": "string"
+        },
+        "official_id": {
+          "description": "Identifiant officiel de la version citée, ex. LEGIARTI…",
+          "title": "Official Id",
+          "type": "string"
+        },
+        "provision_number": {
+          "title": "Provision Number",
+          "type": "string"
+        },
+        "source_archive": {
+          "description": "Nom (horodaté) de l'archive livrée par la source",
+          "title": "Source Archive",
+          "type": "string"
+        },
+        "source_code": {
+          "description": "Code de la source, ex. DILA_LEGI",
+          "title": "Source Code",
+          "type": "string"
+        },
+        "source_file_sha256": {
+          "title": "Source File Sha256",
+          "type": "string"
+        },
+        "source_path": {
+          "title": "Source Path",
+          "type": "string"
+        },
+        "source_status": {
+          "description": "Statut brut publié par la source",
+          "title": "Source Status",
+          "type": "string"
+        },
+        "valid_from": {
+          "format": "date",
+          "title": "Valid From",
+          "type": "string"
+        },
+        "valid_to": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "None : pas de date de fin connue",
+          "title": "Valid To"
+        }
+      },
+      "required": [
+        "source_code",
+        "official_id",
+        "document_official_id",
+        "document_title",
+        "provision_number",
+        "valid_from",
+        "valid_to",
+        "source_status",
+        "source_path",
+        "source_file_sha256",
+        "source_archive",
+        "connector_version"
+      ],
+      "title": "SourceReference",
+      "type": "object"
+    },
+    "SourcedStatement": {
+      "additionalProperties": false,
+      "properties": {
+        "citation": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SourceReference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "kind": {
+          "$ref": "#/$defs/ClaimKind"
+        },
+        "quote": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Quote"
+        },
+        "support": {
+          "$ref": "#/$defs/SupportStatus"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "verification": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CitationVerification"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "text",
+        "citation",
+        "quote",
+        "verification",
+        "support"
+      ],
+      "title": "SourcedStatement",
+      "type": "object"
+    },
+    "SupportStatus": {
+      "enum": [
+        "FONDEE",
+        "INCERTAINE",
+        "BLOQUEE"
+      ],
+      "title": "SupportStatus",
+      "type": "string"
+    },
+    "Verdict": {
+      "enum": [
+        "CONFORME",
+        "INCERTAIN",
+        "NON_CONFORME"
+      ],
+      "title": "Verdict",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "as_of": {
+      "format": "date",
+      "title": "As Of",
+      "type": "string"
+    },
+    "disclaimer": {
+      "title": "Disclaimer",
+      "type": "string"
+    },
+    "mode": {
+      "description": "Ex. EXTRACTIF : aucune génération de texte par un modèle",
+      "title": "Mode",
+      "type": "string"
+    },
+    "question_sha256": {
+      "title": "Question Sha256",
+      "type": "string"
+    },
+    "search": {
+      "$ref": "#/$defs/SearchResponse"
+    },
+    "statements": {
+      "items": {
+        "$ref": "#/$defs/SourcedStatement"
+      },
+      "title": "Statements",
+      "type": "array"
+    },
+    "status": {
+      "$ref": "#/$defs/SupportStatus"
+    },
+    "summary": {
+      "title": "Summary",
+      "type": "string"
+    },
+    "uncertainties": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Uncertainties",
+      "type": "array"
+    }
+  },
+  "required": [
+    "question_sha256",
+    "as_of",
+    "mode",
+    "status",
+    "summary",
+    "statements",
+    "uncertainties",
+    "disclaimer",
+    "search"
+  ],
+  "title": "SourcedAnswer",
+  "type": "object"
+}
