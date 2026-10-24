@@ -18,7 +18,8 @@ from avocat_expert.search.service import HybridSearchService
 from avocat_expert.verification.lexverif import CitationVerifier
 
 DISCLAIMER = (
-    "Résultat produit automatiquement à partir du corpus officiel ingéré, sans génération de texte. "
+    "Vous utilisez un système d'intelligence artificielle. Résultat produit automatiquement à partir du "
+    "corpus officiel ingéré, sans génération de texte. "
     "Il ne constitue pas une consultation juridique et doit être apprécié par un professionnel du droit."
 )
 

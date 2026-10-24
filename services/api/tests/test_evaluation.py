@@ -22,7 +22,8 @@ KNOWN_FAILURES = {"SEED-014"}  # reformulation « combien de temps » / « duré
 def test_seed_corpus(conn: psycopg.Connection[Any], lexverif_bin: str) -> None:
     report = run(conn, LexverifEngine(lexverif_bin), load_cases(REPO_ROOT / "eval" / "cases" / "seed_v0.jsonl"))
     assert report["cas"] == 16
-    assert report["cas_valides_juridiquement"] == 0
+    assert report["cas_valides_juridiquement"] == 0  # aucune validation par un professionnel à ce jour
+    assert report["cas_revus_par_ia_sur_delegation"] == 16
     assert report["citations"]["integrite_controles_deterministes"] == 1.0
     assert report["citations"]["conformite_temporelle"] == 1.0
     assert report["citations"]["integrite_structurelle_des_extraits"] == 1.0

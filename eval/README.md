@@ -3,9 +3,10 @@
 `cases/seed_v0.jsonl` contient **16 cas techniques** construits à partir des
 fixtures LEGI réelles (`fixtures/legi/`). Ils servent à mesurer le
 comportement du pipeline (recherche, blocage, intégrité des citations) et à
-détecter les régressions. **Aucun de ces cas n'a été validé par un juriste**
-(`validation_juridique = NON_VALIDE`) : ils ne mesurent pas la justesse
-juridique d'une réponse.
+détecter les régressions. Le 2026-10-24, les 16 cas ont été revus par Claude
+sur délégation du référent juridique (`validation_juridique =
+AVIS_IA_DELEGUE`, motivation dans le champ `revue`). **Aucun n'est encore
+validé par un professionnel du droit** (`VALIDE`, réservé à ce cas).
 
 L'objectif du cahier des charges (≥ 500 cas enrichis par des juristes
 compétents) reste à atteindre : voir `docs/backlog/backlog-technique.md`
@@ -19,7 +20,8 @@ compétents) reste à atteindre : voir `docs/backlog/backlog-technique.md`
 | `categorie` | `question_simple`, `cas_complexe`, `droit_ancien`, `disposition_transitoire`, `disposition_differee`, `droit_territorial`, `jurisprudence_contradictoire`, `source_manquante`, `document_adversarial`, `delai_procedural`, `hallucination_reference`, `reformulation_semantique`, `identifiant_officiel`, `reference_article`, `version_mort_nee` |
 | `question`, `as_of` | question et date d'appréciation |
 | `attendu` | `{"type": "sources", "official_ids": [...]}` (versions attendues) ou `{"type": "blocage", "incertitude_contient": "..."}` |
-| `validation_juridique` | `NON_VALIDE`, `VALIDE`, `CONTESTE` |
+| `validation_juridique` | `NON_VALIDE`, `AVIS_IA_DELEGUE`, `VALIDE` (professionnel du droit uniquement), `CONTESTE` |
+| `revue` | facultatif : `par`, `date`, `decision`, `commentaire` |
 | `auteur` | auteur du cas (et, après revue, du validateur) |
 
 ## Exécution

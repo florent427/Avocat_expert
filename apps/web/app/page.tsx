@@ -59,8 +59,8 @@ export default function Home() {
       <header className="mb-6">
         <h1 className="text-2xl font-semibold">Avocat Expert</h1>
         <p className="text-sm text-slate-600 dark:text-slate-400">
-          Prototype interne — recherche sourcée dans le corpus officiel ingéré. Ne constitue pas une consultation
-          juridique.
+          Prototype interne — vous utilisez un système d’intelligence artificielle de recherche documentaire dans le
+          corpus officiel ingéré. Ne constitue pas une consultation juridique.
         </p>
       </header>
 

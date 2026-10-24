@@ -15,9 +15,9 @@ P0 = bloquant pour la phase suivante · P1 = nécessaire avant bêta · P2 = apr
 ## Conformité
 | ID | Tâche | Prio |
 |---|---|---|
-| COMP-01 | Information « système d'IA » (art. 50 §1) et marquage lisible par machine des sorties générées (art. 50 §2, règlement IA modifié par 2026/1744) avant activation du mode génératif | P0 phase E |
+| COMP-01 | ✅ mention « système d'IA » affichée (web et API) ; reste : marquage lisible par machine des sorties générées (art. 50 §2) avant tout mode génératif | P0 phase E |
 | COMP-02 | Registre de qualification du système au regard de l'annexe III (point 8) et de l'art. 6 §3, revu à chaque nouvel usage ou client | P0 bêta (validation) |
-| COMP-03 | Rejouer les deltas LEGI postérieurs au 2025-07-13 sur COJ/CJA/loi 71-1130 ; extraire art. 56–66 de la loi 71-1130 | P1 |
+| COMP-03 | Identifier le texte remplaçant l'art. 66-2 de la loi 71-1130 au 01/02/2027 ; extraire les art. 56–66 | P1 |
 
 ## Phase B — socle
 | ID | Tâche | Prio |
@@ -35,10 +35,10 @@ P0 = bloquant pour la phase suivante · P1 = nécessaire avant bêta · P2 = apr
 |---|---|---|
 | ING-01 | Textes et sections LEGI (`LEGITEXT` version/struct, `LEGISCTA`) | P0 |
 | ING-02 | Ingestion du stock Freemium (1,1 Go) en flux + deltas ordonnés, reprise sur incident | P0 |
-| ING-03 | Confirmation de la sémantique DATE_FIN (inclusive/exclusive) et des sentinelles (2999-12-31, 2222-02-22) auprès de la DILA | P0 (validation) |
+| ING-03 | Lecture exclusive de DATE_FIN retenue (décision déléguée du 24/10/2026) ; confirmation DILA et sentinelles 2999-12-31 / 2222-02-22 | P2 |
 | ING-04 | JORF | P1 |
-| ING-05 | Judilibre (spécification OpenAPI 1.2.5 vérifiée ; KeyId PISTE) | P1 |
-| ING-06 | Justice administrative (archives zip XML mensuelles, CGU 18/01/2022) | P1 |
+| ING-05 | Judilibre (spécification OpenAPI 1.2.5 vérifiée ; KeyId PISTE). **Critères d'acceptation R4** : requêtes visant un magistrat ou greffier refusées (tests), zone de composition non indexée, aucun filtre ni agrégat par juge | P1 |
+| ING-06 | Justice administrative (archives zip XML mensuelles, CGU 18/01/2022). Mêmes critères R4 ; signalement des défauts de pseudonymisation | P1 |
 | ING-07 | CELLAR/EUR-Lex (SPARQL + REST CELLAR vérifiés) | P1 |
 | ING-08 | Qualification territoriale (outre-mer, Alsace-Moselle) avec validation juriste | P1 |
 | ING-09 | Exploitation du graphe de références (résolution des cibles, transferts) | P1 |
@@ -75,5 +75,7 @@ P0 = bloquant pour la phase suivante · P1 = nécessaire avant bêta · P2 = apr
 | SEC-05 | Contrôle des sorties réseau (egress) et protection SSRF des connecteurs | P0 |
 | SEC-06 | HMAC par tenant pour les empreintes de données client | P1 |
 | SEC-07 | Demandes RGPD (accès, effacement), politique de conservation, purge | P0 |
+| SEC-09 | R3 : interdiction technique de réutiliser les données client pour les besoins propres de la plateforme (aucun export vers l'évaluation ou l'entraînement sans accord exprès du cabinet, contrôlé par test) | P0 |
+| VAL-01 | Validation par un professionnel du droit des décisions déléguées du lot n° 1 et des lots suivants (préalable à la bêta) | P0 bêta |
 | SEC-08 | Tests d'intrusion, tests adversariaux, montée en charge | P0 bêta |
 | DOC-01 | Analyse documentaire (OCR, extraction des faits) et exports (DOCX/PDF) | P1 |

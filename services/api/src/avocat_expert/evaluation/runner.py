@@ -37,6 +37,14 @@ class Expected(BaseModel):
     incertitude_contient: str | None = None
 
 
+class Review(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    par: str
+    date: date
+    decision: Literal["valide", "a_corriger", "conteste"]
+    commentaire: str
+
+
 class Case(BaseModel):
     model_config = ConfigDict(extra="forbid")
     id: str
@@ -44,8 +52,11 @@ class Case(BaseModel):
     question: str
     as_of: date
     attendu: Expected
-    validation_juridique: Literal["NON_VALIDE", "VALIDE", "CONTESTE"]
+    #: VALIDE est réservé à une validation par un professionnel du droit ;
+    #: AVIS_IA_DELEGUE = revue par Claude sur délégation du référent juridique.
+    validation_juridique: Literal["NON_VALIDE", "AVIS_IA_DELEGUE", "VALIDE", "CONTESTE"]
     auteur: str
+    revue: Review | None = None
 
 
 @dataclass
@@ -123,6 +134,7 @@ def summarise(results: list[CaseResult]) -> dict[str, Any]:
     return {
         "cas": len(results),
         "cas_valides_juridiquement": sum(r.case.validation_juridique == "VALIDE" for r in results),
+        "cas_revus_par_ia_sur_delegation": sum(r.case.validation_juridique == "AVIS_IA_DELEGUE" for r in results),
         "recherche": {
             "cas": len(sources),
             "rappel_moyen": mean([r.recall for r in sources]),

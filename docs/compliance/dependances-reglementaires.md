@@ -204,6 +204,22 @@ traçabilité des versions citées (déjà en place).
 Directive NIS 2 et sa transposition, exigences d'accessibilité : applicabilité
 à qualifier selon la taille, les clients et les services proposés.
 
+## Décisions du 2026-10-24 (Claude, sur délégation du référent juridique)
+
+> Prises par Claude à la demande du porteur du projet, référent juridique,
+> après vérification des sources sur Légifrance (connecteur Openlegi) et
+> CELLAR. **Elles encadrent le développement ; elles ne constituent pas la
+> validation par un professionnel exigée avant la bêta.**
+
+| # | Décision | Sources vérifiées le 2026-10-24 |
+|---|---|---|
+| R1 | **Approuvée.** Produit réservé aux professionnels, mode documentaire. Un mode génératif appliquant le droit à la situation personnelle d'un non-professionnel franchirait la ligne ; avis externe obligatoire avant toute ouverture à des non-professionnels. | Loi 71-1130 art. 54 ; Cass. 1re civ., 8 févr. 2023, n° 21-22.828 (« informations à caractère documentaire sur l'état du droit et de la jurisprudence ») ; Cass. 1re civ., 23 sept. 2020, n° 19-12.894 (Demander justice ; « bibliothèque documentaire » dans les motifs de la cour d'appel) ; Cass. 1re civ., 5 juill. 2017, n° 16-22.878. Sanction : art. 66-2 → peines de l'art. 72 → art. 433-17 C. pén. ; **art. 66-2 en abrogation différée au 01/02/2027**, texte de remplacement non identifié. |
+| R2 | **Approuvée.** Aucune donnée client réelle avant décision d'hébergement ; exigences : clés hors hébergeur, UE, contestation des demandes étrangères, journal d'accès pour le cabinet, réversibilité, effacement prouvé. | Loi 71-1130 art. 66-5 (« toutes les pièces du dossier sont couvertes par le secret professionnel »). |
+| R3 | **Amendée.** Cabinet responsable, plateforme sous-traitante ; **aucune réutilisation des données client pour les besoins propres de la plateforme** (évaluation, amélioration, entraînement) sans accord exprès ; AIPD avant bêta. | RGPD art. 22, 28, 35 ; loi 78-17 art. 46, 2° (auxiliaires de justice). |
+| R4 | **Amendée.** Refus des requêtes visant nommément un magistrat ou un greffier ; pas d'indexation de la composition des juridictions ; aucun tri, filtre ou regroupement par juge ou formation nominative ; pas de masquage des noms dans le texte affiché. | COJ L111-13 ; CJA L10 ; loi 78-17 art. 46, 5° (ni objet ni effet de réidentification). |
+| R5 | **Approuvée.** Mentions cumulées Licence Ouverte + fiche DILA ; texte jamais altéré. | CRPA art. L322-1 (non-altération, sens non dénaturé, sources et date de dernière mise à jour). |
+| R6 | **Amendée.** Hors annexe III point 8 a) pour un outil vendu aux avocats ; juridictions exclues comme clientes ; mention « système d'IA » affichée (fait) ; aucune analyse des juges ; plateforme = fournisseur, cabinets = déployeurs ; marquage des sorties générées avant tout mode génératif. | Règlement (UE) 2024/1689 consolidé (modifié par 2026/1744) : annexe III pt 8, art. 6 §3, art. 50. |
+
 ## Conditions minimales avant toute bêta avec données réelles
 
 1. DEC-01 (hébergement) et DEC-02 (IdP) tranchées ; SEC-01, SEC-03, SEC-04, SEC-07 livrés.

@@ -8,5 +8,8 @@
 | 2026-10-24 | ADR | **ADR 0001 à 0013 acceptées** (0009 et 0011 amendées par DEC-01 et DEC-02). | — |
 | 2026-10-24 | REF-01 | **Référent juridique** : le porteur du projet. | Validation des cas d'évaluation (`validation_juridique`), instruction des risques R1–R6 et de ING-03 sur fiches préparées par l'équipe technique. |
 
+| 2026-10-24 | REF-02 | **Délégation** : le référent juridique demande à Claude de trancher lui-même le lot de validation n° 1 (16 cas, R1–R6, ING-03). | Décisions enregistrées (page de validation, `eval/cases/seed_v0.jsonl` au statut `AVIS_IA_DELEGUE`, `docs/compliance/dependances-reglementaires.md`). Statut distinct de `VALIDE` : la validation par un professionnel reste exigée avant la bêta. |
+| 2026-10-24 | ING-03 | Lecture **exclusive** de `DATE_FIN` confirmée (décision déléguée). | Convention de l'ADR 0002 maintenue ; confirmation DILA souhaitable, non bloquante. |
+
 Restent ouvertes : DEC-03 (fournisseur de modèles, phase E), DEC-04
 (positionnement et CGU, avant bêta), décision d'hébergement de production.
