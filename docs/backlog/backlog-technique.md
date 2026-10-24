@@ -33,6 +33,7 @@ P0 = bloquant pour la phase suivante · P1 = nécessaire avant bêta · P2 = apr
 | INFRA-06 | Sauvegarde logique hebdomadaire hors RDS (tâche ECS planifiée vers S3 chiffré) | P1 |
 | INFRA-07 | Registre ECR du compte, recopie des images tierces, signature cosign et attestation de provenance, workflow de déploiement par OIDC GitHub → AWS (sans clé longue durée) | P0 avant recette |
 | INFRA-08 | Image Keycloak optimisée (`kc.sh build`) construite et analysée en CI | P0 avant recette |
+| INFRA-09 | Montées de version majeures planifiées (non proposées par Dependabot) : TypeScript 7 (nouveau compilateur, changement d'éditeur npm à vérifier), Node 26 (vérifier le statut LTS), `@types/node` aligné sur Node ; chacune avec notes de rupture lues et CI complète | P2 |
 | SEC-10 | Rotation des secrets applicatifs (Secrets Manager) | P1 |
 | SEC-11 | Chiffrement de bout en bout ALB → cibles | P2 |
 | SEC-12 | Alertes de sécurité (GuardDuty, CloudTrail) via EventBridge vers l'astreinte | P1 |

@@ -52,6 +52,23 @@ aucune ressource cloud créée, aucun coût engagé.
    arrêté le job. Correction : `certifi` 2026.10.19, par exception ciblée à la
    règle des 14 jours (`exclude-newer-package`, contrainte de version
    minimale), documentée dans `pyproject.toml`.
+7. **Quotas des registres publics** (exécution n° 19) : la galerie ECR
+   publique a refusé les téléchargements anonymes du runner (429 « Data limit
+   exceeded »), comme Docker Hub en local. Un premier correctif (registre en
+   argument de construction) a rendu Dependabot aveugle : il ne résout pas les
+   `ARG` des lignes `FROM` et a fermé sa proposition Rust (« no longer a
+   dependency »). Correctif retenu : `FROM docker.io/library/…@sha256:…` en
+   toutes lettres, et miroir du démon Docker (`registry-mirrors` →
+   `mirror.gcr.io`) configuré et contrôlé en CI ; l'empreinte épinglée garantit
+   l'identité des images servies. Remède durable : recopie dans l'ECR du
+   compte (INFRA-07).
+8. **Dependabot** : les premières propositions (PR n° 1 à 5) échouaient
+   avant toute analyse, sur le quota ci-dessus (PR n° 1 et 2 fermées par
+   Dependabot lui-même pendant l'épisode décrit au point 7). Trois sont des versions
+   majeures (TypeScript 7, Node 26, `@types/node` 26) : elles ne sont plus
+   proposées automatiquement et sont planifiées (INFRA-09). Le délai de
+   14 jours ne s'applique pas aux images Docker (pas de date de publication
+   fournie par le registre).
 
 ## 4. Limites et risques
 

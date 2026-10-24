@@ -122,12 +122,20 @@ jobs:
       TRIVY_VERSION: 0.75.0
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - name: Construction
-        # Images de base via mirror.gcr.io (même empreinte) : la galerie ECR
-        # publique limite les téléchargements anonymes des runners partagés.
+      - name: Miroir Docker Hub (mirror.gcr.io)
+        # Docker Hub et la galerie ECR publique limitent les téléchargements
+        # anonymes des runners partagés ; les empreintes épinglées garantissent
+        # que le miroir sert exactement les mêmes images.
         run: |
-          docker build --build-arg BASE_REGISTRY=mirror.gcr.io/library -f services/api/Dockerfile -t avocat-expert/api:dev .
-          docker build --build-arg BASE_REGISTRY=mirror.gcr.io/library -t avocat-expert/web:dev apps/web
+          conf=/etc/docker/daemon.json
+          current="$(sudo cat "$conf" 2>/dev/null || echo '{}')"
+          echo "$current" | jq '. + {"registry-mirrors": ["https://mirror.gcr.io"]}' | sudo tee "$conf" >/dev/null
+          sudo systemctl restart docker
+          docker info --format '{{json .RegistryConfig.Mirrors}}' | grep -q mirror.gcr.io
+      - name: Construction
+        run: |
+          docker build -f services/api/Dockerfile -t avocat-expert/api:dev .
+          docker build -t avocat-expert/web:dev apps/web
       - name: Trivy
         run: |
           archive="trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz"
