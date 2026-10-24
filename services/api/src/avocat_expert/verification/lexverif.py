@@ -30,6 +30,7 @@ def _period(v: VersionRecord) -> dict[str, Any]:
         "valid_from": v.valid_from.isoformat() if v.valid_from else None,
         "valid_to": v.valid_to.isoformat() if v.valid_to else None,
         "end_undetermined": v.end_undetermined,
+        "dates_unknown": v.dates_unknown,
         "status_raw": v.source_status,
     }
 

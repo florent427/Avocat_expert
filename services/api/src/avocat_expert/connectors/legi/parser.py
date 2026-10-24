@@ -70,8 +70,16 @@ class LegiArticle(BaseModel):
     source_path: str
     source_file_sha256: str
 
+    @property
+    def unnumbered_key(self) -> str | None:
+        """Article non numéroté : plus petit identifiant de version connu de
+        l'article (lui-même et son bloc VERSIONS), stable d'une version à l'autre."""
+        if self.number:
+            return None
+        return min([self.official_id, *(d.official_id for d in self.declared_versions)])
 
-def _text_of(element: Element | None) -> str:
+
+def text_of(element: Element | None) -> str:
     """Texte d'un bloc XHTML en conservant les ruptures de paragraphe."""
     if element is None:
         return ""
@@ -141,8 +149,13 @@ def parse_article(data: bytes, source_path: str) -> LegiArticle:
     if not _ARTICLE_ID.match(official_id):
         raise LegiFormatError(f"identifiant d'article inattendu : {official_id}")
     meta = "META/META_SPEC/META_ARTICLE/"
-    number = _required(root, meta + "NUM")
-    status = _required(root, meta + "ETAT")
+    # NUM vide : article non numéroté (25 121 cas dans le stock du 2025-07-13).
+    if root.find(meta + "NUM") is None:
+        raise LegiFormatError(f"élément obligatoire absent : {meta}NUM")
+    number = " ".join((root.findtext(meta + "NUM") or "").split())
+    if root.find(meta + "ETAT") is None:
+        raise LegiFormatError(f"élément obligatoire absent : {meta}ETAT")
+    status = (root.findtext(meta + "ETAT") or "").strip()  # vide observé (versions JORF d'origine)
     raw_from = _required(root, meta + "DATE_DEBUT")
     raw_to = (root.findtext(meta + "DATE_FIN") or "").strip() or None
 
@@ -159,8 +172,8 @@ def parse_article(data: bytes, source_path: str) -> LegiArticle:
     if not text_id:
         raise LegiFormatError("identifiant du texte parent absent")
 
-    content = _text_of(root.find("BLOC_TEXTUEL/CONTENU"))
-    nota = _text_of(root.find("NOTA/CONTENU")) or None
+    content = text_of(root.find("BLOC_TEXTUEL/CONTENU"))
+    nota = text_of(root.find("NOTA/CONTENU")) or None
 
     declared = tuple(
         DeclaredVersion(

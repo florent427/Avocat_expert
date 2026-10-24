@@ -4,15 +4,19 @@ Source de vérité : `services/api/migrations/*.sql` (appliquées par
 `avx migrate`, empreintes contrôlées). PostgreSQL 16, extensions `pgcrypto`,
 `unaccent`, `vector`.
 
-## Corpus juridique (public, sans tenant) — `0001`, `0004`
+## Corpus juridique (public, sans tenant) — `0001`, `0004`, `0007`, `0008`
 
 | Table | Rôle | Points clés |
 |---|---|---|
 | `legal_source` | source (DILA_LEGI…) | mode d'accès, URL, licence et obligations |
-| `ingestion_run` | lot d'ingestion | version du connecteur, archive, SHA-256, statistiques, statut |
-| `legal_document` | texte (code, loi…) | identifiant officiel (`LEGITEXT…`), nature, titre, `territorial_scope` (NULL = non renseigné) |
+| `ingestion_run` | lot d'ingestion | version du connecteur, archive, SHA-256, **horodatage de l'archive** (ordre des livraisons, date de connaissance), statistiques, statut, point de reprise (`files_committed`, `last_committed_path`, `resume_count`) |
+| `legal_document` | texte (code, loi…) | identifiant commun `cid` (`LEGITEXT…` pour un code, `JORFTEXT…` pour un texte non codifié), nature, titre, `territorial_scope` (NULL = non renseigné) |
+| `document_version` | version d'un texte (`texte/version`, `LEGITEXT…`) | titres, état, période, NOR, dates de publication et de signature (sentinelles -> NULL, brut conservé), visas, signataires, travaux préparatoires, nota, abrogation, rectificatif ; bitemporelle |
+| `document_reference` | liens d'une version de texte | comme `legal_reference` |
+| `structure_node_version` | plan : racine d'une version de texte (`texte/struct`) ou section (`section_ta`) | titre, commentaire, contexte (sections parentes et intitulés datés) ; bitemporelle |
+| `structure_entry` | entrées ordonnées d'un nœud | sous-section, article ou version du texte, avec numéro, intitulé, niveau, état et période (`valid_period`) ; insertion seule |
 | `provision` | disposition logique | (document, type, numéro) |
-| `provision_version` | **version citable** | identifiant officiel (`LEGIARTI…`), statut brut, `[valid_from, valid_to)` + `valid_period`, valeurs brutes, texte + SHA-256, NOTA, chemin et empreinte du fichier source, lot, `sys_from/sys_to`, `superseded_by`, retrait, `tsv`, `embedding` |
+| `provision_version` | **version citable** | identifiant officiel (`LEGIARTI…`), statut brut, `[valid_from, valid_to)` + `valid_period` (début non fixé : `valid_from` NULL ; fin non fixée : `end_undetermined`, ADR 0016), valeurs brutes, texte + SHA-256, NOTA, chemin et empreinte du fichier source, lot, `sys_from/sys_to`, `superseded_by`, retrait, `tsv`, `embedding` |
 | `provision_version_declared` | versions annoncées par la source (bloc VERSIONS) | détection des lacunes de couverture |
 | `legal_reference` | références croisées (bloc LIENS) | type (CITATION, MODIFIE…), sens, cible |
 | `source_withdrawal` | entrées de la liste de suppression | `matched` ; jamais de DELETE |
@@ -56,7 +60,6 @@ durée, coût estimé en micro-euros, version de la table de prix, tenant),
 `access_log` (insertion seule).
 
 ## Évolutions prévues
-* Textes (versions de `LEGITEXT`), sections (`LEGISCTA`) et structure (phase C).
 * Champ territorial qualifié (tables de correspondance territoires ↔ dispositions, avec origine et validation).
 * Partitionnement de `provision_version` et `execution_step` à volumétrie réelle.
 * HMAC par tenant pour les empreintes de données client (SEC-06).

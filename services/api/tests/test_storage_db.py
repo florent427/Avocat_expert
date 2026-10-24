@@ -41,15 +41,22 @@ def test_first_ingestion_stats(conn: psycopg.Connection[Any]) -> None:
     assert row is not None
     status, stats = row
     assert status == "SUCCEEDED"
-    assert stats["files_seen"] == 43
-    assert stats["inserted"] == 43
+    assert stats["files_seen"] == 57
+    assert stats["inserted"] == 57
+    assert stats["rejected"] == 0
+    assert {k: v["inserted"] for k, v in stats["by_kind"].items()} == {
+        "ARTICLE": 43,
+        "SECTION": 10,
+        "TEXT_STRUCT": 2,
+        "TEXT_VERSION": 2,
+    }
     assert stats["withdrawals_recorded"] == 3
     assert stats["withdrawals_matched"] == 0  # les articles retirés ne font pas partie des fixtures
 
 
 def test_reingestion_is_idempotent(conn: psycopg.Connection[Any], legi_fixtures: Path) -> None:
     _, stats = ingest_legi(conn, legi_fixtures)
-    assert (stats.inserted, stats.superseded, stats.unchanged) == (0, 0, 43)
+    assert (stats.inserted, stats.superseded, stats.unchanged) == (0, 0, 57)
 
 
 def test_change_of_knowledge_preserves_history(
@@ -69,7 +76,7 @@ def test_change_of_knowledge_preserves_history(
         ),
         "utf-8",
     )
-    _, stats = ingest_legi(conn, tmp_path)
+    _, stats = ingest_legi(conn, tmp_path, enforce_order=False)
     assert stats.superseded == 1
 
     rows = conn.execute(
@@ -205,7 +212,7 @@ def test_branch_move_is_not_a_withdrawal(conn: psycopg.Connection[Any], legi_fix
         "code_et_TNC_non_vigueur/code_non_vigueur",
         [old_path.removesuffix(".xml")],
     )
-    _, stats = ingest_legi(conn, delivery)
+    _, stats = ingest_legi(conn, delivery, enforce_order=False)
     assert (stats.superseded, stats.withdrawals_recorded, stats.withdrawals_matched) == (1, 1, 0)
     current = conn.execute(
         "SELECT source_path, withdrawn_from_source FROM provision_version WHERE official_id = %s AND sys_to IS NULL",
@@ -222,7 +229,9 @@ def test_withdrawal_matching_path_hides_version(ingested_url: str, legi_fixtures
         path = conn.execute(
             "SELECT source_path FROM provision_version WHERE official_id = %s AND sys_to IS NULL", (official_id,)
         ).fetchone()[0]  # type: ignore[index]
-        _, stats = ingest_legi(conn, _deliver(tmp_path, legi_fixtures, official_id, None, [path.removesuffix(".xml")]))
+        _, stats = ingest_legi(
+            conn, _deliver(tmp_path, legi_fixtures, official_id, None, [path.removesuffix(".xml")]), enforce_order=False
+        )
         assert stats.withdrawals_matched == 1
         assert CorpusRepository(conn).get_current_version(official_id) is None
         recorded = conn.execute(

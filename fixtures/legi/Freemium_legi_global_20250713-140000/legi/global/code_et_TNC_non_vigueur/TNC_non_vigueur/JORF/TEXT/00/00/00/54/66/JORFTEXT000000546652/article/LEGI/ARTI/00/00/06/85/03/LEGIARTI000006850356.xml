@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ARTICLE>
+<META>
+<META_COMMUN>
+<ID>LEGIARTI000006850356</ID>
+<ANCIEN_ID>UPH4SXXXXXX021AAXXXXXXAA</ANCIEN_ID>
+<ORIGINE>LEGI</ORIGINE>
+<URL>article/LEGI/ARTI/00/00/06/85/03/LEGIARTI000006850356.xml</URL>
+<NATURE>Article</NATURE>
+</META_COMMUN>
+<META_SPEC>
+<META_ARTICLE>
+
+<NUM>21</NUM>
+
+<ETAT/>
+
+<DATE_DEBUT>2999-01-01</DATE_DEBUT>
+<DATE_FIN>2999-01-01</DATE_FIN>
+
+
+
+<TYPE>ENTIEREMENT_MODIF</TYPE>
+</META_ARTICLE>
+</META_SPEC>
+</META>
+<CONTEXTE>
+<TEXTE autorite="" cid="JORFTEXT000000546652" date_publi="1994-01-19" date_signature="1994-01-05" ministere="MINISTERE DE L'ECONOMIE" nature="DECRET" nor="ECOC9300166D" num="94-46" num_parution_jo="0015">
+<TITRE_TXT c_titre_court="Décret n° 94-46 du 5 janvier 1994" debut="2999-01-01" fin="2999-01-01" id_txt="JORFTEXT000000546652">Décret n° 94-46 du 5 janvier 1994 fixant les conditions de dissémination    volontaire des organismes génétiquement modifiés destinés à l'alimentation    humaine autres que les plantes, les semences, les plants et les animaux, ou    entrant dans la composition des produits de nettoyage des matériaux et objets    destinés à entrer en contact avec des denrées, produits ou boissons destinés    à l'alimentation de l'homme ou des animaux</TITRE_TXT>
+<TITRE_TXT c_titre_court="Décret n°94-46 du 5 janvier 1994" debut="1994-01-19" fin="2007-03-20" id_txt="LEGITEXT000005615128">Décret n°94-46 du 5 janvier 1994 fixant les conditions de dissémination volontaire des organismes génétiquement modifiés destinés à l'alimentation humaine autres que les plantes, les semences, les plants et les animaux, ou entrant dans la composition des produits de nettoyage des matériaux et objets destinés à entrer en contact avec des denrées, produits ou boissons destinés à l'alimentation de l'homme ou des animaux</TITRE_TXT>
+<TM>
+<TITRE_TM debut="1994-01-19" fin="2007-03-20" id="LEGISCTA000006109058">TITRE II : Dispositions relatives aux procédés et produits utilisés pour le nettoyage des matériaux et objets destinés à entrer en contact avec des denrées, produits et boissons pour l'alimentation de l'homme et des animaux.</TITRE_TM>
+</TM>
+</TEXTE>
+</CONTEXTE>
+
+<VERSIONS>
+<VERSION etat="">
+<LIEN_ART debut="2999-01-01" etat="" fin="2999-01-01" id="LEGIARTI000006850356" num="21" origine="LEGI"/>
+</VERSION>
+</VERSIONS>
+<NOTA>
+<CONTENU/>
+</NOTA>
+<BLOC_TEXTUEL>
+<CONTENU>a modifié les dispositions suivantes<br/>
+<br/>
+</CONTENU>
+</BLOC_TEXTUEL>
+<LIENS>
+<LIEN cidtexte="JORFTEXT000000696195" datesignatexte="1973-02-12" id="LEGIARTI000006554637" naturetexte="DECRET" nortexte="" num="11" numtexte="73-138" sens="cible" typelien="MODIFICATION">Décret n°73-138 du 12 février 1973 - art. 11 (M)</LIEN>
+</LIENS>
+</ARTICLE>

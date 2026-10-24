@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ARTICLE>
+<META>
+<META_COMMUN>
+<ID>LEGIARTI000029825776</ID>
+<ANCIEN_ID/>
+<ORIGINE>LEGI</ORIGINE>
+<URL>article/LEGI/ARTI/00/00/29/82/57/LEGIARTI000029825776.xml</URL>
+<NATURE>Article</NATURE>
+</META_COMMUN>
+<META_SPEC>
+<META_ARTICLE>
+
+<NUM/>
+
+<ETAT>ABROGE</ETAT>
+
+<DATE_DEBUT>1992-01-02</DATE_DEBUT>
+<DATE_FIN>2020-09-01</DATE_FIN>
+
+
+
+<TYPE>AUTONOME</TYPE>
+</META_ARTICLE>
+</META_SPEC>
+</META>
+<CONTEXTE>
+<TEXTE autorite="" cid="JORFTEXT000000721735" date_publi="1992-01-01" date_signature="1991-12-24" ministere="MINISTERE DE L'EDUCATION NATIONALE" nature="ARRETE" nor="MENZ9103001A" num="" num_parution_jo="0001">
+<TITRE_TXT c_titre_court="Arrêté du 24 décembre 1991" debut="2999-01-01" fin="2999-01-01" id_txt="JORFTEXT000000721735">Arrêté du 24 décembre 1991 donnant compétence aux recteurs d'académie,    chanceliers des universités, pour signer le diplôme d'Etat de conseiller    d'orientation-psychologue</TITRE_TXT>
+<TITRE_TXT c_titre_court="Arrêté du 24 décembre 1991" debut="1992-01-02" fin="2020-09-01" id_txt="LEGITEXT000029825775">Arrêté du 24 décembre 1991 donnant compétence aux recteurs d'académie,    chanceliers des universités, pour signer le diplôme d'Etat de conseiller    d'orientation-psychologue</TITRE_TXT>
+</TEXTE>
+</CONTEXTE>
+<VERSIONS>
+<VERSION etat="ABROGE">
+<LIEN_ART debut="1992-01-02" etat="ABROGE" fin="2020-09-01" id="LEGIARTI000029825776" num="" origine="LEGI"/>
+</VERSION>
+<VERSION etat="">
+<LIEN_ART debut="2999-01-01" etat="" fin="2999-01-01" id="JORFARTI000000992907" num="" origine="JORF"/>
+</VERSION>
+</VERSIONS>
+<NOTA>
+<CONTENU/>
+</NOTA>
+<BLOC_TEXTUEL>
+<CONTENU>  Art. 1er. - Les recteurs d'académie, chanceliers des universités, reçoivent     compétence par délégation du ministre chargé de l'enseignement supérieur à     l'effet de signer les diplômes d'Etat de conseiller d'orientation-psychologue     délivrés par les établissements agréés par le ministre à organiser la     formation.<br/>
+<br/>
+</CONTENU>
+</BLOC_TEXTUEL>
+<LIENS>
+<LIEN cidtexte="JORFTEXT000041491748" datesignatexte="2020-01-23" id="LEGIARTI000041509331" naturetexte="ARRETE" nortexte="ESRS2001248A" num="2" numtexte="" sens="cible" typelien="ABROGE">Arrêté du 23 janvier 2020 - art. 2</LIEN>
+</LIENS>
+</ARTICLE>

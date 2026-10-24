@@ -93,6 +93,10 @@ export interface SearchHit {
  */
 export interface SourceReference {
   connector_version: string;
+  /**
+   * La source ne renseigne aucune date d'application : applicabilité indéterminée
+   */
+  dates_unknown?: boolean;
   document_official_id: string;
   document_title: string;
   /**
@@ -103,6 +107,9 @@ export interface SourceReference {
    * Identifiant officiel de la version citée, ex. LEGIARTI…
    */
   official_id: string;
+  /**
+   * Numéro publié ; vide pour un article non numéroté
+   */
   provision_number: string;
   /**
    * Nom (horodaté) de l'archive livrée par la source

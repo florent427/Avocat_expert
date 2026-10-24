@@ -27,7 +27,10 @@ class LegalPeriod(BaseModel):
 
     * ``valid_from=None`` : entrée en vigueur à une date non fixée par la source ;
     * ``valid_to=None`` et ``end_undetermined=False`` : pas de fin connue ;
-    * ``end_undetermined=True`` : fin (abrogation) à une date non fixée.
+    * ``end_undetermined=True`` : fin (abrogation) à une date non fixée ;
+    * ``dates_unknown=True`` : la source ne renseigne aucune date d'application
+      (LEGI : ``2999-01-01`` en début, ``ETAT`` vide, observé pour des articles de
+      versions JORF d'origine) — applicabilité toujours indéterminée.
     """
 
     model_config = ConfigDict(frozen=True, extra="forbid")
@@ -35,16 +38,19 @@ class LegalPeriod(BaseModel):
     valid_from: date | None
     valid_to: date | None
     end_undetermined: bool = False
+    dates_unknown: bool = False
 
     @model_validator(mode="after")
     def _coherent(self) -> LegalPeriod:
         if self.end_undetermined and self.valid_to is not None:
             raise ValueError("fin non fixée incompatible avec une date de fin")
+        if self.dates_unknown and self.valid_from is not None:
+            raise ValueError("dates inconnues incompatibles avec une date de début")
         return self
 
     @property
     def start_undetermined(self) -> bool:
-        return self.valid_from is None
+        return self.valid_from is None and not self.dates_unknown
 
     @property
     def ever_in_force(self) -> bool:
@@ -57,6 +63,8 @@ class LegalPeriod(BaseModel):
         known = knowledge_date is not None and at <= knowledge_date
         if self.valid_to is not None and at >= self.valid_to:
             return InForce.NON
+        if self.dates_unknown:
+            return InForce.INDETERMINE
         if self.valid_from is None:
             return InForce.NON if known else InForce.INDETERMINE
         if not self.ever_in_force or at < self.valid_from:

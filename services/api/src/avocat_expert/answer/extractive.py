@@ -31,18 +31,23 @@ _SUPPORT_BY_VERDICT = {
 
 
 def _describe(ref: SourceReference) -> str:
-    start = (
-        f"applicable à compter du {ref.valid_from.isoformat()}"
-        if ref.valid_from
-        else "entrée en vigueur à une date non encore fixée par la source"
-    )
-    if ref.valid_to:
-        end = f"jusqu'au {ref.valid_to.isoformat()} (exclu)"
-    elif ref.end_undetermined:
-        end = "jusqu'à une date d'abrogation non encore fixée par la source"
+    article = f"article {ref.provision_number}" if ref.provision_number else "article non numéroté"
+    if ref.dates_unknown:
+        period = "dates d'application non renseignées par la source"
     else:
-        end = "sans date de fin connue"
-    return f"{ref.document_title}, article {ref.provision_number} — version {ref.official_id}, {start}, {end}."
+        start = (
+            f"applicable à compter du {ref.valid_from.isoformat()}"
+            if ref.valid_from
+            else "entrée en vigueur à une date non encore fixée par la source"
+        )
+        if ref.valid_to:
+            end = f"jusqu'au {ref.valid_to.isoformat()} (exclu)"
+        elif ref.end_undetermined:
+            end = "jusqu'à une date d'abrogation non encore fixée par la source"
+        else:
+            end = "sans date de fin connue"
+        period = f"{start}, {end}"
+    return f"{ref.document_title}, {article} — version {ref.official_id}, {period}."
 
 
 class ExtractiveAnswerService:

@@ -220,6 +220,25 @@ fn undetermined_end_is_never_certain_beyond_knowledge_date() {
 }
 
 #[test]
+fn empty_source_status_is_never_certain() {
+    // Stock du 2025-07-13 : articles à ETAT vide mais dates renseignées.
+    let mut req = request(
+        "les travailleurs aptes au travail et recherchant",
+        "2026-10-01",
+        None,
+    );
+    req["payload"]["candidate"]["period"]["status_raw"] = json!("");
+    let (response, _) = run(&req);
+    assert_eq!(
+        outcome(&response, "APPLICABILITE_TEMPORELLE"),
+        "INDETERMINE"
+    );
+    assert!(response["result"]["uncertainties"]
+        .to_string()
+        .contains("état juridique de la version non renseigné"));
+}
+
+#[test]
 fn malformed_json_is_refused() {
     let (response, code) = run(&json!("pas un objet"));
     assert_eq!(code, 2);

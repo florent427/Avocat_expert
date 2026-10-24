@@ -13,8 +13,12 @@ réelle : l'article 289 était déclaré « en vigueur » avec certitude en 2030
 la réponse affichait « jusqu'au 2222-02-22 ».
 
 ## Décision
-* `2222-02-22` signifie « date non fixée » ; `2999-01-01` et au-delà
-  « absence de date ». Interprétation **déduite des données** (NOTA
+* `2222-02-22` (et toute date de l'année 2222, variante `2222-01-01` observée
+  dans le stock) signifie « date non fixée » ; `2999-01-01` et au-delà
+  « absence de date ». Un **début** à `2999-01-01` (229 644 articles du stock
+  du 2025-07-13, `ETAT` vide) signifie « dates d'application non
+  renseignées » : applicabilité toujours `INDETERMINE` (`dates_unknown`).
+  Un `ETAT` vide avec des dates renseignées donne au mieux `INCERTAIN`. Interprétation **déduite des données** (NOTA
   concordantes), à confirmer auprès de la DILA (ING-03). Valeurs brutes
   toujours conservées.
 * Modèle : `valid_from` facultatif (début non fixé : jamais en vigueur à une
@@ -26,7 +30,7 @@ la réponse affichait « jusqu'au 2222-02-22 ».
   `CONFORME`. Toute question à une date postérieure à la date de connaissance
   reçoit une incertitude explicite.
 * Contrat du moteur `lexverif` porté en **v2** (`valid_from` facultatif,
-  `end_undetermined`, `knowledge_date`, résolution `INDETERMINEE`) ; le
+  `end_undetermined`, `dates_unknown`, `knowledge_date`, résolution `INDETERMINEE`) ; le
   contrat v1 est refusé.
 
 ## Conséquences

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEXTE_VERSION>
+<META>
+<META_COMMUN>
+<ID>LEGITEXT000018840114</ID>
+<ANCIEN_ID/>
+<ORIGINE>LEGI</ORIGINE>
+<URL>texte/version/LEGI/TEXT/00/00/18/84/01/LEGITEXT000018840114.xml</URL>
+<NATURE>ARRETE</NATURE>
+</META_COMMUN>
+<META_SPEC>
+<META_TEXTE_CHRONICLE>
+<CID>JORFTEXT000018837783</CID>
+<NUM/>
+<NUM_PARUTION>0120</NUM_PARUTION>
+<NUM_SEQUENCE>4</NUM_SEQUENCE>
+<NOR>DEVE0812230A</NOR>
+<DATE_PUBLI>2008-05-24</DATE_PUBLI>
+<DATE_TEXTE>2008-05-19</DATE_TEXTE>
+<DERNIERE_MODIFICATION>2008-05-25</DERNIERE_MODIFICATION>
+<VERSIONS_A_VENIR/>
+<ORIGINE_PUBLI>JORF n°0120 du 24 mai 2008</ORIGINE_PUBLI>
+<PAGE_DEB_PUBLI>8473</PAGE_DEB_PUBLI>
+<PAGE_FIN_PUBLI>8475</PAGE_FIN_PUBLI>
+</META_TEXTE_CHRONICLE>
+<META_TEXTE_VERSION>
+
+
+<TITRE>Arrêté du 19 mai 2008</TITRE>
+<TITREFULL>Arrêté du 19 mai 2008 relatif à la fourniture de dernier recours de gaz naturel aux clients non domestiques assurant des missions d'intérêt général liées à la satisfaction des besoins essentiels de la nation</TITREFULL>
+
+<ETAT>ABROGE_DIFF</ETAT>
+<DATE_DEBUT>2008-05-25</DATE_DEBUT>
+<DATE_FIN>2222-01-01</DATE_FIN>
+<AUTORITE/>
+<MINISTERE/>
+<LIENS>
+<LIEN cidtexte="JORFTEXT000000215117" datesignatexte="2000-04-12" id="JORFTEXT000000215117" naturetexte="LOI" nortexte="FPPX9800029L" num="" numtexte="2000-321" sens="source" typelien="CITATION">LOI n° 2000-321 du 12 avril 2000</LIEN>
+<LIEN cidtexte="JORFTEXT000000776748" datesignatexte="2003-01-03" id="JORFTEXT000000776748" naturetexte="LOI" nortexte="ECOX0200139L" num="" numtexte="2003-8" sens="source" typelien="CITATION">Loi n°2003-8 du 3 janvier 2003</LIEN>
+<LIEN cidtexte="JORFTEXT000000248517" datesignatexte="2004-03-19" id="JORFTEXT000000248517" naturetexte="DECRET" nortexte="INDI0402493D" num="" numtexte="2004-250" sens="source" typelien="CITATION">Décret n° 2004-250 du 19 mars 2004</LIEN>
+<LIEN cidtexte="JORFTEXT000000248518" datesignatexte="2004-03-19" id="JORFTEXT000000248518" naturetexte="DECRET" nortexte="INDI0402494D" num="" numtexte="2004-251" sens="source" typelien="CITATION">Décret n° 2004-251 du 19 mars 2004</LIEN>
+<LIEN cidtexte="JORFTEXT000000649747" datesignatexte="2007-06-29" id="JORFTEXT000000649747" naturetexte="DECRET" nortexte="DEVE0757658D" num="" numtexte="2007-1057" sens="source" typelien="CITATION">Décret n°2007-1057 du 29 juin 2007</LIEN>
+<LIEN cidtexte="JORFTEXT000043243818" datesignatexte="2021-03-11" id="LEGIARTI000043247373" naturetexte="DECRET" nortexte="TRER2103788D" num="32" numtexte="2021-273" sens="cible" typelien="ABROGE">Décret n°2021-273 du 11 mars 2021 - art. 32</LIEN>
+</LIENS>
+
+
+</META_TEXTE_VERSION>
+</META_SPEC>
+</META>
+<VISAS>
+<CONTENU>
+<p align="left">
+<br/> Le ministre d'Etat, ministre de l'écologie, de l'énergie, du développement durable et de l'aménagement du territoire,<br/> Vu la loi n° 2000-321 du 12 avril 2000 modifiée relative aux droits des citoyens dans leurs relations avec les administrations ;<br/> Vu la loi n° 2003-8 du 3 janvier 2003 modifiée relative aux marchés du gaz et de l'électricité et au service public de l'énergie, notamment son article 16 ;<br/> Vu le décret n° 2004-250 du 19 mars 2004 relatif à l'autorisation de fourniture de gaz, modifié par le décret n° 2007-1057 du 29 juin 2007 ;<br/> Vu le décret n° 2004-251 du 19 mars 2004 relatif aux obligations de service public dans le secteur du gaz, modifié par le décret n° 2007-1057 du 29 juin 2007 ;<br/> Vu l'avis du Conseil supérieur de l'énergie en date du 15 avril 2008,<br/> Arrête :</p>
+</CONTENU>
+</VISAS>
+<SIGNATAIRES>
+<CONTENU>
+<div align="left">
+<p> Fait à Paris, le 19 mai 2008.</p>
+</div>
+<div align="center">
+<p>Pour le ministre et par délégation :</p>
+<p>Le directeur général de l'énergie</p>
+<p>et des matières premières,</p>
+<p>P.-F. Chevet</p>
+</div>
+</CONTENU>
+</SIGNATAIRES>
+<TP>
+<CONTENU/>
+</TP>
+<NOTA>
+<CONTENU/>
+</NOTA>
+<ABRO>
+<CONTENU/>
+</ABRO>
+<RECT>
+<CONTENU/>
+</RECT>
+
+
+</TEXTE_VERSION>

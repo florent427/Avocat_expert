@@ -10,7 +10,8 @@
 //! (abrogation à une date non fixée). L'état de ces versions n'est connu que
 //! jusqu'à la date de connaissance du corpus (dernière livraison intégrée) ;
 //! au-delà, il est indéterminé. Sans date de connaissance, il est toujours
-//! indéterminé.
+//! indéterminé. Une version sans aucune date d'application renseignée
+//! (`dates_unknown`) est indéterminée à toute date antérieure à sa fin.
 
 use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
@@ -25,6 +26,9 @@ pub struct VersionPeriod {
     /// Fin (abrogation) à une date non fixée par la source.
     #[serde(default)]
     pub end_undetermined: bool,
+    /// Aucune date d'application renseignée par la source.
+    #[serde(default)]
+    pub dates_unknown: bool,
     /// Statut brut fourni par la source (ex. `VIGUEUR`, `MODIFIE_MORT_NE`).
     pub status_raw: String,
 }
@@ -49,6 +53,9 @@ impl VersionPeriod {
         let known = knowledge_date.is_some_and(|k| date <= k);
         if self.valid_to.is_some_and(|end| date >= end) {
             return InForce::Non;
+        }
+        if self.dates_unknown {
+            return InForce::Indetermine;
         }
         let Some(start) = self.valid_from else {
             return if known {
@@ -133,6 +140,7 @@ mod tests {
             valid_from: Some(d(from)),
             valid_to: to.map(d),
             end_undetermined: false,
+            dates_unknown: false,
             status_raw: status.into(),
         }
     }
@@ -239,6 +247,7 @@ mod tests {
             valid_from: Some(d("2023-12-31")),
             valid_to: None,
             end_undetermined: true,
+            dates_unknown: false,
             status_raw: "ABROGE_DIFF".into(),
         }
     }
@@ -278,6 +287,7 @@ mod tests {
             valid_from: None,
             valid_to: None,
             end_undetermined: false,
+            dates_unknown: false,
             status_raw: "VIGUEUR_DIFF".into(),
         };
         let current = v("A", "2020-01-01", None, "VIGUEUR");
@@ -295,5 +305,24 @@ mod tests {
                 possibly_in_force: vec!["B".into()]
             }
         );
+    }
+
+    #[test]
+    fn unknown_dates_are_always_indeterminate() {
+        // Stock du 2025-07-13 : LEGIARTI000006850356, ETAT vide, dates 2999-01-01.
+        let unknown = VersionPeriod {
+            official_id: "LEGIARTI000006850356".into(),
+            valid_from: None,
+            valid_to: None,
+            end_undetermined: false,
+            dates_unknown: true,
+            status_raw: String::new(),
+        };
+        for date in ["1990-01-01", "2026-10-23", "2030-01-01"] {
+            assert_eq!(
+                unknown.in_force_at(d(date), Some(d(KNOWLEDGE))),
+                InForce::Indetermine
+            );
+        }
     }
 }

@@ -5,5 +5,5 @@ Le format a été vérifié sur l'archive réelle ``LEGI_20261023-215041.tar.gz`
 évolution du format doit faire l'objet d'une nouvelle version du connecteur.
 """
 
-CONNECTOR_VERSION = "dila-legi-xml/0.1.0"
+CONNECTOR_VERSION = "dila-legi-xml/0.2.0"
 SOURCE_CODE = "DILA_LEGI"

@@ -134,3 +134,25 @@ def test_external_entity_is_refused() -> None:
     xxe = b'<?xml version="1.0"?><!DOCTYPE a [<!ENTITY e SYSTEM "file:///etc/passwd">]><ARTICLE>&e;</ARTICLE>'
     with pytest.raises(Exception, match=r"(?i)entit"):
         parse_article(xxe, "xxe.xml")
+
+
+def test_streamed_tar_reading_with_many_members(legi_fixtures: Path, tmp_path: Path) -> None:
+    import io
+    import tarfile
+
+    from avocat_expert.connectors.legi.archive import ArchiveReader
+
+    data = next(legi_fixtures.rglob("LEGIARTI000048590547.xml")).read_bytes()
+    archive = tmp_path / "LEGI_20990101-000000.tar.gz"
+    with tarfile.open(archive, "w:gz") as tar:
+        for i in range(3000):
+            info = tarfile.TarInfo(f"x/legi/global/a/article/LEGI/ARTI/{i:06d}/LEGIARTI{i:012d}.xml")
+            info.size = len(data)
+            tar.addfile(info, io.BytesIO(data))
+        info = tarfile.TarInfo("x/legi/global/README")
+        info.size = 2
+        tar.addfile(info, io.BytesIO(b"ok"))
+    reader = ArchiveReader(archive)
+    entries = list(reader.entries())
+    assert len(entries) == 3000 and reader.ignored == 1
+    assert entries[-1].path == "legi/global/a/article/LEGI/ARTI/002999/LEGIARTI000000002999.xml"

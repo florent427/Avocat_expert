@@ -48,11 +48,14 @@ class SourceReference(Strict):
     official_id: str = Field(description="Identifiant officiel de la version citée, ex. LEGIARTI…")
     document_official_id: str
     document_title: str
-    provision_number: str
+    provision_number: str = Field(description="Numéro publié ; vide pour un article non numéroté")
     valid_from: date | None = Field(description="None : entrée en vigueur à une date non fixée par la source")
     valid_to: date | None = Field(description="None : pas de date de fin connue (voir end_undetermined)")
     end_undetermined: bool = Field(
         default=False, description="Fin (abrogation) annoncée par la source à une date non encore fixée"
+    )
+    dates_unknown: bool = Field(
+        default=False, description="La source ne renseigne aucune date d'application : applicabilité indéterminée"
     )
     source_status: str = Field(description="Statut brut publié par la source")
     source_path: str

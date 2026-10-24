@@ -263,6 +263,12 @@
           "title": "Connector Version",
           "type": "string"
         },
+        "dates_unknown": {
+          "default": false,
+          "description": "La source ne renseigne aucune date d'application : applicabilité indéterminée",
+          "title": "Dates Unknown",
+          "type": "boolean"
+        },
         "document_official_id": {
           "title": "Document Official Id",
           "type": "string"
@@ -283,6 +289,7 @@
           "type": "string"
         },
         "provision_number": {
+          "description": "Numéro publié ; vide pour un article non numéroté",
           "title": "Provision Number",
           "type": "string"
         },

@@ -13,7 +13,8 @@ from psycopg.rows import dict_row
 from avocat_expert.contracts.common import SourceReference
 
 _VERSION_COLUMNS = """
-  pv.id, pv.official_id, pv.source_status, pv.valid_from, pv.valid_to, pv.end_undetermined, pv.text_content,
+  pv.id, pv.official_id, pv.source_status, pv.valid_from, pv.valid_to, pv.end_undetermined, pv.dates_unknown,
+  pv.text_content,
   pv.text_sha256, pv.source_path, pv.source_file_sha256, pv.section_path, pv.provision_id,
   p.number AS provision_number, d.official_id AS document_official_id, d.title AS document_title,
   d.territorial_scope, s.code AS source_code, r.connector_version, r.archive_name
@@ -44,6 +45,7 @@ class VersionRecord:
     valid_from: date | None
     valid_to: date | None
     end_undetermined: bool
+    dates_unknown: bool
     text_content: str
     provision_id: uuid.UUID
     provision_number: str
@@ -62,6 +64,7 @@ class VersionRecord:
             valid_from=row["valid_from"],
             valid_to=row["valid_to"],
             end_undetermined=row["end_undetermined"],
+            dates_unknown=row["dates_unknown"],
             text_content=row["text_content"],
             provision_id=row["provision_id"],
             provision_number=row["provision_number"],
@@ -78,6 +81,7 @@ class VersionRecord:
                 valid_from=row["valid_from"],
                 valid_to=row["valid_to"],
                 end_undetermined=row["end_undetermined"],
+                dates_unknown=row["dates_unknown"],
                 source_status=row["source_status"],
                 source_path=row["source_path"],
                 source_file_sha256=row["source_file_sha256"],

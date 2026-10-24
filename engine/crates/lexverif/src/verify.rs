@@ -200,23 +200,40 @@ pub fn verify_citation(payload: &VerifyCitationPayload) -> VerifyCitationResult 
             .knowledge_date
             .map(|k| k.to_string())
             .unwrap_or_else(|| "non communiquée".into());
-        let start = period
-            .valid_from
-            .map(|d| format!("du {d}"))
-            .unwrap_or_else(|| "à compter d'une date non fixée par la source".into());
+        let start = match period.valid_from {
+            Some(d) => format!("du {d}"),
+            None if period.dates_unknown => {
+                "sans date d'application renseignée par la source".into()
+            }
+            None => "à compter d'une date non fixée par la source".into(),
+        };
         let end = match (period.valid_to, period.end_undetermined) {
             (Some(d), _) => format!("au {d}"),
             (None, true) => "jusqu'à une date non fixée par la source".into(),
+            (None, false) if period.dates_unknown => String::new(),
             (None, false) => "sans date de fin connue".into(),
         };
         checks.push(match period.in_force_at(claim.as_of, payload.knowledge_date) {
+            InForce::Oui if period.status_raw.trim().is_empty() => {
+                uncertainties.push("état juridique de la version non renseigné par la source".into());
+                check(
+                    CheckName::ApplicabiliteTemporelle,
+                    Outcome::Indetermine,
+                    format!(
+                        "période {} {} couvrant le {}, mais état juridique non renseigné par la source",
+                        start, end, claim.as_of
+                    ),
+                )
+            }
             InForce::Oui => check(
                 CheckName::ApplicabiliteTemporelle,
                 Outcome::Ok,
                 format!("en vigueur le {} (période {} {})", claim.as_of, start, end),
             ),
             InForce::Indetermine => {
-                uncertainties.push(if period.valid_from.is_none() {
+                uncertainties.push(if period.dates_unknown {
+                    "dates d'application non renseignées par la source".into()
+                } else if period.valid_from.is_none() {
                     "entrée en vigueur à une date non fixée par la source".into()
                 } else {
                     "abrogation à une date non fixée par la source".into()

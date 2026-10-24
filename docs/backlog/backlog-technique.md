@@ -41,9 +41,9 @@ P0 = bloquant pour la phase suivante · P1 = nécessaire avant bêta · P2 = apr
 ## Phase C — corpus
 | ID | Tâche | Prio |
 |---|---|---|
-| ING-01 | Textes et sections LEGI (`LEGITEXT` version/struct, `LEGISCTA`) | P0 |
-| ING-02 | Ingestion du stock Freemium (1,1 Go) en flux + deltas ordonnés, reprise sur incident | P0 |
-| ING-03 | Lecture exclusive de DATE_FIN retenue (décision déléguée du 24/10/2026) ; confirmation DILA et sentinelles 2999-12-31 / 2222-02-22 | P2 |
+| ING-01 | ✅ textes (`texte/version`), plan (`texte/struct`) et sections (`section_ta`) : parseurs vérifiés sur les DTD et par l'analyse du stock complet (2 276 109 fichiers : articles sans état ni date, non numérotés, sentinelle 2222-01-01, sections sans cid, index ELI), tables bitemporelles (0008, 0009), plan d'un texte à une date (`StructureRepository`) avec lacunes signalées ; reste : exposition par l'API (phase D) | — |
+| ING-02 | ✅ lecture en flux du stock, lots transactionnels avec point de reprise, une ingestion à la fois par source, ordre des livraisons contrôlé, `avx sync-legi` (stock puis deltas postérieurs, hôte officiel seul) ; reste : planification en recette (tâche ECS) | — |
+| ING-03 | Lecture exclusive de DATE_FIN retenue (décision déléguée du 24/10/2026) ; confirmation DILA et sentinelles 2999-12-31 / 2222-02-22 (2222-02-22 traité comme « date non fixée », ADR 0016) | P2 |
 | ING-04 | JORF | P1 |
 | ING-05 | Judilibre (spécification OpenAPI 1.2.5 vérifiée ; KeyId PISTE). **Critères d'acceptation R4** : requêtes visant un magistrat ou greffier refusées (tests), zone de composition non indexée, aucun filtre ni agrégat par juge | P1 |
 | ING-06 | Justice administrative (archives zip XML mensuelles, CGU 18/01/2022). Mêmes critères R4 ; signalement des défauts de pseudonymisation | P1 |
