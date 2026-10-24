@@ -170,3 +170,33 @@ def test_same_article_twice_in_one_batch(conn: psycopg.Connection[Any], legi_fix
     assert current is not None and "code_non_vigueur" in current[0]
     _, stats = ingest_legi(conn, legi_fixtures)  # restauration
     assert stats.superseded == 1
+
+
+def test_newest_copy_wins_within_one_delivery(
+    conn: psycopg.Connection[Any], legi_fixtures: Path, tmp_path: Path
+) -> None:
+    # Stock du 2025-07-13 : 12 143 articles présents dans les deux branches. La
+    # copie la plus récente (horodatage du fichier dans l'archive) fait foi, même
+    # si l'ancienne copie est lue après elle.
+    import io
+
+    official_id = "LEGIARTI000006792617"
+    source = next(legi_fixtures.rglob(f"{official_id}.xml"))
+    data = source.read_bytes()
+    relative = "20990101-000000/" + source.relative_to(legi_fixtures).as_posix()
+    newer = relative.replace("code_et_TNC_en_vigueur/code_en_vigueur", "code_et_TNC_non_vigueur/code_non_vigueur")
+    archive = tmp_path / "livraison-de-test.tar.gz"  # non horodatée : ne déplace pas la date de connaissance
+    with tarfile.open(archive, "w:gz") as tar:
+        for name, mtime in ((newer, 1_711_911_554), (relative, 1_711_052_384)):  # récent lu en premier
+            info = tarfile.TarInfo(name)
+            info.size, info.mtime = len(data), mtime
+            tar.addfile(info, io.BytesIO(data))
+    _, stats = ingest_legi(conn, archive, enforce_order=False)
+    assert (stats.superseded, stats.stale_duplicate) == (1, 1)
+    current = conn.execute(
+        "SELECT source_path, source_mtime IS NOT NULL FROM provision_version WHERE official_id = %s AND sys_to IS NULL",
+        (official_id,),
+    ).fetchone()
+    assert current is not None and "code_non_vigueur" in current[0] and current[1]
+    _, stats = ingest_legi(conn, legi_fixtures, enforce_order=False)  # restauration
+    assert stats.superseded == 1

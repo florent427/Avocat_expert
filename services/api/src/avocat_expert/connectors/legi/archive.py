@@ -14,7 +14,7 @@ import re
 import tarfile
 from collections.abc import Iterator
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Literal
 
@@ -51,9 +51,13 @@ def is_stock(name: str) -> bool:
 
 @dataclass(frozen=True)
 class ArchiveEntry:
+    """Fichier XML d'une livraison. ``mtime`` : horodatage du fichier dans
+    l'archive ; ``None`` pour un répertoire extrait (horodatages non fiables)."""
+
     path: str
     data: bytes
     kind: EntryKind = "ARTICLE"
+    mtime: datetime | None = None
 
 
 @dataclass(frozen=True)
@@ -146,12 +150,13 @@ class ArchiveReader:
                 if kind is None:
                     self._skip("/" + relative)
                     continue
+                mtime = datetime.fromtimestamp(member.mtime, UTC) if member.mtime else None
                 if self._skipping():
-                    yield ArchiveEntry(relative, b"", kind)
+                    yield ArchiveEntry(relative, b"", kind, mtime)
                     continue
                 handle = archive.extractfile(member)
                 if handle is not None:
-                    yield ArchiveEntry(relative, handle.read(), kind)
+                    yield ArchiveEntry(relative, handle.read(), kind, mtime)
 
 
 def _relative(path: str) -> str:

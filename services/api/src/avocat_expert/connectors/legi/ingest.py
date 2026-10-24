@@ -67,7 +67,7 @@ SOURCE_DEFINITION = {
 }
 
 DEFAULT_BATCH_SIZE = 1000
-OUTCOMES = ("inserted", "unchanged", "superseded", "rejected")
+OUTCOMES = ("inserted", "unchanged", "superseded", "rejected", "stale_duplicate")
 
 
 class IngestionOrderError(RuntimeError):
@@ -85,6 +85,7 @@ class IngestionStats:
     unchanged: int = 0
     superseded: int = 0
     rejected: int = 0
+    stale_duplicate: int = 0  # copie plus ancienne d'un élément déjà lu dans la même livraison
     withdrawals_recorded: int = 0
     withdrawals_matched: int = 0
     ignored: int = 0
@@ -148,7 +149,8 @@ def _link_rows(owner: uuid.UUID, links: Iterable[LegiLink]) -> list[tuple[Any, .
 Parsed = LegiArticle | LegiTextVersion | LegiStructureNode
 
 _ARTICLE_STATE = """SELECT official_id, id, text_sha256, source_status, valid_from, valid_to, end_undetermined,
-                           dates_unknown, source_file_sha256, source_path, withdrawn_from_source
+                           dates_unknown, source_file_sha256, source_path, withdrawn_from_source,
+                           ingestion_run_id, source_mtime
                     FROM provision_version WHERE official_id = ANY(%s) AND sys_to IS NULL FOR UPDATE"""
 
 
@@ -165,6 +167,7 @@ class _Store:
 
     def __init__(self, conn: psycopg.Connection[Any], run_id: uuid.UUID, source_id: uuid.UUID) -> None:
         self.conn = conn
+        self.mtime: datetime | None = None  # horodatage du fichier en cours d'écriture
         self.run_id = run_id
         self.source_id = source_id
         self._documents: dict[str, uuid.UUID] = {}
@@ -216,8 +219,9 @@ class _Store:
                 self._nodes[(table, key[0] + key[1])] = None
             kind_sql = "''" if table == "document_version" else "kind"
             for row in self.conn.execute(
-                f"SELECT {kind_sql} || official_id, id, source_path, source_file_sha256, withdrawn_from_source "  # noqa: S608
-                f"FROM {table} WHERE official_id = ANY(%s) AND sys_to IS NULL FOR UPDATE",
+                f"SELECT {kind_sql} || official_id, id, source_path, source_file_sha256, withdrawn_from_source, "  # noqa: S608
+                f"ingestion_run_id, source_mtime FROM {table} "
+                "WHERE official_id = ANY(%s) AND sys_to IS NULL FOR UPDATE",
                 ([k[1] for k in keys],),
             ).fetchall():
                 if (table, row[0]) in self._nodes:
@@ -241,6 +245,16 @@ class _Store:
                 (docs, numbers, keys),
             ).fetchall():
                 self._provisions[(doc_id, number or f"~{key}")] = prov_id
+
+    def _older_copy(self, written_by: Any, written_mtime: Any) -> bool:
+        """Vrai si l'élément a déjà été écrit par cette livraison à partir d'un
+        fichier plus récent que celui en cours (copie périmée dans une autre branche)."""
+        return bool(
+            written_by == self.run_id
+            and written_mtime is not None
+            and self.mtime is not None
+            and self.mtime < written_mtime
+        )
 
     def document(self, cid: str, nature: str, title: str | None) -> uuid.UUID:
         cached = self._documents.get(cid)
@@ -297,8 +311,10 @@ class _Store:
             row = self.conn.execute(_ARTICLE_STATE, ([a.official_id],)).fetchone()
             current = row[1:] if row else None
         if current is not None:
+            if self._older_copy(current[10], current[11]):
+                return "stale_duplicate"
             text_sha, status, valid_from, valid_to, end_undetermined, unknown, source_sha, source_path, withdrawn = (
-                current[1:]
+                current[1:10]
             )
             if (
                 not withdrawn  # une relivraison après retrait constitue une connaissance nouvelle
@@ -333,13 +349,15 @@ class _Store:
             a.source_file_sha256,
             a.source_path,
             False,
+            self.run_id,
+            self.mtime,
         )
         self.conn.execute(
             """INSERT INTO provision_version (
                  id, provision_id, official_id, source_status, valid_from, valid_to, end_undetermined,
                  dates_unknown, raw_valid_from, raw_valid_to, section_path, text_content, text_sha256, nota,
-                 source_path, source_file_sha256, ingestion_run_id)
-               VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""",
+                 source_path, source_file_sha256, ingestion_run_id, source_mtime)
+               VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""",
             (
                 new_id,
                 provision_id,
@@ -358,6 +376,7 @@ class _Store:
                 a.source_path,
                 a.source_file_sha256,
                 self.run_id,
+                self.mtime,
             ),
         )
         with self.conn.cursor() as cur:
@@ -386,13 +405,15 @@ class _Store:
             current = self._nodes[cache_key]
         else:
             current = self.conn.execute(
-                f"SELECT id, source_path, source_file_sha256, withdrawn_from_source FROM {table} "  # noqa: S608
-                f"WHERE {key_sql} AND sys_to IS NULL FOR UPDATE",
+                f"SELECT id, source_path, source_file_sha256, withdrawn_from_source, ingestion_run_id, source_mtime "  # noqa: S608
+                f"FROM {table} WHERE {key_sql} AND sys_to IS NULL FOR UPDATE",
                 key,
             ).fetchone()
+        if current is not None and self._older_copy(current[4], current[5]):
+            return "stale_duplicate", None
         if current is not None and current[1] == path and current[2] == sha and not current[3]:
             return "unchanged", None
-        self._nodes[cache_key] = (new_id, path, sha, False)
+        self._nodes[cache_key] = (new_id, path, sha, False, self.run_id, self.mtime)
         if current is None:
             return "inserted", None
         return "superseded", current[0]
@@ -417,9 +438,9 @@ class _Store:
                  publication_date, raw_publication_date, signature_date, raw_signature_date, last_modified,
                  upcoming_versions, publication_origin, authority, ministry, visas, signatories,
                  preparatory_work, nota, abrogation, rectification, source_path, source_file_sha256,
-                 ingestion_run_id)
+                 ingestion_run_id, source_mtime)
                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
-                       %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""",
+                       %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""",
             (
                 new_id,
                 document_id,
@@ -454,6 +475,7 @@ class _Store:
                 t.source_path,
                 t.source_file_sha256,
                 self.run_id,
+                self.mtime,
             ),
         )
         with self.conn.cursor() as cur:
@@ -486,8 +508,8 @@ class _Store:
         context = [[title.model_dump() for title in level] for level in n.context]
         self.conn.execute(
             """INSERT INTO structure_node_version (id, kind, official_id, document_id, title, commentary, context,
-                                                   source_path, source_file_sha256, ingestion_run_id)
-               VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""",
+                                                   source_path, source_file_sha256, ingestion_run_id, source_mtime)
+               VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""",
             (
                 new_id,
                 n.kind,
@@ -499,6 +521,7 @@ class _Store:
                 n.source_path,
                 n.source_file_sha256,
                 self.run_id,
+                self.mtime,
             ),
         )
         with self.conn.cursor() as cur:
@@ -746,6 +769,7 @@ def _commit_batch(
             with store.conn.pipeline():
                 for entry, item in parsed:
                     if item is not None:
+                        store.mtime = entry.mtime
                         working.count(entry.kind, store.store(item))
             store.conn.execute(
                 "UPDATE ingestion_run SET files_committed = %s, last_committed_path = %s, stats = %s WHERE id = %s",

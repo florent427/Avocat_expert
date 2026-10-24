@@ -29,6 +29,12 @@ avx sync-legi --dossier /data/legi                # stock puis deltas, dans l'or
 | Fichier rejeté (format) | compté dans `rejected`, détail dans `stats.errors` ; code retour 1 | analyser avant la livraison suivante |
 | Deux ingestions simultanées | la seconde attend le verrou consultatif de la source | aucune |
 
+Un même élément présent dans deux branches d'une livraison (le stock du
+2025-07-13 en contient 12 143 articles et 1 945 sections) : la copie dont le
+fichier est le plus récent dans l'archive fait foi (`stale_duplicate` compte
+les copies périmées écartées). Un répertoire extrait ne conserve pas ces
+horodatages de manière fiable : l'ordre de lecture s'applique alors.
+
 Une ingestion répétée de la même archive est idempotente : aucune écriture
 pour un fichier déjà connu à l'identique.
 
