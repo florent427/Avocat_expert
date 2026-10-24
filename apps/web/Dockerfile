@@ -1,9 +1,13 @@
 # Image de l'application web. Contexte de construction : apps/web.
 #   docker build -t avocat-expert/web apps/web
+# Image de base officielle épinglée par empreinte ; registre choisi par
+# BASE_REGISTRY (galerie publique ECR par défaut, mirror.gcr.io en CI).
 # Un certificat d'autorité supplémentaire peut être fourni au seul moment de
 # la construction : --secret id=extra_ca,src=<fichier.pem>.
 
-FROM public.ecr.aws/docker/library/node:22-bookworm-slim@sha256:de170b39439eb0e5a3444ad7d60b015614a381e10fecae2e30ec9e735122f38d AS build
+ARG BASE_REGISTRY=public.ecr.aws/docker/library
+
+FROM ${BASE_REGISTRY}/node:22-bookworm-slim@sha256:de170b39439eb0e5a3444ad7d60b015614a381e10fecae2e30ec9e735122f38d AS build
 ENV NEXT_TELEMETRY_DISABLED=1
 WORKDIR /app
 COPY package.json package-lock.json ./
@@ -13,7 +17,7 @@ RUN --mount=type=secret,id=extra_ca,required=false \
 COPY . .
 RUN npm run build
 
-FROM public.ecr.aws/docker/library/node:22-bookworm-slim@sha256:de170b39439eb0e5a3444ad7d60b015614a381e10fecae2e30ec9e735122f38d AS runtime
+FROM ${BASE_REGISTRY}/node:22-bookworm-slim@sha256:de170b39439eb0e5a3444ad7d60b015614a381e10fecae2e30ec9e735122f38d AS runtime
 ENV NODE_ENV=production NEXT_TELEMETRY_DISABLED=1 PORT=3000 HOSTNAME=0.0.0.0
 # npm, corepack et yarn sont inutiles à l'exécution (et porteurs de vulnérabilités) : retirés.
 RUN rm -rf /usr/local/lib/node_modules/npm /usr/local/lib/node_modules/corepack /opt/yarn-* \

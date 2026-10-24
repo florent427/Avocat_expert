@@ -123,9 +123,11 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Construction
+        # Images de base via mirror.gcr.io (même empreinte) : la galerie ECR
+        # publique limite les téléchargements anonymes des runners partagés.
         run: |
-          docker build -f services/api/Dockerfile -t avocat-expert/api:dev .
-          docker build -t avocat-expert/web:dev apps/web
+          docker build --build-arg BASE_REGISTRY=mirror.gcr.io/library -f services/api/Dockerfile -t avocat-expert/api:dev .
+          docker build --build-arg BASE_REGISTRY=mirror.gcr.io/library -t avocat-expert/web:dev apps/web
       - name: Trivy
         run: |
           archive="trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz"
