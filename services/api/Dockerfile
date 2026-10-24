@@ -7,7 +7,7 @@
 # au seul moment de la construction : --secret id=extra_ca,src=<fichier.pem>.
 # Il n'est jamais copié dans une couche de l'image.
 
-FROM public.ecr.aws/docker/library/rust:1.97-slim-bookworm@sha256:2775a09d208ff0d7c1f50490c45b62db929e87ba1dcbc3f2132ac71a704bcdd3 AS engine
+FROM public.ecr.aws/docker/library/rust:1.99-slim-bookworm@sha256:86234e857a413004348b471d11a4ebe1aa92d2eae2b6b143cac68fd1ac3c48be AS engine
 WORKDIR /src/engine
 COPY engine/ ./
 RUN --mount=type=secret,id=extra_ca,required=false \
