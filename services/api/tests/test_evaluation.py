@@ -27,4 +27,6 @@ def test_seed_corpus(conn: psycopg.Connection[Any], lexverif_bin: str) -> None:
     assert report["citations"]["conformite_temporelle"] == 1.0
     assert report["citations"]["integrite_structurelle_des_extraits"] == 1.0
     assert report["blocages"]["exactitude"] == 1.0
+    # Plancher de non-régression (0,7949 mesuré le 2026-10-24 après SRCH-04).
+    assert report["recherche"]["precision_moyenne"] >= 0.79
     assert {e["id"] for e in report["echecs"]} == KNOWN_FAILURES

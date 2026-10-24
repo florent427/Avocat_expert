@@ -15,7 +15,9 @@ _BARE_ARTICLE = re.compile(r"\bart(?:icle|\.)?\s+(\d{1,5}(?:-\d{1,5})*)(?![\w-])
 _STOPWORDS = frozenset(
     "les des une un le la de du et en au aux pour par sur dans est sont qui que quoi quel quelle quels "
     "quelles dont avec sans pas plus ou ne se sa son ses leur leurs ce cette ces il elle ils elles on "
-    "nous vous je tu peut peuvent doit doivent etre avoir faire article articles code".split()
+    "nous vous je tu peut peuvent doit doivent etre avoir faire article articles code "
+    # Verbes et adverbes interrogatifs : ils formulent la question, ils n'en sont pas l'objet.
+    "dit dire disent prevoit prevoient dispose disposent enonce enoncent quand comment pourquoi combien".split()
 )
 
 

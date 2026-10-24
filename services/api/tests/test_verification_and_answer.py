@@ -204,3 +204,24 @@ def test_api_verify_endpoint(api_client: TestClient) -> None:
     )
     assert response.status_code == 200
     assert response.json()["verdict"] == "INCERTAIN"
+
+
+@pytest.mark.parametrize("as_of", [date(2026, 10, 24), date(2027, 6, 1)])
+def test_named_code_excludes_other_codes(answer_service: ExtractiveAnswerService, as_of: date) -> None:
+    answer = answer_service.answer(
+        AnswerRequest(question="article L. 161-1 du code des impositions sur les biens et services", as_of=as_of), TODAY
+    )
+    titles = {s.citation.document_title for s in answer.statements if s.citation}
+    assert titles == {"Code des impositions sur les biens et services"}
+
+
+def test_explicit_reference_without_content_terms_cites_only_that_article(
+    answer_service: ExtractiveAnswerService,
+) -> None:
+    answer = answer_service.answer(AnswerRequest(question="article L. 5422-2 du code du travail"), TODAY)
+    assert [s.citation.provision_number for s in answer.statements if s.citation] == ["L5422-2"]
+
+
+def test_weak_lexical_matches_are_dropped(answer_service: ExtractiveAnswerService) -> None:
+    answer = answer_service.answer(AnswerRequest(question="inscription sur la liste des demandeurs d'emploi"), TODAY)
+    assert [s.citation.provision_number for s in answer.statements if s.citation] == ["L5411-1"]

@@ -32,3 +32,7 @@ def test_excerpt_is_literal() -> None:
     text = "Premier alinéa sans rapport avec la question posée.\nL'allocation est versée sous condition de ressources.\nAutre."
     excerpt = select_excerpt(text, terms_of("allocation versée"))
     assert excerpt == "L'allocation est versée sous condition de ressources."
+
+
+def test_question_verbs_are_not_search_terms() -> None:
+    assert parse_query("Que prévoit l'article L. 5422-2 ? Que dit le texte ?").terms == ("texte",)

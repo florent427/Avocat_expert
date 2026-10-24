@@ -50,7 +50,7 @@ P0 = bloquant pour la phase suivante · P1 = nécessaire avant bêta · P2 = apr
 | SRCH-01 | Adaptateur OpenSearch (analyseur français), comparaison avec BM25 PostgreSQL | P0 |
 | SRCH-02 | Sélection et évaluation d'un modèle d'embeddings ; activation pgvector (SEED-014) | P0 |
 | SRCH-03 | Reranking (après mesure) | P1 |
-| SRCH-04 | Seuil de pertinence du canal lexical : écarter les citations parasites (ex. L125-2 C. assur. sur une question CIBS) ; métrique de précision sur annotations juristes | P0 |
+| SRCH-04 | ✅ 2026-10-24 : texte nommé = périmètre (mots du titre exclus), verbes interrogatifs ignorés, seuil relatif BM25 0,5 ; **à recalibrer sur corpus annoté par des juristes** | P1 |
 | QUAL-01 | Corpus ≥ 500 cas validés juridiquement (référent : porteur du projet, REF-01) | P0 (validation) |
 | QUAL-02 | Interface de correction humaine des cas et des réponses | P0 |
 | QUAL-03 | Métriques de couverture juridique par domaine | P1 |

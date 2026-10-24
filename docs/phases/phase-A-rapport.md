@@ -191,5 +191,16 @@ métrique de l'évaluation, exigée en test) ; rappel et MRR inchangés
 73 réussis (14 nouveaux, dont une vérification par le moteur Rust de tous les
 extraits produits sur les 40 articles réels pour 9 requêtes).
 
-Reste ouvert : citations parasites issues du canal lexical (ex. L125-2 C.
-assur. sur une question de fiscalité) — backlog SRCH-04.
+## 11. Citations parasites (SRCH-04, 2026-10-24)
+
+Trois causes mesurées : mots du titre du code cité traités comme mots de
+contenu (« impositions biens services » → L125-2 C. assur.), verbes
+interrogatifs (« dit », « prévoit ») cherchés comme termes, résultats faibles
+conservés. Règles : un texte nommé dans la question restreint le périmètre
+lexical et ses mots de titre sont exclus ; verbes interrogatifs ignorés ;
+résultats lexicaux sous 50 % du meilleur score écartés.
+
+Résultats : précision@3 0,5256 → **0,7949** ; rappel et MRR inchangés
+(0,9231) ; 30 → 19 citations (11 parasites en moins) ; 78 tests réussis.
+Le seuil de 0,5 est calibré sur des cas conçus par l'équipe technique :
+risque de sur-ajustement, à recalibrer sur le corpus juriste (QUAL-01).

@@ -174,6 +174,11 @@ class CorpusRepository:
         )
         return [LexicalHit(VersionRecord.from_row(r), float(r["score"])) for r in rows]
 
+    def document_titles(self) -> list[tuple[str, str, str | None]]:
+        """(identifiant officiel, titre, titre court) des textes du corpus."""
+        rows = self._fetch("SELECT official_id, title, short_title FROM legal_document ORDER BY official_id", ())
+        return [(r["official_id"], r["title"], r["short_title"]) for r in rows]
+
     def declared_but_missing(self, number: str, as_of: date) -> list[tuple[str, str]]:
         """Versions déclarées par la source (bloc VERSIONS), couvrant la date,
         mais absentes du corpus ingéré : signale une lacune de couverture."""

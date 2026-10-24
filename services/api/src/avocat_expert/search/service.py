@@ -14,11 +14,15 @@ from datetime import date
 from avocat_expert.contracts.services import ChannelStatus, SearchHit, SearchResponse
 from avocat_expert.search.excerpt import select_excerpt
 from avocat_expert.search.ports import LexicalSearcher, SemanticSearcher
-from avocat_expert.search.query import ParsedQuery, fold, parse_query
+from avocat_expert.search.query import ParsedQuery, fold, parse_query, terms_of
 from avocat_expert.storage.corpus import CorpusRepository, LexicalHit, VersionRecord
 
 RRF_K = 60
 EXACT_MATCH_BONUS = 1.0
+#: Un résultat lexical dont le score est inférieur à cette fraction du meilleur
+#: score lexical de la requête est écarté (bruit). Heuristique calibrée sur le
+#: corpus technique seed_v0 : à recalibrer sur le corpus annoté par des juristes.
+LEXICAL_RELATIVE_CUTOFF = 0.5
 
 
 @dataclass(frozen=True)
@@ -48,6 +52,20 @@ class HybridSearchService:
         self._repository = repository
         self._lexical = lexical
         self._semantic = semantic
+        self._titles: list[tuple[str, str, str | None]] | None = None
+
+    def _named_documents(self, raw: str) -> list[tuple[str, str]]:
+        """Textes du corpus dont le titre (ou titre court) figure dans la question."""
+        if self._titles is None:
+            self._titles = self._repository.document_titles()
+        folded = fold(raw)
+        named = []
+        for official_id, title, short_title in self._titles:
+            for candidate in (title, short_title):
+                if candidate and fold(candidate) in folded:
+                    named.append((official_id, candidate))
+                    break
+        return named
 
     def _exact_candidates(self, parsed: ParsedQuery, as_of: date) -> tuple[list[_Candidate], list[str], int]:
         notes: list[str] = []
@@ -92,11 +110,26 @@ class HybridSearchService:
         exact, notes, resolved = self._exact_candidates(parsed, as_of)
         for candidate in exact:
             merge(candidate)
-        for channel in (self._lexical, self._semantic):
-            if not parsed.free_text:
-                break
-            for rank, hit in enumerate(channel.search(parsed.free_text, as_of, limit * 3), start=1):
-                merge(_Candidate(hit.version, 1.0 / (RRF_K + rank), [channel.name]))
+
+        # Un texte nommé dans la question (« code du travail ») restreint le
+        # périmètre ; les mots de son titre ne sont pas des mots de contenu.
+        named = self._named_documents(parsed.raw)
+        title_terms = {t for _, title in named for t in terms_of(title)}
+        content_terms = [t for t in parsed.terms if t not in title_terms]
+        explicit_found = resolved > 0
+        if content_terms:
+            for channel in (self._lexical, self._semantic):
+                channel_hits = channel.search(" ".join(content_terms), as_of, limit * 3)
+                if named:
+                    allowed = {doc_id for doc_id, _ in named}
+                    channel_hits = [h for h in channel_hits if h.version.document_official_id in allowed]
+                if channel is self._lexical and channel_hits:
+                    floor = channel_hits[0].score * LEXICAL_RELATIVE_CUTOFF
+                    channel_hits = [h for h in channel_hits if h.score >= floor]
+                for rank, hit in enumerate(channel_hits, start=1):
+                    merge(_Candidate(hit.version, 1.0 / (RRF_K + rank), [channel.name]))
+        elif not explicit_found and parsed.terms:
+            notes.append("la question ne contient pas de terme de contenu exploitable en dehors du nom du texte")
 
         ranked = sorted(candidates.values(), key=lambda c: (-c.score, c.version.official_id))[:limit]
         hits = [
@@ -118,7 +151,10 @@ class HybridSearchService:
             as_of=as_of,
             hits=hits,
             channels=channels,
-            ranking=f"correspondances exactes prioritaires puis RRF(k={RRF_K}) ; lexical : {self._lexical.ranking}",
+            ranking=(
+                f"correspondances exactes prioritaires puis RRF(k={RRF_K}) ; lexical : {self._lexical.ranking}, "
+                f"seuil relatif {LEXICAL_RELATIVE_CUTOFF}, restreint au texte nommé dans la question le cas échéant"
+            ),
         )
         return SearchOutcome(
             response=response,
