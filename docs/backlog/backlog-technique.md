@@ -43,19 +43,20 @@ P0 = bloquant pour la phase suivante · P1 = nécessaire avant bêta · P2 = apr
 |---|---|---|
 | ING-01 | ✅ textes (`texte/version`), plan (`texte/struct`) et sections (`section_ta`) : parseurs vérifiés sur les DTD et par l'analyse du stock complet (2 276 109 fichiers : articles sans état ni date, non numérotés, sentinelle 2222-01-01, sections sans cid, index ELI), tables bitemporelles (0008, 0009), plan d'un texte à une date (`StructureRepository`) avec lacunes signalées ; reste : exposition par l'API (phase D) | — |
 | ING-02 | ✅ lecture en flux du stock, lots transactionnels avec point de reprise, une ingestion à la fois par source, ordre des livraisons contrôlé, `avx sync-legi` (stock puis deltas postérieurs, hôte officiel seul) ; reste : planification en recette (tâche ECS) | — |
-| ING-03 | Lecture exclusive de DATE_FIN retenue (décision déléguée du 24/10/2026) ; confirmation DILA et sentinelles 2999-12-31 / 2222-02-22 (2222-02-22 traité comme « date non fixée », ADR 0016) | P2 |
+| ING-03 | Lecture exclusive de DATE_FIN retenue (décision déléguée du 24/10/2026) ; confirmation DILA et sentinelles 2999-12-31 / 2222-02-22 (2222-02-22 traité comme « date non fixée », ADR 0016) ; confirmer aussi le double classement en branches (copie la plus récente retenue) et les 11 328 retraits d'identifiants absents du corpus | P2 |
 | ING-04 | JORF | P1 |
 | ING-05 | Judilibre (spécification OpenAPI 1.2.5 vérifiée ; KeyId PISTE). **Critères d'acceptation R4** : requêtes visant un magistrat ou greffier refusées (tests), zone de composition non indexée, aucun filtre ni agrégat par juge | P1 |
 | ING-06 | Justice administrative (archives zip XML mensuelles, CGU 18/01/2022). Mêmes critères R4 ; signalement des défauts de pseudonymisation | P1 |
 | ING-07 | CELLAR/EUR-Lex (SPARQL + REST CELLAR vérifiés) | P1 |
 | ING-08 | Qualification territoriale (outre-mer, Alsace-Moselle) avec validation juriste | P1 |
-| ING-09 | Exploitation du graphe de références (résolution des cibles, transferts) | P1 |
+| ING-09 | Exploitation du graphe de références (résolution des cibles, transferts) ; blocs de liens stockés par empreinte (`legal_reference` : 23 M de lignes, 6,4 Go à 10,5 mois, chaque version reprenant son bloc) | P1 |
 | ING-10 | ✅ `avx fraicheur-legi` : dernière livraison intégrée et publiée, livraisons en attente, retard en jours, code retour 3 si en retard ; reste : alarme CloudWatch en recette | — |
+| ING-11 | Index ELI (`legi/global/eli/…/versions.xml`, 280 936 fichiers) : correspondances ELI → versions, pour citer et résoudre les identifiants ELI | P2 |
 
 ## Phase D — recherche et évaluation
 | ID | Tâche | Prio |
 |---|---|---|
-| SRCH-01 | Adaptateur OpenSearch (analyseur français), comparaison avec BM25 PostgreSQL | P0 |
+| SRCH-01 | Adaptateur OpenSearch (analyseur français), comparaison avec BM25 PostgreSQL. **Mesure phase C** : BM25 SQL sur 1,8 M de versions = 17 s en médiane, 76 s au 95e centile ; questions en langage naturel sans réponse pertinente (4/4) — prérequis à toute recette utilisateurs | P0 |
 | SRCH-02 | Sélection et évaluation d'un modèle d'embeddings ; activation pgvector (SEED-014) | P0 |
 | SRCH-03 | Reranking (après mesure) | P1 |
 | SRCH-04 | ✅ 2026-10-24 : texte nommé = périmètre (mots du titre exclus), verbes interrogatifs ignorés, seuil relatif BM25 0,5 ; **à recalibrer sur corpus annoté par des juristes** | P1 |
