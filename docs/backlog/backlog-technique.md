@@ -15,7 +15,7 @@ P0 = bloquant pour la phase suivante · P1 = nécessaire avant bêta · P2 = apr
 ## Phase B — socle
 | ID | Tâche | Prio |
 |---|---|---|
-| INFRA-01 | CI GitHub Actions verte sur `main` (workflow fourni, à exécuter) | P0 |
+| INFRA-01 | CI GitHub Actions verte sur la branche de travail puis protégée sur `main` (règles de branche, revues obligatoires) | P0 |
 | INFRA-02 | Construction et scan des images (API, web), SBOM, signature | P0 |
 | INFRA-03 | Terraform : réseau privé, RDS, ECS, ALB+WAF, Secrets Manager, CloudTrail, budgets — sans apply avant validation | P0 |
 | INFRA-04 | OpenTelemetry (traces, métriques) avec liste blanche d'attributs | P1 |

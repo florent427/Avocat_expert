@@ -15,7 +15,7 @@ PostgreSQL 16.15 + pgvector 0.6.0 locaux ; **Docker indisponible**).
 | 5 | Modèle de données initial | ✅ 4 migrations appliquées et testées | `services/api/migrations/`, `docs/data-model/` |
 | 6 | Contrats des services et des agents | ✅ Pydantic + schémas JSON | `contracts/`, `packages/contracts/schemas/` |
 | 7 | Backlog technique priorisé | ✅ | `docs/backlog/backlog-technique.md` |
-| 8 | Monorepo et socle de tests | ✅ (CI rédigée, **non encore exécutée sur GitHub**) | `.github/workflows/ci.yml`, `Makefile` |
+| 8 | Monorepo et socle de tests | ✅ CI GitHub Actions exécutée (voir §4) | `.github/workflows/ci.yml`, `Makefile` |
 | 9 | Tranche verticale | ✅ ingestion LEGI réelle → indexation → recherche → réponse sourcée → vérification | voir §3 |
 | 10 | Tests exécutés, résultats réels | ✅ | §4 |
 
@@ -62,6 +62,16 @@ question vide → 400.
 | Terraform | `terraform fmt -check`, `init -backend=false`, `validate` (1.16.7, provider AWS ~> 6.60) | « The configuration is valid. » |
 | Secrets | `gitleaks dir` | aucune fuite dans les fichiers versionnés (8 alertes dans `.next/`, artefacts générés et ignorés par Git) |
 
+### CI GitHub Actions — exécution n° 1 (commit `eebf41c`, 2026-10-24)
+
+| Job | Résultat |
+|---|---|
+| Moteur Rust | ✅ succès |
+| Backend Python (PostgreSQL `pgvector/pgvector:0.8.7-pg16`, aucun test ignoré toléré) | ✅ succès |
+| Application web | ✅ succès |
+| Terraform | ✅ succès |
+| Détection de secrets | ❌ échec **de l'outillage** : le fichier de sommes de contrôle de gitleaks référence le nom d'origine de l'archive, renommée par le script ; aucune analyse n'a eu lieu. Corrigé dans le commit suivant (étape reproduite localement : somme OK, « no leaks found »). |
+
 Couverture fonctionnelle des tests Python : parseur sur fichiers réels
 (sentinelle, version mort-née, entrée en vigueur différée, chemins, liens),
 refus XML malformé / XXE / expansion d'entités, migrations idempotentes et
@@ -103,8 +113,8 @@ fichiers ≈ 0,8 s ; évaluation des 16 cas ≈ 0,7 s.
 
 ## 5. Ce qui n'a pas été fait ou pas pu être vérifié
 
-* Docker indisponible : `Dockerfile` et `docker-compose.yml` **non construits
-  ni exécutés** ; la CI GitHub Actions **n'a pas encore tourné**.
+* Docker indisponible localement : `Dockerfile` et `docker-compose.yml` **non
+  construits ni exécutés** (construction d'image en CI : INFRA-02).
 * Aucune ingestion du stock complet (1,1 Go) : performance à grande échelle
   inconnue.
 * Canal sémantique, OpenSearch, reranking, agents, OIDC : non implémentés
