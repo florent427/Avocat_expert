@@ -1,17 +1,97 @@
-# Environnement local de développement. Mots de passe factices, réservés au poste local.
-# NB : non exécuté dans l'environnement de développement initial (Docker indisponible).
+# Environnement local de développement : PostgreSQL, migrations, API, web, Keycloak.
+#   cp .env.example .env   (puis renseigner les valeurs locales)
+#   docker compose up --build
+# Réservé au poste de développement : aucun port n'est exposé hors de 127.0.0.1.
+
+x-api-image: &api-image
+  image: avocat-expert/api:dev
+  build:
+    context: .
+    dockerfile: services/api/Dockerfile
+
 services:
   postgres:
-    image: pgvector/pgvector:0.8.7-pg16
+    image: mirror.gcr.io/pgvector/pgvector:0.8.7-pg16@sha256:7b822b0aac60967beb1ea5e576b8602c94c300a157d187f385ae3e0da199b90a
     environment:
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?définir POSTGRES_PASSWORD dans .env}
       POSTGRES_DB: avocat_expert
+      KEYCLOAK_DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD:?définir KEYCLOAK_DB_PASSWORD dans .env}
     ports: ["127.0.0.1:5432:5432"]
-    volumes: ["pgdata:/var/lib/postgresql/data"]
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./infra/local/postgres-init.sh:/docker-entrypoint-initdb.d/10-keycloak.sh:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d avocat_expert"]
       interval: 5s
-      retries: 10
+      retries: 20
+
+  migrate:
+    <<: *api-image
+    command: ["avx", "migrate"]
+    environment:
+      AVX_DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD}@postgres:5432/avocat_expert
+    depends_on:
+      postgres: { condition: service_healthy }
+    restart: "no"
+
+  bootstrap-role:
+    image: mirror.gcr.io/pgvector/pgvector:0.8.7-pg16@sha256:7b822b0aac60967beb1ea5e576b8602c94c300a157d187f385ae3e0da199b90a
+    command: >
+      psql -v ON_ERROR_STOP=1 -h postgres -U postgres -d avocat_expert
+      -v api_role=avx_api -v api_password=${AVX_API_DB_PASSWORD:?définir AVX_API_DB_PASSWORD dans .env}
+      -f /ops/create_login_role.sql
+    environment:
+      PGPASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./services/api/ops:/ops:ro
+    depends_on:
+      migrate: { condition: service_completed_successfully }
+    restart: "no"
+
+  api:
+    <<: *api-image
+    environment:
+      AVX_ENVIRONMENT: local
+      AVX_DATABASE_URL: postgresql://avx_api:${AVX_API_DB_PASSWORD}@postgres:5432/avocat_expert
+      AVX_DEV_TOKEN_SHA256: ${AVX_DEV_TOKEN_SHA256:?définir AVX_DEV_TOKEN_SHA256 dans .env}
+    ports: ["127.0.0.1:8000:8000"]
+    read_only: true
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: ["ALL"]
+    depends_on:
+      bootstrap-role: { condition: service_completed_successfully }
+
+  web:
+    image: avocat-expert/web:dev
+    build: { context: apps/web }
+    environment:
+      AVX_API_URL: http://api:8000
+      AVX_API_TOKEN: ${AVX_API_TOKEN:?définir AVX_API_TOKEN dans .env}
+    ports: ["127.0.0.1:3000:3000"]
+    read_only: true
+    tmpfs: ["/app/.next/cache"]
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: ["ALL"]
+    depends_on:
+      api: { condition: service_healthy }
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.8.0@sha256:27b3230fbabb8c9ff3c66c864cf09dcd8a41aca82e5100679d109ef0eeb05741
+    command: ["start-dev", "--import-realm"]
+    environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KEYCLOAK_ADMIN_USER:?définir KEYCLOAK_ADMIN_USER dans .env}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD:?définir KEYCLOAK_ADMIN_PASSWORD dans .env}
+      KC_HEALTH_ENABLED: "true"
+      KC_HTTP_PORT: "8080"
+    ports: ["127.0.0.1:8080:8080"]
+    volumes:
+      - ./infra/keycloak/realm-avocat-expert.json:/opt/keycloak/data/import/realm-avocat-expert.json:ro
+    depends_on:
+      postgres: { condition: service_healthy }
 
 volumes:
   pgdata:

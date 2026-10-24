@@ -1,0 +1,15 @@
+**/.git
+**/node_modules
+**/.next
+**/.venv
+**/__pycache__
+**/.mypy_cache
+**/.ruff_cache
+**/.pytest_cache
+engine/target
+infra/**/.terraform
+**/.env
+**/.env.*
+fixtures
+eval
+docs

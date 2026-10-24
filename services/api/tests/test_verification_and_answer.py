@@ -225,3 +225,46 @@ def test_explicit_reference_without_content_terms_cites_only_that_article(
 def test_weak_lexical_matches_are_dropped(answer_service: ExtractiveAnswerService) -> None:
     answer = answer_service.answer(AnswerRequest(question="inscription sur la liste des demandeurs d'emploi"), TODAY)
     assert [s.citation.provision_number for s in answer.statements if s.citation] == ["L5411-1"]
+
+
+@pytest.fixture
+def least_privilege_url(ingested_url: str) -> Iterator[str]:
+    """Rôle de connexion membre d'avx_app uniquement, comme l'API en production."""
+    import secrets
+
+    from psycopg import sql
+
+    role, password = f"avx_api_test_{secrets.token_hex(4)}", secrets.token_urlsafe(16)
+    with psycopg.connect(ingested_url, autocommit=True) as admin:
+        admin.execute(
+            sql.SQL("CREATE ROLE {} LOGIN PASSWORD {} IN ROLE avx_app").format(
+                sql.Identifier(role), sql.Literal(password)
+            )
+        )
+    try:
+        yield psycopg.conninfo.make_conninfo(ingested_url, user=role, password=password)
+    finally:
+        with psycopg.connect(ingested_url, autocommit=True) as admin:
+            admin.execute(sql.SQL("DROP OWNED BY {}").format(sql.Identifier(role)))
+            admin.execute(sql.SQL("DROP ROLE {}").format(sql.Identifier(role)))
+
+
+def test_api_runs_with_least_privilege_role(least_privilege_url: str, lexverif_bin: str) -> None:
+    from avocat_expert.api.app import create_app
+    from avocat_expert.config import Settings, get_settings
+
+    app = create_app()
+    app.dependency_overrides[get_settings] = lambda: Settings(
+        environment="test",
+        database_url=least_privilege_url,
+        lexverif_bin=lexverif_bin,
+        dev_token_sha256=hashlib.sha256(TOKEN.encode()).hexdigest(),
+    )
+    with TestClient(app) as client:
+        response = client.post(
+            "/v1/answer",
+            json={"question": "inscription sur la liste des demandeurs d'emploi", "as_of": "2026-10-24"},
+            headers={"Authorization": f"Bearer {TOKEN}"},
+        )
+    assert response.status_code == 200, response.text
+    assert [s["citation"]["official_id"] for s in response.json()["statements"]] == ["LEGIARTI000048590205"]

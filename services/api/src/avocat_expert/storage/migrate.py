@@ -8,12 +8,14 @@ détectée et refusée.
 from __future__ import annotations
 
 import hashlib
+import os
 import re
 from pathlib import Path
 
 import psycopg
 
-MIGRATIONS_DIR = Path(__file__).resolve().parents[3] / "migrations"
+# Dans le dépôt : services/api/migrations ; dans l'image : AVX_MIGRATIONS_DIR.
+MIGRATIONS_DIR = Path(os.environ.get("AVX_MIGRATIONS_DIR") or Path(__file__).resolve().parents[3] / "migrations")
 _NAME = re.compile(r"^(\d{4})_[a-z0-9_]+\.sql$")
 
 
