@@ -1,6 +1,6 @@
 # ADR 0004 — Moteur déterministe Rust en sous-processus, contrat JSON versionné
 
-**Statut** : acceptée le 2026-10-24 (registre des décisions) · 2026-10-24
+**Statut** : acceptée le 2026-10-24 (voir `docs/decisions/registre-decisions.md`)
 
 ## Contexte
 Les vérifications de citation doivent être déterministes, auditables,

@@ -1,6 +1,6 @@
 # ADR 0012 — Traçabilité sans fuite de données confidentielles
 
-**Statut** : acceptée le 2026-10-24 (registre des décisions) · 2026-10-24
+**Statut** : acceptée le 2026-10-24 (voir `docs/decisions/registre-decisions.md`)
 
 ## Décision
 * Traces d'exécution, étapes et coûts : empreintes SHA-256, longueurs,

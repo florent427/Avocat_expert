@@ -1,6 +1,6 @@
 # ADR 0013 — Orchestrateur typé, évaluation de LangGraph en phase E
 
-**Statut** : acceptée le 2026-10-24 (registre des décisions) · 2026-10-24
+**Statut** : acceptée le 2026-10-24 (voir `docs/decisions/registre-decisions.md`)
 
 ## Contexte
 Le cahier des charges cite LangGraph « ou orchestrateur typé équivalent ».

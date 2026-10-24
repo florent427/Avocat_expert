@@ -1,6 +1,6 @@
 # ADR 0009 — AWS eu-west-3, Terraform, aucun apply sans validation
 
-**Statut** : acceptée le 2026-10-24 (registre des décisions) · 2026-10-24
+**Statut** : acceptée le 2026-10-24 (voir `docs/decisions/registre-decisions.md`)
 
 ## Décision
 * Région AWS Paris `eu-west-3`, services managés (ECS Fargate, RDS, S3, SQS,

@@ -1,6 +1,6 @@
 # ADR 0005 — BM25 dans PostgreSQL en V1, OpenSearch en phase D
 
-**Statut** : acceptée le 2026-10-24 (registre des décisions) · 2026-10-24
+**Statut** : acceptée le 2026-10-24 (voir `docs/decisions/registre-decisions.md`)
 
 ## Contexte
 Le cahier des charges prévoit OpenSearch + pgvector. La tranche verticale

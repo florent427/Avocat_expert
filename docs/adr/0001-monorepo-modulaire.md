@@ -1,6 +1,6 @@
 # ADR 0001 — Monorepo modulaire
 
-**Statut** : acceptée le 2026-10-24 (registre des décisions) · 2026-10-24
+**Statut** : acceptée le 2026-10-24 (voir `docs/decisions/registre-decisions.md`)
 
 ## Contexte
 Le projet combine une application web (TypeScript), un backend (Python), un

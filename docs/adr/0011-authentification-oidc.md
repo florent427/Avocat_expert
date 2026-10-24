@@ -1,6 +1,6 @@
 # ADR 0011 — Authentification OIDC, mode développement fail-closed
 
-**Statut** : acceptée le 2026-10-24 (registre des décisions) · 2026-10-24
+**Statut** : acceptée le 2026-10-24 (voir `docs/decisions/registre-decisions.md`)
 
 ## Décision
 * Cible : OIDC (code + PKCE côté web, jetons d'accès vérifiés côté API via

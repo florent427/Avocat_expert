@@ -1,6 +1,6 @@
 # ADR 0006 — Canal sémantique désactivé tant qu'aucun modèle d'embeddings n'est validé
 
-**Statut** : acceptée le 2026-10-24 (registre des décisions) · 2026-10-24
+**Statut** : acceptée le 2026-10-24 (voir `docs/decisions/registre-decisions.md`)
 
 ## Contexte
 La recherche sémantique exige un modèle d'embeddings. Pour le corpus public,

@@ -1,6 +1,6 @@
 # ADR 0008 — Isolation multi-tenant par Row Level Security
 
-**Statut** : acceptée le 2026-10-24 (registre des décisions) · 2026-10-24
+**Statut** : acceptée le 2026-10-24 (voir `docs/decisions/registre-decisions.md`)
 
 ## Décision
 * Base partagée, `organization_id` sur toutes les tables client.
