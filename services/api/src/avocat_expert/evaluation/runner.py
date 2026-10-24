@@ -98,7 +98,11 @@ def evaluate_case(case: Case, answer: SourcedAnswer) -> CaseResult:
         if statement.quote is not None and structurally_complete(statement.quote):
             result.citations_structured += 1
         ref = statement.citation
-        if ref.valid_from <= answer.as_of and (ref.valid_to is None or answer.as_of < ref.valid_to):
+        if (
+            ref.valid_from is not None
+            and ref.valid_from <= answer.as_of
+            and (ref.valid_to is None or answer.as_of < ref.valid_to)
+        ):
             result.citations_in_force += 1
 
     if case.attendu.type == "sources":

@@ -1,4 +1,4 @@
-"""Adaptateur vers le moteur déterministe Rust ``lexverif`` (contrat JSON v1).
+"""Adaptateur vers le moteur déterministe Rust ``lexverif`` (contrat JSON v2).
 
 Le moteur est invoqué en sous-processus, sans shell, avec délai maximal.
 Toute erreur du moteur est remontée : une vérification qui n'a pas pu avoir
@@ -17,7 +17,7 @@ from avocat_expert.contracts.common import CheckOutcome, Verdict
 from avocat_expert.contracts.services import CitationCheck, CitationVerification
 from avocat_expert.storage.corpus import CorpusRepository, VersionRecord
 
-CONTRACT_VERSION = "1"
+CONTRACT_VERSION = "2"
 
 
 class VerificationUnavailable(RuntimeError):
@@ -27,8 +27,9 @@ class VerificationUnavailable(RuntimeError):
 def _period(v: VersionRecord) -> dict[str, Any]:
     return {
         "official_id": v.official_id,
-        "valid_from": v.valid_from.isoformat(),
+        "valid_from": v.valid_from.isoformat() if v.valid_from else None,
         "valid_to": v.valid_to.isoformat() if v.valid_to else None,
+        "end_undetermined": v.end_undetermined,
         "status_raw": v.source_status,
     }
 
@@ -72,6 +73,7 @@ class CitationVerifier:
     def verify(self, official_id: str, quote: str, as_of: date, territory: str | None) -> CitationVerification:
         candidate = self._repository.get_current_version(official_id)
         siblings = self._repository.versions_of_provision(candidate.provision_id) if candidate else []
+        knowledge = self._repository.knowledge_date(candidate.reference.source_code) if candidate else None
         payload: dict[str, Any] = {
             "citation": {
                 "official_id": official_id,
@@ -88,6 +90,7 @@ class CitationVerifier:
                 "territorial_scope": candidate.territorial_scope,
             },
             "sibling_versions": [_period(v) for v in siblings],
+            "knowledge_date": None if knowledge is None else knowledge.isoformat(),
         }
         response = self._engine.call("verify_citation", payload)
         result = response["result"]

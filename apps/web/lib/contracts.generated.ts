@@ -96,6 +96,10 @@ export interface SourceReference {
   document_official_id: string;
   document_title: string;
   /**
+   * Fin (abrogation) annoncée par la source à une date non encore fixée
+   */
+  end_undetermined?: boolean;
+  /**
    * Identifiant officiel de la version citée, ex. LEGIARTI…
    */
   official_id: string;
@@ -114,9 +118,12 @@ export interface SourceReference {
    * Statut brut publié par la source
    */
   source_status: string;
-  valid_from: string;
   /**
-   * None : pas de date de fin connue
+   * None : entrée en vigueur à une date non fixée par la source
+   */
+  valid_from: string | null;
+  /**
+   * None : pas de date de fin connue (voir end_undetermined)
    */
   valid_to: string | null;
 }

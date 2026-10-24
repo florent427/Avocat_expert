@@ -14,10 +14,8 @@ from xml.etree.ElementTree import Element
 import defusedxml.ElementTree as SafeET
 from pydantic import BaseModel, ConfigDict
 
+from avocat_expert.connectors.legi.dates import LegiDateError, legal_period, optional_date
 from avocat_expert.domain.temporal import LegalPeriod
-
-#: Valeur sentinelle observée dans LEGI pour « pas de date de fin ».
-OPEN_END_SENTINEL = date(2999, 1, 1)
 
 _ARTICLE_ID = re.compile(r"^LEGIARTI\d{12}$")
 _BLOCK_TAGS = {"p", "div", "br", "tr", "li", "table", "blockquote"}
@@ -104,31 +102,28 @@ def _required(root: Element, path: str) -> str:
     return value.strip()
 
 
-def _parse_date(raw: str, field: str) -> date:
+def _title_valid_at(title: Element, at: date) -> bool:
     try:
-        return date.fromisoformat(raw)
-    except ValueError as exc:
-        raise LegiFormatError(f"date invalide pour {field} : {raw!r}") from exc
+        period = legal_period(title.get("debut", ""), title.get("fin"))
+    except LegiDateError:
+        return False
+    return (
+        period.valid_from is not None and period.valid_from <= at and (period.valid_to is None or at < period.valid_to)
+    )
 
 
-def _optional_date(raw: str | None) -> date | None:
-    if not raw:
-        return None
-    try:
-        return date.fromisoformat(raw)
-    except ValueError:
-        return None
-
-
-def _section_path(texte: Element) -> tuple[str, ...]:
-    """Titres de structure (TM imbriqués) ; en cas de titres successifs au même
-    niveau, le dernier publié est retenu et les autres restent dans le XML source."""
+def section_path_at(texte: Element, at: date | None) -> tuple[str, ...]:
+    """Titres de structure (TM imbriqués). Lorsqu'un niveau porte plusieurs
+    titres successifs (ex. intitulé de titre modifié), le titre en vigueur à la
+    date ``at`` (début de la version de l'article) est retenu ; à défaut, le
+    dernier publié. Tous les titres restent dans le XML source."""
     path: list[str] = []
     node = texte.find("TM")
     while node is not None:
         titles = node.findall("TITRE_TM")
         if titles:
-            path.append(" ".join((titles[-1].text or "").split()))
+            chosen = next((t for t in titles if at is not None and _title_valid_at(t, at)), titles[-1])
+            path.append(" ".join((chosen.text or "").split()))
         node = node.find("TM")
     return tuple(p for p in path if p)
 
@@ -151,10 +146,10 @@ def parse_article(data: bytes, source_path: str) -> LegiArticle:
     raw_from = _required(root, meta + "DATE_DEBUT")
     raw_to = (root.findtext(meta + "DATE_FIN") or "").strip() or None
 
-    valid_from = _parse_date(raw_from, "DATE_DEBUT")
-    valid_to = None if raw_to is None else _parse_date(raw_to, "DATE_FIN")
-    if valid_to is not None and valid_to >= OPEN_END_SENTINEL:
-        valid_to = None
+    try:
+        period = legal_period(raw_from, raw_to)
+    except LegiDateError as exc:
+        raise LegiFormatError(str(exc)) from exc
 
     texte = root.find("CONTEXTE/TEXTE")
     titre = root.find("CONTEXTE/TEXTE/TITRE_TXT")
@@ -185,7 +180,7 @@ def parse_article(data: bytes, source_path: str) -> LegiArticle:
             target_official_id=link.get("id") or None,
             target_text_id=link.get("cidtexte") or None,
             target_label=" ".join((link.text or "").split()),
-            target_date=_optional_date(link.get("datesignatexte")),
+            target_date=optional_date(link.get("datesignatexte")),
         )
         for link in root.findall("LIENS/LIEN")
     )
@@ -196,12 +191,12 @@ def parse_article(data: bytes, source_path: str) -> LegiArticle:
         status=status,
         raw_valid_from=raw_from,
         raw_valid_to=raw_to,
-        period=LegalPeriod(valid_from=valid_from, valid_to=valid_to),
+        period=period,
         text_official_id=text_id,
         text_nature=texte.get("nature") or "INCONNUE",
         text_title=" ".join((titre.text or "").split()),
         text_short_title=titre.get("c_titre_court") or None,
-        section_path=_section_path(texte),
+        section_path=section_path_at(texte, period.valid_from),
         content=content,
         content_sha256=hashlib.sha256(content.encode("utf-8")).hexdigest(),
         nota=nota,

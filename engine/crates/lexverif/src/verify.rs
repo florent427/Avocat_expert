@@ -6,7 +6,7 @@ use crate::contract::{
 };
 use crate::identifiers::classify;
 use crate::normalize::normalize;
-use crate::temporal::{resolve_at, Resolution};
+use crate::temporal::{resolve_at, InForce, Resolution};
 
 /// Longueur minimale (caractères non blancs) d'un segment cité pour qu'une
 /// correspondance soit probante. En deçà, un extrait comme « le » serait
@@ -31,9 +31,11 @@ pub fn handle(request: Request) -> Response {
     }
     let result = match request.command {
         Command::VerifyCitation(payload) => ResultBody::VerifyCitation(verify_citation(&payload)),
-        Command::ResolveAt(payload) => {
-            ResultBody::ResolveAt(resolve_at(&payload.versions, payload.as_of))
-        }
+        Command::ResolveAt(payload) => ResultBody::ResolveAt(resolve_at(
+            &payload.versions,
+            payload.as_of,
+            payload.knowledge_date,
+        )),
     };
     Response::Ok {
         contract_version: CONTRACT_VERSION,
@@ -164,7 +166,11 @@ pub fn verify_citation(payload: &VerifyCitationPayload) -> VerifyCitationResult 
     let resolution = if payload.sibling_versions.is_empty() {
         None
     } else {
-        Some(resolve_at(&payload.sibling_versions, claim.as_of))
+        Some(resolve_at(
+            &payload.sibling_versions,
+            claim.as_of,
+            payload.knowledge_date,
+        ))
     };
 
     if let Some(candidate) = candidate {
@@ -190,51 +196,80 @@ pub fn verify_citation(payload: &VerifyCitationPayload) -> VerifyCitationResult 
 
         // 4. Applicabilité temporelle.
         let period = &candidate.period;
-        let end = period
-            .valid_to
-            .map(|d| d.to_string())
-            .unwrap_or_else(|| "sans date de fin connue".into());
-        checks.push(if period.in_force_at(claim.as_of) {
-            check(
+        let knowledge = payload
+            .knowledge_date
+            .map(|k| k.to_string())
+            .unwrap_or_else(|| "non communiquée".into());
+        let start = period
+            .valid_from
+            .map(|d| format!("du {d}"))
+            .unwrap_or_else(|| "à compter d'une date non fixée par la source".into());
+        let end = match (period.valid_to, period.end_undetermined) {
+            (Some(d), _) => format!("au {d}"),
+            (None, true) => "jusqu'à une date non fixée par la source".into(),
+            (None, false) => "sans date de fin connue".into(),
+        };
+        checks.push(match period.in_force_at(claim.as_of, payload.knowledge_date) {
+            InForce::Oui => check(
                 CheckName::ApplicabiliteTemporelle,
                 Outcome::Ok,
-                format!(
-                    "en vigueur le {} (du {} au {})",
-                    claim.as_of, period.valid_from, end
-                ),
-            )
-        } else if !period.ever_in_force() {
-            check(
+                format!("en vigueur le {} (période {} {})", claim.as_of, start, end),
+            ),
+            InForce::Indetermine => {
+                uncertainties.push(if period.valid_from.is_none() {
+                    "entrée en vigueur à une date non fixée par la source".into()
+                } else {
+                    "abrogation à une date non fixée par la source".into()
+                });
+                check(
+                    CheckName::ApplicabiliteTemporelle,
+                    Outcome::Indetermine,
+                    format!(
+                        "applicabilité au {} indéterminée (période {} {}) ; état connu jusqu'au {}, date de connaissance du corpus",
+                        claim.as_of, start, end, knowledge
+                    ),
+                )
+            }
+            InForce::Non if !period.ever_in_force() => check(
                 CheckName::ApplicabiliteTemporelle,
                 Outcome::Echec,
                 format!(
                     "version jamais entrée en vigueur (statut source {})",
                     period.status_raw
                 ),
-            )
-        } else {
-            let replacement = match &resolution {
-                Some(Resolution::Unique { official_id }) => {
-                    format!(" ; version en vigueur à cette date : {official_id}")
-                }
-                Some(Resolution::Aucune) => {
-                    " ; aucune version connue en vigueur à cette date".into()
-                }
-                Some(Resolution::Ambigue { official_ids }) => {
-                    format!(" ; versions concurrentes : {}", official_ids.join(", "))
-                }
-                None => String::new(),
-            };
-            check(
-                CheckName::ApplicabiliteTemporelle,
-                Outcome::Echec,
-                format!(
-                    "non en vigueur le {} (période du {} au {}){}",
-                    claim.as_of, period.valid_from, end, replacement
-                ),
-            )
+            ),
+            InForce::Non => {
+                let replacement = match &resolution {
+                    Some(Resolution::Unique { official_id }) => {
+                        format!(" ; version en vigueur à cette date : {official_id}")
+                    }
+                    Some(Resolution::Aucune) => {
+                        " ; aucune version connue en vigueur à cette date".into()
+                    }
+                    Some(Resolution::Ambigue { official_ids }) => {
+                        format!(" ; versions concurrentes : {}", official_ids.join(", "))
+                    }
+                    Some(Resolution::Indeterminee {
+                        possibly_in_force, ..
+                    }) => format!(
+                        " ; versions d'applicabilité indéterminée : {}",
+                        possibly_in_force.join(", ")
+                    ),
+                    None => String::new(),
+                };
+                check(
+                    CheckName::ApplicabiliteTemporelle,
+                    Outcome::Echec,
+                    format!(
+                        "non en vigueur le {} (période {} {}){}",
+                        claim.as_of, start, end, replacement
+                    ),
+                )
+            }
         });
-        if period.valid_from > claim.as_of && period.status_raw.ends_with("_DIFF") {
+        if period.valid_from.is_some_and(|start| start > claim.as_of)
+            && period.status_raw.ends_with("_DIFF")
+        {
             uncertainties.push("disposition à entrée en vigueur différée".into());
         }
 

@@ -8,7 +8,10 @@ use crate::temporal::{Resolution, VersionPeriod};
 use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 
-pub const CONTRACT_VERSION: &str = "1";
+/// v2 : dates non fixées par la source (`valid_from` facultatif,
+/// `end_undetermined`), date de connaissance du corpus, résolution
+/// `INDETERMINEE`.
+pub const CONTRACT_VERSION: &str = "2";
 
 #[derive(Debug, Clone, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -21,7 +24,7 @@ pub struct Request {
 #[derive(Debug, Clone, Deserialize)]
 #[serde(tag = "command", content = "payload", rename_all = "snake_case")]
 pub enum Command {
-    VerifyCitation(VerifyCitationPayload),
+    VerifyCitation(Box<VerifyCitationPayload>),
     ResolveAt(ResolveAtPayload),
 }
 
@@ -35,6 +38,10 @@ pub struct VerifyCitationPayload {
     /// Toutes les versions connues de la même disposition (y compris `candidate`).
     #[serde(default)]
     pub sibling_versions: Vec<VersionPeriod>,
+    /// Date de la dernière livraison de la source intégrée au corpus ; en
+    /// son absence, l'état des versions à date non fixée est indéterminé.
+    #[serde(default)]
+    pub knowledge_date: Option<NaiveDate>,
 }
 
 #[derive(Debug, Clone, Deserialize)]
@@ -64,6 +71,8 @@ pub struct CandidateVersion {
 pub struct ResolveAtPayload {
     pub as_of: NaiveDate,
     pub versions: Vec<VersionPeriod>,
+    #[serde(default)]
+    pub knowledge_date: Option<NaiveDate>,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]

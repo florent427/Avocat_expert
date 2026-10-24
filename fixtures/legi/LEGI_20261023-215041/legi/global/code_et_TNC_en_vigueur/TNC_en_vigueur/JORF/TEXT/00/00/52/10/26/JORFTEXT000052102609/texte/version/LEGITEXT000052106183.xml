@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEXTE_VERSION>
+<META>
+<META_COMMUN>
+<ID>LEGITEXT000052106183</ID>
+<ANCIEN_ID/>
+<ORIGINE>LEGI</ORIGINE>
+<URL>texte/version/LEGI/TEXT/00/00/52/10/61/LEGITEXT000052106183.xml</URL>
+<NATURE>DECRET</NATURE>
+</META_COMMUN>
+<META_SPEC>
+<META_TEXTE_CHRONICLE>
+<CID>JORFTEXT000052102609</CID>
+<NUM>2025-822</NUM>
+<NUM_PARUTION>0189</NUM_PARUTION>
+<NUM_SEQUENCE>27</NUM_SEQUENCE>
+<NOR>APFF2517870D</NOR>
+<DATE_PUBLI>2025-08-15</DATE_PUBLI>
+<DATE_TEXTE>2025-08-12</DATE_TEXTE>
+<DERNIERE_MODIFICATION>2026-08-30</DERNIERE_MODIFICATION>
+<VERSIONS_A_VENIR/>
+<ORIGINE_PUBLI>JORF n°0189 du 15 août 2025</ORIGINE_PUBLI>
+<PAGE_DEB_PUBLI/>
+<PAGE_FIN_PUBLI/>
+</META_TEXTE_CHRONICLE>
+<META_TEXTE_VERSION>
+
+
+<TITRE>Décret n°2025-822 du 12 août 2025</TITRE>
+<TITREFULL>Décret n° 2025-822 du 12 août 2025 portant dispositions statutaires communes et particulières aux corps interministériels d'ingénieurs de l'Etat ayant vocation à exercer des fonctions d'encadrement supérieur</TITREFULL>
+
+<ETAT>VIGUEUR</ETAT>
+<DATE_DEBUT>2025-12-01</DATE_DEBUT>
+<DATE_FIN>2999-01-01</DATE_FIN>
+<AUTORITE/>
+<MINISTERE/>
+
+<LIENS>
+<LIEN cidtexte="JORFTEXT000000522961" datesignatexte="1928-03-30" id="JORFTEXT000000522961" naturetexte="LOI" nortexte="" num="" numtexte="" sens="source" typelien="CITATION">Loi du 30 mars 1928</LIEN>
+<LIEN cidtexte="JORFTEXT000000339141" datesignatexte="1958-11-28" id="JORFTEXT000000339141" naturetexte="ORDONNANCE" nortexte="" num="" numtexte="58-1136" sens="source" typelien="CITATION">Ordonnance n° 58-1136 du 28 novembre 1958</LIEN>
+<LIEN cidtexte="JORFTEXT000000513902" datesignatexte="1967-08-16" id="JORFTEXT000000513902" naturetexte="DECRET" nortexte="" num="" numtexte="67-715" sens="source" typelien="CITATION">Décret n°67-715 du 16 août 1967</LIEN>
+<LIEN cidtexte="JORFTEXT000000874472" datesignatexte="1970-07-15" id="JORFTEXT000000874472" naturetexte="LOI" nortexte="" num="" numtexte="70-631" sens="source" typelien="CITATION">Loi n° 70-631 du 15 juillet 1970</LIEN>
+<LIEN cidtexte="JORFTEXT000000874472" datesignatexte="1970-07-15" id="LEGIARTI000006434801" naturetexte="LOI" nortexte="" num="4" numtexte="70-631" sens="source" typelien="CITATION">Loi n° 70-631 du 15 juillet 1970 - art. 4</LIEN>
+<LIEN cidtexte="JORFTEXT000000874472" datesignatexte="1970-07-15" id="LEGIARTI000006434804" naturetexte="LOI" nortexte="" num="7" numtexte="70-631" sens="source" typelien="CITATION">Loi n° 70-631 du 15 juillet 1970 - art. 7</LIEN>
+<LIEN cidtexte="JORFTEXT000000864119" datesignatexte="1977-07-12" id="JORFTEXT000000864119" naturetexte="DECRET" nortexte="" num="" numtexte="77-788" sens="source" typelien="CITATION">Décret n°77-788 du 12 juillet 1977</LIEN>
+<LIEN cidtexte="JORFTEXT000000311539" datesignatexte="1981-04-07" id="JORFTEXT000000311539" naturetexte="DECRET" nortexte="" num="" numtexte="81-317" sens="source" typelien="CITATION">Décret n°81-317 du 7 avril 1981</LIEN>
+<LIEN cidtexte="JORFTEXT000000701356" datesignatexte="1984-02-16" id="JORFTEXT000000701356" naturetexte="DECRET" nortexte="" num="" numtexte="84-117" sens="source" typelien="CITATION">Décret n°84-117 du 16 février 1984</LIEN>
+<LIEN cidtexte="JORFTEXT000000324972" datesignatexte="1984-10-25" id="JORFTEXT000000324972" naturetexte="DECRET" nortexte="" num="" numtexte="84-961" sens="source" typelien="CITATION">Décret n°84-961 du 25 octobre 1984</LIEN>
+<LIEN cidtexte="JORFTEXT000000502401" datesignatexte="1985-09-16" id="JORFTEXT000000502401" naturetexte="DECRET" nortexte="" num="" numtexte="85-986" sens="source" typelien="CITATION">Décret n°85-986 du 16 septembre 1985</LIEN>
+<LIEN cidtexte="JORFTEXT000000716493" datesignatexte="1990-07-02" id="JORFTEXT000000716493" naturetexte="LOI" nortexte="PTTX9000053L" num="" numtexte="90-568" sens="source" typelien="CITATION">Loi n° 90-568 du 2 juillet 1990</LIEN>
+<LIEN cidtexte="JORFTEXT000000366828" datesignatexte="1994-10-07" id="JORFTEXT000000366828" naturetexte="DECRET" nortexte="FPPA9400088D" num="" numtexte="94-874" sens="source" typelien="CITATION">Décret n°94-874 du 7 octobre 1994</LIEN>
+<LIEN cidtexte="JORFTEXT000000445133" datesignatexte="2004-10-19" id="JORFTEXT000000445133" naturetexte="DECRET" nortexte="FPPX0400131D" num="" numtexte="2004-1105" sens="source" typelien="CITATION">Décret n°2004-1105 du 19 octobre 2004</LIEN>
+<LIEN cidtexte="JORFTEXT000000272471" datesignatexte="2007-02-13" id="JORFTEXT000000272471" naturetexte="DECRET" nortexte="FPPA0700009D" num="" numtexte="2007-196" sens="source" typelien="CITATION">Décret  n° 2007-196 du 13 février 2007</LIEN>
+<LIEN cidtexte="JORFTEXT000018663869" datesignatexte="2008-04-18" id="JORFTEXT000018663869" naturetexte="DECRET" nortexte="BCFX0808083D" num="" numtexte="2008-370" sens="source" typelien="CITATION">Décret n°2008-370 du 18 avril 2008</LIEN>
+<LIEN cidtexte="JORFTEXT000019476291" datesignatexte="2008-09-12" id="JORFTEXT000019476291" naturetexte="DECRET" nortexte="DEFH0801177D" num="" numtexte="2008-939" sens="source" typelien="CITATION">Décret n°2008-939
+ du 12 septembre 2008</LIEN>
+<LIEN cidtexte="JORFTEXT000020104503" datesignatexte="2009-01-16" id="JORFTEXT000020104503" naturetexte="DECRET" nortexte="ECEP0827531D" num="" numtexte="2009-64" sens="source" typelien="CITATION">Décret n°2009-64 du 16 janvier 2009</LIEN>
+<LIEN cidtexte="JORFTEXT000023317481" datesignatexte="2010-12-28" id="JORFTEXT000023317481" naturetexte="DECRET" nortexte="EFIS1020583D" num="" numtexte="2010-1670" sens="source" typelien="CITATION">Décret n°2010-1670 du 28 décembre 2010</LIEN>
+<LIEN cidtexte="JORFTEXT000039727701" datesignatexte="2019-12-31" id="JORFTEXT000039727701" naturetexte="DECRET" nortexte="CPAF1932827D" num="" numtexte="2019-1594" sens="source" typelien="CITATION">Décret n°2019-1594 du 31 décembre 2019</LIEN>
+<LIEN cidtexte="JORFTEXT000043590607" datesignatexte="2021-06-02" id="JORFTEXT000043590607" naturetexte="ORDONNANCE" nortexte="TFPF2112601R" num="" numtexte="2021-702" sens="source" typelien="CITATION">Ordonnance n°2021-702 du 2 juin 2021</LIEN>
+<LIEN cidtexte="LEGITEXT000044416551" datesignatexte="2999-01-01" id="LEGITEXT000044416551" naturetexte="CODE" nortexte="" num="" numtexte="" sens="source" typelien="CITATION">Code général de la fonction publique</LIEN>
+<LIEN cidtexte="JORFTEXT000046591161" datesignatexte="2022-11-23" id="JORFTEXT000046591161" naturetexte="DECRET" nortexte="PRMG2229059D" num="" numtexte="2022-1453" sens="source" typelien="CITATION">Décret n°2022-1453 du 23 novembre 2022</LIEN>
+<LIEN cidtexte="LEGITEXT000006070302" datesignatexte="2999-01-01" id="LEGIARTI000006362725" naturetexte="CODE" nortexte="" num="L24" numtexte="" sens="source" typelien="CITATION">Code des pensions civiles et militaires de retr... - art. L24</LIEN>
+<LIEN cidtexte="LEGITEXT000006070302" datesignatexte="2999-01-01" id="LEGITEXT000006070302" naturetexte="CODE" nortexte="" num="" numtexte="" sens="source" typelien="CITATION">Code des pensions civiles et militaires de retraite</LIEN>
+<LIEN cidtexte="LEGITEXT000006071190" datesignatexte="2999-01-01" id="LEGITEXT000006071190" naturetexte="CODE" nortexte="" num="" numtexte="" sens="source" typelien="CITATION">Code de la recherche</LIEN>
+<LIEN cidtexte="LEGITEXT000006071191" datesignatexte="2999-01-01" id="LEGITEXT000006071191" naturetexte="CODE" nortexte="" num="" numtexte="" sens="source" typelien="CITATION">Code de l'éducation</LIEN>
+<LIEN cidtexte="LEGITEXT000006071307" datesignatexte="2999-01-01" id="LEGITEXT000006071307" naturetexte="CODE" nortexte="" num="" numtexte="" sens="source" typelien="CITATION">Code de la défense.</LIEN>
+<LIEN cidtexte="LEGITEXT000006071335" datesignatexte="2999-01-01" id="LEGITEXT000006071335" naturetexte="CODE" nortexte="" num="" numtexte="" sens="source" typelien="CITATION">Code du service national</LIEN>
+<LIEN cidtexte="LEGITEXT000006072050" datesignatexte="2999-01-01" id="LEGITEXT000006072050" naturetexte="CODE" nortexte="" num="" numtexte="" sens="source" typelien="CITATION">Code du travail</LIEN>
+<LIEN cidtexte="LEGITEXT000006072050" datesignatexte="2999-01-01" id="LEGIARTI000037374022" naturetexte="CODE" nortexte="" num="L6113-1" numtexte="" sens="source" typelien="CITATION">Code du travail - art. L6113-1</LIEN>
+</LIENS>
+
+
+</META_TEXTE_VERSION>
+</META_SPEC>
+</META>
+<VISAS>
+<CONTENU>
+<p align="left">
+<br/>Le Premier ministre,<br/>Sur le rapport du ministre de l'action publique, de la fonction publique et de la simplification,<br/>Vu le code de la défense ;<br/>Vu le code de l'éducation ;<br/>Vu le code général de la fonction publique ;<br/>Vu le code des pensions civiles et militaires de retraite, notamment son article L. 24 ;<br/>Vu le code de la recherche ;<br/>Vu le code du service national ;<br/>Vu le code du travail, notamment son article L. 6113-1 ;<br/>Vu la loi du 30 mars 1928 modifiée relative au statut du personnel navigant de l'aéronautique ;<br/>Vu la loi n° 70-631 du 15 juillet 1970 modifiée relative à l'Ecole polytechnique, notamment ses articles 4 et 7 ;<br/>Vu la loi n° 90-568 du 2 juillet 1990 relative à l'organisation du service public de la poste et à France Télécom ;<br/>Vu l'ordonnance n° 58-1136 du 28 novembre 1958 modifiée portant loi organique concernant les nominations aux emplois civils et militaires de l'Etat ;<br/>Vu l'ordonnance n° 2021-702 du 2 juin 2021 portant réforme de l'encadrement supérieur de la fonction publique de l'Etat ;<br/>Vu le décret n° 77-788 du 12 juillet 1977 modifié relatif à la limite d'âge applicable au recrutement par concours de certains emplois publics en faveur des personnes élevant leur enfant ou ayant élevé au moins un enfant ;<br/>Vu le décret n° 81-317 du 7 avril 1981 modifié fixant les conditions dans lesquelles certains pères ou mères de famille bénéficient d'une dispense de diplôme pour se présenter à divers concours ;<br/>Vu le décret n° 84-117 du 16 février 1984 modifié relatif à l'admission dans les services publics des ingénieurs diplômés de l'Ecole polytechnique ;<br/>Vu le décret n° 84-961 du 25 octobre 1984 modifié relatif à la procédure disciplinaire concernant les fonctionnaires de l'Etat ;<br/>Vu le décret n° 85-986 du 16 septembre 1985 modifié relatif au régime particulier de certaines positions des fonctionnaires de l'Etat, à la mise à disposition, à l'intégration et à la cessation définitive de fonctions ;<br/>Vu le décret n° 94-874 du 7 octobre 1994 modifié fixant les dispositions communes applicables aux stagiaires de l'Etat et de ses établissements publics ;<br/>Vu le décret n° 2004-1105 du 19 octobre 2004 modifié relatif à l'ouverture des procédures de recrutement dans la fonction publique de l'Etat ;<br/>Vu le décret n° 2006-96 du 1<sup>er</sup> février 2006 modifiant le décret n° 67-715 du 16 août 1967 relatif au statut particulier du corps des ingénieurs des télécommunications ;<br/>Vu le décret n° 2007-196 du 13 février 2007 modifié relatif aux équivalences de diplômes requises pour se présenter aux concours d'accès aux corps et cadres d'emplois de la fonction publique ;<br/>Vu le décret n° 2008-370 du 18 avril 2008 organisant les conditions d'exercice des fonctions, en position d'activité, dans les administrations de l'Etat ;<br/>Vu le décret n° 2008-939 du 12 septembre 2008 modifié relatif aux officiers sous contrat ;<br/>Vu le décret n° 2009-64 du 16 janvier 2009 relatif au Conseil général de l'économie, de l'industrie, de l'énergie et des technologies ;<br/>Vu le décret n° 2010-1670 du 28 décembre 2010 modifié relatif au Groupe des écoles nationales d'économie et statistique ;<br/>Vu le décret n° 2019-1594 du 31 décembre 2019 modifié relatif aux emplois de direction de l'Etat ;<br/>Vu le décret n° 2021-1550 du 1<sup>er</sup> décembre 2021 modifié portant statut particulier du corps des administrateurs de l'Etat ;<br/>Vu le décret n° 2022-1453 du 23 novembre 2022 modifié relatif aux conditions de classement, d'avancement et de rémunération applicables à certains emplois supérieurs de la fonction publique de l'Etat ;<br/>Vu l'avis du conseil supérieur de la fonction militaire en date du 2 juillet 2025 ;<br/>Vu l'avis du conseil supérieur de la fonction publique d'Etat en date du 10 juillet 2025 ;<br/>Le Conseil d'Etat (section de l'administration) entendu,<br/>Décrète :</p>
+</CONTENU>
+</VISAS>
+<SIGNATAIRES>
+<CONTENU>
+<div align="left">
+<p>Fait le 12 août 2025.</p>
+</div>
+<div align="left">
+<p>François Bayrou</p>
+<p>Par le Premier ministre :</p>
+</div>
+<div align="left">
+<p>Le ministre de l'action publique, de la fonction publique et de la simplification,</p>
+<p>Laurent Marcangeli</p>
+</div>
+<div align="left">
+<p>Le ministre de l'économie, des finances et de la souveraineté industrielle et numérique,</p>
+<p>Éric Lombard</p>
+</div>
+<div align="left">
+<p>Le ministre des armées,</p>
+<p>Sébastien Lecornu</p>
+</div>
+<div align="left">
+<p>La ministre de la transition écologique, de la biodiversité, de la forêt, de la mer et de la pêche,</p>
+<p>Agnès Pannier-Runacher</p>
+</div>
+<div align="left">
+<p>La ministre de l'agriculture, et de la souveraineté alimentaire,</p>
+<p>Annie Genevard</p>
+</div>
+<div align="left">
+<p>La ministre auprès du ministre de l'économie, des finances et de la souveraineté industrielle et numérique, chargée des comptes publics,</p>
+<p>Amélie de Montchalin</p>
+</div>
+</CONTENU>
+</SIGNATAIRES>
+<TP>
+<CONTENU/>
+</TP>
+<NOTA>
+<CONTENU/>
+</NOTA>
+<ABRO>
+<CONTENU/>
+</ABRO>
+<RECT>
+<CONTENU/>
+</RECT>
+
+
+</TEXTE_VERSION>

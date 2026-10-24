@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SECTION_TA>
+<ID>LEGISCTA000006145418</ID>
+<TITRE_TA>Livre IV : Le demandeur d'emploi </TITRE_TA>
+<STRUCTURE_TA>
+<LIEN_SECTION_TA cid="LEGISCTA000006160811" debut="2008-05-01" etat="VIGUEUR" fin="2999-01-01" id="LEGISCTA000006160811" niv="4" url="/LEGI/SCTA/00/00/06/16/08/LEGISCTA000006160811.xml">Titre Ier : Droits et obligations du demandeur d'emploi </LIEN_SECTION_TA>
+<LIEN_SECTION_TA cid="LEGISCTA000006160812" debut="2008-05-01" etat="MODIFIE" fin="2019-01-01" id="LEGISCTA000006160812" niv="4" url="/LEGI/SCTA/00/00/06/16/08/LEGISCTA000006160812.xml">Titre II : Indemnisation des travailleurs involontairement privés d'emploi  </LIEN_SECTION_TA>
+<LIEN_SECTION_TA cid="LEGISCTA000006160812" debut="2019-01-01" etat="VIGUEUR" fin="2999-01-01" id="LEGISCTA000037388216" niv="4" url="/LEGI/SCTA/00/00/37/38/82/LEGISCTA000037388216.xml">Titre II : Indemnisation des travailleurs privés d'emploi</LIEN_SECTION_TA>
+</STRUCTURE_TA>
+<CONTEXTE>
+<TEXTE autorite="" cid="LEGITEXT000006072050" date_publi="2999-01-01" date_signature="2999-01-01" ministere="" nature="CODE" nor="" num="" num_parution_jo="">
+<TITRE_TXT c_titre_court="Code du travail" debut="1973-01-03" fin="2999-01-01" id_txt="LEGITEXT000006072050">Code du travail</TITRE_TXT>
+<TM>
+<TITRE_TM debut="2008-05-01" fin="2999-01-01" id="LEGISCTA000006112874">Partie législative  </TITRE_TM>
+<TM>
+<TITRE_TM debut="2008-05-01" fin="2999-01-01" id="LEGISCTA000006132343">Cinquième partie : L'emploi</TITRE_TM>
+</TM>
+</TM>
+</TEXTE>
+</CONTEXTE>
+</SECTION_TA>

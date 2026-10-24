@@ -111,7 +111,7 @@ def test_answer_cites_in_force_version(answer_service: ExtractiveAnswerService) 
     assert answer.statements, "au moins une disposition attendue"
     for statement in answer.statements:
         assert statement.citation is not None
-        assert statement.citation.valid_from <= TODAY
+        assert statement.citation.valid_from is not None and statement.citation.valid_from <= TODAY
         assert statement.citation.valid_to is None or statement.citation.valid_to > TODAY
         assert statement.verification is not None
         assert statement.support is not SupportStatus.BLOQUEE
@@ -268,3 +268,22 @@ def test_api_runs_with_least_privilege_role(least_privilege_url: str, lexverif_b
         )
     assert response.status_code == 200, response.text
     assert [s["citation"]["official_id"] for s in response.json()["statements"]] == ["LEGIARTI000048590205"]
+
+
+def test_undetermined_abrogation_is_never_presented_as_certain(answer_service: ExtractiveAnswerService) -> None:
+    # Art. 289 CGI : ABROGE_DIFF, fin 2222-02-22 (date non fixée). Corpus connu au 2026-10-23.
+    answer = answer_service.answer(
+        AnswerRequest(question="article 289 du code général des impôts", as_of=date(2030, 1, 1)), TODAY
+    )
+    statements = [s for s in answer.statements if s.citation and s.citation.official_id == "LEGIARTI000048827413"]
+    assert len(statements) == 1
+    statement = statements[0]
+    assert statement.citation is not None and statement.citation.end_undetermined
+    assert statement.citation.valid_to is None
+    assert "date d'abrogation non encore fixée" in statement.text
+    assert "2222" not in statement.text
+    assert statement.support is SupportStatus.INCERTAINE
+    assert statement.verification is not None
+    outcomes = {c.check: c.outcome.value for c in statement.verification.checks}
+    assert outcomes["APPLICABILITE_TEMPORELLE"] == "INDETERMINE"
+    assert any("postérieure à la dernière livraison intégrée (2026-10-23)" in u for u in answer.uncertainties)

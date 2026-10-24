@@ -55,8 +55,13 @@ cassation (JavaScript requis). Les points qui en dépendent restent **NON VÉRIF
 **Non vérifié** (impact : ADR 0002, risque R-03) : définition officielle de
 chaque ETAT ; sémantique de `2999-01-01` (« sans fin ») et caractère
 inclusif/exclusif de DATE_FIN — déduits des données ; autres sentinelles
-observées (`2999-12-31` dans la DTD des sections, `2222-02-22` dans des
-attributs `fin`).
+observées (`2999-12-31` dans la DTD des sections, `2222-02-22`).
+
+`2222-02-22` (livraison du 2026-10-23) : `DATE_FIN` d'articles
+`ABROGE_DIFF` (ex. art. 289 CGI, NOTA : dispositions « maintenues en vigueur
+jusqu'à leur reprise par les mesures réglementaires »), `DATE_DEBUT` et
+attributs `debut` d'éléments `VIGUEUR_DIFF`, `VERSION_A_VENIR`. Interprété
+comme « date non fixée » (ADR 0016) ; à confirmer par la DILA.
 
 Conséquences appliquées dans le code : chemin source inclus dans la
 connaissance enregistrée ; retrait appliqué au seul chemin exact ; attribution

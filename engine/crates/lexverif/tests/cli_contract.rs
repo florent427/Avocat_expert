@@ -40,7 +40,7 @@ fn request(quote: &str, as_of: &str, candidate_id: Option<&str>) -> Value {
         "status_raw": "MODIFIE"
     });
     json!({
-        "contract_version": "1",
+        "contract_version": "2",
         "command": "verify_citation",
         "payload": {
             "citation": {
@@ -55,7 +55,8 @@ fn request(quote: &str, as_of: &str, candidate_id: Option<&str>) -> Value {
                 "period": period,
                 "territorial_scope": null
             })},
-            "sibling_versions": [previous, period]
+            "sibling_versions": [previous, period],
+            "knowledge_date": "2026-10-23"
         }
     })
 }
@@ -159,7 +160,7 @@ fn non_deterministic_checks_are_never_reported_as_passed() {
 #[test]
 fn wrong_contract_version_and_unknown_fields_are_refused() {
     let mut req = request("x", "2026-10-24", None);
-    req["contract_version"] = json!("2");
+    req["contract_version"] = json!("1"); // contrat antérieur : refusé
     let (response, code) = run(&req);
     assert_eq!(code, 2);
     assert_eq!(response["status"], "error");
@@ -169,6 +170,53 @@ fn wrong_contract_version_and_unknown_fields_are_refused() {
     let (response, code) = run(&req);
     assert_eq!(code, 2);
     assert_eq!(response["status"], "error");
+}
+
+/// Abrogation à une date non fixée (article 289 du CGI, LEGIARTI000048827413,
+/// ABROGE_DIFF, DATE_FIN 2222-02-22 dans la livraison du 2026-10-23).
+fn undetermined_end_request(as_of: &str, knowledge_date: Option<&str>) -> Value {
+    let mut req = request(
+        "les travailleurs aptes au travail et recherchant",
+        as_of,
+        None,
+    );
+    let period = json!({
+        "official_id": "LEGIARTI000048590547",
+        "valid_from": "2023-12-31",
+        "valid_to": null,
+        "end_undetermined": true,
+        "status_raw": "ABROGE_DIFF"
+    });
+    req["payload"]["candidate"]["period"] = period.clone();
+    req["payload"]["sibling_versions"] = json!([period]);
+    req["payload"]["knowledge_date"] = json!(knowledge_date);
+    req
+}
+
+#[test]
+fn undetermined_end_is_never_certain_beyond_knowledge_date() {
+    let (response, _) = run(&undetermined_end_request("2026-10-01", Some("2026-10-23")));
+    assert_eq!(outcome(&response, "APPLICABILITE_TEMPORELLE"), "OK");
+
+    let (response, _) = run(&undetermined_end_request("2030-01-01", Some("2026-10-23")));
+    assert_eq!(
+        outcome(&response, "APPLICABILITE_TEMPORELLE"),
+        "INDETERMINE"
+    );
+    assert_eq!(response["result"]["verdict"], "INCERTAIN");
+    assert_eq!(
+        response["result"]["resolution_at_date"]["kind"],
+        "INDETERMINEE"
+    );
+    let uncertainties = response["result"]["uncertainties"].to_string();
+    assert!(uncertainties.contains("abrogation à une date non fixée"));
+
+    // Sans date de connaissance, même une date passée reste indéterminée.
+    let (response, _) = run(&undetermined_end_request("2026-10-01", None));
+    assert_eq!(
+        outcome(&response, "APPLICABILITE_TEMPORELLE"),
+        "INDETERMINE"
+    );
 }
 
 #[test]

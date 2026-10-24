@@ -11,6 +11,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import date
 
+from avocat_expert.connectors.legi import SOURCE_CODE as LEGI_SOURCE_CODE
 from avocat_expert.contracts.services import ChannelStatus, SearchHit, SearchResponse
 from avocat_expert.search.excerpt import select_excerpt
 from avocat_expert.search.ports import LexicalSearcher, SemanticSearcher
@@ -108,6 +109,14 @@ class HybridSearchService:
             existing.matched_by.extend(m for m in candidate.matched_by if m not in existing.matched_by)
 
         exact, notes, resolved = self._exact_candidates(parsed, as_of)
+        knowledge = self._repository.knowledge_date(LEGI_SOURCE_CODE)
+        if knowledge is None:
+            notes.append("date de la dernière livraison intégrée inconnue : état du corpus non daté")
+        elif as_of > knowledge:
+            notes.append(
+                f"date demandée ({as_of}) postérieure à la dernière livraison intégrée ({knowledge}) : "
+                "les modifications publiées depuis ne sont pas connues du corpus"
+            )
         for candidate in exact:
             merge(candidate)
 

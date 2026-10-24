@@ -36,7 +36,7 @@
                     │  search/ ─ hybride : id, n° d'article,       │
                     │            BM25, sémantique (port)           │
                     │  verification/ ─ adaptateur lexverif ────────┼──▶ engine/lexverif (Rust)
-                    │  connectors/legi ─ ingestion bitemporelle    │     contrat JSON v1, stdin/stdout
+                    │  connectors/legi ─ ingestion bitemporelle    │     contrat JSON v2, stdin/stdout
                     │  contracts/ ─ contrats services & agents     │
                     │  observability/ ─ traces, coûts              │
                     │  evaluation/ ─ métriques sur corpus de cas   │

@@ -9,6 +9,9 @@ import pytest
 
 from avocat_expert.connectors.legi.archive import iter_article_files, read_withdrawals
 from avocat_expert.connectors.legi.parser import LegiFormatError, parse_article
+from avocat_expert.domain.temporal import InForce
+
+KNOWLEDGE = date(2026, 10, 23)  # livraison LEGI_20261023-215041
 
 
 @pytest.fixture(scope="module")
@@ -17,7 +20,7 @@ def articles(legi_fixtures: Path) -> dict[str, object]:
 
 
 def test_all_fixtures_parse(articles: dict[str, object]) -> None:
-    assert len(articles) == 40
+    assert len(articles) == 43
 
 
 def test_open_end_sentinel_becomes_none(articles: dict) -> None:  # type: ignore[type-arg]
@@ -56,8 +59,36 @@ def test_deferred_version(articles: dict) -> None:  # type: ignore[type-arg]
     a = articles["LEGIARTI000053150353"]  # L161-1 CIBS, VIGUEUR_DIFF à compter de 2027
     assert a.status == "VIGUEUR_DIFF"
     assert a.period.valid_from == date(2027, 1, 1)
-    assert not a.period.in_force_at(date(2026, 10, 24))
-    assert a.period.in_force_at(date(2027, 1, 1))
+    assert a.period.in_force_at(date(2026, 10, 24), KNOWLEDGE) is InForce.NON
+    assert a.period.in_force_at(date(2027, 1, 1), KNOWLEDGE) is InForce.OUI
+
+
+def test_undetermined_end_date_is_not_a_real_date(articles: dict) -> None:  # type: ignore[type-arg]
+    # Article 289 du CGI : abrogation différée « jusqu'à leur reprise par les mesures
+    # réglementaires » (NOTA). Avant correction, la fin était lue comme le 22/02/2222
+    # et l'article déclaré en vigueur avec certitude en 2030.
+    a = articles["LEGIARTI000048827413"]
+    assert (a.status, a.raw_valid_to) == ("ABROGE_DIFF", "2222-02-22")
+    assert a.period.valid_to is None and a.period.end_undetermined
+    assert a.period.in_force_at(date(2026, 1, 1), KNOWLEDGE) is InForce.OUI
+    assert a.period.in_force_at(date(2030, 1, 1), KNOWLEDGE) is InForce.INDETERMINE
+    assert a.period.in_force_at(date(2026, 1, 1), None) is InForce.INDETERMINE
+
+
+def test_undetermined_start_date(articles: dict) -> None:  # type: ignore[type-arg]
+    a = articles["LEGIARTI000025453562"]  # MODIFIE_MORT_NE, DATE_DEBUT 2222-02-22
+    assert a.raw_valid_from == "2222-02-22"
+    assert a.period.valid_from is None and a.period.start_undetermined
+    assert a.period.in_force_at(date(2026, 1, 1), KNOWLEDGE) is InForce.NON
+
+
+def test_section_title_is_chosen_at_version_date(articles: dict) -> None:  # type: ignore[type-arg]
+    # L'intitulé du titre II a changé le 2019-01-01 ; la version de 2008 de
+    # L5422-1 doit porter l'intitulé alors en vigueur.
+    old = articles["LEGIARTI000006903823"]
+    assert "Titre II : Indemnisation des travailleurs involontairement privés d'emploi" in old.section_path
+    current = articles["LEGIARTI000048590547"]
+    assert "Titre II : Indemnisation des travailleurs privés d'emploi" in current.section_path
 
 
 def test_declared_versions_and_links(articles: dict) -> None:  # type: ignore[type-arg]

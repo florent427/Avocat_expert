@@ -8,7 +8,7 @@ indépendantes des modèles et isolées de toute entrée réseau.
 
 ## Décision
 Crate `lexverif` (bibliothèque + binaire). Interface : une requête JSON sur
-stdin, une réponse sur stdout, `contract_version = "1"`, champs inconnus
+stdin, une réponse sur stdout, `contract_version` (v2 depuis l'ADR 0016), champs inconnus
 refusés, entrée bornée à 8 Mio. Python l'invoque sans shell, avec délai.
 Une indisponibilité du moteur est une erreur (HTTP 503), jamais un succès.
 

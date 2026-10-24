@@ -13,7 +13,7 @@ from psycopg.rows import dict_row
 from avocat_expert.contracts.common import SourceReference
 
 _VERSION_COLUMNS = """
-  pv.id, pv.official_id, pv.source_status, pv.valid_from, pv.valid_to, pv.text_content,
+  pv.id, pv.official_id, pv.source_status, pv.valid_from, pv.valid_to, pv.end_undetermined, pv.text_content,
   pv.text_sha256, pv.source_path, pv.source_file_sha256, pv.section_path, pv.provision_id,
   p.number AS provision_number, d.official_id AS document_official_id, d.title AS document_title,
   d.territorial_scope, s.code AS source_code, r.connector_version, r.archive_name
@@ -41,8 +41,9 @@ class VersionRecord:
     id: uuid.UUID
     official_id: str
     source_status: str
-    valid_from: date
+    valid_from: date | None
     valid_to: date | None
+    end_undetermined: bool
     text_content: str
     provision_id: uuid.UUID
     provision_number: str
@@ -60,6 +61,7 @@ class VersionRecord:
             source_status=row["source_status"],
             valid_from=row["valid_from"],
             valid_to=row["valid_to"],
+            end_undetermined=row["end_undetermined"],
             text_content=row["text_content"],
             provision_id=row["provision_id"],
             provision_number=row["provision_number"],
@@ -75,6 +77,7 @@ class VersionRecord:
                 provision_number=row["provision_number"],
                 valid_from=row["valid_from"],
                 valid_to=row["valid_to"],
+                end_undetermined=row["end_undetermined"],
                 source_status=row["source_status"],
                 source_path=row["source_path"],
                 source_file_sha256=row["source_file_sha256"],
@@ -140,7 +143,7 @@ class CorpusRepository:
         rows = self._fetch(
             f"SELECT {_VERSION_COLUMNS} {_VERSION_FROM} "
             "WHERE pv.provision_id = %s AND pv.sys_to IS NULL AND NOT pv.withdrawn_from_source "
-            "ORDER BY pv.valid_from, pv.official_id",
+            "ORDER BY pv.valid_from NULLS LAST, pv.official_id",
             (provision_id,),
         )
         return [VersionRecord.from_row(r) for r in rows]
@@ -173,6 +176,12 @@ class CorpusRepository:
             (terms, as_of, " | ".join(_quote_lexeme(t) for t in terms), BM25_K1, BM25_K1, BM25_B, BM25_B, limit),
         )
         return [LexicalHit(VersionRecord.from_row(r), float(r["score"])) for r in rows]
+
+    def knowledge_date(self, source_code: str) -> date | None:
+        """Date de la dernière livraison de la source intégrée avec succès."""
+        rows = self._fetch("SELECT avx_knowledge_date(%s) AS d", (source_code,))
+        value = rows[0]["d"] if rows else None
+        return value if isinstance(value, date) else None
 
     def document_titles(self) -> list[tuple[str, str, str | None]]:
         """(identifiant officiel, titre, titre court) des textes du corpus."""

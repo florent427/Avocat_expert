@@ -24,3 +24,4 @@ Statuts : **Proposée**, **Acceptée**, **Remplacée**. Les ADR 0001 à 0013 ont
 | 0013 | Orchestrateur typé, évaluation de LangGraph en phase E | Acceptée |
 | 0014 | Conteneurs et chaîne d'approvisionnement | Proposée — implémentée |
 | 0015 | Observabilité à liste blanche | Proposée — implémentée |
+| 0016 | Dates non fixées par la source et date de connaissance du corpus | Proposée — implémentée |

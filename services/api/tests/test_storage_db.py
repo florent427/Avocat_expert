@@ -41,15 +41,15 @@ def test_first_ingestion_stats(conn: psycopg.Connection[Any]) -> None:
     assert row is not None
     status, stats = row
     assert status == "SUCCEEDED"
-    assert stats["files_seen"] == 40
-    assert stats["inserted"] == 40
+    assert stats["files_seen"] == 43
+    assert stats["inserted"] == 43
     assert stats["withdrawals_recorded"] == 3
     assert stats["withdrawals_matched"] == 0  # les articles retirés ne font pas partie des fixtures
 
 
 def test_reingestion_is_idempotent(conn: psycopg.Connection[Any], legi_fixtures: Path) -> None:
     _, stats = ingest_legi(conn, legi_fixtures)
-    assert (stats.inserted, stats.superseded, stats.unchanged) == (0, 0, 40)
+    assert (stats.inserted, stats.superseded, stats.unchanged) == (0, 0, 43)
 
 
 def test_change_of_knowledge_preserves_history(

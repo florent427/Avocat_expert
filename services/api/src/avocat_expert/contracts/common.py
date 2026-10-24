@@ -49,8 +49,11 @@ class SourceReference(Strict):
     document_official_id: str
     document_title: str
     provision_number: str
-    valid_from: date
-    valid_to: date | None = Field(description="None : pas de date de fin connue")
+    valid_from: date | None = Field(description="None : entrée en vigueur à une date non fixée par la source")
+    valid_to: date | None = Field(description="None : pas de date de fin connue (voir end_undetermined)")
+    end_undetermined: bool = Field(
+        default=False, description="Fin (abrogation) annoncée par la source à une date non encore fixée"
+    )
     source_status: str = Field(description="Statut brut publié par la source")
     source_path: str
     source_file_sha256: str

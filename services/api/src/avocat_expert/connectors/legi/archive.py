@@ -11,12 +11,29 @@ import re
 import tarfile
 from collections.abc import Iterator
 from dataclasses import dataclass
+from datetime import datetime
 from pathlib import Path
 
 MAX_MEMBER_BYTES = 20 * 1024 * 1024
 _ARTICLE_FILE = re.compile(r"(^|/)LEGIARTI\d{12}\.xml$")
 _SUPPRESSION_FILE = "liste_suppression_legi.dat"
 _ID_IN_LINE = re.compile(r"(LEGI[A-Z]{4}\d{12})\s*$")
+
+
+_ARCHIVE_NAME = re.compile(r"^(?:LEGI|Freemium_legi_global)_(\d{8}-\d{6})(?:\.tar\.gz)?$")
+
+
+def archive_timestamp(name: str) -> datetime | None:
+    """Horodatage d'une livraison DILA d'après son nom (``LEGI_AAAAMMJJ-HHMMSS.tar.gz``
+    ou ``Freemium_legi_global_AAAAMMJJ-HHMMSS.tar.gz``) ; ``None`` si le nom ne suit
+    pas cette forme."""
+    match = _ARCHIVE_NAME.match(name)
+    if match is None:
+        return None
+    try:
+        return datetime.strptime(match.group(1), "%Y%m%d-%H%M%S")
+    except ValueError:
+        return None
 
 
 @dataclass(frozen=True)

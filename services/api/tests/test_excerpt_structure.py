@@ -104,12 +104,13 @@ def test_every_excerpt_passes_the_rust_verifier(articles: list[LegiArticle], lex
             excerpt = select_excerpt(article.content, terms_of(query))
             period = {
                 "official_id": article.official_id,
-                "valid_from": article.period.valid_from.isoformat(),
+                "valid_from": article.period.valid_from.isoformat() if article.period.valid_from else None,
                 "valid_to": article.period.valid_to.isoformat() if article.period.valid_to else None,
+                "end_undetermined": article.period.end_undetermined,
                 "status_raw": article.status,
             }
             request = {
-                "contract_version": "1",
+                "contract_version": "2",
                 "command": "verify_citation",
                 "payload": {
                     "citation": {

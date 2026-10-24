@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SECTION_TA>
+<ID>LEGISCTA000006195891</ID>
+<TITRE_TA>Sous-section 1 : Conditions d'attribution.</TITRE_TA>
+<STRUCTURE_TA>
+<LIEN_ART debut="2008-05-01" etat="MODIFIE" fin="2008-06-27" id="LEGIARTI000006903823" num="L5422-1" origine="LEGI"/>
+<LIEN_ART debut="2008-06-27" etat="MODIFIE" fin="2015-08-08" id="LEGIARTI000019071164" num="L5422-1" origine="LEGI"/>
+<LIEN_ART debut="2015-08-08" etat="MODIFIE" fin="2017-12-22" id="LEGIARTI000031009611" num="L5422-1" origine="LEGI"/>
+<LIEN_ART debut="2017-12-22" etat="MODIFIE" fin="2019-01-01" id="LEGIARTI000036262989" num="L5422-1" origine="LEGI"/>
+<LIEN_ART debut="2019-01-01" etat="MODIFIE" fin="2022-12-23" id="LEGIARTI000037388218" num="L5422-1" origine="LEGI"/>
+<LIEN_ART debut="2022-12-23" etat="MODIFIE" fin="2025-01-01" id="LEGIARTI000046774640" num="L5422-1" origine="LEGI"/>
+<LIEN_ART debut="2025-01-01" etat="VIGUEUR" fin="2999-01-01" id="LEGIARTI000048590547" num="L5422-1" origine="LEGI"/>
+<LIEN_ART debut="2019-01-01" etat="MODIFIE" fin="2024-01-01" id="LEGIARTI000037388244" num="L5422-1-1" origine="LEGI"/>
+<LIEN_ART debut="2024-01-01" etat="VIGUEUR" fin="2999-01-01" id="LEGIARTI000048600619" num="L5422-1-1" origine="LEGI"/>
+<LIEN_ART debut="2008-05-01" etat="MODIFIE" fin="2008-05-01" id="LEGIARTI000006903824" num="L5422-2" origine="LEGI"/>
+<LIEN_ART debut="2008-05-01" etat="MODIFIE" fin="2019-01-01" id="LEGIARTI000018766919" num="L5422-2" origine="LEGI"/>
+<LIEN_ART debut="2019-01-01" etat="MODIFIE" fin="2026-06-13" id="LEGIARTI000037388568" num="L5422-2" origine="LEGI"/>
+<LIEN_ART debut="2026-06-13" etat="VIGUEUR" fin="2999-01-01" id="LEGIARTI000054241899" num="L5422-2" origine="LEGI"/>
+<LIEN_ART debut="2013-06-17" etat="VIGUEUR" fin="2999-01-01" id="LEGIARTI000027550383" num="L5422-2-1" origine="LEGI"/>
+<LIEN_ART debut="2022-12-23" etat="MODIFIE" fin="2025-10-26" id="LEGIARTI000046773092" num="L5422-2-2" origine="LEGI"/>
+<LIEN_ART debut="2025-10-26" etat="VIGUEUR" fin="2999-01-01" id="LEGIARTI000052437200" num="L5422-2-2" origine="LEGI"/>
+</STRUCTURE_TA>
+<CONTEXTE>
+<TEXTE autorite="" cid="LEGITEXT000006072050" date_publi="2999-01-01" date_signature="2999-01-01" ministere="" nature="CODE" nor="" num="" num_parution_jo="">
+<TITRE_TXT c_titre_court="Code du travail" debut="1973-01-03" fin="2999-01-01" id_txt="LEGITEXT000006072050">Code du travail</TITRE_TXT>
+<TM>
+<TITRE_TM debut="2008-05-01" fin="2999-01-01" id="LEGISCTA000006112874">Partie législative  </TITRE_TM>
+<TM>
+<TITRE_TM debut="2008-05-01" fin="2999-01-01" id="LEGISCTA000006132343">Cinquième partie : L'emploi</TITRE_TM>
+<TM>
+<TITRE_TM debut="2008-05-01" fin="2999-01-01" id="LEGISCTA000006145418">Livre IV : Le demandeur d'emploi </TITRE_TM>
+<TM>
+<TITRE_TM debut="2008-05-01" fin="2019-01-01" id="LEGISCTA000006160812">Titre II : Indemnisation des travailleurs involontairement privés d'emploi  </TITRE_TM>
+<TITRE_TM debut="2019-01-01" fin="2999-01-01" id="LEGISCTA000037388216">Titre II : Indemnisation des travailleurs privés d'emploi</TITRE_TM>
+<TM>
+<TITRE_TM debut="2008-05-01" fin="2999-01-01" id="LEGISCTA000006178164">Chapitre II : Régime d'assurance</TITRE_TM>
+<TM>
+<TITRE_TM debut="2008-05-01" fin="2999-01-01" id="LEGISCTA000006189821">Section 1 : Conditions et modalités d'attribution de l'allocation d'assurance</TITRE_TM>
+</TM>
+</TM>
+</TM>
+</TM>
+</TM>
+</TM>
+</TEXTE>
+</CONTEXTE>
+</SECTION_TA>

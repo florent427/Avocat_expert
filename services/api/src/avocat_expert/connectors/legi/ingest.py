@@ -31,7 +31,7 @@ import psycopg
 from psycopg.types.json import Jsonb
 
 from avocat_expert.connectors.legi import CONNECTOR_VERSION, SOURCE_CODE
-from avocat_expert.connectors.legi.archive import iter_article_files, read_withdrawals
+from avocat_expert.connectors.legi.archive import archive_timestamp, iter_article_files, read_withdrawals
 from avocat_expert.connectors.legi.parser import LegiArticle, LegiFormatError, parse_article
 
 SOURCE_DEFINITION = {
@@ -119,7 +119,7 @@ def _ensure_provision(conn: psycopg.Connection[Any], document_id: uuid.UUID, num
 
 
 def _same_knowledge(current: tuple[Any, ...], a: LegiArticle) -> bool:
-    text_sha, status, valid_from, valid_to, source_sha, source_path, withdrawn = current
+    text_sha, status, valid_from, valid_to, end_undetermined, source_sha, source_path, withdrawn = current
     return bool(
         not withdrawn  # une relivraison après retrait constitue une connaissance nouvelle
         and source_path == a.source_path
@@ -127,6 +127,7 @@ def _same_knowledge(current: tuple[Any, ...], a: LegiArticle) -> bool:
         and status == a.status
         and valid_from == a.period.valid_from
         and valid_to == a.period.valid_to
+        and end_undetermined == a.period.end_undetermined
         and source_sha == a.source_file_sha256
     )
 
@@ -135,7 +136,8 @@ def _store_article(conn: psycopg.Connection[Any], run_id: uuid.UUID, source_id: 
     document_id = _ensure_document(conn, source_id, a)
     provision_id = _ensure_provision(conn, document_id, a.number)
     current = conn.execute(
-        """SELECT id, text_sha256, source_status, valid_from, valid_to, source_file_sha256, source_path,
+        """SELECT id, text_sha256, source_status, valid_from, valid_to, end_undetermined, source_file_sha256,
+                  source_path,
                   withdrawn_from_source
            FROM provision_version WHERE official_id = %s AND sys_to IS NULL FOR UPDATE""",
         (a.official_id,),
@@ -153,10 +155,10 @@ def _store_article(conn: psycopg.Connection[Any], run_id: uuid.UUID, source_id: 
         outcome = "superseded"
     conn.execute(
         """INSERT INTO provision_version (
-             id, provision_id, official_id, source_status, valid_from, valid_to,
+             id, provision_id, official_id, source_status, valid_from, valid_to, end_undetermined,
              raw_valid_from, raw_valid_to, section_path, text_content, text_sha256, nota,
              source_path, source_file_sha256, ingestion_run_id)
-           VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""",
+           VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""",
         (
             new_id,
             provision_id,
@@ -164,6 +166,7 @@ def _store_article(conn: psycopg.Connection[Any], run_id: uuid.UUID, source_id: 
             a.status,
             a.period.valid_from,
             a.period.valid_to,
+            a.period.end_undetermined,
             a.raw_valid_from,
             a.raw_valid_to,
             list(a.section_path),
@@ -213,9 +216,10 @@ def ingest_legi(conn: psycopg.Connection[Any], location: Path) -> tuple[uuid.UUI
     with conn.transaction():
         source_id = _ensure_source(conn)
         run_row = conn.execute(
-            """INSERT INTO ingestion_run (source_id, connector_version, archive_name, archive_sha256)
-               VALUES (%s, %s, %s, %s) RETURNING id""",
-            (source_id, CONNECTOR_VERSION, location.name, _sha256_file(location)),
+            """INSERT INTO ingestion_run (source_id, connector_version, archive_name, archive_sha256,
+                                          archive_timestamp)
+               VALUES (%s, %s, %s, %s, %s) RETURNING id""",
+            (source_id, CONNECTOR_VERSION, location.name, _sha256_file(location), archive_timestamp(location.name)),
         ).fetchone()
     run_id = _returned_id(run_row)
 

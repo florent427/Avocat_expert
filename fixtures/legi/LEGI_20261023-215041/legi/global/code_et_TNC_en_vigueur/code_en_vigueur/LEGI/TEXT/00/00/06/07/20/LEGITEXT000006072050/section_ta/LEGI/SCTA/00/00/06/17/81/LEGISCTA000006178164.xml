@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SECTION_TA>
+<ID>LEGISCTA000006178164</ID>
+<TITRE_TA>Chapitre II : Régime d'assurance</TITRE_TA>
+<STRUCTURE_TA>
+<LIEN_SECTION_TA cid="LEGISCTA000006189821" debut="2008-05-01" etat="VIGUEUR" fin="2999-01-01" id="LEGISCTA000006189821" niv="6" url="/LEGI/SCTA/00/00/06/18/98/LEGISCTA000006189821.xml">Section 1 : Conditions et modalités d'attribution de l'allocation d'assurance</LIEN_SECTION_TA>
+<LIEN_SECTION_TA cid="LEGISCTA000006189822" debut="2008-05-01" etat="VIGUEUR" fin="2999-01-01" id="LEGISCTA000006189822" niv="6" url="/LEGI/SCTA/00/00/06/18/98/LEGISCTA000006189822.xml">Section 2 : Financement de l'allocation d'assurance.</LIEN_SECTION_TA>
+<LIEN_SECTION_TA cid="LEGISCTA000006189823" debut="2008-05-01" etat="VIGUEUR" fin="2999-01-01" id="LEGISCTA000006189823" niv="6" url="/LEGI/SCTA/00/00/06/18/98/LEGISCTA000006189823.xml">Section 3 : Obligations d'assurance et de déclaration des rémunérations.</LIEN_SECTION_TA>
+<LIEN_SECTION_TA cid="LEGISCTA000006189824" debut="2008-05-01" etat="MODIFIE_MORT_NE" fin="2008-05-01" id="LEGISCTA000006189824" niv="6" url="/LEGI/SCTA/00/00/06/18/98/LEGISCTA000006189824.xml">Section 4 : Actions en recouvrement et sanctions.</LIEN_SECTION_TA>
+<LIEN_SECTION_TA cid="LEGISCTA000006189824" debut="2008-05-01" etat="VIGUEUR" fin="2999-01-01" id="LEGISCTA000018767222" niv="6" url="/LEGI/SCTA/00/00/18/76/72/LEGISCTA000018767222.xml">Section 4 : Modalités de recouvrement et de contrôle des contributions.</LIEN_SECTION_TA>
+<LIEN_SECTION_TA cid="LEGISCTA000006189825" debut="2008-05-01" etat="VIGUEUR" fin="2999-01-01" id="LEGISCTA000006189825" niv="6" url="/LEGI/SCTA/00/00/06/18/98/LEGISCTA000006189825.xml">Section 5 : Accords relatifs à l'assurance chômage.</LIEN_SECTION_TA>
+<LIEN_SECTION_TA cid="LEGISCTA000029995706" debut="2014-12-31" etat="VIGUEUR" fin="2999-01-01" id="LEGISCTA000029995706" niv="6" url="/LEGI/SCTA/00/00/29/99/57/LEGISCTA000029995706.xml">Section 6 -   Suivi financier du régime d'assurance chômage  </LIEN_SECTION_TA>
+</STRUCTURE_TA>
+<CONTEXTE>
+<TEXTE autorite="" cid="LEGITEXT000006072050" date_publi="2999-01-01" date_signature="2999-01-01" ministere="" nature="CODE" nor="" num="" num_parution_jo="">
+<TITRE_TXT c_titre_court="Code du travail" debut="1973-01-03" fin="2999-01-01" id_txt="LEGITEXT000006072050">Code du travail</TITRE_TXT>
+<TM>
+<TITRE_TM debut="2008-05-01" fin="2999-01-01" id="LEGISCTA000006112874">Partie législative  </TITRE_TM>
+<TM>
+<TITRE_TM debut="2008-05-01" fin="2999-01-01" id="LEGISCTA000006132343">Cinquième partie : L'emploi</TITRE_TM>
+<TM>
+<TITRE_TM debut="2008-05-01" fin="2999-01-01" id="LEGISCTA000006145418">Livre IV : Le demandeur d'emploi </TITRE_TM>
+<TM>
+<TITRE_TM debut="2008-05-01" fin="2019-01-01" id="LEGISCTA000006160812">Titre II : Indemnisation des travailleurs involontairement privés d'emploi  </TITRE_TM>
+<TITRE_TM debut="2019-01-01" fin="2999-01-01" id="LEGISCTA000037388216">Titre II : Indemnisation des travailleurs privés d'emploi</TITRE_TM>
+</TM>
+</TM>
+</TM>
+</TM>
+</TEXTE>
+</CONTEXTE>
+</SECTION_TA>

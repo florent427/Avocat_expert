@@ -17,13 +17,18 @@ ne sont pas à jour.
 document, numéro, période de validité, statut brut, chemin et empreinte du
 fichier source, **archive source**, version du connecteur.
 
-## Moteur `lexverif` (JSON, `contract_version = "1"`)
+## Moteur `lexverif` (JSON, `contract_version = "2"`)
 
 Commandes `verify_citation` et `resolve_at`. Contrôles :
 `SOURCE_IDENTIFIEE`, `IDENTIFIANT_RESOLU`, `PASSAGE_PRESENT`,
 `APPLICABILITE_TEMPORELLE`, `TERRITOIRE`, `COHERENCE_TEMPORELLE`,
 `ADEQUATION_RAISONNEMENT` (toujours `NON_EVALUE`), `CONTRADICTIONS`
 (toujours `NON_EVALUE`). Verdict : `CONFORME` / `INCERTAIN` / `NON_CONFORME`.
+
+v2 (ADR 0016) : `valid_from` facultatif (entrée en vigueur non fixée),
+`end_undetermined` (abrogation non fixée), `knowledge_date` (dernière
+livraison intégrée) ; applicabilité `OUI` / `NON` / `INDETERMINE` et
+résolution `UNIQUE` / `AUCUNE` / `AMBIGUE` / `INDETERMINEE`.
 
 ## Agents
 

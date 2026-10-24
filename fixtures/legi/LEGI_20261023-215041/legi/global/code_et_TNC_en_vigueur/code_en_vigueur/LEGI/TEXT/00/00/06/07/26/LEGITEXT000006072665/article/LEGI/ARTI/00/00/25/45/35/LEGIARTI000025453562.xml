@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ARTICLE>
+<META>
+<META_COMMUN>
+<ID>LEGIARTI000025453562</ID>
+<ANCIEN_ID/>
+<ORIGINE>LEGI</ORIGINE>
+<URL>article/LEGI/ARTI/00/00/25/45/35/LEGIARTI000025453562.xml</URL>
+<NATURE>Article</NATURE>
+</META_COMMUN>
+<META_SPEC>
+<META_ARTICLE>
+
+<NUM>L5311-1</NUM>
+
+<ETAT>MODIFIE_MORT_NE</ETAT>
+
+<DATE_DEBUT>2222-02-22</DATE_DEBUT>
+<DATE_FIN>2016-07-17</DATE_FIN>
+
+
+
+<TYPE>AUTONOME</TYPE>
+</META_ARTICLE>
+</META_SPEC>
+</META>
+<CONTEXTE>
+<TEXTE autorite="" cid="LEGITEXT000006072665" date_publi="2999-01-01" date_signature="2999-01-01" ministere="" nature="CODE" nor="" num="" num_parution_jo="">
+<TITRE_TXT c_titre_court="Code de la santé publique" debut="1953-10-07" fin="2999-01-01" id_txt="LEGITEXT000006072665">Code de la santé publique</TITRE_TXT>
+<TM>
+<TITRE_TM debut="2000-06-22" fin="2999-01-01" id="LEGISCTA000006103419">Partie législative</TITRE_TM>
+<TM>
+<TITRE_TM debut="2000-06-22" fin="2999-01-01" id="LEGISCTA000006125349">Cinquième partie : Produits de santé</TITRE_TM>
+<TM>
+<TITRE_TM debut="2000-06-22" fin="2012-05-01" id="LEGISCTA000006140633">Livre III : Agence française de sécurité sanitaire des produits de santé</TITRE_TM>
+<TITRE_TM debut="2012-05-01" fin="2999-01-01" id="LEGISCTA000025104258">Livre III : Agence nationale de sécurité du médicament et des produits de santé</TITRE_TM>
+<TM>
+<TITRE_TM debut="2000-06-22" fin="2999-01-01" id="LEGISCTA000006155093">Titre Ier : Missions et prérogatives</TITRE_TM>
+<TM>
+<TITRE_TM debut="2000-06-22" fin="2999-01-01" id="LEGISCTA000006171401">Chapitre Ier : Missions.</TITRE_TM>
+</TM>
+</TM>
+</TM>
+</TM>
+</TM>
+</TEXTE>
+</CONTEXTE>
+
+<VERSIONS>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2000-06-22" etat="MODIFIE" fin="2001-03-03" id="LEGIARTI000006690344" num="L5311-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2001-03-03" etat="MODIFIE" fin="2002-03-05" id="LEGIARTI000006690345" num="L5311-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2002-03-05" etat="MODIFIE" fin="2004-08-07" id="LEGIARTI000006690346" num="L5311-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2004-08-07" etat="MODIFIE" fin="2004-08-11" id="LEGIARTI000006690347" num="L5311-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2004-08-11" etat="MODIFIE" fin="2005-09-02" id="LEGIARTI000006690348" num="L5311-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2005-09-02" etat="MODIFIE" fin="2007-02-27" id="LEGIARTI000006690349" num="L5311-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2007-02-27" etat="MODIFIE" fin="2007-04-27" id="LEGIARTI000006690350" num="L5311-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2007-04-27" etat="MODIFIE" fin="2008-06-01" id="LEGIARTI000006690351" num="L5311-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2008-06-01" etat="MODIFIE" fin="2009-07-23" id="LEGIARTI000018652199" num="L5311-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2009-07-23" etat="MODIFIE" fin="2010-01-16" id="LEGIARTI000020892075" num="L5311-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2010-01-16" etat="MODIFIE" fin="2012-05-01" id="LEGIARTI000021709037" num="L5311-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2012-05-01" etat="MODIFIE" fin="2012-12-22" id="LEGIARTI000025104251" num="L5311-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2012-12-22" etat="MODIFIE" fin="2013-06-01" id="LEGIARTI000026809110" num="L5311-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2013-06-01" etat="MODIFIE" fin="2016-01-28" id="LEGIARTI000027480562" num="L5311-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2016-01-28" etat="MODIFIE" fin="2016-07-17" id="LEGIARTI000031930410" num="L5311-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE_MORT_NE">
+<LIEN_ART debut="2222-02-22" etat="MODIFIE_MORT_NE" fin="2016-07-17" id="LEGIARTI000025453562" num="L5311-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2016-07-17" etat="MODIFIE" fin="2017-07-01" id="LEGIARTI000032908924" num="L5311-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2017-07-01" etat="MODIFIE" fin="2021-06-01" id="LEGIARTI000033897163" num="L5311-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2021-06-01" etat="MODIFIE" fin="2021-08-04" id="LEGIARTI000042654751" num="L5311-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2021-08-04" etat="MODIFIE" fin="2022-04-22" id="LEGIARTI000043896283" num="L5311-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2022-04-22" etat="MODIFIE" fin="2022-07-31" id="LEGIARTI000045630379" num="L5311-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2022-07-31" etat="MODIFIE" fin="2024-01-01" id="LEGIARTI000046126182" num="L5311-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="MODIFIE">
+<LIEN_ART debut="2024-01-01" etat="MODIFIE" fin="2026-08-20" id="LEGIARTI000046871876" num="L5311-1" origine="LEGI"/>
+</VERSION>
+<VERSION etat="VIGUEUR">
+<LIEN_ART debut="2026-08-20" etat="VIGUEUR" fin="2999-01-01" id="LEGIARTI000054711226" num="L5311-1" origine="LEGI"/>
+</VERSION>
+</VERSIONS>
+<NOTA>
+<CONTENU/>
+</NOTA>
+<BLOC_TEXTUEL>
+<CONTENU>
+<p>I. - L'Agence nationale de sécurité du médicament et des produits de santé est un établissement public de l'Etat, placé sous la tutelle du ministre chargé de la santé. </p>
+<p>II. - L'agence procède à l'évaluation des bénéfices et des risques liés à l'utilisation des produits à finalité sanitaire destinés à l'homme et des produits à finalité cosmétique. Elle surveille le risque lié à ces produits et effectue des réévaluations des bénéfices et des risques. </p>
+<p>L'agence peut demander que les essais cliniques portant sur des médicaments soient effectués sous forme d'essais contre comparateurs actifs et contre placebo. Si la personne produisant ou exploitant un médicament s'oppose aux essais contre comparateurs actifs, elle doit le justifier. </p>
+<p>L'agence participe à l'application des lois et règlements et prend, dans les cas prévus par des dispositions particulières, des décisions relatives à l'évaluation, aux essais, à la fabrication, à la préparation, à l'importation, à l'exportation, à la distribution en gros, au courtage, au conditionnement, à la conservation, à l'exploitation, à la mise sur le marché, à la publicité, à la mise en service ou à l'utilisation des produits à finalité sanitaire destinés à l'homme et des produits à finalité cosmétique, et notamment : </p>
+<p>1° Les médicaments, y compris les insecticides, acaricides et antiparasitaires à usage humain, les préparations magistrales, hospitalières et officinales, les substances stupéfiantes, psychotropes ou autres substances vénéneuses utilisées en médecine, les huiles essentielles et plantes médicinales, les matières premières à usage pharmaceutique ; </p>
+<p>2° Les produits contraceptifs et contragestifs ; </p>
+<p>3° Les biomatériaux et les dispositifs médicaux ; </p>
+<p>4° Les dispositifs médicaux de diagnostic in vitro ; </p>
+<p>5° Les produits sanguins labiles ; </p>
+<p>6° Les organes, tissus, cellules et produits d'origine humaine ou animale, y compris lorsqu'ils sont prélevés à l'occasion d'une intervention chirurgicale ; </p>
+<p>7° Les produits cellulaires à finalité thérapeutique ; </p>
+<p>8° Le lait maternel collecté, qualifié, préparé et conservé par les lactariums ; </p>
+<p>9° Les produits destinés à l'entretien ou à l'application des lentilles de contact ; </p>
+<p>10° (Abrogé) ;</p>
+<p>11° Les procédés et appareils destinés à la désinfection des locaux et des véhicules dans les cas prévus à l'article L. 3114-1 ; </p>
+<p>12° (Abrogé) ;</p>
+<p>13° (Abrogé) ;</p>
+<p>14° Les lentilles oculaires non correctrices ; </p>
+<p>15° Les produits cosmétiques ; </p>
+<p>16° Les micro-organismes et toxines mentionnés à l'article L. 5139-1 ; </p>
+<p>17° Les produits de tatouage ; </p>
+<p>18° Les logiciels qui ne sont pas des dispositifs médicaux et qui sont utilisés par les laboratoires de biologie médicale, pour la gestion des examens de biologie médicale et lors de la validation, de l'interprétation, de la communication appropriée en application du 3° de l'article L. 6211-2 et de l'archivage des résultats ; </p>
+<p>19° Les dispositifs à finalité non strictement médicale utilisés dans les laboratoires de biologie médicale pour la réalisation des examens de biologie médicale ;</p>
+<p>20° Les logiciels d'aide à la prescription et les logiciels d'aide à la dispensation.</p>
+<p>III. - L'agence participe à l'application des lois et règlements relatifs aux recherches impliquant la personne humaine et prend, dans les cas prévus par des dispositions particulières, des décisions relatives aux recherches impliquant la personne humaine.</p>
+<p>Elle assure la mise en œuvre des systèmes de vigilance, à l'exception de ceux portant sur le lait maternel, les organes, les tissus, les cellules et les préparations de thérapie cellulaire, et prépare la pharmacopée. </p>
+<p>Elle rend publics un rapport de synthèse de l'évaluation effectuée pour tout nouveau médicament dans des conditions déterminées par voie réglementaire, ainsi que les décisions d'octroi, de suspension et de retrait de l'autorisation de mise sur le marché mentionnées aux articles L. 5121-8 et L. 5121-9. Elle organise des réunions régulières d'information avec des associations agréées de personnes malades et d'usagers du système de santé mentionnées à l'article L. 1114-1 sur les problèmes de sécurité sanitaire des produits de santé, notamment sur les actions entreprises dans le domaine de la prévention et de la répression de la falsification des médicaments. </p>
+<p>Elle contrôle la publicité en faveur de tous les produits, objets, appareils et méthodes revendiquant une finalité sanitaire. </p>
+<p>Elle prend ou demande aux autorités compétentes de prendre les mesures de police sanitaire nécessaires lorsque la santé de la population est menacée, dans les conditions prévues au présent code ou par toute autre disposition législative ou réglementaire visant à préserver la santé humaine. </p>
+<p>Elle établit un rapport annuel d'activité adressé au Gouvernement et au Parlement. Ce rapport est rendu public. Le rapport comporte le bilan annuel de la réévaluation du rapport entre les bénéfices et les risques des médicaments à usage humain mentionnés à l'article L. 5121-8. </p>
+<p>Elle organise des auditions publiques sur des thèmes de santé publique. </p>
+<p>L'agence est également chargée du contrôle du respect des dispositions des autorisations délivrées en application de l'article L. 1161-5.
+</p>
+</CONTENU>
+</BLOC_TEXTUEL>
+<LIENS>
+<LIEN cidtexte="JORFTEXT000000503017" datesignatexte="1981-03-25" id="LEGIARTI000006630983" naturetexte="DECRET" nortexte="" num="1" numtexte="81-278" sens="cible" typelien="CITATION">Décret n°81-278 du 25 mars 1981 - art. 1 (Ab)</LIEN>
+<LIEN cidtexte="JORFTEXT000000503017" datesignatexte="1981-03-25" id="LEGIARTI000006631025" naturetexte="DECRET" nortexte="" num="Annexe I" numtexte="81-278" sens="cible" typelien="CITATION">Décret n°81-278 du 25 mars 1981 - art. Annexe I (Ab)</LIEN>
+<LIEN cidtexte="JORFTEXT000000160314" datesignatexte="1990-10-30" id="LEGIARTI000035606736" naturetexte="DECRET" nortexte="SPSG9001546D" num="2-1" numtexte="90-975" sens="cible" typelien="CITATION">Décret n°90-975 du 30 octobre 1990 - art. 2-1 (VD)</LIEN>
+<LIEN cidtexte="JORFTEXT000000726011" datesignatexte="1992-12-30" id="LEGIARTI000006712582" naturetexte="DECRET" nortexte="SPSG9202710D" num="2" numtexte="92-1432" sens="cible" typelien="CITATION">Décret n°92-1432 du 30 décembre 1992 - art. 2 (Ab)</LIEN>
+<LIEN cidtexte="JORFTEXT000000711604" datesignatexte="1993-01-29" id="LEGIARTI000006355280" naturetexte="LOI" nortexte="PRMX9200148L" num="87" numtexte="93-122" sens="cible" typelien="CITATION">Loi n°93-122 du 29 janvier 1993 - art. 87 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000000195660" datesignatexte="1996-09-20" id="LEGIARTI000006865783" naturetexte="DECRET" nortexte="ENVP9640024D" num="Annexe" numtexte="96-850" sens="cible" typelien="CITATION">Décret n°96-850 du 20 septembre 1996 - art. Annexe (Ab)</LIEN>
+<LIEN cidtexte="JORFTEXT000000571865" datesignatexte="1998-05-18" id="LEGIARTI000006506987" naturetexte="DECRET" nortexte="MESG9820693D" num="3" numtexte="98-385" sens="cible" typelien="CITATION">Décret n°98-385 du 18 mai 1998 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000000388987" datesignatexte="2001-01-11" id="LEGIARTI000006724441" naturetexte="DECRET" nortexte="MJSK0070147D" num="5" numtexte="2001-35" sens="cible" typelien="CITATION">Décret n°2001-35 du 11 janvier 2001 - art. 5 (Ab)</LIEN>
+<LIEN cidtexte="JORFTEXT000000459554" datesignatexte="2006-08-16" id="LEGIARTI000006254318" naturetexte="ARRETE" nortexte="SANP0623381A" num="1" numtexte="" sens="cible" typelien="CITATION">Arrêté du 16 août 2006 - art. 1 (Ab)</LIEN>
+<LIEN cidtexte="JORFTEXT000000639980" datesignatexte="2006-08-16" id="LEGIARTI000006254325" naturetexte="ARRETE" nortexte="SANP0623382A" num="1" numtexte="" sens="cible" typelien="CITATION">Arrêté du 16 août 2006 - art. 1 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000000270592" datesignatexte="2006-08-16" id="LEGIARTI000006254307" naturetexte="ARRETE" nortexte="SANP0623380A" num="1" numtexte="" sens="cible" typelien="CITATION">Arrêté du 16 août 2006 - art. 1 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000000459554" datesignatexte="2006-08-16" id="LEGIARTI000006254319" naturetexte="ARRETE" nortexte="SANP0623381A" num="2" numtexte="" sens="cible" typelien="CITATION">Arrêté du 16 août 2006 - art. 2 (Ab)</LIEN>
+<LIEN cidtexte="JORFTEXT000000270592" datesignatexte="2006-08-16" id="LEGIARTI000020326653" naturetexte="ARRETE" nortexte="SANP0623380A" num="2" numtexte="" sens="cible" typelien="CITATION">Arrêté du 16 août 2006 - art. 2 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000000459554" datesignatexte="2006-08-16" id="LEGIARTI000020320295" naturetexte="ARRETE" nortexte="SANP0623381A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 16 août 2006 - art. 3 (Ab)</LIEN>
+<LIEN cidtexte="JORFTEXT000000270592" datesignatexte="2006-08-16" id="LEGIARTI000020326611" naturetexte="ARRETE" nortexte="SANP0623380A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 16 août 2006 - art. 3 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000000459554" datesignatexte="2006-08-16" id="LEGIARTI000006254321" naturetexte="ARRETE" nortexte="SANP0623381A" num="4" numtexte="" sens="cible" typelien="CITATION">Arrêté du 16 août 2006 - art. 4 (Ab)</LIEN>
+<LIEN cidtexte="JORFTEXT000000270592" datesignatexte="2006-08-16" id="LEGIARTI000006254313" naturetexte="ARRETE" nortexte="SANP0623380A" num="7" numtexte="" sens="cible" typelien="CITATION">Arrêté du 16 août 2006 - art. 7 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000000639975" datesignatexte="2006-08-16" id="LEGIARTI000006734099" naturetexte="ARRETE" nortexte="SANP0623370A" num="ANNEXE" numtexte="" sens="cible" typelien="CITATION">Arrêté du 16 août 2006 - art. ANNEXE (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000000271992" datesignatexte="2006-09-11" id="LEGIARTI000006255223" naturetexte="ARRETE" nortexte="SANP0623792A" num="1" numtexte="" sens="cible" typelien="CITATION">Arrêté du 11 septembre 2006 - art. 1 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000000271992" datesignatexte="2006-09-11" id="LEGIARTI000020322856" naturetexte="ARRETE" nortexte="SANP0623792A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 11 septembre 2006 - art. 3 (Ab)</LIEN>
+<LIEN cidtexte="JORFTEXT000000613381" datesignatexte="2007-02-26" id="LEGIARTI000006697048" naturetexte="LOI" nortexte="SANX0600004L" num="39" numtexte="2007-248" sens="cible" typelien="CITATION">Loi n°2007-248 du 26 février 2007 - art. 39 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000000821090" datesignatexte="2007-03-19" id="LEGIARTI000006868630" naturetexte="DECRET" nortexte="AGRG0700644D" num="29" numtexte="2007-358" sens="cible" typelien="CITATION">Décret  n° 2007-358 du 19 mars 2007 - art. 29 (Ab)</LIEN>
+<LIEN cidtexte="JORFTEXT000000466314" datesignatexte="2007-03-25" id="LEGIARTI000006726837" naturetexte="DECRET" nortexte="MJSK0770075D" num="5" numtexte="2007-462" sens="cible" typelien="CITATION">Décret n°2007-462 du 25 mars 2007 - art. 5 (Ab)</LIEN>
+
+
+<LIEN cidtexte="JORFTEXT000018360158" datesignatexte="2008-03-05" id="LEGIARTI000018361459" naturetexte="ARRETE" nortexte="SJSP0805973A" num="Annexe" numtexte="" sens="cible" typelien="CITATION">Arrêté du 5 mars 2008 - art. Annexe (Ab)</LIEN>
+
+
+
+
+
+
+<LIEN cidtexte="JORFTEXT000019381783" datesignatexte="2008-08-11" id="LEGIARTI000019382668" naturetexte="ARRETE" nortexte="SJSP0820319A" num="2" numtexte="" sens="cible" typelien="CITATION">Arrêté du 11 août 2008 - art. 2 (V)</LIEN>
+
+
+<LIEN cidtexte="JORFTEXT000020234297" datesignatexte="2009-02-06" id="LEGIARTI000034448482" naturetexte="ARRETE" nortexte="SJSG0824493A" num="7" numtexte="" sens="cible" typelien="CITATION">Arrêté du 6 février 2009 - art. 7 (Ab)</LIEN>
+<LIEN cidtexte="JORFTEXT000020318429" datesignatexte="2009-02-19" id="LEGITEXT000020319418" naturetexte="ARRETE" nortexte="SASP0904387A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 19 février 2009 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000020318439" datesignatexte="2009-02-19" id="LEGITEXT000020319427" naturetexte="ARRETE" nortexte="SASP0904427A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 19 février 2009 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000020318449" datesignatexte="2009-02-19" id="LEGITEXT000020319436" naturetexte="ARRETE" nortexte="SASP0904394A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 19 février 2009 (V)</LIEN>
+
+
+
+
+
+<LIEN cidtexte="JORFTEXT000021782073" datesignatexte="2010-01-13" id="LEGIARTI000021782780" naturetexte="ARRETE" nortexte="SASP1001133A" num="Annexe au règlement intérieur" numtexte="" sens="cible" typelien="CITATION">Arrêté du 13 janvier 2010 - art. Annexe au règlement intérieur (Ab)</LIEN>
+
+<LIEN cidtexte="JORFTEXT000022415149" datesignatexte="2010-06-30" id="LEGITEXT000022416787" naturetexte="ARRETE" nortexte="SASP1017123A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 30 juin 2010 (Ab)</LIEN>
+<LIEN cidtexte="JORFTEXT000022415125" datesignatexte="2010-06-30" id="LEGITEXT000022416463" naturetexte="ARRETE" nortexte="SASP1017105A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 30 juin 2010 (Ab)</LIEN>
+<LIEN cidtexte="JORFTEXT000022415141" datesignatexte="2010-06-30" id="LEGITEXT000022416472" naturetexte="ARRETE" nortexte="SASP1017114A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 30 juin 2010 (Ab)</LIEN>
+<LIEN cidtexte="JORFTEXT000023428330" datesignatexte="2011-01-13" id="LEGIARTI000023430029" naturetexte="DECRET" nortexte="SPOV1017553D" num="6" numtexte="2011-57" sens="cible" typelien="CITATION">Décret n°2011-57
+ du 13 janvier 2011 - art. 6</LIEN>
+<LIEN cidtexte="JORFTEXT000023776935" datesignatexte="2011-03-17" id="LEGITEXT000023778069" naturetexte="ARRETE" nortexte="ETSP1108041A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 17 mars 2011 (Ab)</LIEN>
+
+
+
+<LIEN cidtexte="JORFTEXT000025053440" datesignatexte="2011-12-29" id="LEGIARTI000025071143" naturetexte="LOI" nortexte="ETSX1119227L" num="38" numtexte="2011-2012" sens="cible" typelien="CITATION">LOI n°2011-2012
+ du 29 décembre 2011 - art. 38 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000025053440" datesignatexte="2011-12-29" id="LEGIARTI000025071141" naturetexte="LOI" nortexte="ETSX1119227L" num="39" numtexte="2011-2012" sens="cible" typelien="CITATION">LOI n°2011-2012
+ du 29 décembre 2011 - art. 39 (V)</LIEN>
+
+
+<LIEN cidtexte="JORFTEXT000025441587" datesignatexte="2012-03-05" id="LEGIARTI000025442828" naturetexte="LOI" nortexte="SASX0901817L" num="1" numtexte="2012-300" sens="source" typelien="MODIFICATION">LOI n°2012-300&#13;
+ du 5 mars 2012 - art. 1 (V)</LIEN>
+
+
+
+<LIEN cidtexte="JORFTEXT000026479723" datesignatexte="2012-10-10" id="LEGIARTI000026480621" naturetexte="ARRETE" nortexte="AFSP1221372A" num="4" numtexte="" sens="cible" typelien="CITATION">Arrêté du 10 octobre 2012 - art. 4 (Ab)</LIEN>
+<LIEN cidtexte="JORFTEXT000026805101" datesignatexte="2012-12-19" id="LEGIARTI000026806482" naturetexte="ORDONNANCE" nortexte="AFSX1240311R" num="14" numtexte="2012-1427" sens="source" typelien="MODIFICATION">Ordonnance n°2012-1427&#13;
+ du 19 décembre 2012 - art. 14</LIEN>
+
+
+<LIEN cidtexte="JORFTEXT000027047902" datesignatexte="2013-01-23" id="LEGIARTI000027648252" naturetexte="ARRETE" nortexte="AFSP1228322A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 23 janvier 2013 - art. (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000027434029" datesignatexte="2013-05-21" id="LEGITEXT000027434552" naturetexte="DECRET" nortexte="AFSP1304115D" num="" numtexte="2013-414" sens="cible" typelien="CITATION">Décret n°2013-414
+ du 21 mai 2013 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000027478077" datesignatexte="2013-05-30" id="LEGIARTI000027479341" naturetexte="LOI" nortexte="AFSX1242935L" num="8" numtexte="2013-442" sens="source" typelien="MODIFICATION">LOI n°2013-442&#13;
+ du 30 mai 2013 - art. 8</LIEN>
+<LIEN cidtexte="JORFTEXT000027592947" datesignatexte="2013-06-20" id="LEGIARTI000027594512" naturetexte="ARRETE" nortexte="AFSP1313848A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 20 juin 2013 - art. (V)</LIEN>
+
+<LIEN cidtexte="JORFTEXT000027697076" datesignatexte="2013-06-17" id="LEGIARTI000027699119" naturetexte="ARRETE" nortexte="AFSP1301854A" num="1" numtexte="" sens="cible" typelien="CITATION">Arrêté du 17 juin 2013 - art. 1 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000027910341" datesignatexte="2013-08-29" id="LEGIARTI000033202304" naturetexte="ARRETE" nortexte="PROI1311061A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 29 août 2013 - art. (V)</LIEN>
+
+
+
+
+<LIEN cidtexte="JORFTEXT000029675991" datesignatexte="2014-10-23" id="LEGIARTI000035971526" naturetexte="DECRET" nortexte="AFSX1419046D" num="" numtexte="2014-1286" sens="cible" typelien="CITATION">DÉCRET n°2014-1286 du 23 octobre 2014 - art. (V)</LIEN>
+
+
+
+
+<LIEN cidtexte="JORFTEXT000031912641" datesignatexte="2016-01-26" id="LEGIARTI000036393921" naturetexte="LOI" nortexte="AFSX1418355L" num="166" numtexte="2016-41" sens="cible" typelien="CITATION">LOI n°2016-41 du 26 janvier 2016 - art. 166 (VD)</LIEN>
+<LIEN cidtexte="JORFTEXT000031912641" datesignatexte="2016-01-26" id="LEGIARTI000031916570" naturetexte="LOI" nortexte="AFSX1418355L" num="169" numtexte="2016-41" sens="cible" typelien="CITATION">LOI n°2016-41 du 26 janvier 2016 - art. 169 (V)</LIEN>
+
+
+
+<LIEN cidtexte="JORFTEXT000033507693" datesignatexte="2016-11-28" id="LEGIARTI000043508038" naturetexte="ARRETE" nortexte="AFSP1633477A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 28 novembre 2016 - art. (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000033553349" datesignatexte="2016-12-02" id="LEGIARTI000033554483" naturetexte="ARRETE" nortexte="AFSP1635656A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 2 décembre 2016 - art. 3 (V)</LIEN>
+
+
+<LIEN cidtexte="JORFTEXT000034078423" datesignatexte="2017-02-23" id="LEGIARTI000038887172" naturetexte="LOI" nortexte="AFSP1622342L" num="2" numtexte="2017-220" sens="cible" typelien="CITATION">LOI n°2017-220 du 23 février 2017 - art. 2 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000034150863" datesignatexte="2017-02-27" id="LEGIARTI000054359695" naturetexte="ARRETE" nortexte="AFSP1706243A" num="1" numtexte="" sens="cible" typelien="CITATION">Arrêté du 27 février 2017 - art. 1 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000034150842" datesignatexte="2017-02-27" id="LEGIARTI000053750659" naturetexte="ARRETE" nortexte="AFSP1706241A" num="3" numtexte="" sens="cible" typelien="CITATION">Arrêté du 27 février 2017 - art. 3 (V)</LIEN>
+
+
+
+<LIEN cidtexte="JORFTEXT000035268202" datesignatexte="2017-07-17" id="LEGIARTI000035269375" naturetexte="ARRETE" nortexte="SSAE1720859A" num="1" numtexte="" sens="cible" typelien="CITATION">Arrêté du 17 juillet 2017 - art. 1 (V)</LIEN>
+
+<LIEN cidtexte="JORFTEXT000036299141" datesignatexte="2017-12-27" id="LEGITEXT000036406189" naturetexte="DECRET" nortexte="SSAP1728401D" num="" numtexte="2017-1781" sens="cible" typelien="CITATION">Décret n°2017-1781 du 27 décembre 2017 (V)</LIEN>
+
+
+
+
+
+
+
+
+
+
+
+
+<LIEN cidtexte="JORFTEXT000038431240" datesignatexte="2019-04-30" id="LEGIARTI000038432466" naturetexte="DECRET" nortexte="SSAS1906324D" num="1" numtexte="2019-389" sens="cible" typelien="CITATION">Décret n°2019-389 du 30 avril 2019 - art. 1</LIEN>
+<LIEN cidtexte="JORFTEXT000039663324" datesignatexte="2019-12-20" id="LEGITEXT000039664011" naturetexte="ARRETE" nortexte="SSAP1936730A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 20 décembre 2019 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000041746744" datesignatexte="2020-03-23" id="LEGIARTI000041898595" naturetexte="ARRETE" nortexte="SSAX2007864A" num="10-3-1" numtexte="" sens="cible" typelien="CITATION">Arrêté du 23 mars 2020 - art. 10-3-1 (Ab)</LIEN>
+<LIEN cidtexte="JORFTEXT000041814597" datesignatexte="2020-04-22" id="LEGIARTI000042645749" naturetexte="ORDONNANCE" nortexte="ECOX2009794R" num="17" numtexte="2020-460" sens="cible" typelien="CITATION">Ordonnance n°2020-460 du 22 avril 2020 - art. 17 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000041889362" datesignatexte="2020-05-18" id="LEGIARTI000041890409" naturetexte="ARRETE" nortexte="SSAZ2011564A" num="1" numtexte="" sens="cible" typelien="CITATION">Arrêté du 18 mai 2020 - art. 1</LIEN>
+<LIEN cidtexte="JORFTEXT000041897919" datesignatexte="2020-05-20" id="LEGIARTI000041898504" naturetexte="ARRETE" nortexte="SSAZ2012596A" num="1" numtexte="" sens="cible" typelien="CITATION">Arrêté du 20 mai 2020 - art. 1</LIEN>
+<LIEN cidtexte="JORFTEXT000042106233" datesignatexte="2020-07-10" id="LEGIARTI000043298218" naturetexte="ARRETE" nortexte="SSAZ2018110A" num="25" numtexte="" sens="cible" typelien="CITATION">Arrêté du 10 juillet 2020 - art. 25 (Ab)</LIEN>
+<LIEN cidtexte="JORFTEXT000042106233" datesignatexte="2020-07-10" id="LEGIARTI000042609739" naturetexte="ARRETE" nortexte="SSAZ2018110A" num="26" numtexte="" sens="cible" typelien="CITATION">Arrêté du 10 juillet 2020 - art. 26 (Ab)</LIEN>
+
+
+
+<LIEN cidtexte="JORFTEXT000043100729" datesignatexte="2021-02-05" id="LEGIARTI000043103458" naturetexte="ARRETE" nortexte="SSAP2104251A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 5 février 2021 - art. (Ab)</LIEN>
+
+<LIEN cidtexte="JORFTEXT000043297285" datesignatexte="2021-03-26" id="LEGIARTI000043298491" naturetexte="DECRET" nortexte="SSAS2034156D" num="3" numtexte="2021-331" sens="cible" typelien="CITATION">Décret n°2021-331 du 26 mars 2021 - art. 3</LIEN>
+<LIEN cidtexte="JORFTEXT000043541690" datesignatexte="2021-05-26" id="LEGITEXT000043543262" naturetexte="DECRET" nortexte="ECOI2106880D" num="" numtexte="2021-662" sens="cible" typelien="CITATION">Décret n°2021-662 du 26 mai 2021 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000043541690" datesignatexte="2021-05-26" id="LEGIARTI000043543283" naturetexte="DECRET" nortexte="ECOI2106880D" num="" numtexte="2021-662" sens="cible" typelien="CITATION">Décret n°2021-662 du 26 mai 2021 - art.</LIEN>
+<LIEN cidtexte="JORFTEXT000043575801" datesignatexte="2021-06-01" id="LEGIARTI000047779186" naturetexte="ARRETE" nortexte="SSAZ2116944A" num="25" numtexte="" sens="cible" typelien="CITATION">Arrêté du 1 juin 2021 - art. 25 (M)</LIEN>
+<LIEN cidtexte="JORFTEXT000043575801" datesignatexte="2021-06-01" id="LEGIARTI000043770220" naturetexte="ARRETE" nortexte="SSAZ2116944A" num="27" numtexte="" sens="cible" typelien="CITATION">Arrêté du 1 juin 2021 - art. 27 (VT)</LIEN>
+
+
+<LIEN cidtexte="JORFTEXT000046566303" datesignatexte="2022-11-14" id="LEGIARTI000055010739" naturetexte="ARRETE" nortexte="SPRP2231874A" num="Annexe 1" numtexte="" sens="cible" typelien="CITATION">Arrêté du 14 novembre 2022 - art. Annexe 1 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000046566303" datesignatexte="2022-11-14" id="LEGIARTI000055010697" naturetexte="ARRETE" nortexte="SPRP2231874A" num="Annexe 2" numtexte="" sens="cible" typelien="CITATION">Arrêté du 14 novembre 2022 - art. Annexe 2 (V)</LIEN>
+
+
+<LIEN cidtexte="JORFTEXT000050407232" datesignatexte="2024-10-24" id="LEGIARTI000050409030" naturetexte="ARRETE" nortexte="MSAP2428789A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 24 octobre 2024 - art. (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000050407232" datesignatexte="2024-10-24" id="LEGIARTI000050409032" naturetexte="ARRETE" nortexte="MSAP2428789A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 24 octobre 2024 - art. (V)</LIEN>
+
+
+
+
+
+<LIEN cidtexte="JORFTEXT000051261244" datesignatexte="2025-02-20" id="LEGITEXT000051266995" naturetexte="ARRETE" nortexte="ECOC2504865A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 20 février 2025 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000051269481" datesignatexte="2025-02-28" id="LEGIARTI000051273896" naturetexte="LOI" nortexte="ECOX2421198L" num="95" numtexte="2025-199" sens="cible" typelien="CITATION">LOI n°2025-199 du 28 février 2025 - art. 95 (V)</LIEN>
+
+
+<LIEN cidtexte="JORFTEXT000052119950" datesignatexte="2025-08-07" id="LEGITEXT000052120843" naturetexte="ARRETE" nortexte="TSSS2523572A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 7 août 2025 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000053226384" datesignatexte="2025-12-30" id="LEGIARTI000053265460" naturetexte="LOI" nortexte="CPPX2521641L" num="107" numtexte="2025-1403" sens="cible" typelien="CITATION">LOI n°2025-1403 du 30 décembre 2025 - art. 107 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000054190991" datesignatexte="2026-05-29" id="LEGITEXT000054193434" naturetexte="ARRETE" nortexte="SFHS2613231A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 29 mai 2026 (V)</LIEN>
+<LIEN cidtexte="JORFTEXT000054199978" datesignatexte="2026-06-04" id="LEGITEXT000054202493" naturetexte="ARRETE" nortexte="TRSR2614452A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 4 juin 2026 (V)</LIEN>
+
+<LIEN cidtexte="JORFTEXT000055009308" datesignatexte="2026-10-16" id="LEGITEXT000055010574" naturetexte="ARRETE" nortexte="SFHP2627773A" num="" numtexte="" sens="cible" typelien="CITATION">Arrêté du 16 octobre 2026 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006074220" datesignatexte="2999-01-01" id="LEGIARTI000043545974" naturetexte="CODE" nortexte="" num="Annexe I à l'article D523-8" numtexte="" sens="cible" typelien="CITATION">Code de l'environnement - art. Annexe I à l'article D523-8 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006074220" datesignatexte="2999-01-01" id="LEGIARTI000027912149" naturetexte="CODE" nortexte="" num="D523-8" numtexte="" sens="cible" typelien="CITATION">Code de l'environnement - art. D523-8 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006074220" datesignatexte="2999-01-01" id="LEGIARTI000042654871" naturetexte="CODE" nortexte="" num="L521-2" numtexte="" sens="cible" typelien="CITATION">Code de l'environnement - art. L521-2 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006074220" datesignatexte="2999-01-01" id="LEGIARTI000021666283" naturetexte="CODE" nortexte="" num="L531-3" numtexte="" sens="cible" typelien="CITATION">Code de l'environnement - art. L531-3 (VD)</LIEN>
+<LIEN cidtexte="LEGITEXT000006069565" datesignatexte="2999-01-01" id="LEGIARTI000028749087" naturetexte="CODE" nortexte="" num="L221-10" numtexte="" sens="cible" typelien="CITATION">Code de la consommation - art. L221-10 (VT)</LIEN>
+<LIEN cidtexte="LEGITEXT000006069565" datesignatexte="2999-01-01" id="LEGIARTI000041985451" naturetexte="CODE" nortexte="" num="L511-22" numtexte="" sens="cible" typelien="CITATION">Code de la consommation - art. L511-22 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006069565" datesignatexte="2999-01-01" id="LEGIARTI000046012786" naturetexte="CODE" nortexte="" num="R422-1" numtexte="" sens="cible" typelien="CITATION">Code de la consommation - art. R422-1 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006071307" datesignatexte="2999-01-01" id="LEGIARTI000006574178" naturetexte="CODE" nortexte="" num="R*1142-25" numtexte="" sens="cible" typelien="CITATION">Code de la défense. - art. R*1142-25 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006071307" datesignatexte="2999-01-01" id="LEGIARTI000006574182" naturetexte="CODE" nortexte="" num="R*1142-29" numtexte="" sens="cible" typelien="CITATION">Code de la défense. - art. R*1142-29 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000054358088" naturetexte="CODE" nortexte="" num="D1413-58" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. D1413-58 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000033642702" naturetexte="CODE" nortexte="" num="D6141-42" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. D6141-42 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006685816" naturetexte="CODE" nortexte="" num="L1114-1" numtexte="" sens="source" typelien="CITATION">Code de la santé publique - art. L1114-1</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000025104470" naturetexte="CODE" nortexte="" num="L1121-1" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L1121-1 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000024325597" naturetexte="CODE" nortexte="" num="L1121-11" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L1121-11 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000025457563" naturetexte="CODE" nortexte="" num="L1121-16" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L1121-16 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000025104351" naturetexte="CODE" nortexte="" num="L1121-3" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L1121-3 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000032722946" naturetexte="CODE" nortexte="" num="L1123-12" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L1123-12 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006685881" naturetexte="CODE" nortexte="" num="L1123-7" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L1123-7 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006685885" naturetexte="CODE" nortexte="" num="L1123-8" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L1123-8 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006685887" naturetexte="CODE" nortexte="" num="L1123-9" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L1123-9 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006685903" naturetexte="CODE" nortexte="" num="L1124-6" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L1124-6 (Ab)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000025139326" naturetexte="CODE" nortexte="" num="L1125-3" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L1125-3 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006685930" naturetexte="CODE" nortexte="" num="L1126-5" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L1126-5 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006685933" naturetexte="CODE" nortexte="" num="L1126-6" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L1126-6 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000025076559" naturetexte="CODE" nortexte="" num="L1142-2" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L1142-2 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000033461560" naturetexte="CODE" nortexte="" num="L1143-2" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L1143-2 (Ab)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000020891766" naturetexte="CODE" nortexte="" num="L1161-5" numtexte="" sens="source" typelien="CITATION">Code de la santé publique - art. L1161-5</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000049572333" naturetexte="CODE" nortexte="" num="L1411-5-1" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L1411-5-1 (VD)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000033861667" naturetexte="CODE" nortexte="" num="L1411-5-2" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L1411-5-2 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000033894427" naturetexte="CODE" nortexte="" num="L1411-5-3" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L1411-5-3 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000032411335" naturetexte="CODE" nortexte="" num="L1413-14" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L1413-14 (VD)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006686954" naturetexte="CODE" nortexte="" num="L1413-2" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L1413-2 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000041398073" naturetexte="CODE" nortexte="" num="L1421-3" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L1421-3 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000036515441" naturetexte="CODE" nortexte="" num="L1431-1" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L1431-1 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000033897222" naturetexte="CODE" nortexte="" num="L1435-12" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L1435-12 (VD)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000049572314" naturetexte="CODE" nortexte="" num="L1451-1" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L1451-1 (VD)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000032411475" naturetexte="CODE" nortexte="" num="L1451-4" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L1451-4 (VD)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000038888435" naturetexte="CODE" nortexte="" num="L1453-1" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L1453-1 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000038888272" naturetexte="CODE" nortexte="" num="L1453-5" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L1453-5 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000031931743" naturetexte="CODE" nortexte="" num="L1454-3" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L1454-3 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000033897288" naturetexte="CODE" nortexte="" num="L1454-4" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L1454-4 (VD)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000043894115" naturetexte="CODE" nortexte="" num="L1461-1" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L1461-1 (VD)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000038886860" naturetexte="CODE" nortexte="" num="L1461-3" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L1461-3 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000025104626" naturetexte="CODE" nortexte="" num="L2323-1" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L2323-1 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006687809" naturetexte="CODE" nortexte="" num="L3114-1" numtexte="" sens="source" typelien="CITATION">Code de la santé publique - art. L3114-1</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006688644" naturetexte="CODE" nortexte="" num="L4001-1" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L4001-1 (Ab)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000029354480" naturetexte="CODE" nortexte="" num="L5121-12-1" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L5121-12-1 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000054140170" naturetexte="CODE" nortexte="" num="L5121-18" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L5121-18 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000025086808" naturetexte="CODE" nortexte="" num="L5121-28" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L5121-28 (Ab)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006689889" naturetexte="CODE" nortexte="" num="L5121-8" numtexte="" sens="source" typelien="CITATION">Code de la santé publique - art. L5121-8</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006690180" naturetexte="CODE" nortexte="" num="L5139-1" numtexte="" sens="source" typelien="CITATION">Code de la santé publique - art. L5139-1</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000045405779" naturetexte="CODE" nortexte="" num="L5150-1" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L5150-1 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006690298" naturetexte="CODE" nortexte="" num="L5211-5-2" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L5211-5-2 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000025104582" naturetexte="CODE" nortexte="" num="L5232-4" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L5232-4 (VD)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000037269120" naturetexte="CODE" nortexte="" num="L5311-2" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L5311-2 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000025104332" naturetexte="CODE" nortexte="" num="L5312-1" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L5312-1 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006690361" naturetexte="CODE" nortexte="" num="L5312-2" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L5312-2 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006690363" naturetexte="CODE" nortexte="" num="L5312-3" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L5312-3 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000051285227" naturetexte="CODE" nortexte="" num="L5312-4-1" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L5312-4-1 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000033388204" naturetexte="CODE" nortexte="" num="L5312-4-2" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L5312-4-2 (Ab)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000046871873" naturetexte="CODE" nortexte="" num="L5312-4-3" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L5312-4-3 (VD)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000046871868" naturetexte="CODE" nortexte="" num="L5313-1" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L5313-1 (VD)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000031931672" naturetexte="CODE" nortexte="" num="L5322-1" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L5322-1 (VD)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000032906040" naturetexte="CODE" nortexte="" num="L5322-2" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L5322-2 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000046871863" naturetexte="CODE" nortexte="" num="L5411-1" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L5411-1 (VD)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000046871854" naturetexte="CODE" nortexte="" num="L5412-1" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L5412-1 (VD)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000046871847" naturetexte="CODE" nortexte="" num="L5413-1" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L5413-1 (VD)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000032235822" naturetexte="CODE" nortexte="" num="L5414-1" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L5414-1 (VD)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000024040502" naturetexte="CODE" nortexte="" num="L5514-3" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L5514-3 (VT)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000047084100" naturetexte="CODE" nortexte="" num="L5523-1" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L5523-1 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000046126253" naturetexte="CODE" nortexte="" num="L5541-2" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L5541-2 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000049587997" naturetexte="CODE" nortexte="" num="L5541-3" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L5541-3 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006690670" naturetexte="CODE" nortexte="" num="L6111-1" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L6111-1 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006690998" naturetexte="CODE" nortexte="" num="L6144-1" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. L6144-1 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006695238" naturetexte="CODE" nortexte="" num="L793-1" numtexte="" sens="cible" typelien="CONCORDE">Code de la santé publique - art. L793-1 (Ab)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006695238" naturetexte="CODE" nortexte="" num="L793-1" numtexte="" sens="source" typelien="CONCORDANCE">Code de la santé publique - art. L793-1 (Ab)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000038789622" naturetexte="CODE" nortexte="" num="R1114-37" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1114-37 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000049986712" naturetexte="CODE" nortexte="" num="R1121-2" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1121-2 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006908372" naturetexte="CODE" nortexte="" num="R1123-17" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1123-17 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006908397" naturetexte="CODE" nortexte="" num="R1123-28" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1123-28 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000025788756" naturetexte="CODE" nortexte="" num="R1123-31" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1123-31 (Ab)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000033418177" naturetexte="CODE" nortexte="" num="R1123-39" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1123-39 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006908425" naturetexte="CODE" nortexte="" num="R1123-46" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1123-46 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000033418056" naturetexte="CODE" nortexte="" num="R1123-62" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1123-62 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006908463" naturetexte="CODE" nortexte="" num="R1124-14" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1124-14 (Ab)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006908465" naturetexte="CODE" nortexte="" num="R1124-16" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1124-16 (Ab)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006908470" naturetexte="CODE" nortexte="" num="R1125-1" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1125-1 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006908473" naturetexte="CODE" nortexte="" num="R1125-2" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1125-2 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006908476" naturetexte="CODE" nortexte="" num="R1125-3" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1125-3 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006908479" naturetexte="CODE" nortexte="" num="R1125-4" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1125-4 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006908481" naturetexte="CODE" nortexte="" num="R1125-5" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1125-5 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006908484" naturetexte="CODE" nortexte="" num="R1125-6" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1125-6 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000029450960" naturetexte="CODE" nortexte="" num="R1221-49-3" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1221-49-3 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000035334573" naturetexte="CODE" nortexte="" num="R1222-56" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1222-56 (Ab)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000029460533" naturetexte="CODE" nortexte="" num="R1223-31" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1223-31 (Ab)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006909371" naturetexte="CODE" nortexte="" num="R1251-2" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1251-2 (Ab)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000033627212" naturetexte="CODE" nortexte="" num="R1340-10" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1340-10 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000033627238" naturetexte="CODE" nortexte="" num="R1340-11" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1340-11 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000033627266" naturetexte="CODE" nortexte="" num="R1340-12" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1340-12 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000033627093" naturetexte="CODE" nortexte="" num="R1340-8" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1340-8 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000028617383" naturetexte="CODE" nortexte="" num="R1341-12" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1341-12 (T)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000028617377" naturetexte="CODE" nortexte="" num="R1341-13" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1341-13 (T)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000028617371" naturetexte="CODE" nortexte="" num="R1341-14" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1341-14 (T)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000028617441" naturetexte="CODE" nortexte="" num="R1341-17" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1341-17 (T)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000028617436" naturetexte="CODE" nortexte="" num="R1341-18" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1341-18 (T)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000028603601" naturetexte="CODE" nortexte="" num="R1341-27" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1341-27 (T)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000028603774" naturetexte="CODE" nortexte="" num="R1341-30" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1341-30 (T)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000032481499" naturetexte="CODE" nortexte="" num="R1341-8" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1341-8 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000031443661" naturetexte="CODE" nortexte="" num="R1342-19" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1342-19 (Ab)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000037443282" naturetexte="CODE" nortexte="" num="R1411-2" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1411-2 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000034687007" naturetexte="CODE" nortexte="" num="R1413-68" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1413-68 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000035837242" naturetexte="CODE" nortexte="" num="R1413-90" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1413-90 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000025788264" naturetexte="CODE" nortexte="" num="R1418-4" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1418-4 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000041792139" naturetexte="CODE" nortexte="" num="R1421-13" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1421-13 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000050932843" naturetexte="CODE" nortexte="" num="R1451-1" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1451-1 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000033777658" naturetexte="CODE" nortexte="" num="R1453-2" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1453-2 (VD)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000033777614" naturetexte="CODE" nortexte="" num="R1453-8" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1453-8 (VD)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000033777605" naturetexte="CODE" nortexte="" num="R1453-9" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R1453-9 (VD)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006911434" naturetexte="CODE" nortexte="" num="R2142-21" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R2142-21 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000019069769" naturetexte="CODE" nortexte="" num="R2142-51" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R2142-51 (Ab)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006912355" naturetexte="CODE" nortexte="" num="R3632-5" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R3632-5 (Ab)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006912680" naturetexte="CODE" nortexte="" num="R4113-109" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R4113-109 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000031261777" naturetexte="CODE" nortexte="" num="R4362-14" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R4362-14 (VD)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006799765" naturetexte="CODE" nortexte="" num="R5104-15" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R5104-15 (Ab)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006915265" naturetexte="CODE" nortexte="" num="R5126-9" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R5126-9 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006915478" naturetexte="CODE" nortexte="" num="R5127-10" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R5127-10 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000025787433" naturetexte="CODE" nortexte="" num="R5139-1" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R5139-1 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000025378819" naturetexte="CODE" nortexte="" num="R5161-1" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R5161-1 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000024766107" naturetexte="CODE" nortexte="" num="R5232-16" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R5232-16 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000006916402" naturetexte="CODE" nortexte="" num="R5311-2" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R5311-2 (Ab)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000033856747" naturetexte="CODE" nortexte="" num="R5313-3" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R5313-3 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000033851855" naturetexte="CODE" nortexte="" num="R5313-3-1" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R5313-3-1 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000033856733" naturetexte="CODE" nortexte="" num="R5313-4" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R5313-4 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000025787041" naturetexte="CODE" nortexte="" num="R5313-6" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R5313-6 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000035333890" naturetexte="CODE" nortexte="" num="R5313-6-2" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R5313-6-2 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000028542287" naturetexte="CODE" nortexte="" num="R5313-7" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R5313-7 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000033857104" naturetexte="CODE" nortexte="" num="R5322-14" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R5322-14 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006072665" datesignatexte="2999-01-01" id="LEGIARTI000025786265" naturetexte="CODE" nortexte="" num="R5322-8" numtexte="" sens="cible" typelien="CITATION">Code de la santé publique - art. R5322-8 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006073189" datesignatexte="2999-01-01" id="LEGIARTI000025104309" naturetexte="CODE" nortexte="" num="L161-39" numtexte="" sens="cible" typelien="CITATION">Code de la sécurité sociale. - art. L161-39 (M)</LIEN>
+<LIEN cidtexte="LEGITEXT000006073189" datesignatexte="2999-01-01" id="LEGIARTI000042685822" naturetexte="CODE" nortexte="" num="L162-17-2-1" numtexte="" sens="cible" typelien="CITATION">Code de la sécurité sociale. - art. L162-17-2-1 (VD)</LIEN>
+<LIEN cidtexte="LEGITEXT000006073189" datesignatexte="2999-01-01" id="LEGIARTI000037064523" naturetexte="CODE" nortexte="" num="L245-5-5-1" numtexte="" sens="cible" typelien="CITATION">Code de la sécurité sociale. - art. L245-5-5-1 (VT)</LIEN>
+<LIEN cidtexte="LEGITEXT000006073189" datesignatexte="2999-01-01" id="LEGIARTI000054703326" naturetexte="CODE" nortexte="" num="L245-6" numtexte="" sens="cible" typelien="CITATION">Code de la sécurité sociale. - art. L245-6 (VD)</LIEN>
+<LIEN cidtexte="LEGITEXT000006073189" datesignatexte="2999-01-01" id="LEGIARTI000031093005" naturetexte="CODE" nortexte="" num="R245-16-3" numtexte="" sens="cible" typelien="CITATION">Code de la sécurité sociale. - art. R245-16-3 (VT)</LIEN>
+<LIEN cidtexte="LEGITEXT000006071154" datesignatexte="2999-01-01" id="LEGIARTI000042779560" naturetexte="CODE" nortexte="" num="706-2" numtexte="" sens="cible" typelien="CITATION">Code de procédure pénale - art. 706-2 (VT)</LIEN>
+<LIEN cidtexte="LEGITEXT000006073984" datesignatexte="2999-01-01" id="LEGIARTI000025859349" naturetexte="CODE" nortexte="" num="L251-1" numtexte="" sens="cible" typelien="CITATION">Code des assurances - art. L251-1 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006073984" datesignatexte="2999-01-01" id="LEGIARTI000038086667" naturetexte="CODE" nortexte="" num="R250-1" numtexte="" sens="cible" typelien="CITATION">Code des assurances - art. R250-1 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006071318" datesignatexte="2999-01-01" id="LEGIARTI000043907211" naturetexte="CODE" nortexte="" num="R232-49" numtexte="" sens="cible" typelien="CITATION">Code du sport. - art. R232-49 (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006069577" datesignatexte="2999-01-01" id="LEGIARTI000037947963" naturetexte="CODE" nortexte="" num="1635 bis AE" numtexte="" sens="cible" typelien="CITATION">Code général des impôts, CGI. - art. 1635 bis AE (VD)</LIEN>
+<LIEN cidtexte="LEGITEXT000006069574" datesignatexte="2999-01-01" id="LEGIARTI000042160762" naturetexte="CODE" nortexte="" num="344 undecies A" numtexte="" sens="cible" typelien="CITATION">Code général des impôts, annexe 3, CGIAN3. - art. 344 undecies A (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006069583" datesignatexte="2999-01-01" id="LEGIARTI000030752201" naturetexte="CODE" nortexte="" num="L166 D" numtexte="" sens="cible" typelien="CITATION">Livre des procédures fiscales - art. L166 D (V)</LIEN>
+<LIEN cidtexte="LEGITEXT000006069583" datesignatexte="2999-01-01" id="LEGIARTI000029012373" naturetexte="CODE" nortexte="" num="R166 D-1" numtexte="" sens="cible" typelien="CITATION">Livre des procédures fiscales - art. R166 D-1 (Ab)</LIEN>
+</LIENS>
+</ARTICLE>

@@ -271,6 +271,12 @@
           "title": "Document Title",
           "type": "string"
         },
+        "end_undetermined": {
+          "default": false,
+          "description": "Fin (abrogation) annoncée par la source à une date non encore fixée",
+          "title": "End Undetermined",
+          "type": "boolean"
+        },
         "official_id": {
           "description": "Identifiant officiel de la version citée, ex. LEGIARTI…",
           "title": "Official Id",
@@ -304,9 +310,17 @@
           "type": "string"
         },
         "valid_from": {
-          "format": "date",
-          "title": "Valid From",
-          "type": "string"
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "None : entrée en vigueur à une date non fixée par la source",
+          "title": "Valid From"
         },
         "valid_to": {
           "anyOf": [
@@ -318,7 +332,7 @@
               "type": "null"
             }
           ],
-          "description": "None : pas de date de fin connue",
+          "description": "None : pas de date de fin connue (voir end_undetermined)",
           "title": "Valid To"
         }
       },

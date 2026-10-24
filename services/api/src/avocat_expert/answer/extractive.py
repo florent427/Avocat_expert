@@ -12,7 +12,7 @@ from __future__ import annotations
 import hashlib
 from datetime import date
 
-from avocat_expert.contracts.common import ClaimKind, SupportStatus, Verdict
+from avocat_expert.contracts.common import ClaimKind, SourceReference, SupportStatus, Verdict
 from avocat_expert.contracts.services import AnswerRequest, SourcedAnswer, SourcedStatement
 from avocat_expert.search.service import HybridSearchService
 from avocat_expert.verification.lexverif import CitationVerifier
@@ -30,11 +30,19 @@ _SUPPORT_BY_VERDICT = {
 }
 
 
-def _describe(title: str, number: str, official_id: str, valid_from: date, valid_to: date | None) -> str:
-    end = f"jusqu'au {valid_to.isoformat()} (exclu)" if valid_to else "sans date de fin connue"
-    return (
-        f"{title}, article {number} — version {official_id}, applicable à compter du {valid_from.isoformat()}, {end}."
+def _describe(ref: SourceReference) -> str:
+    start = (
+        f"applicable à compter du {ref.valid_from.isoformat()}"
+        if ref.valid_from
+        else "entrée en vigueur à une date non encore fixée par la source"
     )
+    if ref.valid_to:
+        end = f"jusqu'au {ref.valid_to.isoformat()} (exclu)"
+    elif ref.end_undetermined:
+        end = "jusqu'à une date d'abrogation non encore fixée par la source"
+    else:
+        end = "sans date de fin connue"
+    return f"{ref.document_title}, article {ref.provision_number} — version {ref.official_id}, {start}, {end}."
 
 
 class ExtractiveAnswerService:
@@ -62,9 +70,7 @@ class ExtractiveAnswerService:
             statements.append(
                 SourcedStatement(
                     kind=ClaimKind.DROIT_APPLICABLE,
-                    text=_describe(
-                        ref.document_title, ref.provision_number, ref.official_id, ref.valid_from, ref.valid_to
-                    ),
+                    text=_describe(ref),
                     citation=ref,
                     quote=None if support is SupportStatus.BLOQUEE else hit.excerpt,
                     verification=verification,
