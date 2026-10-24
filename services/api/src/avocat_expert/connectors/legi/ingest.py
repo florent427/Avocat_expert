@@ -676,20 +676,34 @@ def ingest_legi(
     *,
     enforce_order: bool = True,
     batch_size: int = DEFAULT_BATCH_SIZE,
+    refresh_statistics: bool = True,
 ) -> tuple[uuid.UUID, IngestionStats]:
-    """Ingère une archive ``.tar.gz`` LEGI (stock ou delta) ou un répertoire extrait."""
+    """Ingère une archive ``.tar.gz`` LEGI (stock ou delta) ou un répertoire extrait.
+
+    ``refresh_statistics=False`` reporte le rafraîchissement des statistiques
+    BM25 (32 s sur le corpus complet) : réservé à une suite de livraisons dont
+    la dernière, ou ``refresh_corpus_statistics``, rafraîchit les statistiques."""
     if conn.autocommit is False:
         raise ValueError("connexion en mode autocommit requise (une transaction par lot)")
     lock = _lock_key(conn)
     conn.execute("SELECT pg_advisory_lock(%s)", (lock,))
     try:
-        return _ingest_locked(conn, location, enforce_order=enforce_order, batch_size=batch_size)
+        return _ingest_locked(
+            conn, location, enforce_order=enforce_order, batch_size=batch_size, refresh_statistics=refresh_statistics
+        )
     finally:
         conn.execute("SELECT pg_advisory_unlock(%s)", (lock,))
 
 
+def refresh_corpus_statistics(conn: psycopg.Connection[Any]) -> None:
+    """Statistiques BM25 du corpus (fréquences documentaires, longueur moyenne)."""
+    with conn.transaction():
+        conn.execute("REFRESH MATERIALIZED VIEW corpus_lexeme_stats")
+        conn.execute("REFRESH MATERIALIZED VIEW corpus_stats")
+
+
 def _ingest_locked(
-    conn: psycopg.Connection[Any], location: Path, *, enforce_order: bool, batch_size: int
+    conn: psycopg.Connection[Any], location: Path, *, enforce_order: bool, batch_size: int, refresh_statistics: bool
 ) -> tuple[uuid.UUID, IngestionStats]:
     sha = _sha256_file(location)
     stamp = archive_timestamp(location.name)
@@ -732,7 +746,7 @@ def _ingest_locked(
                 stats.withdrawals_matched += int(store.withdrawal(withdrawal))
             stats.ignored = reader.ignored + reader.oversized
             stats.eli_index = reader.eli_index
-            if stats.inserted or stats.superseded or stats.withdrawals_matched:
+            if refresh_statistics and (stats.inserted or stats.superseded or stats.withdrawals_matched):
                 conn.execute("REFRESH MATERIALIZED VIEW corpus_lexeme_stats")
                 conn.execute("REFRESH MATERIALIZED VIEW corpus_stats")
             conn.execute(

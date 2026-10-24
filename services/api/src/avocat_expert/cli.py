@@ -51,6 +51,7 @@ def main(argv: list[str] | None = None) -> int:
     sync.add_argument("--max", type=int, default=None, help="nombre maximal de livraisons à appliquer")
     sync.add_argument("--simulation", action="store_true", help="afficher le plan sans rien télécharger ni ingérer")
     sync.add_argument("--lot", type=int, default=1000, help="nombre de fichiers par transaction")
+    sub.add_parser("rafraichir-statistiques", help="recalculer les statistiques BM25 du corpus")
     sub.add_parser("fraicheur-legi", help="écart entre le corpus et les livraisons LEGI publiées (code 3 si en retard)")
     ask = sub.add_parser("answer", help="réponse sourcée extractive")
     ask.add_argument("question")
@@ -73,6 +74,13 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps({"run_id": str(run_id), **stats.as_dict()}, ensure_ascii=False))
         return 0 if stats.rejected == 0 else 1
 
+    if args.command == "rafraichir-statistiques":
+        from avocat_expert.connectors.legi.ingest import refresh_corpus_statistics
+
+        with _connect() as conn:
+            refresh_corpus_statistics(conn)
+        return 0
+
     if args.command == "fraicheur-legi":
         from avocat_expert.connectors.legi.remote import fetch_index, freshness
 
@@ -83,7 +91,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0 if report.up_to_date else 3
 
     if args.command == "sync-legi":
-        from avocat_expert.connectors.legi.ingest import ingest_legi
+        from avocat_expert.connectors.legi.ingest import ingest_legi, refresh_corpus_statistics
         from avocat_expert.connectors.legi.remote import download, fetch_index, plan
 
         with _connect() as conn:
@@ -94,14 +102,21 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps({"derniere_livraison": str(last_applied), "a_appliquer": [a.name for a in todo]}))
             if args.simulation:
                 return 0
-            for archive in todo:
-                local = download(archive, args.dossier)
-                run_id, stats = ingest_legi(conn, local, batch_size=args.lot)
-                print(
-                    json.dumps({"archive": archive.name, "run_id": str(run_id), **stats.as_dict()}, ensure_ascii=False)
-                )
-                if stats.rejected:
-                    return 1
+            # Statistiques BM25 (32 s sur le corpus complet) rafraîchies une seule
+            # fois, après la dernière livraison appliquée, y compris en cas d'arrêt.
+            stale = False
+            try:
+                for archive in todo:
+                    local = download(archive, args.dossier)
+                    run_id, stats = ingest_legi(conn, local, batch_size=args.lot, refresh_statistics=False)
+                    stale = True
+                    line = {"archive": archive.name, "run_id": str(run_id), **stats.as_dict()}
+                    print(json.dumps(line, ensure_ascii=False), flush=True)
+                    if stats.rejected:
+                        return 1
+            finally:
+                if stale:
+                    refresh_corpus_statistics(conn)
         return 0
 
     if args.command == "answer":
