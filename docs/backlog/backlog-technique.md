@@ -22,13 +22,20 @@ P0 = bloquant pour la phase suivante · P1 = nécessaire avant bêta · P2 = apr
 ## Phase B — socle
 | ID | Tâche | Prio |
 |---|---|---|
-| INFRA-01 | CI GitHub Actions verte sur la branche de travail puis protégée sur `main` (règles de branche, revues obligatoires) | P0 |
-| INFRA-02 | Construction et scan des images (API, web), SBOM, signature | P0 |
-| INFRA-03 | Terraform : réseau privé, RDS, ECS, ALB+WAF, Secrets Manager, CloudTrail, budgets — sans apply avant validation | P0 |
-| INFRA-04 | OpenTelemetry (traces, métriques) avec liste blanche d'attributs | P1 |
-| INFRA-05 | Sauvegardes RDS + test de restauration documenté | P1 |
-| WEB-01 | ESLint, tests de composants, tests E2E Playwright | P1 |
-| WEB-03 | Génération des types TypeScript depuis `packages/contracts` | P1 |
+| INFRA-01 | ✅ CI verte sur la branche de travail ; **reste (porteur)** : protéger `main` (revue obligatoire, CI requise) dans les réglages GitHub | P0 |
+| INFRA-02 | ✅ images construites, Trivy bloquant, SBOM CycloneDX, test de fumée en CI ; signature → INFRA-07 | — |
+| INFRA-03 | ✅ modules complets, `validate` + checkov (0 échec, 31 exceptions motivées) ; **jamais appliqués** ; reste : compte AWS, état distant, image Keycloak optimisée | P0 |
+| INFRA-04 | ✅ traces à liste blanche (ADR 0015) ; reste : métriques, collecteur | P1 |
+| INFRA-05 | ✅ test pg_dump/pg_restore en CI (défaut de restauration trouvé et corrigé), PITR 14 j, procédure mensuelle | — |
+| WEB-01 | ✅ ESLint (0 avertissement), Playwright mobile + ordinateur (6 tests) ; reste : tests de composants | P2 |
+| WEB-03 | ✅ types générés depuis les schémas, vérifiés en CI | — |
+
+| INFRA-06 | Sauvegarde logique hebdomadaire hors RDS (tâche ECS planifiée vers S3 chiffré) | P1 |
+| INFRA-07 | Registre ECR du compte, recopie des images tierces, signature cosign et attestation de provenance, workflow de déploiement par OIDC GitHub → AWS (sans clé longue durée) | P0 avant recette |
+| INFRA-08 | Image Keycloak optimisée (`kc.sh build`) construite et analysée en CI | P0 avant recette |
+| SEC-10 | Rotation des secrets applicatifs (Secrets Manager) | P1 |
+| SEC-11 | Chiffrement de bout en bout ALB → cibles | P2 |
+| SEC-12 | Alertes de sécurité (GuardDuty, CloudTrail) via EventBridge vers l'astreinte | P1 |
 
 ## Phase C — corpus
 | ID | Tâche | Prio |

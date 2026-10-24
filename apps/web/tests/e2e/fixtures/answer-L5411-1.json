@@ -1,0 +1,132 @@
+{
+  "question_sha256": "56147c00a2acf0cd1c8f138ae469368ad706559d994e3a9bde9c8a6a58863414",
+  "as_of": "2026-10-24",
+  "mode": "EXTRACTIF",
+  "status": "INCERTAINE",
+  "summary": "1 disposition(s) du corpus officiel, en vigueur au 2026-10-24, correspondent aux termes de la question. Les extraits sont cités littéralement ; leur pertinence et leur portée juridiques ne sont pas évaluées automatiquement.",
+  "statements": [
+    {
+      "kind": "DROIT_APPLICABLE",
+      "text": "Code du travail, article L5411-1 — version LEGIARTI000048590205, applicable à compter du 2025-01-01, sans date de fin connue.",
+      "citation": {
+        "source_code": "DILA_LEGI",
+        "official_id": "LEGIARTI000048590205",
+        "document_official_id": "LEGITEXT000006072050",
+        "document_title": "Code du travail",
+        "provision_number": "L5411-1",
+        "valid_from": "2025-01-01",
+        "valid_to": null,
+        "source_status": "VIGUEUR",
+        "source_path": "legi/global/code_et_TNC_en_vigueur/code_en_vigueur/LEGI/TEXT/00/00/06/07/20/LEGITEXT000006072050/article/LEGI/ARTI/00/00/48/59/02/LEGIARTI000048590205.xml",
+        "source_file_sha256": "8ab495f1ce9d3c7f6b2afb8dedd041abe2c4c8b1488d297f236af6bdda9d3330",
+        "source_archive": "LEGI_20261023-215041",
+        "connector_version": "dila-legi-xml/0.1.0"
+      },
+      "quote": "Est inscrite sur la liste des demandeurs d'emploi auprès de l'opérateur France Travail :\n1° La personne à la recherche d'un emploi qui demande son inscription ;\n2° La personne qui demande le revenu de solidarité active mentionné à l'article L. 262-1 du code de l'action sociale et des familles ainsi que son conjoint, son concubin ou le partenaire auquel elle est liée par un pacte civil de solidarité. Le présent 2° ne s'applique pas lorsque la personne est un assuré mentionné à l'article L. 351-1 du code de la sécurité sociale qui a atteint l'âge prévu au 1° de l'article L. 351-8 du même code ou qui justifie, à partir de l'âge prévu à l'article L. 161-17-2 dudit code, d'une durée d'assurance et de périodes reconnues équivalentes au moins égales à la limite prévue au deuxième alinéa de l'article L. 351-1 du même code ;\n3° La personne à la recherche d'un emploi mentionnée à l'article L. 5314-2 du présent code qui sollicite un accompagnement par une mission locale mentionnée à l'article L. 5314-1 ;\n4° La personne qui sollicite un accompagnement par un organisme de placement spécialisé dans l'insertion professionnelle des personnes en situation de handicap mentionné à l'article L. 5214-3-1.",
+      "verification": {
+        "official_id": "LEGIARTI000048590205",
+        "verdict": "INCERTAIN",
+        "checks": [
+          {
+            "check": "SOURCE_IDENTIFIEE",
+            "outcome": "OK",
+            "detail": "famille LegiArticle"
+          },
+          {
+            "check": "IDENTIFIANT_RESOLU",
+            "outcome": "OK",
+            "detail": "version trouvée dans le corpus"
+          },
+          {
+            "check": "PASSAGE_PRESENT",
+            "outcome": "OK",
+            "detail": "passage trouvé"
+          },
+          {
+            "check": "APPLICABILITE_TEMPORELLE",
+            "outcome": "OK",
+            "detail": "en vigueur le 2026-10-24 (du 2025-01-01 au sans date de fin connue)"
+          },
+          {
+            "check": "TERRITOIRE",
+            "outcome": "INDETERMINE",
+            "detail": "territoire de la question non précisé"
+          },
+          {
+            "check": "ADEQUATION_RAISONNEMENT",
+            "outcome": "NON_EVALUE",
+            "detail": "adéquation au raisonnement : contrôle par le vérificateur indépendant ou un professionnel requis"
+          },
+          {
+            "check": "CONTRADICTIONS",
+            "outcome": "NON_EVALUE",
+            "detail": "recherche de sources contraires : non couverte par le moteur déterministe"
+          }
+        ],
+        "uncertainties": [
+          "territoire de la question non précisé"
+        ],
+        "quote_start": 0,
+        "quote_end": 1203,
+        "version_in_force_at_date": "LEGIARTI000048590205",
+        "engine_version": "0.1.0",
+        "contract_version": "1"
+      },
+      "support": "INCERTAINE"
+    }
+  ],
+  "uncertainties": [
+    "L5411-1 : territoire de la question non précisé",
+    "pertinence juridique des extraits non évaluée (mode extractif)"
+  ],
+  "disclaimer": "Vous utilisez un système d'intelligence artificielle. Résultat produit automatiquement à partir du corpus officiel ingéré, sans génération de texte. Il ne constitue pas une consultation juridique et doit être apprécié par un professionnel du droit.",
+  "search": {
+    "as_of": "2026-10-24",
+    "hits": [
+      {
+        "reference": {
+          "source_code": "DILA_LEGI",
+          "official_id": "LEGIARTI000048590205",
+          "document_official_id": "LEGITEXT000006072050",
+          "document_title": "Code du travail",
+          "provision_number": "L5411-1",
+          "valid_from": "2025-01-01",
+          "valid_to": null,
+          "source_status": "VIGUEUR",
+          "source_path": "legi/global/code_et_TNC_en_vigueur/code_en_vigueur/LEGI/TEXT/00/00/06/07/20/LEGITEXT000006072050/article/LEGI/ARTI/00/00/48/59/02/LEGIARTI000048590205.xml",
+          "source_file_sha256": "8ab495f1ce9d3c7f6b2afb8dedd041abe2c4c8b1488d297f236af6bdda9d3330",
+          "source_archive": "LEGI_20261023-215041",
+          "connector_version": "dila-legi-xml/0.1.0"
+        },
+        "excerpt": "Est inscrite sur la liste des demandeurs d'emploi auprès de l'opérateur France Travail :\n1° La personne à la recherche d'un emploi qui demande son inscription ;\n2° La personne qui demande le revenu de solidarité active mentionné à l'article L. 262-1 du code de l'action sociale et des familles ainsi que son conjoint, son concubin ou le partenaire auquel elle est liée par un pacte civil de solidarité. Le présent 2° ne s'applique pas lorsque la personne est un assuré mentionné à l'article L. 351-1 du code de la sécurité sociale qui a atteint l'âge prévu au 1° de l'article L. 351-8 du même code ou qui justifie, à partir de l'âge prévu à l'article L. 161-17-2 dudit code, d'une durée d'assurance et de périodes reconnues équivalentes au moins égales à la limite prévue au deuxième alinéa de l'article L. 351-1 du même code ;\n3° La personne à la recherche d'un emploi mentionnée à l'article L. 5314-2 du présent code qui sollicite un accompagnement par une mission locale mentionnée à l'article L. 5314-1 ;\n4° La personne qui sollicite un accompagnement par un organisme de placement spécialisé dans l'insertion professionnelle des personnes en situation de handicap mentionné à l'article L. 5214-3-1.",
+        "score": 0.016393,
+        "matched_by": [
+          "lexical"
+        ]
+      }
+    ],
+    "channels": [
+      {
+        "channel": "identifiant",
+        "enabled": true,
+        "detail": "identifiants LEGI/JORF"
+      },
+      {
+        "channel": "numero_article",
+        "enabled": true,
+        "detail": "numéros d'articles (L, R, D, A)"
+      },
+      {
+        "channel": "lexical",
+        "enabled": true,
+        "detail": "BM25 (k1=1,2 ; b=0,75) sur tsvector PostgreSQL, configuration avx_fr"
+      },
+      {
+        "channel": "semantique",
+        "enabled": false,
+        "detail": "désactivé : aucun fournisseur d'embeddings configuré et validé"
+      }
+    ],
+    "ranking": "correspondances exactes prioritaires puis RRF(k=60) ; lexical : BM25 (k1=1,2 ; b=0,75) sur tsvector PostgreSQL, configuration avx_fr, seuil relatif 0.5, restreint au texte nommé dans la question le cas échéant"
+  }
+}

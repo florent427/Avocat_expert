@@ -85,8 +85,15 @@ jobs:
       - run: npm ci
       - name: Audit des dépendances
         run: npm audit --audit-level=high
+      - name: Types des contrats à jour
+        run: npm run contracts:check
+      - run: npm run lint
       - run: npm run typecheck
       - run: npm run build
+      - name: Navigateur des tests de bout en bout
+        run: npx playwright install --with-deps chromium
+      - name: Tests de bout en bout (mobile et ordinateur)
+        run: npm run test:e2e
 
   terraform:
     name: Terraform (validation, sans apply)
@@ -104,6 +111,44 @@ jobs:
         run: |
           terraform init -backend=false -input=false
           terraform validate
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+      - name: Analyse de sécurité (checkov ; exceptions motivées dans le code)
+        run: uvx --python 3.12 checkov==3.3.26 -d . --framework terraform --quiet --compact
+
+  images:
+    name: Images (construction, vulnérabilités, SBOM, test de fumée)
+    runs-on: ubuntu-24.04
+    env:
+      TRIVY_VERSION: 0.75.0
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Construction
+        run: |
+          docker build -f services/api/Dockerfile -t avocat-expert/api:dev .
+          docker build -t avocat-expert/web:dev apps/web
+      - name: Trivy
+        run: |
+          archive="trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz"
+          base="https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}"
+          curl -sSfL -o "$archive" "$base/$archive"
+          curl -sSfL -o trivy-checksums.txt "$base/trivy_${TRIVY_VERSION}_checksums.txt"
+          grep " ${archive}$" trivy-checksums.txt | sha256sum -c -
+          tar -xzf "$archive" trivy
+      - name: Vulnérabilités corrigeables HIGH/CRITICAL (bloquant)
+        run: |
+          for img in api web; do
+            ./trivy image --quiet --severity HIGH,CRITICAL --ignore-unfixed --scanners vuln --exit-code 1 "avocat-expert/$img:dev"
+          done
+      - name: Nomenclatures logicielles (CycloneDX)
+        run: |
+          mkdir -p sbom
+          for img in api web; do ./trivy image --quiet --format cyclonedx --output "sbom/$img.cdx.json" "avocat-expert/$img:dev"; done
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: sbom
+          path: sbom/
+      - name: Test de fumée de la pile (ingestion, API, web, Keycloak)
+        run: scripts/smoke-compose.sh --no-build
 
   secrets:
     name: Détection de secrets
