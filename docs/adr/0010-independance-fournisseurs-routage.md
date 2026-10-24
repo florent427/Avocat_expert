@@ -1,6 +1,6 @@
 # ADR 0010 — Indépendance des fournisseurs de modèles et routage par complexité
 
-**Statut** : proposée — contrats implémentés · 2026-10-24
+**Statut** : acceptée le 2026-10-24 (registre des décisions) · 2026-10-24
 
 ## Décision
 * Aucun SDK de fournisseur dans le code métier : ports `LanguageModel`,

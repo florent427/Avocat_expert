@@ -1,6 +1,6 @@
 # ADR 0009 — AWS eu-west-3, Terraform, aucun apply sans validation
 
-**Statut** : proposée — décision de souveraineté ouverte · 2026-10-24
+**Statut** : acceptée le 2026-10-24 (registre des décisions) · 2026-10-24
 
 ## Décision
 * Région AWS Paris `eu-west-3`, services managés (ECS Fargate, RDS, S3, SQS,
@@ -16,3 +16,11 @@ exigences du secret professionnel, du RGPD (transferts, accès d'autorités
 conseil spécialisé ; une alternative qualifiée SecNumCloud doit être
 chiffrée. L'abstraction des services (S3 compatible, PostgreSQL, conteneurs)
 préserve la réversibilité.
+
+## Amendement du 2026-10-24 (DEC-01)
+AWS eu-west-3 est retenu pour le développement et la recette **avec des
+données publiques ou fictives uniquement**. L'hébergement de production
+(AWS, hybride ou SecNumCloud) sera décidé après avis du DPO et d'un conseil.
+D'ici là, aucun choix ne doit lier l'application à un service propre à AWS
+sans équivalent chez un hébergeur qualifié (objet S3 compatible, PostgreSQL,
+conteneurs OCI, Keycloak, files de messages abstraites derrière un port).

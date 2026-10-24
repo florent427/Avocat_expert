@@ -1,6 +1,6 @@
 # ADR 0002 — Modèle bitemporel et historique immuable
 
-**Statut** : proposée — implémentée · 2026-10-24
+**Statut** : acceptée le 2026-10-24 (registre des décisions) · 2026-10-24
 
 ## Contexte
 Le droit applicable dépend de la date des faits ; la connaissance qu'a le

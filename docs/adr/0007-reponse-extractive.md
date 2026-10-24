@@ -1,6 +1,6 @@
 # ADR 0007 — Réponse extractive par défaut ; génération soumise au vérificateur
 
-**Statut** : proposée — implémentée (extractif) · 2026-10-24
+**Statut** : acceptée le 2026-10-24 (registre des décisions) · 2026-10-24
 
 ## Décision
 * Mode **EXTRACTIF** (V1) : extraits littéraux de versions officielles,

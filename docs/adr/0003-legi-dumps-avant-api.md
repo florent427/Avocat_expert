@@ -1,6 +1,6 @@
 # ADR 0003 — Ingestion LEGI par dumps open data DILA avant l'API PISTE
 
-**Statut** : proposée — implémentée · 2026-10-24
+**Statut** : acceptée le 2026-10-24 (registre des décisions) · 2026-10-24
 
 ## Contexte
 Deux accès officiels existent : les dumps XML (`echanges.dila.gouv.fr/OPENDATA/LEGI/`,

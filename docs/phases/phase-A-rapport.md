@@ -162,3 +162,11 @@ fichiers ≈ 0,8 s ; évaluation des 16 cas ≈ 0,7 s.
 2. Décisions DEC-01 (hébergement) et DEC-05 (compte PISTE) engagées.
 3. CI exécutée et verte sur GitHub (INFRA-01) ; images construites (INFRA-02).
 4. Désignation d'un référent juridique pour l'instruction R1–R6 et le corpus QUAL-01.
+
+## 9. Décisions du porteur (2026-10-24)
+
+Voir `docs/decisions/registre-decisions.md` : ADR acceptées ; AWS en
+dev/recette sans données réelles ; compte PISTE bac à sable ; Keycloak ;
+référent juridique = porteur du projet. Conditions 1 et 4 du §8 remplies ;
+condition 2 engagée (DEC-01 partielle, DEC-05 en cours) ; condition 3 :
+CI verte depuis l'exécution n° 2.

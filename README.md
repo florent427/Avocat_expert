@@ -59,6 +59,7 @@ Tout vérifier : `make check`.
 * [Contrats](docs/contracts/contrats-services-agents.md)
 * [Backlog](docs/backlog/backlog-technique.md)
 * [Rapport de phase A](docs/phases/phase-A-rapport.md)
+* [Registre des décisions](docs/decisions/registre-decisions.md)
 
 ## Attribution des données
 Données LEGI : © DILA — Licence Ouverte v2.0 — https://echanges.dila.gouv.fr/OPENDATA/LEGI/

@@ -6,11 +6,11 @@ P0 = bloquant pour la phase suivante · P1 = nécessaire avant bêta · P2 = apr
 ## Décisions à prendre (porteur du projet)
 | ID | Sujet | Prio | Dépend de |
 |---|---|---|---|
-| DEC-01 | Souveraineté de l'hébergement (AWS vs SecNumCloud) au regard du secret professionnel | P0 | DPO, conseil |
-| DEC-02 | Fournisseur d'identité OIDC | P0 | DEC-01 |
+| DEC-01 | ✅ 2026-10-24 : AWS en dev/recette sans données réelles ; **production à décider** (DPO, conseil) | P0 | DPO, conseil |
+| DEC-02 | ✅ 2026-10-24 : Keycloak auto-hébergé | — | — |
 | DEC-03 | Fournisseur(s) de modèles et conditions contractuelles (DPA, absence d'entraînement, localisation) | P0 phase E | DEC-01 |
 | DEC-04 | Positionnement (outil réservé aux professionnels du droit) et CGU | P0 bêta | conseil |
-| DEC-05 | Ouverture d'un compte PISTE (Légifrance, Judilibre) et acceptation des CGU | P0 phase C | — |
+| DEC-05 | ✅ 2026-10-24 : compte bac à sable PISTE créé par le porteur (en attente) | P0 phase C | porteur |
 
 ## Conformité
 | ID | Tâche | Prio |
@@ -50,7 +50,7 @@ P0 = bloquant pour la phase suivante · P1 = nécessaire avant bêta · P2 = apr
 | SRCH-01 | Adaptateur OpenSearch (analyseur français), comparaison avec BM25 PostgreSQL | P0 |
 | SRCH-02 | Sélection et évaluation d'un modèle d'embeddings ; activation pgvector (SEED-014) | P0 |
 | SRCH-03 | Reranking (après mesure) | P1 |
-| QUAL-01 | Corpus ≥ 500 cas rédigés/validés par des juristes (toutes catégories du cahier des charges) | P0 (validation) |
+| QUAL-01 | Corpus ≥ 500 cas validés juridiquement (référent : porteur du projet, REF-01) | P0 (validation) |
 | QUAL-02 | Interface de correction humaine des cas et des réponses | P0 |
 | QUAL-03 | Métriques de couverture juridique par domaine | P1 |
 
@@ -67,7 +67,7 @@ P0 = bloquant pour la phase suivante · P1 = nécessaire avant bêta · P2 = apr
 ## Phases G–I — utilisateurs, documents, sécurité
 | ID | Tâche | Prio |
 |---|---|---|
-| SEC-01 | OIDC + MFA + RBAC (ADR 0011) | P0 |
+| SEC-01 | OIDC + MFA + RBAC avec Keycloak (ADR 0011 amendée) | P0 |
 | SEC-02 | Journal d'accès alimenté par toutes les routes | P0 |
 | SEC-03 | Positionnement de `app.tenant_id` par transaction (`SET LOCAL`) et tests de pool | P0 |
 | SEC-04 | Téléversement : liste blanche de types, taille, antivirus, stockage S3 chiffré, URL présignées courtes | P0 |
