@@ -12,6 +12,13 @@ P0 = bloquant pour la phase suivante · P1 = nécessaire avant bêta · P2 = apr
 | DEC-04 | Positionnement (outil réservé aux professionnels du droit) et CGU | P0 bêta | conseil |
 | DEC-05 | Ouverture d'un compte PISTE (Légifrance, Judilibre) et acceptation des CGU | P0 phase C | — |
 
+## Conformité
+| ID | Tâche | Prio |
+|---|---|---|
+| COMP-01 | Information « système d'IA » (art. 50 §1) et marquage lisible par machine des sorties générées (art. 50 §2, règlement IA modifié par 2026/1744) avant activation du mode génératif | P0 phase E |
+| COMP-02 | Registre de qualification du système au regard de l'annexe III (point 8) et de l'art. 6 §3, revu à chaque nouvel usage ou client | P0 bêta (validation) |
+| COMP-03 | Rejouer les deltas LEGI postérieurs au 2025-07-13 sur COJ/CJA/loi 71-1130 ; extraire art. 56–66 de la loi 71-1130 | P1 |
+
 ## Phase B — socle
 | ID | Tâche | Prio |
 |---|---|---|

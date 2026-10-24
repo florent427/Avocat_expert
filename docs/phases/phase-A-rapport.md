@@ -119,8 +119,12 @@ fichiers ≈ 0,8 s ; évaluation des 16 cas ≈ 0,7 s.
   inconnue.
 * Canal sémantique, OpenSearch, reranking, agents, OIDC : non implémentés
   (contrats et ports en place).
-* Textes juridiques (COJ, loi de 1971, RGPD, règlement IA) non consultés sur
-  Légifrance/EUR-Lex (sites inaccessibles) : voir le document de conformité.
+* Textes réglementaires consultés via les exports officiels (stock DILA du
+  2025-07-13, CELLAR), Légifrance et EUR-Lex étant inaccessibles. Constat
+  majeur : le règlement IA a été modifié par le règlement (UE) 2026/1744
+  (obligations haut risque de l'annexe III repoussées au 2 décembre 2027).
+  Restent non vérifiés : CGU PISTE et Cour de cassation, art. 56–66 de la loi
+  de 1971, modifications françaises postérieures au 2025-07-13.
 * Pas de validation juridique des sorties.
 
 ## 6. Incidents notables

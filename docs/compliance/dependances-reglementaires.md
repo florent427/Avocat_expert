@@ -2,6 +2,11 @@
 
 > Document technique d'identification des risques, rédigé par l'équipe
 > d'ingénierie le 2026-10-24. **Il ne constitue pas un avis juridique.**
+> Textes consultés via les exports officiels (Légifrance et EUR-Lex étant
+> inaccessibles) : stock DILA LEGI `Freemium_legi_global_20250713-140000`
+> pour le droit français (**état au 2025-07-13 : modifications ultérieures
+> non contrôlées**) et CELLAR (Office des publications de l'UE) pour le droit
+> de l'Union.
 > Chaque point doit être instruit et validé par des professionnels compétents
 > (avocat, DPO, RSSI). Le statut de vérification de chaque texte est indiqué ;
 > « NON VÉRIFIÉ » signifie que le texte officiel n'a pas pu être consulté
@@ -13,12 +18,12 @@ bloque une phase technique.
 
 | # | Dépendance | Bloque | Responsable | Statut |
 |---|---|---|---|---|
-| R1 | Périmètre du droit : consultation juridique et rédaction d'actes réservées | B-PROD | Conseil | à instruire |
+| R1 | Périmètre du droit : consultation juridique et rédaction d'actes réservées | B-PROD | Conseil | art. 54–55 vérifiés ; qualification à instruire |
 | R2 | Secret professionnel de l'avocat et hébergement | B-BETA | Conseil, DPO, RSSI | à instruire (ADR 0009) |
-| R3 | RGPD : rôles, contrat de sous-traitance, AIPD, registre, durées, droits | B-BETA | DPO | à instruire |
-| R4 | Données de justice : interdiction du profilage des magistrats et greffiers, pseudonymisation | B-PHASE (C, jurisprudence) | Conseil | exigence intégrée au modèle |
+| R3 | RGPD : rôles, contrat de sous-traitance, AIPD, registre, durées, droits | B-BETA | DPO | art. 22, 28, 35 vérifiés ; à instruire |
+| R4 | Données de justice : interdiction du profilage des magistrats et greffiers, pseudonymisation | B-PHASE (C, jurisprudence) | Conseil | textes vérifiés ; exigence intégrée au modèle |
 | R5 | Licences et CGU des sources (LO 2.0, PISTE, Cour de cassation, justice administrative, UE) | B-PHASE (C) | Conseil | partiellement vérifié |
-| R6 | Règlement (UE) 2024/1689 (IA) : qualification du système, transparence, maîtrise de l'IA | B-PROD | Conseil | à instruire |
+| R6 | Règlement (UE) 2024/1689 (IA), modifié par le règlement (UE) 2026/1744 : qualification, transparence, maîtrise de l'IA | B-PROD | Conseil | textes vérifiés ; qualification à instruire |
 | R7 | Sous-traitants IA (fournisseurs de modèles) : transferts, confidentialité, usage des données | B-PHASE (E) | DPO, achats | à instruire |
 | R8 | Données de santé éventuellement présentes dans les pièces (HDS) | B-BETA | DPO | à qualifier |
 | R9 | Responsabilité, assurance, CGU/CGV, information de l'utilisateur | B-PROD | Conseil | à instruire |
@@ -26,10 +31,21 @@ bloque une phase technique.
 
 ## R1 — Activité de consultation juridique
 
-La loi n° 71-1130 du 31 décembre 1971 (titre II, art. 54 et suivants)
-réserve la consultation juridique et la rédaction d'actes pour autrui à
-certaines professions et sous conditions. Statut : **NON VÉRIFIÉ** (texte
-officiel non consulté ce jour).
+Loi n° 71-1130 du 31 décembre 1971 — **VÉRIFIÉ pour les art. 54 et 55**
+(stock LEGI du 2025-07-13) :
+
+* art. 54 (version en vigueur depuis le 2020-01-01) : « Nul ne peut,
+  directement ou par personne interposée, à titre habituel et rémunéré,
+  donner des consultations juridiques ou rédiger des actes sous seing privé,
+  pour autrui : 1° S'il n'est titulaire d'une licence en droit ou s'il ne
+  justifie, à défaut, d'une compétence juridique appropriée […] conformément
+  aux articles 56 à 66. » ;
+* art. 55 : obligation d'assurance, « également applicable[s] à toute personne
+  qui, à titre habituel et gratuit, donne des consultations juridiques ».
+
+**NON VÉRIFIÉ** : art. 56 à 66 (catégories autorisées), dispositions pénales,
+et toute jurisprudence sur la qualification d'un outil logiciel en
+« consultation juridique ». La qualification du produit relève d'un conseil.
 
 Conséquences techniques retenues dès la V1 : produit destiné à des
 professionnels du droit ; mode extractif sans conclusion ; mention « ne
@@ -54,12 +70,24 @@ Hypothèse de travail à valider : le cabinet est responsable de traitement des
 données de ses dossiers, la plateforme est sous-traitant (art. 28 :
 contrat, instructions documentées, sous-traitants ultérieurs autorisés) ;
 pour ses propres données (comptes, facturation), la plateforme est
-responsable de traitement. Une **AIPD** (art. 35) est très probablement
-requise (données relatives à des procédures, éventuellement à des
-infractions — art. 10 —, usage de technologies nouvelles). Décisions
-individuelles automatisées (art. 22) : le système n'en prend pas ; à
-confirmer dans l'AIPD. Statut des citations d'articles : **NON VÉRIFIÉ**
-(texte non consulté ce jour).
+responsable de traitement.
+
+Textes **VÉRIFIÉS** (CELLAR `32016R0679`, aucun acte modificatif indexé) :
+art. 28 §1 (« uniquement appel à des sous-traitants qui présentent des
+garanties suffisantes »), §2 (pas de sous-traitant ultérieur « sans
+l'autorisation écrite préalable, spécifique ou générale, du responsable du
+traitement »), §3 (contrat ou autre acte juridique) ; art. 35 §1 (analyse
+d'impact préalable lorsqu'un traitement, « en particulier par le recours à de
+nouvelles technologies », est susceptible d'engendrer un risque élevé) ;
+art. 22 §1 (droit de ne pas faire l'objet d'une décision « fondée
+exclusivement sur un traitement automatisé […] produisant des effets
+juridiques »).
+
+Une **AIPD** paraît très probablement nécessaire (technologies nouvelles,
+données de procédures, éventuellement d'infractions) — à confirmer par le
+DPO au regard des listes de la CNIL et des lignes directrices du CEPD
+(**non consultées**). Le système ne prend pas de décision individuelle
+automatisée : à documenter dans l'AIPD.
 
 Déjà prévu dans le modèle : durée de conservation par organisation,
 effacement des pièces (`erased_at`), traces sans contenu, liste des
@@ -68,13 +96,21 @@ personnes, purge, registre).
 
 ## R4 — Données de justice
 
-Code de l'organisation judiciaire, art. L111-13, et code de justice
-administrative, art. L10 : les données d'identité des magistrats et des
+**VÉRIFIÉ** (stock LEGI du 2025-07-13) — COJ art. L111-13
+(`LEGIARTI000038311162`, en vigueur depuis le 2019-03-25) et CJA art. L10
+(`LEGIARTI000038311171`) : « Les données d'identité des magistrats et des
 membres du greffe ne peuvent faire l'objet d'une réutilisation ayant pour
 objet ou pour effet d'évaluer, d'analyser, de comparer ou de prédire leurs
-pratiques professionnelles réelles ou supposées (formulation reprise dans les
-CGU de la justice administrative, version du 18/01/2022, vérifiées). Le
-texte du COJ n'a pas été consulté sur Légifrance ce jour.
+pratiques professionnelles réelles ou supposées. » Pour le COJ : « La
+violation de cette interdiction est punie des peines prévues aux articles
+226-18, 226-24 et 226-31 du code pénal […] » ; occultation préalable des
+« nom et prénoms des personnes physiques mentionnées dans la décision,
+lorsqu'elles sont parties ou tiers ». La même interdiction figure dans les
+CGU de la justice administrative (18/01/2022).
+
+**NON VÉRIFIÉ** : décrets d'application (R. 111-10 s. COJ, R. 741-13 à
+R. 741-15 CJA), arrêté du 28 avril 2021, et modifications postérieures au
+2025-07-13.
 
 Conséquences techniques retenues : aucun champ structuré d'identité de
 magistrat ou de greffier dans `court_decision` ; aucune statistique par
@@ -98,16 +134,50 @@ chemin, empreinte), licence et obligations stockées dans `legal_source`.
 
 ## R6 — Règlement (UE) 2024/1689 sur l'intelligence artificielle
 
-À instruire : (a) la qualification du système au regard de l'annexe III,
-point 8 (administration de la justice) — un outil destiné à des avocats
-diffère d'un outil destiné aux autorités judiciaires, mais l'usage par ou
-pour le compte d'une autorité judiciaire changerait la qualification ;
-(b) les obligations de transparence (art. 50) ; (c) l'obligation de maîtrise
-de l'IA (art. 4) ; (d) les obligations relatives aux modèles d'IA à usage
-général, portées par leurs fournisseurs. Calendrier d'application et
-éventuelles modifications ultérieures du règlement : **NON VÉRIFIÉ** —
-à consulter au Journal officiel de l'UE (version consolidée CELLAR
-disponible : `02024R1689-20260727`).
+**VÉRIFIÉ** via CELLAR (texte JO, version consolidée `02024R1689-20260727`,
+« outil de documentation » sans effet juridique, et acte modificatif) le
+2026-10-24 ; le point clé a été recontrôlé indépendamment.
+
+**Fait majeur** : le règlement est modifié par le **règlement (UE) 2026/1744**
+du 8 juillet 2026 (« train de mesures omnibus numérique sur l'IA », JO L du
+24.7.2026). Conséquences sur le calendrier (art. 113 consolidé) :
+
+* application générale : 2 août 2026 (inchangée) ;
+* chapitre III, sections 1 à 3 (obligations des systèmes à haut risque) :
+  **2 décembre 2027** pour l'annexe III (dont le point 8), 2 août 2028 pour
+  l'annexe I ;
+* art. 50 (transparence) : applicable depuis le 2 août 2026 ; pour les
+  systèmes générant du contenu de synthèse mis sur le marché avant cette date,
+  mise en conformité à l'art. 50 §2 d'ici au 2 décembre 2026 (art. 111 §4) ;
+* art. 4 (maîtrise de l'IA) réécrit : les fournisseurs et déployeurs
+  « prennent des mesures pour favoriser le développement de la maîtrise de
+  l'IA par leur personnel » (le texte initial disait « garantir »).
+
+Qualification à instruire :
+
+* annexe III, point 8 a) (inchangé) : systèmes « destinés à être utilisés par
+  les autorités judiciaires ou en leur nom, pour les aider à rechercher et à
+  interpréter les faits ou la loi » — un outil destiné aux avocats n'est pas
+  visé par cette lettre, mais toute offre à des juridictions ou pour leur
+  compte changerait l'analyse ;
+* art. 6 §3 : dérogation pour un système de l'annexe III sans « risque
+  important de préjudice », mais un système de l'annexe III « est toujours
+  considéré comme étant à haut risque lorsqu'il effectue un profilage de
+  personnes physiques » ;
+* art. 50 §1 : information des personnes qu'elles interagissent avec un
+  système d'IA ; §2 : marquage lisible par machine des contenus textuels de
+  synthèse — pertinent dès l'activation d'un mode génératif (phase E).
+
+**NON VÉRIFIÉ** : nouveaux points b bis) et b ter) de l'art. 5 §1 (applicables
+au 2 décembre 2026), actes délégués et lignes directrices de la Commission
+(art. 6 §3, art. 50), exhaustivité de l'indexation des actes modificatifs par
+CELLAR.
+
+Conséquences techniques retenues : statut « résultat produit
+automatiquement » déjà affiché ; ajout au backlog de COMP-01 (information
+art. 50 §1 et marquage des sorties générées, art. 50 §2, avant la phase E) et
+COMP-02 (registre de qualification du système, mis à jour à chaque nouvel
+usage ou client).
 
 ## R7 — Fournisseurs de modèles
 

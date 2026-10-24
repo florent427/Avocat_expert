@@ -15,6 +15,7 @@ non vérifié.
 | Judilibre | VÉRIFIÉ (CGU et quotas non vérifiés) | ⏳ ING-05 |
 | Open data justice administrative | VÉRIFIÉ | ⏳ ING-06 |
 | EUR-Lex / CELLAR | PARTIEL | ⏳ ING-07 |
+| Textes réglementaires (COJ, CJA, loi 71-1130, RGPD, règlement IA) | VÉRIFIÉ / PARTIEL — voir `docs/compliance/dependances-reglementaires.md` | — |
 
 Sites inaccessibles le 2026-10-24 : `piste.gouv.fr` (503), `legifrance.gouv.fr`
 (403), `eur-lex.europa.eu` (challenge anti-robot), page CGU de la Cour de
@@ -119,3 +120,12 @@ connaissance enregistrée ; retrait appliqué au seul chemin exact ; attribution
   non, sous conditions (citer la source, ne pas altérer le sens).
 * **Non vérifié** : service web EUR-Lex et ses conditions d'inscription,
   avis juridique et licence actuelle d'EUR-Lex, quotas CELLAR.
+
+## 6. Textes réglementaires
+
+Consultés via le stock DILA LEGI du 2025-07-13 (COJ L111-13, CJA L10,
+loi 71-1130 art. 54–55) et via CELLAR (RGPD art. 22, 28, 35 ; règlement
+(UE) 2024/1689 consolidé au 27.07.2026 et règlement modificatif (UE)
+2026/1744). Extraits et réserves dans le document de conformité. Réserve
+principale : les textes français reflètent l'état du 2025-07-13 ; les deltas
+postérieurs n'ont pas été rejoués.
