@@ -89,8 +89,9 @@ PY
 fi
 
 step "Base : l'API écrit ses traces avec le rôle avx_api, sans privilège sur le corpus"
+TRACES=1; [[ -n "$SEMANTIC" ]] && TRACES=2  # une trace par question posée
 compose exec -T postgres psql -U postgres -d avocat_expert -Atc \
-  "SELECT count(*) FROM execution_trace" | grep -qx 1
+  "SELECT count(*) FROM execution_trace" | grep -qx "$TRACES"
 denied=$(compose exec -T -e PGPASSWORD="$(grep ^AVX_API_DB_PASSWORD "$ENV_FILE" | cut -d= -f2-)" postgres \
   psql -h 127.0.0.1 -U avx_api -d avocat_expert -Atc "DELETE FROM provision_version" 2>&1 || true)
 grep -q "permission denied" <<<"$denied" || { echo "le rôle avx_api ne devrait pas pouvoir supprimer : $denied"; exit 1; }
