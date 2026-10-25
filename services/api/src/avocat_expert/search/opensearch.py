@@ -19,9 +19,10 @@ import json
 import urllib.error
 import urllib.request
 from datetime import date
-from typing import Any
+from typing import Any, Protocol
 from urllib.parse import quote, urlsplit
 
+from avocat_expert.embedding.models import ModelSpec
 from avocat_expert.storage.corpus import CorpusRepository, LexicalHit
 
 #: Analyseur français documenté (élision, minuscules, mots vides, racinisation
@@ -64,17 +65,37 @@ MAPPINGS: dict[str, Any] = {
     },
 }
 
-INDEX_VERSION = "v1"
+INDEX_VERSION = "v2"
+
+#: Graphe HNSW (moteur faiss, valeurs par défaut documentées : m = 16,
+#: ef_construction = 100). Filtrage « efficace » (pendant le parcours du graphe,
+#: recherche exacte si le filtre est très sélectif) : faiss et lucene
+#: uniquement (documentation k-NN OpenSearch 3.x).
+HNSW_PARAMETERS = {"m": 16, "ef_construction": 100}
 
 
-def index_body(replicas: int = 0) -> dict[str, Any]:
-    return {
-        "settings": {
-            "index": {"number_of_shards": 1, "number_of_replicas": replicas, "codec": "best_compression"},
-            "analysis": ANALYSIS,
-        },
-        "mappings": MAPPINGS,
-    }
+def index_body(replicas: int = 0, embedding: ModelSpec | None = None) -> dict[str, Any]:
+    """Paramètres et correspondances ; avec un modèle, champ vectoriel de sa
+    dimension et clé du modèle dans ``_meta`` (une requête n'est jamais
+    vectorisée par un autre modèle que celui de l'index)."""
+    index: dict[str, Any] = {"number_of_shards": 1, "number_of_replicas": replicas, "codec": "best_compression"}
+    mappings: dict[str, Any] = {**MAPPINGS, "properties": dict(MAPPINGS["properties"])}
+    mappings["_meta"] = {"embedding_model": embedding.key if embedding else None}
+    if embedding is not None:
+        index["knn"] = True
+        mappings["properties"]["embedding"] = {
+            "type": "knn_vector",
+            "dimension": embedding.dimension,
+            "method": {"name": "hnsw", "engine": "faiss", "space_type": "cosinesimil", "parameters": HNSW_PARAMETERS},
+        }
+    return {"settings": {"index": index, "analysis": ANALYSIS}, "mappings": mappings}
+
+
+def index_embedding_model(client: OpenSearchClient, alias: str) -> str | None:
+    """Clé du modèle des vecteurs de l'index désigné par l'alias (``_meta``)."""
+    mappings = client.request("GET", f"/{quote(alias)}/_mapping", ok_missing=True) or {}
+    keys = {(m.get("mappings", {}).get("_meta") or {}).get("embedding_model") for m in mappings.values()}
+    return keys.pop() if len(keys) == 1 else None
 
 
 class OpenSearchError(RuntimeError):
@@ -216,4 +237,67 @@ class OpenSearchLexicalSearcher:
         versions = self._repository.current_versions(sorted({official_id for official_id, _ in scored}))
         # Un document de l'index sans version courante (index en retard sur le
         # corpus) est ignoré : seule la base fait foi.
+        return [LexicalHit(versions[official_id], score) for official_id, score in scored if official_id in versions]
+
+
+class QueryEmbedder(Protocol):
+    spec: ModelSpec
+
+    def embed_queries(self, texts: list[str]) -> Any: ...
+
+
+class OpenSearchSemanticSearcher:
+    """Plus proches voisins (cosinus) parmi les versions en vigueur à la date,
+    restreints le cas échéant aux textes nommés ; versions relues dans
+    PostgreSQL. Score renvoyé : similarité cosinus (score OpenSearch
+    ``cosinesimil`` = (1 + cos) / 2)."""
+
+    name = "semantique"
+
+    def __init__(
+        self, client: OpenSearchClient, alias: str, repository: CorpusRepository, embedder: QueryEmbedder
+    ) -> None:
+        self._client = client
+        self._alias = alias
+        self._repository = repository
+        self._embedder = embedder
+        self._index_model: str | bool | None = False  # False : non encore lu
+
+    def _ready(self) -> bool:
+        if self._index_model is False:
+            self._index_model = index_embedding_model(self._client, self._alias)
+        return self._index_model == self._embedder.spec.key
+
+    @property
+    def enabled(self) -> bool:
+        return self._ready()
+
+    @property
+    def detail(self) -> str:
+        spec = self._embedder.spec
+        if not self._ready():
+            return (
+                f"désactivé : l'index {self._alias} n'a pas été construit avec le modèle {spec.key} "
+                "(reconstruction requise : avx indexer-recherche --complet)"
+            )
+        return (
+            f"{spec.repository} (révision {spec.revision[:8]}, auto-hébergé, ONNX Runtime) ; "
+            "plus proches voisins (HNSW faiss, cosinus) filtrés par date et par texte"
+        )
+
+    def search(self, query: str, as_of: date, limit: int, documents: frozenset[str] | None = None) -> list[LexicalHit]:
+        if not self._ready():
+            return []
+        vector = [float(x) for x in self._embedder.embed_queries([query])[0]]
+        filters = temporal_filter(as_of)
+        if documents:
+            filters.append({"terms": {"document_official_id": sorted(documents)}})
+        body = {
+            "size": limit,
+            "_source": False,
+            "query": {"knn": {"embedding": {"vector": vector, "k": limit, "filter": {"bool": {"filter": filters}}}}},
+        }
+        result = self._client.request("POST", f"/{quote(self._alias)}/_search", body)
+        scored = [(hit["_id"], 2.0 * float(hit["_score"]) - 1.0) for hit in result["hits"]["hits"]]
+        versions = self._repository.current_versions(sorted({official_id for official_id, _ in scored}))
         return [LexicalHit(versions[official_id], score) for official_id, score in scored if official_id in versions]

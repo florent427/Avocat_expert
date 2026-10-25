@@ -88,7 +88,7 @@ Règles d'implémentation : spécification officielle vérifiée avant tout code
 | Identifiant officiel (LEGIARTI, LEGITEXT, JORFTEXT…) | ✅ |
 | Numéro d'article (L, R, D, A ; « article 1240 ») + titre du code | ✅ |
 | Lexical BM25 (k1=1,2 ; b=0,75) sur tsvector `avx_fr` (français, sans accents) | ✅ |
-| Sémantique (pgvector) | ⏳ port défini, **désactivé** tant qu'aucun modèle d'embeddings n'est validé (ADR 0006) |
+| Sémantique | ✅ modèle auto-hébergé (multilingual-e5-base, ONNX Runtime), vecteurs dans PostgreSQL, plus proches voisins filtrés dans OpenSearch, fusion RRF (ADR 0017) ; désactivé et signalé sans configuration |
 | Filtres temporels (version en vigueur à la date) | ✅ intervalle semi-ouvert |
 | Filtres territoriaux | ❓ la source LEGI ne renseigne pas le champ territorial : jamais présumé |
 | Graphe de références | ✅ stockage (`legal_reference`), ⏳ exploitation |

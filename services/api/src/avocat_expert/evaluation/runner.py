@@ -22,7 +22,7 @@ from avocat_expert.config import get_settings
 from avocat_expert.contracts.common import CheckOutcome, SupportStatus
 from avocat_expert.contracts.services import AnswerRequest, SourcedAnswer
 from avocat_expert.search.excerpt import ELISION, is_item
-from avocat_expert.search.ports import DisabledSemanticSearcher, LexicalSearcher
+from avocat_expert.search.ports import DisabledSemanticSearcher, LexicalSearcher, SemanticSearcher
 from avocat_expert.search.service import HybridSearchService, PostgresLexicalSearcher
 from avocat_expert.storage.corpus import CorpusRepository
 from avocat_expert.verification.lexverif import CitationVerifier, LexverifEngine
@@ -30,10 +30,21 @@ from avocat_expert.verification.lexverif import CitationVerifier, LexverifEngine
 DETERMINISTIC_CHECKS = ("SOURCE_IDENTIFIEE", "IDENTIFIANT_RESOLU", "PASSAGE_PRESENT", "APPLICABILITE_TEMPORELLE")
 
 
+class Disposition(BaseModel):
+    """Article attendu désigné par texte et numéro : la version en vigueur à la
+    date du cas est résolue dans le corpus (corpus complet, où les identifiants
+    de version changent à chaque livraison)."""
+
+    model_config = ConfigDict(extra="forbid")
+    texte: str
+    numero: str
+
+
 class Expected(BaseModel):
     model_config = ConfigDict(extra="forbid")
     type: Literal["sources", "blocage"]
     official_ids: list[str] = []
+    dispositions: list[Disposition] = []
     incertitude_contient: str | None = None
 
 
@@ -83,6 +94,24 @@ def structurally_complete(quote: str) -> bool:
 
 def load_cases(path: Path) -> list[Case]:
     return [Case.model_validate_json(line) for line in path.read_text("utf-8").splitlines() if line.strip()]
+
+
+def resolve_expected(repository: CorpusRepository, case: Case) -> Case:
+    """Ajoute aux identifiants attendus les versions en vigueur des dispositions
+    attendues ; une disposition introuvable rend le cas inexploitable (erreur)."""
+    if not case.attendu.dispositions:
+        return case
+    ids = list(case.attendu.official_ids)
+    for disposition in case.attendu.dispositions:
+        versions = [
+            v
+            for v in repository.find_in_force_by_number(disposition.numero, case.as_of)
+            if v.document_official_id == disposition.texte
+        ]
+        if len(versions) != 1:
+            raise ValueError(f"{case.id} : {disposition} — {len(versions)} version(s) en vigueur au {case.as_of}")
+        ids.append(versions[0].official_id)
+    return case.model_copy(update={"attendu": case.attendu.model_copy(update={"official_ids": ids})})
 
 
 def evaluate_case(case: Case, answer: SourcedAnswer) -> CaseResult:
@@ -175,16 +204,19 @@ def run(
     cases: list[Case],
     max_sources: int = 3,
     lexical: LexicalSearcher | None = None,
+    semantic: SemanticSearcher | None = None,
 ) -> dict[str, Any]:
     repository = CorpusRepository(conn)
     service = ExtractiveAnswerService(
-        HybridSearchService(repository, lexical or PostgresLexicalSearcher(repository), DisabledSemanticSearcher()),
+        HybridSearchService(
+            repository, lexical or PostgresLexicalSearcher(repository), semantic or DisabledSemanticSearcher()
+        ),
         CitationVerifier(repository, engine),
     )
     today = datetime.now(UTC).date()
     results = [
         evaluate_case(
-            case,
+            resolve_expected(repository, case),
             service.answer(AnswerRequest(question=case.question, as_of=case.as_of, max_sources=max_sources), today),
         )
         for case in cases

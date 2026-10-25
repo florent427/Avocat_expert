@@ -52,6 +52,15 @@ def main(argv: list[str] | None = None) -> int:
     sync.add_argument("--simulation", action="store_true", help="afficher le plan sans rien télécharger ni ingérer")
     sync.add_argument("--lot", type=int, default=1000, help="nombre de fichiers par transaction")
     sub.add_parser("rafraichir-statistiques", help="recalculer les statistiques BM25 du corpus")
+    model = sub.add_parser("telecharger-modele", help="télécharger et vérifier les fichiers du modèle d'embeddings")
+    model.add_argument("--modele", default=None, help="clé du modèle (par défaut : AVX_EMBEDDING_MODEL)")
+    model.add_argument("--dossier", type=Path, default=None, help="destination (par défaut : AVX_EMBEDDING_MODEL_DIR)")
+    embed = sub.add_parser("calculer-embeddings", help="vectoriser les versions courantes qui n'ont pas de vecteur")
+    embed.add_argument("--textes", nargs="+", default=None, help="identifiants des seuls textes à traiter")
+    embed.add_argument("--nature", default=None, help="nature des textes à traiter (ex. CODE)")
+    embed.add_argument("--en-vigueur-au", type=date.fromisoformat, default=None, help="versions en vigueur à la date")
+    embed.add_argument("--lot", type=int, default=256, help="versions par transaction")
+    embed.add_argument("--max", type=int, default=None, help="nombre maximal de versions traitées")
     index = sub.add_parser("indexer-recherche", help="mettre à jour l'index OpenSearch depuis le corpus")
     index.add_argument("--complet", action="store_true", help="reconstruire un nouvel index puis basculer l'alias")
     index.add_argument("--lot", type=int, default=1000)
@@ -77,6 +86,39 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps({"run_id": str(run_id), **stats.as_dict()}, ensure_ascii=False))
         return 0 if stats.rejected == 0 else 1
 
+    if args.command == "telecharger-modele":
+        from avocat_expert.embedding.download import download_model
+        from avocat_expert.embedding.models import model_spec
+
+        settings = get_settings()
+        key = args.modele or settings.embedding_model
+        directory = args.dossier or (Path(settings.embedding_model_dir) if settings.embedding_model_dir else None)
+        if not key or directory is None:
+            sys.exit("modèle ou dossier non précisé (--modele, --dossier ou AVX_EMBEDDING_MODEL[_DIR])")
+        paths = download_model(model_spec(key), directory)
+        print(json.dumps({"modele": key, "fichiers": [str(p) for p in paths]}, ensure_ascii=False))
+        return 0
+
+    if args.command == "calculer-embeddings":
+        from avocat_expert.embedding import configured_embedder
+        from avocat_expert.embedding.store import compute_missing
+
+        embedder = configured_embedder(get_settings())
+        if embedder is None:
+            sys.exit("AVX_EMBEDDING_MODEL non défini")
+        with _connect() as conn:
+            embed_report = compute_missing(
+                conn,
+                embedder,
+                documents=args.textes,
+                nature=args.nature,
+                as_of=args.en_vigueur_au,
+                batch=args.lot,
+                limit=args.max,
+            )
+        print(json.dumps(embed_report.as_dict(), ensure_ascii=False))
+        return 0
+
     if args.command == "indexer-recherche":
         from avocat_expert.search import indexer
         from avocat_expert.search.opensearch import OpenSearchClient
@@ -87,9 +129,12 @@ def main(argv: list[str] | None = None) -> int:
         client = OpenSearchClient(
             settings.opensearch_url, username=settings.opensearch_username, password=settings.opensearch_password
         )
+        from avocat_expert.embedding.models import model_spec
+
+        spec = model_spec(settings.embedding_model) if settings.embedding_model else None
         with _connect() as conn:
             action = indexer.rebuild if args.complet else indexer.update
-            index_report = action(conn, client, settings.opensearch_alias, args.lot)
+            index_report = action(conn, client, settings.opensearch_alias, args.lot, spec)
         print(json.dumps(index_report.as_dict(), ensure_ascii=False))
         return 0
 
@@ -141,8 +186,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "answer":
         from avocat_expert.answer.extractive import ExtractiveAnswerService
         from avocat_expert.contracts.services import AnswerRequest
-        from avocat_expert.search.ports import DisabledSemanticSearcher
-        from avocat_expert.search.service import HybridSearchService, lexical_searcher
+        from avocat_expert.search.service import HybridSearchService, lexical_searcher, semantic_searcher
         from avocat_expert.storage.corpus import CorpusRepository
         from avocat_expert.verification.lexverif import CitationVerifier, LexverifEngine
 
@@ -150,7 +194,9 @@ def main(argv: list[str] | None = None) -> int:
         with _connect() as conn:
             repository = CorpusRepository(conn)
             service = ExtractiveAnswerService(
-                HybridSearchService(repository, lexical_searcher(settings, repository), DisabledSemanticSearcher()),
+                HybridSearchService(
+                    repository, lexical_searcher(settings, repository), semantic_searcher(settings, repository)
+                ),
                 CitationVerifier(repository, LexverifEngine(settings.lexverif_bin, settings.lexverif_timeout_s)),
             )
             result = service.answer(

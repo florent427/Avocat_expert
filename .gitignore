@@ -32,3 +32,6 @@ node_modules/
 # Données : aucun document client ni dump complet dans le dépôt
 data/
 *.tar.gz
+
+# Fichiers de modèles d'embeddings (téléchargés, jamais versionnés)
+.avx-models/

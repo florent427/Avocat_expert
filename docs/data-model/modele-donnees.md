@@ -16,13 +16,17 @@ Source de vérité : `services/api/migrations/*.sql` (appliquées par
 | `structure_node_version` | plan : racine d'une version de texte (`texte/struct`) ou section (`section_ta`) | titre, commentaire, contexte (sections parentes et intitulés datés) ; bitemporelle |
 | `structure_entry` | entrées ordonnées d'un nœud | sous-section, article ou version du texte, avec numéro, intitulé, niveau, état et période (`valid_period`) ; insertion seule |
 | `provision` | disposition logique | (document, type, numéro) |
-| `provision_version` | **version citable** | identifiant officiel (`LEGIARTI…`), statut brut, `[valid_from, valid_to)` + `valid_period` (début non fixé : `valid_from` NULL ; fin non fixée : `end_undetermined`, ADR 0016), valeurs brutes, texte + SHA-256, NOTA, chemin et empreinte du fichier source, lot, `sys_from/sys_to`, `superseded_by`, retrait, `tsv`, `embedding` |
+| `provision_version` | **version citable** | identifiant officiel (`LEGIARTI…`), statut brut, `[valid_from, valid_to)` + `valid_period` (début non fixé : `valid_from` NULL ; fin non fixée : `end_undetermined`, ADR 0016), valeurs brutes, texte + SHA-256, NOTA, chemin et empreinte du fichier source, lot, `sys_from/sys_to`, `superseded_by`, retrait, `tsv` |
 | `provision_version_declared` | versions annoncées par la source (bloc VERSIONS) | détection des lacunes de couverture |
 | `legal_reference` | références croisées (bloc LIENS) | type (CITATION, MODIFIE…), sens, cible |
 | `source_withdrawal` | entrées de la liste de suppression | `matched` ; jamais de DELETE |
 | `court_decision` | décisions (structure initiale) | ECLI, juridiction, date, texte pseudonymisé ; **aucun champ d'identité de magistrat ou de greffier** (art. L111-13 COJ, L10 CJA) |
 | `case_law_relation` | relations de jurisprudence | origine : source / extraction automatique / validation humaine |
 | `corpus_lexeme_stats`, `corpus_stats` | vues matérialisées BM25 | rafraîchies après ingestion |
+| `embedding_model` | modèle d'embeddings (0013, ADR 0017) | clé, dépôt, révision, dimension |
+| `embedding_vector` | vecteur d'un texte soumis au modèle | (modèle, SHA-256 du texte exact) → vecteur ; insertion seule |
+| `provision_embedding` | texte vectorisé pour une version | (modèle, version) → SHA-256 ; insertion seule |
+| `search_index_state` | index OpenSearch (0012) | alias, index physique, point de contrôle |
 
 Invariants (triggers `avx_forbid_history_rewrite`) : pas de DELETE ; contenu
 non modifiable ; ligne close non modifiable ; une seule ligne courante par

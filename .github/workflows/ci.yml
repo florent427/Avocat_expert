@@ -55,6 +55,7 @@ jobs:
     env:
       AVX_TEST_DATABASE_URL: postgresql://postgres:ci-only-not-a-secret@localhost:5432/postgres
       AVX_TEST_OPENSEARCH_URL: http://localhost:9200
+      AVX_TEST_EMBEDDING_MODEL_DIR: ${{ github.workspace }}/.avx-models/multilingual-e5-base@d1287505
       LEXVERIF_BIN: ${{ github.workspace }}/engine/target/debug/lexverif
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -65,6 +66,14 @@ jobs:
       - name: Dépendances
         working-directory: services/api
         run: uv sync --locked
+      - name: Modèle d'embeddings (cache)
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ${{ env.AVX_TEST_EMBEDDING_MODEL_DIR }}
+          key: embedding-multilingual-e5-base@d1287505
+      - name: Modèle d'embeddings (téléchargement si absent, empreintes vérifiées)
+        working-directory: services/api
+        run: uv run avx telecharger-modele --modele multilingual-e5-base@d1287505 --dossier "$AVX_TEST_EMBEDDING_MODEL_DIR"
       - name: Lint et formatage
         working-directory: services/api
         run: |
@@ -76,7 +85,7 @@ jobs:
       - name: Schémas des contrats à jour
         working-directory: services/api
         run: uv run python scripts/export_schemas.py --check
-      - name: Tests (PostgreSQL, OpenSearch et moteur Rust réels ; aucun test ignoré toléré)
+      - name: Tests (PostgreSQL, OpenSearch, modèle d'embeddings et moteur Rust réels ; aucun test ignoré toléré)
         working-directory: services/api
         run: |
           uv run pytest -rs | tee pytest.log
@@ -149,6 +158,8 @@ jobs:
         run: |
           docker build -f services/api/Dockerfile -t avocat-expert/api:dev .
           docker build -t avocat-expert/web:dev apps/web
+          # Canal sémantique : environnement d'exécution ONNX chargeable dans l'image.
+          docker run --rm --entrypoint python avocat-expert/api:dev -c "import onnxruntime, tokenizers, numpy"
       - name: Trivy
         run: |
           archive="trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz"

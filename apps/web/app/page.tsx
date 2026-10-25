@@ -22,6 +22,19 @@ const OUTCOME_SYMBOL: Record<CheckOutcome, string> = {
   NON_EVALUE: "—",
 };
 
+// Canal par lequel une disposition a été retrouvée (contrat SearchHit.matched_by).
+const MATCH_LABEL: Record<string, string> = {
+  identifiant: "identifiant officiel",
+  numero_article: "numéro d’article",
+  lexical: "termes de la question",
+  semantique: "proximité de sens",
+};
+
+function matchedBy(answer: SourcedAnswer, officialId: string | undefined): string | null {
+  const hit = answer.search.hits.find((h) => h.reference.official_id === officialId);
+  return hit ? hit.matched_by.map((m) => MATCH_LABEL[m] ?? m).join(", ") : null;
+}
+
 export default function Home() {
   const [question, setQuestion] = useState("");
   const [asOf, setAsOf] = useState("");
@@ -113,6 +126,9 @@ export default function Home() {
                 <h2 className="font-medium">{s.text}</h2>
                 <span className={`rounded px-2 py-0.5 text-xs ${SUPPORT_STYLE[s.support]}`}>{SUPPORT_LABEL[s.support]}</span>
               </div>
+              {matchedBy(answer, s.citation?.official_id) && (
+                <p className="mt-1 text-xs text-slate-500">Retrouvée par : {matchedBy(answer, s.citation?.official_id)}</p>
+              )}
               {s.quote && (
                 <blockquote className="mt-3 whitespace-pre-line border-l-4 border-slate-300 pl-3 text-sm dark:border-slate-700">
                   {s.quote}

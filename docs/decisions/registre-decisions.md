@@ -10,6 +10,8 @@
 
 | 2026-10-24 | REF-02 | **Délégation** : le référent juridique demande à Claude de trancher lui-même le lot de validation n° 1 (16 cas, R1–R6, ING-03). | Décisions enregistrées (page de validation, `eval/cases/seed_v0.jsonl` au statut `AVIS_IA_DELEGUE`, `docs/compliance/dependances-reglementaires.md`). Statut distinct de `VALIDE` : la validation par un professionnel reste exigée avant la bêta. |
 | 2026-10-24 | ING-03 | Lecture **exclusive** de `DATE_FIN` confirmée (décision déléguée). | Convention de l'ADR 0002 maintenue ; confirmation DILA souhaitable, non bloquante. |
+| 2026-10-25 | DEC-06 | **Phase D prioritaire** (OpenSearch, canal sémantique) ; **recette locale** (pile `docker compose`, test de fumée) avant tout déploiement AWS. | AWS reste non déployé ; protection de `main` par le porteur. |
+| 2026-10-25 | DEC-07 | **Embeddings : modèle auto-hébergé**, aucune API tierce. | ADR 0017 : calcul local (ONNX Runtime), aucun texte ni question ne quitte l'infrastructure ; pas de sous-traitant supplémentaire au sens de l'article 28 RGPD pour la recherche sémantique. La comparaison avec un modèle sous API prévue par l'ADR 0006 est abandonnée. |
 
 Restent ouvertes : DEC-03 (fournisseur de modèles, phase E), DEC-04
 (positionnement et CGU, avant bêta), décision d'hébergement de production.

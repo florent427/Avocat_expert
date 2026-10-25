@@ -25,3 +25,4 @@ Statuts : **Proposée**, **Acceptée**, **Remplacée**. Les ADR 0001 à 0013 ont
 | 0014 | Conteneurs et chaîne d'approvisionnement | Proposée — implémentée |
 | 0015 | Observabilité à liste blanche | Proposée — implémentée |
 | 0016 | Dates non fixées par la source et date de connaissance du corpus | Proposée — implémentée |
+| 0017 | Canal sémantique : embeddings auto-hébergés, vecteurs PostgreSQL, voisins OpenSearch | Proposée — implémentée (DEC-07) |

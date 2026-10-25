@@ -31,6 +31,12 @@ class Settings(BaseSettings):
     opensearch_alias: str = "avx-legi"
     opensearch_username: str = ""
     opensearch_password: str = ""
+    #: Canal sémantique (ADR 0017) : clé d'un modèle de ``embedding/models.py`` et
+    #: répertoire de ses fichiers ; vide : canal désactivé.
+    embedding_model: str = ""
+    embedding_model_dir: str = ""
+    #: Fils de calcul ONNX Runtime ; 0 : nombre de processeurs.
+    embedding_threads: int = 0
 
     @model_validator(mode="after")
     def _guard_production(self) -> Settings:

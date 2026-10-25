@@ -58,7 +58,7 @@ P0 = bloquant pour la phase suivante · P1 = nécessaire avant bêta · P2 = apr
 | ID | Tâche | Prio |
 |---|---|---|
 | SRCH-01 | ✅ OpenSearch 3.9.0 (analyseur avx_fr, intitulés de section), indexeur complet/incrémental, restriction au texte nommé dans le moteur ; corpus complet : 14 ms en médiane (contre 17 s), réponse complète 104 ms ; reste : domaine géré en recette (INFRA-10) | — |
-| SRCH-02 | Sélection et évaluation d'un modèle d'embeddings ; activation pgvector (SEED-014) | P0 |
+| SRCH-02 | ✅ modèle auto-hébergé (DEC-07) : 4 variantes comparées sur 28 questions, multilingual-e5-base retenu ; vecteurs PostgreSQL, voisins OpenSearch filtrés ; SEED-014 aboutit (ADR 0017) ; reste : vectorisation du corpus complet sur instance de calcul, réévaluation de bge-m3 sur QUAL-01 | — |
 | SRCH-03 | Reranking (après mesure) | P1 |
 | SRCH-04 | ✅ 2026-10-24 : texte nommé = périmètre (mots du titre exclus), verbes interrogatifs ignorés, seuil relatif BM25 0,5 ; **à recalibrer sur corpus annoté par des juristes** | P1 |
 | QUAL-01 | Corpus ≥ 500 cas validés juridiquement (référent : porteur du projet, REF-01) | P0 (validation) |

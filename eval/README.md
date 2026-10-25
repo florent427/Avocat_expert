@@ -8,6 +8,15 @@ sur délégation du référent juridique (`validation_juridique =
 AVIS_IA_DELEGUE`, motivation dans le champ `revue`). **Aucun n'est encore
 validé par un professionnel du droit** (`VALIDE`, réservé à ce cas).
 
+`cases/echelle_v0.jsonl` contient **28 questions en langage naturel** posées
+au corpus complet (codes du travail, civil, pénal, de la consommation, de
+commerce), formulées sans reprendre le vocabulaire de l'article attendu
+(« combien de jours de vacances » pour « congé de deux jours et demi
+ouvrables ») : elles mesurent la recherche à l'échelle et l'apport du canal
+sémantique (SRCH-02). Articles attendus désignés par texte et numéro, version
+en vigueur au 2026-06-01 (date de connaissance du corpus de mesure), texte
+relu dans le corpus. Même statut : `AVIS_IA_DELEGUE`, à revoir par un juriste.
+
 L'objectif du cahier des charges (≥ 500 cas enrichis par des juristes
 compétents) reste à atteindre : voir `docs/backlog/backlog-technique.md`
 (items QUAL-*) et le format ci-dessous.
@@ -19,7 +28,7 @@ compétents) reste à atteindre : voir `docs/backlog/backlog-technique.md`
 | `id` | identifiant stable |
 | `categorie` | `question_simple`, `cas_complexe`, `droit_ancien`, `disposition_transitoire`, `disposition_differee`, `droit_territorial`, `jurisprudence_contradictoire`, `source_manquante`, `document_adversarial`, `delai_procedural`, `hallucination_reference`, `reformulation_semantique`, `identifiant_officiel`, `reference_article`, `version_mort_nee` |
 | `question`, `as_of` | question et date d'appréciation |
-| `attendu` | `{"type": "sources", "official_ids": [...]}` (versions attendues) ou `{"type": "blocage", "incertitude_contient": "..."}` |
+| `attendu` | `{"type": "sources", "official_ids": [...]}` (versions attendues), ou `"dispositions": [{"texte": "LEGITEXT…", "numero": "L1221-19"}]` (version en vigueur à `as_of` résolue dans le corpus ; erreur si introuvable), ou `{"type": "blocage", "incertitude_contient": "..."}` |
 | `validation_juridique` | `NON_VALIDE`, `AVIS_IA_DELEGUE`, `VALIDE` (professionnel du droit uniquement), `CONTESTE` |
 | `revue` | facultatif : `par`, `date`, `decision`, `commentaire` |
 | `auteur` | auteur du cas (et, après revue, du validateur) |

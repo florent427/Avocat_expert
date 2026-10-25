@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from pathlib import Path
 from typing import Any
 
 import psycopg
@@ -16,7 +17,8 @@ pytestmark = [pytest.mark.db, pytest.mark.engine]
 
 #: Échecs connus et documentés (docs/phases/phase-A-rapport.md). Toute
 #: variation, amélioration comprise, doit être constatée et documentée.
-KNOWN_FAILURES = {"SEED-014"}  # reformulation « combien de temps » / « durée » : canal sémantique absent
+#: Sans canal sémantique : SEED-014, reformulation « combien de temps » / « durée ».
+KNOWN_FAILURES = {"SEED-014"}
 
 
 def test_seed_corpus(conn: psycopg.Connection[Any], lexverif_bin: str) -> None:
@@ -67,3 +69,45 @@ def test_seed_corpus_with_opensearch(conn: psycopg.Connection[Any], lexverif_bin
     assert report["recherche"]["rappel_moyen"] >= 0.92
     assert report["recherche"]["precision_moyenne"] >= 0.79
     assert {e["id"] for e in report["echecs"]} == KNOWN_FAILURES
+
+
+@pytest.mark.search
+@pytest.mark.embedding
+def test_seed_corpus_with_semantic_channel(
+    conn: psycopg.Connection[Any], lexverif_bin: str, opensearch_url: str, embedding_model_dir: Path
+) -> None:
+    import uuid
+
+    from avocat_expert.embedding.models import MULTILINGUAL_E5_BASE
+    from avocat_expert.embedding.onnx import OnnxEmbedder
+    from avocat_expert.embedding.store import compute_missing
+    from avocat_expert.search import indexer
+    from avocat_expert.search.opensearch import OpenSearchClient, OpenSearchLexicalSearcher, OpenSearchSemanticSearcher
+    from avocat_expert.storage.corpus import CorpusRepository
+
+    embedder = OnnxEmbedder(MULTILINGUAL_E5_BASE, embedding_model_dir)
+    compute_missing(conn, embedder)
+    client = OpenSearchClient(opensearch_url)
+    alias = f"avx-eval-{uuid.uuid4().hex[:8]}"
+    indexer.rebuild(conn, client, alias, embedding=embedder.spec)
+    try:
+        repository = CorpusRepository(conn)
+        report = run(
+            conn,
+            LexverifEngine(lexverif_bin),
+            load_cases(REPO_ROOT / "eval" / "cases" / "seed_v0.jsonl"),
+            lexical=OpenSearchLexicalSearcher(client, alias, repository),
+            semantic=OpenSearchSemanticSearcher(client, alias, repository, embedder),
+        )
+    finally:
+        for physical in client.request("GET", f"/_alias/{alias}", ok_missing=True) or {}:
+            client.request("DELETE", f"/{physical}", ok_missing=True)
+    # Mesuré le 2026-10-25 (multilingual-e5-base, marge 0,015) : rappel 1,0,
+    # précision 0,8205 (0,8077 en lexical seul) ; SEED-014 (« combien de temps »
+    # / « durée ») aboutit par proximité de sens.
+    assert report["citations"]["integrite_controles_deterministes"] == 1.0
+    assert report["citations"]["conformite_temporelle"] == 1.0
+    assert report["blocages"]["exactitude"] == 1.0
+    assert report["recherche"]["rappel_moyen"] == 1.0
+    assert report["recherche"]["precision_moyenne"] >= 0.82
+    assert report["echecs"] == []

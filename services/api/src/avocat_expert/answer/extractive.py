@@ -105,9 +105,20 @@ class ExtractiveAnswerService:
                 if all(s.support is SupportStatus.FONDEE for s in usable)
                 else SupportStatus.INCERTAINE
             )
+            semantic_only = sum(
+                1
+                for hit, statement in zip(hits, statements, strict=True)
+                if statement.support is not SupportStatus.BLOQUEE and hit.matched_by == ["semantique"]
+            )
+            matched = (
+                "correspondent aux termes de la question"
+                if not semantic_only
+                else "ont été retrouvées par les termes de la question ou par proximité de sens "
+                f"({semantic_only} par proximité de sens seulement)"
+            )
             summary = (
                 f"{len(usable)} disposition(s) du corpus officiel, en vigueur au {as_of.isoformat()}, "
-                "correspondent aux termes de la question. Les extraits sont cités littéralement ; "
+                f"{matched}. Les extraits sont cités littéralement ; "
                 "leur pertinence et leur portée juridiques ne sont pas évaluées automatiquement."
             )
         if usable:

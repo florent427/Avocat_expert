@@ -7,12 +7,15 @@ license = { text = "Propriétaire — tous droits réservés" }
 dependencies = [
   "defusedxml>=0.7.1",
   "fastapi>=0.115",
+  "numpy>=2.5.3",
+  "onnxruntime>=1.31.0",
   "opentelemetry-api>=1.30",
   "opentelemetry-exporter-otlp-proto-http>=1.30",
   "opentelemetry-sdk>=1.30",
   "psycopg[binary]>=3.2",
   "pydantic>=2.9",
   "pydantic-settings>=2.6",
+  "tokenizers>=0.23.3",
   "uvicorn>=0.32",
 ]
 
@@ -39,8 +42,10 @@ packages = ["src/avocat_expert"]
 exclude-newer = "2026-10-10T00:00:00Z"
 # Exceptions de sécurité (correctif postérieur à la date limite) :
 # certifi — GHSA-6q48-6c7w-9gw2 (racines emSign compromises), corrigé en 2026.10.19.
-exclude-newer-package = { certifi = "2026-10-21T00:00:00Z" }
-constraint-dependencies = ["certifi>=2026.10.19"]
+# filelock (dépendance de huggingface-hub, via tokenizers) — GHSA-v4x8-3wr5-3wq8
+# (HIGH) et cinq autres avis du 2026-10-23, corrigés en 4.2.1.
+exclude-newer-package = { certifi = "2026-10-21T00:00:00Z", filelock = "2026-10-21T00:00:00Z" }
+constraint-dependencies = ["certifi>=2026.10.19", "filelock>=4.2.1"]
 
 [tool.ruff]
 line-length = 120
@@ -60,7 +65,7 @@ packages = ["avocat_expert"]
 mypy_path = "src"
 
 [[tool.mypy.overrides]]
-module = ["defusedxml.*"]
+module = ["defusedxml.*", "onnxruntime.*"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
@@ -70,4 +75,5 @@ markers = [
   "db: nécessite une base PostgreSQL (variable AVX_TEST_DATABASE_URL)",
   "engine: nécessite le binaire Rust lexverif (variable LEXVERIF_BIN)",
   "search: nécessite un nœud OpenSearch (variable AVX_TEST_OPENSEARCH_URL)",
+  "embedding: nécessite les fichiers du modèle d'embeddings (variable AVX_TEST_EMBEDDING_MODEL_DIR)",
 ]

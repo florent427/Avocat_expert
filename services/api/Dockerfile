@@ -29,7 +29,10 @@ FROM docker.io/library/python:3.13-slim-bookworm@sha256:e32be0e55814a08977501ca8
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 \
     PATH="/app/.venv/bin:$PATH" \
     AVX_LEXVERIF_BIN=/usr/local/bin/lexverif \
-    AVX_MIGRATIONS_DIR=/app/migrations
+    AVX_MIGRATIONS_DIR=/app/migrations \
+    HF_HUB_OFFLINE=1
+# HF_HUB_OFFLINE : la bibliothèque huggingface_hub (dépendance de tokenizers) ne
+# sert jamais ; les fichiers du modèle sont lus sur disque (avx telecharger-modele).
 # Outils d'installation inutiles à l'exécution (et porteurs de vulnérabilités) : retirés.
 RUN python -m pip uninstall -y pip \
     && rm -rf /usr/local/lib/python3.13/ensurepip \

@@ -179,7 +179,7 @@ def test_api_answer_end_to_end_and_trace_without_question_text(
     assert body["search"]["channels"][3] == {
         "channel": "semantique",
         "enabled": False,
-        "detail": "désactivé : aucun fournisseur d'embeddings configuré et validé",
+        "detail": "désactivé : aucun modèle d'embeddings configuré",
     }
     digest = hashlib.sha256(question.encode()).hexdigest()
     trace = conn.execute(

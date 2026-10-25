@@ -23,10 +23,10 @@ from avocat_expert.contracts.services import (
     SearchResponse,
     SourcedAnswer,
 )
+from avocat_expert.embedding import configured_embedder
 from avocat_expert.observability.telemetry import configure_tracing, set_attributes, span
 from avocat_expert.observability.traces import Step, Trace, Usage, persist_trace, sha256_json
-from avocat_expert.search.ports import DisabledSemanticSearcher
-from avocat_expert.search.service import HybridSearchService, lexical_searcher
+from avocat_expert.search.service import HybridSearchService, lexical_searcher, semantic_searcher
 from avocat_expert.storage.corpus import CorpusRepository
 from avocat_expert.verification.lexverif import CitationVerifier, LexverifEngine, VerificationUnavailable
 
@@ -50,7 +50,9 @@ Authenticated = Annotated[Principal, Depends(require_principal)]
 
 def _services(conn: psycopg.Connection[Any], settings: Settings) -> tuple[HybridSearchService, CitationVerifier]:
     repository = CorpusRepository(conn)
-    search = HybridSearchService(repository, lexical_searcher(settings, repository), DisabledSemanticSearcher())
+    search = HybridSearchService(
+        repository, lexical_searcher(settings, repository), semantic_searcher(settings, repository)
+    )
     try:
         engine = LexverifEngine(settings.lexverif_bin, settings.lexverif_timeout_s)
     except VerificationUnavailable as exc:
@@ -66,6 +68,9 @@ def create_app() -> FastAPI:
     )
     settings = get_settings()
     configure_tracing(settings.otel_exporter_endpoint, settings.environment)
+    # Modèle d'embeddings chargé au démarrage : un fichier altéré empêche le
+    # démarrage (et la première question n'attend pas le chargement).
+    configured_embedder(settings)
 
     @app.middleware("http")
     async def trace_requests(request: Request, call_next: Any) -> Response:

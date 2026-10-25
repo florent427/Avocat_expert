@@ -15,7 +15,7 @@ from avocat_expert.config import Settings
 from avocat_expert.connectors.legi import SOURCE_CODE as LEGI_SOURCE_CODE
 from avocat_expert.contracts.services import ChannelStatus, SearchHit, SearchResponse
 from avocat_expert.search.excerpt import select_excerpt
-from avocat_expert.search.ports import LexicalSearcher, SemanticSearcher
+from avocat_expert.search.ports import DisabledSemanticSearcher, LexicalSearcher, SemanticSearcher
 from avocat_expert.search.query import ParsedQuery, fold, parse_query, terms_of
 from avocat_expert.storage.corpus import CorpusRepository, LexicalHit, VersionRecord
 
@@ -47,6 +47,13 @@ EXACT_MATCH_BONUS = 1.0
 #: score lexical de la requête est écarté (bruit). Heuristique calibrée sur le
 #: corpus technique seed_v0 : à recalibrer sur le corpus annoté par des juristes.
 LEXICAL_RELATIVE_CUTOFF = 0.5
+#: Un résultat sémantique dont la similarité cosinus est inférieure de plus de
+#: cet écart à la meilleure de la requête est écarté. Les similarités du modèle
+#: sont resserrées (0,78 à 0,92 sur les fixtures) : un seuil absolu ne distingue
+#: rien d'une requête à l'autre. Calibrage (ADR 0017) : 0,005 à 0,015 font
+#: aboutir SEED-014 sans perte de précision, 0,03 et au-delà ajoutent du bruit ;
+#: à reprendre sur le corpus annoté (QUAL-01).
+SEMANTIC_MARGIN = 0.015
 
 
 @dataclass(frozen=True)
@@ -148,14 +155,23 @@ class HybridSearchService:
         explicit_found = resolved > 0
         if content_terms:
             allowed = frozenset(doc_id for doc_id, _ in named) or None
-            for channel in (self._lexical, self._semantic):
+            queries: list[tuple[LexicalSearcher | SemanticSearcher, str]] = [
+                (self._lexical, " ".join(content_terms)),
+                # Le modèle d'embeddings reçoit la question telle quelle (il a été
+                # entraîné sur des phrases, pas sur des racines).
+                (self._semantic, parsed.raw),
+            ]
+            for channel, text in queries:
+                if channel is self._semantic and not self._semantic.enabled:
+                    continue
                 # Restriction appliquée par le moteur : un filtrage après coup des
                 # premiers résultats ne laisse rien à l'échelle du corpus complet.
-                channel_hits = channel.search(" ".join(content_terms), as_of, limit * 3, allowed)
+                channel_hits = channel.search(text, as_of, limit * 3, allowed)
                 if allowed:
                     channel_hits = [h for h in channel_hits if h.version.document_official_id in allowed]
-                if channel is self._lexical and channel_hits:
-                    floor = channel_hits[0].score * LEXICAL_RELATIVE_CUTOFF
+                if channel_hits:
+                    best = channel_hits[0].score
+                    floor = best * LEXICAL_RELATIVE_CUTOFF if channel is self._lexical else best - SEMANTIC_MARGIN
                     channel_hits = [h for h in channel_hits if h.score >= floor]
                 for rank, hit in enumerate(channel_hits, start=1):
                     merge(_Candidate(hit.version, 1.0 / (RRF_K + rank), [channel.name]))
@@ -184,7 +200,8 @@ class HybridSearchService:
             channels=channels,
             ranking=(
                 f"correspondances exactes prioritaires puis RRF(k={RRF_K}) ; lexical : {self._lexical.ranking}, "
-                f"seuil relatif {LEXICAL_RELATIVE_CUTOFF}, restreint au texte nommé dans la question le cas échéant"
+                f"seuil relatif {LEXICAL_RELATIVE_CUTOFF} ; sémantique : écart maximal de similarité "
+                f"{SEMANTIC_MARGIN} au meilleur résultat ; restreint au texte nommé dans la question le cas échéant"
             ),
         )
         return SearchOutcome(
@@ -216,3 +233,22 @@ def lexical_searcher(settings: Settings, repository: CorpusRepository) -> Lexica
         settings.opensearch_url, username=settings.opensearch_username, password=settings.opensearch_password
     )
     return OpenSearchLexicalSearcher(client, settings.opensearch_alias, repository)
+
+
+def semantic_searcher(settings: Settings, repository: CorpusRepository) -> SemanticSearcher:
+    """Canal sémantique si un modèle et OpenSearch sont configurés (ADR 0017)."""
+    from avocat_expert.embedding import configured_embedder
+
+    embedder = configured_embedder(settings)
+    if embedder is None:
+        return DisabledSemanticSearcher()
+    if not settings.opensearch_url:
+        return DisabledSemanticSearcher(
+            "désactivé : la recherche des plus proches voisins requiert OpenSearch (AVX_OPENSEARCH_URL)"
+        )
+    from avocat_expert.search.opensearch import OpenSearchClient, OpenSearchSemanticSearcher
+
+    client = OpenSearchClient(
+        settings.opensearch_url, username=settings.opensearch_username, password=settings.opensearch_password
+    )
+    return OpenSearchSemanticSearcher(client, settings.opensearch_alias, repository, embedder)

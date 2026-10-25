@@ -21,8 +21,12 @@ class LexicalSearcher(Protocol):
 
 class SemanticSearcher(Protocol):
     name: str
-    enabled: bool
-    detail: str
+
+    @property
+    def enabled(self) -> bool: ...
+
+    @property
+    def detail(self) -> str: ...
 
     def search(
         self, query: str, as_of: date, limit: int, documents: frozenset[str] | None = None
@@ -30,12 +34,14 @@ class SemanticSearcher(Protocol):
 
 
 class DisabledSemanticSearcher:
-    """Canal sémantique désactivé tant qu'aucun modèle d'embeddings n'est
-    choisi, évalué et autorisé (voir ADR 0006)."""
+    """Canal sémantique désactivé : aucun modèle d'embeddings configuré
+    (ADR 0006, 0017), ou configuration incomplète (motif dans ``detail``)."""
 
     name = "semantique"
     enabled = False
-    detail = "désactivé : aucun fournisseur d'embeddings configuré et validé"
+
+    def __init__(self, detail: str = "désactivé : aucun modèle d'embeddings configuré") -> None:
+        self.detail = detail
 
     def search(self, query: str, as_of: date, limit: int, documents: frozenset[str] | None = None) -> list[LexicalHit]:
         return []

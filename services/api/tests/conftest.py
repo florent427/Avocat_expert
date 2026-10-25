@@ -5,6 +5,8 @@
   ils sont ignorés — et signalés comme tels — si la variable est absente.
 * Les tests ``engine`` utilisent le binaire Rust désigné par ``LEXVERIF_BIN``.
 * Les tests ``search`` utilisent un nœud OpenSearch réel (``AVX_TEST_OPENSEARCH_URL``).
+* Les tests ``embedding`` utilisent les fichiers du modèle d'embeddings
+  (``AVX_TEST_EMBEDDING_MODEL_DIR``, obtenus par ``avx telecharger-modele``).
 """
 
 from __future__ import annotations
@@ -85,6 +87,14 @@ def opensearch_url() -> str:
     if not url:
         pytest.skip("AVX_TEST_OPENSEARCH_URL non défini : tests OpenSearch ignorés")
     return url
+
+
+@pytest.fixture(scope="session")
+def embedding_model_dir() -> Path:
+    directory = os.environ.get("AVX_TEST_EMBEDDING_MODEL_DIR")
+    if not directory:
+        pytest.skip("AVX_TEST_EMBEDDING_MODEL_DIR non défini : tests du modèle d'embeddings ignorés")
+    return Path(directory)
 
 
 @pytest.fixture(scope="session")
