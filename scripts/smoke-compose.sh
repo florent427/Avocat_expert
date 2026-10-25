@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Test de fumée de la pile locale (images construites) :
-#   ingestion -> API (rôle à moindre privilège) -> web -> Keycloak.
+#   ingestion -> index OpenSearch -> API (rôle à moindre privilège) -> web -> Keycloak.
 # Les secrets sont générés pour l'exécution et jamais écrits dans le dépôt.
 # Usage : scripts/smoke-compose.sh [--no-build]
 set -euo pipefail
@@ -32,12 +32,16 @@ step() { printf '\n== %s\n' "$*"; }
 
 BUILD="--build"; [[ "${1:-}" == "--no-build" ]] && BUILD=""
 step "Démarrage de la pile"
-compose up -d $BUILD --wait --wait-timeout 300 postgres api web keycloak
+compose up -d $BUILD --wait --wait-timeout 300 postgres opensearch api web keycloak
 
 step "Ingestion des fixtures LEGI (rôle propriétaire, tâche ponctuelle)"
 PGURL="postgresql://postgres:$(grep ^POSTGRES_PASSWORD "$ENV_FILE" | cut -d= -f2-)@postgres:5432/avocat_expert"
 compose run --rm -T -e AVX_DATABASE_URL="$PGURL" -v "$PWD/fixtures:/fixtures:ro" migrate \
   avx ingest-legi /fixtures/legi/LEGI_20261023-215041
+
+step "Index de recherche OpenSearch"
+compose run --rm -T -e AVX_DATABASE_URL="$PGURL" -e AVX_OPENSEARCH_URL=http://opensearch:9200 migrate \
+  avx indexer-recherche --complet
 
 step "API : authentification requise"
 code=$(curl -s -o /dev/null -w '%{http_code}' -X POST http://127.0.0.1:8000/v1/answer -H 'Content-Type: application/json' -d '{"question":"test"}')
@@ -53,7 +57,8 @@ ids = [s["citation"]["official_id"] for s in a["statements"]]
 assert ids == ["LEGIARTI000048590205"], ids
 assert all(s["verification"]["verdict"] == "INCERTAIN" for s in a["statements"])
 assert "intelligence artificielle" in a["disclaimer"]
-print("citations :", ids)
+assert "OpenSearch" in a["search"]["ranking"], a["search"]["ranking"]
+print("citations :", ids, "— classement OpenSearch")
 PY
 
 step "Base : l'API écrit ses traces avec le rôle avx_api, sans privilège sur le corpus"

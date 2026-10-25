@@ -26,7 +26,7 @@ from avocat_expert.contracts.services import (
 from avocat_expert.observability.telemetry import configure_tracing, set_attributes, span
 from avocat_expert.observability.traces import Step, Trace, Usage, persist_trace, sha256_json
 from avocat_expert.search.ports import DisabledSemanticSearcher
-from avocat_expert.search.service import HybridSearchService, PostgresLexicalSearcher
+from avocat_expert.search.service import HybridSearchService, lexical_searcher
 from avocat_expert.storage.corpus import CorpusRepository
 from avocat_expert.verification.lexverif import CitationVerifier, LexverifEngine, VerificationUnavailable
 
@@ -50,7 +50,7 @@ Authenticated = Annotated[Principal, Depends(require_principal)]
 
 def _services(conn: psycopg.Connection[Any], settings: Settings) -> tuple[HybridSearchService, CitationVerifier]:
     repository = CorpusRepository(conn)
-    search = HybridSearchService(repository, PostgresLexicalSearcher(repository), DisabledSemanticSearcher())
+    search = HybridSearchService(repository, lexical_searcher(settings, repository), DisabledSemanticSearcher())
     try:
         engine = LexverifEngine(settings.lexverif_bin, settings.lexverif_timeout_s)
     except VerificationUnavailable as exc:

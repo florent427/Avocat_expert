@@ -4,6 +4,7 @@
   session à partir de ``AVX_TEST_DATABASE_URL`` (URL d'administration) ;
   ils sont ignorés — et signalés comme tels — si la variable est absente.
 * Les tests ``engine`` utilisent le binaire Rust désigné par ``LEXVERIF_BIN``.
+* Les tests ``search`` utilisent un nœud OpenSearch réel (``AVX_TEST_OPENSEARCH_URL``).
 """
 
 from __future__ import annotations
@@ -76,6 +77,14 @@ def ingested_url(migrated_url: str, legi_fixtures: Path) -> str:
 def conn(ingested_url: str) -> Iterator[psycopg.Connection[Any]]:
     with psycopg.connect(ingested_url, autocommit=True) as connection:
         yield connection
+
+
+@pytest.fixture(scope="session")
+def opensearch_url() -> str:
+    url = os.environ.get("AVX_TEST_OPENSEARCH_URL")
+    if not url:
+        pytest.skip("AVX_TEST_OPENSEARCH_URL non défini : tests OpenSearch ignorés")
+    return url
 
 
 @pytest.fixture(scope="session")

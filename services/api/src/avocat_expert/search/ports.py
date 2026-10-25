@@ -12,7 +12,11 @@ class LexicalSearcher(Protocol):
     name: str
     ranking: str
 
-    def search(self, query: str, as_of: date, limit: int) -> list[LexicalHit]: ...
+    def search(self, query: str, as_of: date, limit: int, documents: frozenset[str] | None = None) -> list[LexicalHit]:
+        """``documents`` : identifiants des seuls textes à interroger (texte nommé
+        dans la question) ; la restriction est appliquée par le moteur, avant
+        classement."""
+        ...
 
 
 class SemanticSearcher(Protocol):
@@ -20,7 +24,9 @@ class SemanticSearcher(Protocol):
     enabled: bool
     detail: str
 
-    def search(self, query: str, as_of: date, limit: int) -> list[LexicalHit]: ...
+    def search(
+        self, query: str, as_of: date, limit: int, documents: frozenset[str] | None = None
+    ) -> list[LexicalHit]: ...
 
 
 class DisabledSemanticSearcher:
@@ -31,5 +37,5 @@ class DisabledSemanticSearcher:
     enabled = False
     detail = "désactivé : aucun fournisseur d'embeddings configuré et validé"
 
-    def search(self, query: str, as_of: date, limit: int) -> list[LexicalHit]:
+    def search(self, query: str, as_of: date, limit: int, documents: frozenset[str] | None = None) -> list[LexicalHit]:
         return []

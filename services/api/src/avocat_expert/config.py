@@ -26,6 +26,11 @@ class Settings(BaseSettings):
     otel_exporter_endpoint: str = ""
     oidc_issuer: str = ""
     oidc_audience: str = ""
+    #: Canal lexical OpenSearch ; vide : BM25 calculé dans PostgreSQL (ADR 0005).
+    opensearch_url: str = ""
+    opensearch_alias: str = "avx-legi"
+    opensearch_username: str = ""
+    opensearch_password: str = ""
 
     @model_validator(mode="after")
     def _guard_production(self) -> Settings:

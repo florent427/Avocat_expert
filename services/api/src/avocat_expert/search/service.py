@@ -11,6 +11,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import date
 
+from avocat_expert.config import Settings
 from avocat_expert.connectors.legi import SOURCE_CODE as LEGI_SOURCE_CODE
 from avocat_expert.contracts.services import ChannelStatus, SearchHit, SearchResponse
 from avocat_expert.search.excerpt import select_excerpt
@@ -127,10 +128,12 @@ class HybridSearchService:
         content_terms = [t for t in parsed.terms if t not in title_terms]
         explicit_found = resolved > 0
         if content_terms:
+            allowed = frozenset(doc_id for doc_id, _ in named) or None
             for channel in (self._lexical, self._semantic):
-                channel_hits = channel.search(" ".join(content_terms), as_of, limit * 3)
-                if named:
-                    allowed = {doc_id for doc_id, _ in named}
+                # Restriction appliquée par le moteur : un filtrage après coup des
+                # premiers résultats ne laisse rien à l'échelle du corpus complet.
+                channel_hits = channel.search(" ".join(content_terms), as_of, limit * 3, allowed)
+                if allowed:
                     channel_hits = [h for h in channel_hits if h.version.document_official_id in allowed]
                 if channel is self._lexical and channel_hits:
                     floor = channel_hits[0].score * LEXICAL_RELATIVE_CUTOFF
@@ -180,5 +183,17 @@ class PostgresLexicalSearcher:
     def __init__(self, repository: CorpusRepository) -> None:
         self._repository = repository
 
-    def search(self, query: str, as_of: date, limit: int) -> list[LexicalHit]:
-        return self._repository.lexical_search(query, as_of, limit)
+    def search(self, query: str, as_of: date, limit: int, documents: frozenset[str] | None = None) -> list[LexicalHit]:
+        return self._repository.lexical_search(query, as_of, limit, documents)
+
+
+def lexical_searcher(settings: Settings, repository: CorpusRepository) -> LexicalSearcher:
+    """OpenSearch si configuré, sinon BM25 dans PostgreSQL."""
+    if not settings.opensearch_url:
+        return PostgresLexicalSearcher(repository)
+    from avocat_expert.search.opensearch import OpenSearchClient, OpenSearchLexicalSearcher
+
+    client = OpenSearchClient(
+        settings.opensearch_url, username=settings.opensearch_username, password=settings.opensearch_password
+    )
+    return OpenSearchLexicalSearcher(client, settings.opensearch_alias, repository)

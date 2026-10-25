@@ -107,7 +107,10 @@ WITH stats AS (SELECT document_count, average_length FROM corpus_stats),
              FROM provision_version pv
              WHERE pv.sys_to IS NULL AND NOT pv.withdrawn_from_source
                AND pv.valid_period @> %s::date
-               AND pv.tsv @@ to_tsquery('avx_fr'::regconfig, %s)),
+               AND pv.tsv @@ to_tsquery('avx_fr'::regconfig, %s)
+               AND (%s::text[] IS NULL OR pv.provision_id IN (
+                     SELECT p.id FROM provision p JOIN legal_document d ON d.id = p.document_id
+                     WHERE d.official_id = ANY(%s::text[])))),
     scored AS (
       SELECT c.id,
              sum(ln(1 + (s.document_count - q.df + 0.5) / (q.df + 0.5))
@@ -143,6 +146,17 @@ class CorpusRepository:
         )
         return VersionRecord.from_row(rows[0]) if rows else None
 
+    def current_versions(self, official_ids: list[str]) -> dict[str, VersionRecord]:
+        """Versions courantes (non retirées) des identifiants demandés."""
+        if not official_ids:
+            return {}
+        rows = self._fetch(
+            f"SELECT {_VERSION_COLUMNS} {_VERSION_FROM} "
+            "WHERE pv.official_id = ANY(%s) AND pv.sys_to IS NULL AND NOT pv.withdrawn_from_source",
+            (official_ids,),
+        )
+        return {r["official_id"]: VersionRecord.from_row(r) for r in rows}
+
     def versions_of_provision(self, provision_id: uuid.UUID) -> list[VersionRecord]:
         rows = self._fetch(
             f"SELECT {_VERSION_COLUMNS} {_VERSION_FROM} "
@@ -161,7 +175,9 @@ class CorpusRepository:
         )
         return [VersionRecord.from_row(r) for r in rows]
 
-    def lexical_search(self, query: str, as_of: date, limit: int) -> list[LexicalHit]:
+    def lexical_search(
+        self, query: str, as_of: date, limit: int, documents: frozenset[str] | None = None
+    ) -> list[LexicalHit]:
         """BM25 (k1=1,2 ; b=0,75) calculé dans PostgreSQL à partir des tsvector.
 
         Les fréquences de termes proviennent des positions des lexèmes (plafonnées
@@ -175,9 +191,21 @@ class CorpusRepository:
         terms = sorted(r["lexeme"] for r in lexemes)
         if not terms:
             return []
+        scope = sorted(documents) if documents else None
         rows = self._fetch(
             _BM25_SQL,
-            (terms, as_of, " | ".join(_quote_lexeme(t) for t in terms), BM25_K1, BM25_K1, BM25_B, BM25_B, limit),
+            (
+                terms,
+                as_of,
+                " | ".join(_quote_lexeme(t) for t in terms),
+                scope,
+                scope,
+                BM25_K1,
+                BM25_K1,
+                BM25_B,
+                BM25_B,
+                limit,
+            ),
         )
         return [LexicalHit(VersionRecord.from_row(r), float(r["score"])) for r in rows]
 

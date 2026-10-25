@@ -69,4 +69,5 @@ addopts = "-ra --strict-markers"
 markers = [
   "db: nécessite une base PostgreSQL (variable AVX_TEST_DATABASE_URL)",
   "engine: nécessite le binaire Rust lexverif (variable LEXVERIF_BIN)",
+  "search: nécessite un nœud OpenSearch (variable AVX_TEST_OPENSEARCH_URL)",
 ]

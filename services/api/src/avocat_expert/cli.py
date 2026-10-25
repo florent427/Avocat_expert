@@ -52,6 +52,9 @@ def main(argv: list[str] | None = None) -> int:
     sync.add_argument("--simulation", action="store_true", help="afficher le plan sans rien télécharger ni ingérer")
     sync.add_argument("--lot", type=int, default=1000, help="nombre de fichiers par transaction")
     sub.add_parser("rafraichir-statistiques", help="recalculer les statistiques BM25 du corpus")
+    index = sub.add_parser("indexer-recherche", help="mettre à jour l'index OpenSearch depuis le corpus")
+    index.add_argument("--complet", action="store_true", help="reconstruire un nouvel index puis basculer l'alias")
+    index.add_argument("--lot", type=int, default=1000)
     sub.add_parser("fraicheur-legi", help="écart entre le corpus et les livraisons LEGI publiées (code 3 si en retard)")
     ask = sub.add_parser("answer", help="réponse sourcée extractive")
     ask.add_argument("question")
@@ -73,6 +76,22 @@ def main(argv: list[str] | None = None) -> int:
             run_id, stats = ingest_legi(conn, args.location, enforce_order=not args.hors_sequence, batch_size=args.lot)
         print(json.dumps({"run_id": str(run_id), **stats.as_dict()}, ensure_ascii=False))
         return 0 if stats.rejected == 0 else 1
+
+    if args.command == "indexer-recherche":
+        from avocat_expert.search import indexer
+        from avocat_expert.search.opensearch import OpenSearchClient
+
+        settings = get_settings()
+        if not settings.opensearch_url:
+            sys.exit("AVX_OPENSEARCH_URL non défini")
+        client = OpenSearchClient(
+            settings.opensearch_url, username=settings.opensearch_username, password=settings.opensearch_password
+        )
+        with _connect() as conn:
+            action = indexer.rebuild if args.complet else indexer.update
+            index_report = action(conn, client, settings.opensearch_alias, args.lot)
+        print(json.dumps(index_report.as_dict(), ensure_ascii=False))
+        return 0
 
     if args.command == "rafraichir-statistiques":
         from avocat_expert.connectors.legi.ingest import refresh_corpus_statistics
@@ -123,7 +142,7 @@ def main(argv: list[str] | None = None) -> int:
         from avocat_expert.answer.extractive import ExtractiveAnswerService
         from avocat_expert.contracts.services import AnswerRequest
         from avocat_expert.search.ports import DisabledSemanticSearcher
-        from avocat_expert.search.service import HybridSearchService, PostgresLexicalSearcher
+        from avocat_expert.search.service import HybridSearchService, lexical_searcher
         from avocat_expert.storage.corpus import CorpusRepository
         from avocat_expert.verification.lexverif import CitationVerifier, LexverifEngine
 
@@ -131,7 +150,7 @@ def main(argv: list[str] | None = None) -> int:
         with _connect() as conn:
             repository = CorpusRepository(conn)
             service = ExtractiveAnswerService(
-                HybridSearchService(repository, PostgresLexicalSearcher(repository), DisabledSemanticSearcher()),
+                HybridSearchService(repository, lexical_searcher(settings, repository), DisabledSemanticSearcher()),
                 CitationVerifier(repository, LexverifEngine(settings.lexverif_bin, settings.lexverif_timeout_s)),
             )
             result = service.answer(

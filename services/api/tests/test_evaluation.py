@@ -35,3 +35,35 @@ def test_seed_corpus(conn: psycopg.Connection[Any], lexverif_bin: str) -> None:
     # 0,7821 depuis l'ajout de 3 articles aux fixtures (citation parasite ci-dessus).
     assert report["recherche"]["precision_moyenne"] >= 0.78
     assert {e["id"] for e in report["echecs"]} == KNOWN_FAILURES
+
+
+@pytest.mark.search
+def test_seed_corpus_with_opensearch(conn: psycopg.Connection[Any], lexverif_bin: str, opensearch_url: str) -> None:
+    import uuid
+
+    from avocat_expert.search import indexer
+    from avocat_expert.search.opensearch import OpenSearchClient, OpenSearchLexicalSearcher
+    from avocat_expert.storage.corpus import CorpusRepository
+
+    client = OpenSearchClient(opensearch_url)
+    alias = f"avx-eval-{uuid.uuid4().hex[:8]}"
+    indexer.rebuild(conn, client, alias)
+    try:
+        lexical = OpenSearchLexicalSearcher(client, alias, CorpusRepository(conn))
+        report = run(
+            conn,
+            LexverifEngine(lexverif_bin),
+            load_cases(REPO_ROOT / "eval" / "cases" / "seed_v0.jsonl"),
+            lexical=lexical,
+        )
+    finally:
+        for physical in client.request("GET", f"/_alias/{alias}", ok_missing=True) or {}:
+            client.request("DELETE", f"/{physical}", ok_missing=True)
+    # Mesuré le 2026-10-25 : mêmes rappel et MRR que BM25 SQL, précision 0,7949
+    # (la citation parasite art. 289 CGI n'est plus retenue).
+    assert report["citations"]["integrite_controles_deterministes"] == 1.0
+    assert report["citations"]["conformite_temporelle"] == 1.0
+    assert report["blocages"]["exactitude"] == 1.0
+    assert report["recherche"]["rappel_moyen"] >= 0.92
+    assert report["recherche"]["precision_moyenne"] >= 0.79
+    assert {e["id"] for e in report["echecs"]} == KNOWN_FAILURES

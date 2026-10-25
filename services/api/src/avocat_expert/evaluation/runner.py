@@ -22,7 +22,7 @@ from avocat_expert.config import get_settings
 from avocat_expert.contracts.common import CheckOutcome, SupportStatus
 from avocat_expert.contracts.services import AnswerRequest, SourcedAnswer
 from avocat_expert.search.excerpt import ELISION, is_item
-from avocat_expert.search.ports import DisabledSemanticSearcher
+from avocat_expert.search.ports import DisabledSemanticSearcher, LexicalSearcher
 from avocat_expert.search.service import HybridSearchService, PostgresLexicalSearcher
 from avocat_expert.storage.corpus import CorpusRepository
 from avocat_expert.verification.lexverif import CitationVerifier, LexverifEngine
@@ -170,11 +170,15 @@ def summarise(results: list[CaseResult]) -> dict[str, Any]:
 
 
 def run(
-    conn: psycopg.Connection[Any], engine: LexverifEngine, cases: list[Case], max_sources: int = 3
+    conn: psycopg.Connection[Any],
+    engine: LexverifEngine,
+    cases: list[Case],
+    max_sources: int = 3,
+    lexical: LexicalSearcher | None = None,
 ) -> dict[str, Any]:
     repository = CorpusRepository(conn)
     service = ExtractiveAnswerService(
-        HybridSearchService(repository, PostgresLexicalSearcher(repository), DisabledSemanticSearcher()),
+        HybridSearchService(repository, lexical or PostgresLexicalSearcher(repository), DisabledSemanticSearcher()),
         CitationVerifier(repository, engine),
     )
     today = datetime.now(UTC).date()

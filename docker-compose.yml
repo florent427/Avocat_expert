@@ -1,4 +1,4 @@
-# Environnement local de développement : PostgreSQL, migrations, API, web, Keycloak.
+# Environnement local de développement : PostgreSQL, OpenSearch, migrations, API, web, Keycloak.
 #   cp .env.example .env   (puis renseigner les valeurs locales)
 #   docker compose up --build
 # Réservé au poste de développement : aucun port n'est exposé hors de 127.0.0.1.
@@ -24,6 +24,26 @@ services:
       test: ["CMD-SHELL", "pg_isready -U postgres -d avocat_expert"]
       interval: 5s
       retries: 20
+
+  # Index de recherche (projection du corpus public ; aucune donnée client).
+  # Sécurité du nœud désactivée en local uniquement, port lié à 127.0.0.1 ;
+  # en recette : service géré dans le VPC avec contrôle d'accès (INFRA-10).
+  opensearch:
+    image: mirror.gcr.io/opensearchproject/opensearch:3.9.0@sha256:adfa61f85025d06b4aeb562e7e74fde7e31c437039c93c3862c17e9acebd6c7c
+    environment:
+      discovery.type: single-node
+      DISABLE_SECURITY_PLUGIN: "true"
+      DISABLE_INSTALL_DEMO_CONFIG: "true"
+      OPENSEARCH_JAVA_OPTS: -Xms1g -Xmx1g
+      # Poste de développement : seuils de disque en pourcentage inadaptés.
+      cluster.routing.allocation.disk.threshold_enabled: "false"
+    ports: ["127.0.0.1:9200:9200"]
+    volumes:
+      - osdata:/usr/share/opensearch/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf 'http://localhost:9200/_cluster/health?wait_for_status=yellow&timeout=5s'"]
+      interval: 10s
+      retries: 30
 
   migrate:
     <<: *api-image
@@ -54,12 +74,14 @@ services:
       AVX_ENVIRONMENT: local
       AVX_DATABASE_URL: postgresql://avx_api:${AVX_API_DB_PASSWORD}@postgres:5432/avocat_expert
       AVX_DEV_TOKEN_SHA256: ${AVX_DEV_TOKEN_SHA256:?définir AVX_DEV_TOKEN_SHA256 dans .env}
+      AVX_OPENSEARCH_URL: http://opensearch:9200
     ports: ["127.0.0.1:8000:8000"]
     read_only: true
     security_opt: ["no-new-privileges:true"]
     cap_drop: ["ALL"]
     depends_on:
       bootstrap-role: { condition: service_completed_successfully }
+      opensearch: { condition: service_healthy }
 
   web:
     image: avocat-expert/web:dev
@@ -95,3 +117,4 @@ services:
 
 volumes:
   pgdata:
+  osdata:
