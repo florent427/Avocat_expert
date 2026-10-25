@@ -58,8 +58,9 @@ La mise à jour incrémentale refuse aussi un index d'un autre modèle.
 |---|---|---|
 | Fichiers | 1,13 Go | 487 Mo |
 | Vectorisation du corpus (processeur seul) | environ 10 articles/s | 25 à 40 articles/s |
-| Vectorisation d'une question | 88 ms (sous charge concurrente) | 7 ms |
-| Stockage PostgreSQL par texte distinct | environ 3,2 Ko | environ 1,7 Ko |
+| Vectorisation d'une question | 17 ms (95e centile : 27 ms) | 7 ms |
+| Stockage PostgreSQL par texte distinct (vecteur) | 3,1 Ko | 1,5 Ko |
+| Canal sémantique complet (question, voisins filtrés, relecture) | 31 ms (95e centile : 40 ms) | — |
 
 Le corpus courant complet (1,8 million de versions) demanderait plusieurs
 jours sur 4 cœurs : à répartir sur plusieurs tâches (périmètres disjoints

@@ -87,6 +87,28 @@ vecteurs un tiers plus grands et un modèle deux fois plus lourd. À réévaluer
 sur le corpus annoté par des juristes (QUAL-01), et en particulier pour les
 articles longs (bge-m3 accepte 8 192 jetons).
 
+### De bout en bout, corpus de mesure
+
+Corpus LEGI complet (1,8 million de versions), vecteurs calculés pour les
+46 181 articles en vigueur au 2026-06-01 de sept codes : les cinq visés par
+les questions, plus la santé publique et la sécurité sociale, voisins du
+droit du travail. Réponse à 3 citations, 28 questions :
+
+| Configuration | Articles attendus trouvés | Rappel@3 | MRR |
+|---|---|---|---|
+| Lexical, corpus complet | 3 | 0,107 | 0,107 |
+| Lexical, sept codes | 7 | 0,250 | 0,208 |
+| **Hybride, sept codes (écart 0,015)** | **14** | **0,500** | **0,375** |
+| Hybride, écart 0,005 / 0,03 | 13 / 14 | 0,464 / 0,500 | 0,369 / 0,357 |
+
+Le canal sémantique seul place l'article attendu en tête pour 12 questions
+(16 dans les 10 premiers) ; la fusion ne lui fait rien perdre à 3 citations.
+Quatorze questions restent sans l'article attendu (formulations éloignées :
+« vacances », « prime de fin de CDD », « temps pour contester ») : le
+reclassement (SRCH-03) et le corpus annoté (QUAL-01) en sont les leviers.
+Comparaison lexical / hybride faite sur le même périmètre ; un corpus
+entièrement vectorisé ajouterait des voisins d'autres textes.
+
 ## Conséquences
 
 * Aucun sous-traitant supplémentaire pour la recherche sémantique.
