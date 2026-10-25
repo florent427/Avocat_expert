@@ -181,8 +181,19 @@ jobs:
         with:
           name: sbom
           path: sbom/
-      - name: Test de fumée de la pile (ingestion, API, web, Keycloak)
-        run: scripts/smoke-compose.sh --no-build
+      - name: Modèle d'embeddings (cache)
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ${{ github.workspace }}/.avx-models/multilingual-e5-base@d1287505
+          key: embedding-multilingual-e5-base@d1287505
+      - name: Modèle d'embeddings (téléchargement par l'image si absent, empreintes vérifiées)
+        run: |
+          dir="$GITHUB_WORKSPACE/.avx-models/multilingual-e5-base@d1287505"
+          mkdir -p "$dir"
+          docker run --rm --user "$(id -u):$(id -g)" -v "$dir:/m" --entrypoint avx avocat-expert/api:dev \
+            telecharger-modele --modele multilingual-e5-base@d1287505 --dossier /m
+      - name: Test de fumée de la pile (ingestion, vecteurs, API, web, Keycloak)
+        run: AVX_SMOKE_MODEL_DIR="$GITHUB_WORKSPACE/.avx-models" scripts/smoke-compose.sh --no-build
 
   secrets:
     name: Détection de secrets

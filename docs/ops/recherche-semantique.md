@@ -28,6 +28,21 @@ avx indexer-recherche --complet # index avec champ vectoriel ; bascule de l'alia
   `avx indexer-recherche` (incrémental : reprend aussi les versions qui ont
   reçu leur vecteur depuis la dernière synchronisation).
 
+## Pile locale (`docker compose`)
+
+```bash
+cd services/api && uv run avx telecharger-modele --modele multilingual-e5-base@d1287505 \
+  --dossier ../../.avx-models/multilingual-e5-base@d1287505 && cd ../..
+# .env : AVX_EMBEDDING_MODEL=multilingual-e5-base@d1287505 (AVX_MODELS_DIR, par défaut ./.avx-models)
+docker compose up -d --build
+docker compose run --rm -e AVX_DATABASE_URL=… migrate avx calculer-embeddings
+docker compose run --rm -e AVX_DATABASE_URL=… -e AVX_OPENSEARCH_URL=http://opensearch:9200 migrate avx indexer-recherche --complet
+```
+
+Le répertoire des modèles est monté en lecture seule dans l'API. Test de
+fumée avec le canal sémantique : `AVX_SMOKE_MODEL_DIR=$PWD/.avx-models
+scripts/smoke-compose.sh` (exécuté ainsi en CI).
+
 ## Changement de modèle
 
 Les vecteurs sont rangés par modèle : un nouveau modèle se calcule à côté de

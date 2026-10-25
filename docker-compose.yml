@@ -50,6 +50,10 @@ services:
     command: ["avx", "migrate"]
     environment:
       AVX_DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD}@postgres:5432/avocat_expert
+      AVX_EMBEDDING_MODEL: ${AVX_EMBEDDING_MODEL:-}
+      AVX_EMBEDDING_MODEL_DIR: /modeles/${AVX_EMBEDDING_MODEL:-aucun}
+    volumes:
+      - ${AVX_MODELS_DIR:-./.avx-models}:/modeles:ro
     depends_on:
       postgres: { condition: service_healthy }
     restart: "no"
@@ -75,6 +79,12 @@ services:
       AVX_DATABASE_URL: postgresql://avx_api:${AVX_API_DB_PASSWORD}@postgres:5432/avocat_expert
       AVX_DEV_TOKEN_SHA256: ${AVX_DEV_TOKEN_SHA256:?définir AVX_DEV_TOKEN_SHA256 dans .env}
       AVX_OPENSEARCH_URL: http://opensearch:9200
+      # Canal sémantique (ADR 0017) : vide = désactivé. Fichiers du modèle
+      # téléchargés au préalable (avx telecharger-modele) dans AVX_MODELS_DIR.
+      AVX_EMBEDDING_MODEL: ${AVX_EMBEDDING_MODEL:-}
+      AVX_EMBEDDING_MODEL_DIR: /modeles/${AVX_EMBEDDING_MODEL:-aucun}
+    volumes:
+      - ${AVX_MODELS_DIR:-./.avx-models}:/modeles:ro
     ports: ["127.0.0.1:8000:8000"]
     read_only: true
     security_opt: ["no-new-privileges:true"]
