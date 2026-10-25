@@ -215,6 +215,15 @@ class CorpusRepository:
         value = rows[0]["d"] if rows else None
         return value if isinstance(value, date) else None
 
+    def corpus_marker(self) -> tuple[object, ...]:
+        """Repère de l'état du corpus : change à chaque ingestion réussie."""
+        rows = self._fetch(
+            "SELECT current_database() AS db, count(*) AS n, max(finished_at) AS last "
+            "FROM ingestion_run WHERE status = 'SUCCEEDED'",
+            (),
+        )
+        return (rows[0]["db"], rows[0]["n"], rows[0]["last"]) if rows else ()
+
     def document_titles(self) -> list[tuple[str, str, str | None]]:
         """(identifiant officiel, titre, titre court) des textes du corpus."""
         rows = self._fetch("SELECT official_id, title, short_title FROM legal_document ORDER BY official_id", ())

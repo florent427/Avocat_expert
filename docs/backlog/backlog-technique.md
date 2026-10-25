@@ -57,7 +57,7 @@ P0 = bloquant pour la phase suivante · P1 = nécessaire avant bêta · P2 = apr
 ## Phase D — recherche et évaluation
 | ID | Tâche | Prio |
 |---|---|---|
-| SRCH-01 | Adaptateur OpenSearch (analyseur français), comparaison avec BM25 PostgreSQL. **Mesure phase C** : BM25 SQL sur 1,8 M de versions = 17 s en médiane, 76 s au 95e centile ; questions en langage naturel sans réponse pertinente (4/4) — prérequis à toute recette utilisateurs | P0 |
+| SRCH-01 | ✅ OpenSearch 3.9.0 (analyseur avx_fr, intitulés de section), indexeur complet/incrémental, restriction au texte nommé dans le moteur ; corpus complet : 14 ms en médiane (contre 17 s), réponse complète 104 ms ; reste : domaine géré en recette (INFRA-10) | — |
 | SRCH-02 | Sélection et évaluation d'un modèle d'embeddings ; activation pgvector (SEED-014) | P0 |
 | SRCH-03 | Reranking (après mesure) | P1 |
 | SRCH-04 | ✅ 2026-10-24 : texte nommé = périmètre (mots du titre exclus), verbes interrogatifs ignorés, seuil relatif BM25 0,5 ; **à recalibrer sur corpus annoté par des juristes** | P1 |

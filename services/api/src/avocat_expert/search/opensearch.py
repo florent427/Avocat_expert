@@ -161,9 +161,23 @@ def temporal_filter(as_of: date) -> list[dict[str, Any]]:
     ]
 
 
+#: Proximité des termes dans les intitulés de section (expression à 3 positions
+#: près) et poids de ce signal. Mesuré sur le corpus complet (2026-10-25) :
+#: « conditions d'attribution de l'allocation d'assurance » place l'article
+#: L5422-1 au rang 6 au lieu d'au-delà du rang 200, les premiers résultats
+#: appartenant tous à la sous-section « Conditions d'attribution ».
+#: Calibrage provisoire sur 4 questions : à reprendre sur le corpus annoté (QUAL-01).
+SECTION_PHRASE_SLOP = 3
+SECTION_PHRASE_BOOST = 2.0
+
+
 class OpenSearchLexicalSearcher:
     name = "lexical"
-    ranking = "BM25 OpenSearch (analyseur avx_fr : élision, mots vides, racinisation légère, repli d'accents)"
+    ranking = (
+        "BM25 OpenSearch (analyseur avx_fr : élision, mots vides, racinisation légère, repli d'accents) "
+        f"sur le texte, renforcé par la proximité des termes dans les intitulés de section "
+        f"(expression à {SECTION_PHRASE_SLOP} positions près, poids {SECTION_PHRASE_BOOST})"
+    )
 
     def __init__(self, client: OpenSearchClient, alias: str, repository: CorpusRepository) -> None:
         self._client = client
@@ -178,7 +192,24 @@ class OpenSearchLexicalSearcher:
             "size": limit,
             "_source": False,
             "track_total_hits": False,
-            "query": {"bool": {"must": [{"match": {"text": {"query": query}}}], "filter": filters}},
+            "query": {
+                "bool": {
+                    "should": [
+                        {"match": {"text": {"query": query}}},
+                        {
+                            "match_phrase": {
+                                "section_path": {
+                                    "query": query,
+                                    "slop": SECTION_PHRASE_SLOP,
+                                    "boost": SECTION_PHRASE_BOOST,
+                                }
+                            }
+                        },
+                    ],
+                    "minimum_should_match": 1,
+                    "filter": filters,
+                }
+            },
         }
         result = self._client.request("POST", f"/{quote(self._alias)}/_search", body)
         scored = [(hit["_id"], float(hit["_score"])) for hit in result["hits"]["hits"]]

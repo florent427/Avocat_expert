@@ -19,6 +19,28 @@ from avocat_expert.search.ports import LexicalSearcher, SemanticSearcher
 from avocat_expert.search.query import ParsedQuery, fold, parse_query, terms_of
 from avocat_expert.storage.corpus import CorpusRepository, LexicalHit, VersionRecord
 
+_TITLE_CACHE: dict[str, tuple[object, list[tuple[str, str, str]]]] = {}
+
+
+def _folded_titles(repository: CorpusRepository) -> list[tuple[str, str, str]]:
+    """Titres et titres courts repliés (minuscules, sans diacritiques), calculés
+    une fois par processus et par état du corpus : 147 187 textes sur le corpus
+    complet, dont le repliage à chaque question coûtait 1,5 s (mesure du
+    2026-10-25). Invalidé à chaque nouvelle ingestion réussie."""
+    marker = repository.corpus_marker()
+    cached = _TITLE_CACHE.get("titles")
+    if cached is not None and cached[0] == marker:
+        return cached[1]
+    entries = [
+        (official_id, candidate, fold(candidate))
+        for official_id, title, short_title in repository.document_titles()
+        for candidate in (title, short_title)
+        if candidate
+    ]
+    _TITLE_CACHE["titles"] = (marker, entries)
+    return entries
+
+
 RRF_K = 60
 EXACT_MATCH_BONUS = 1.0
 #: Un résultat lexical dont le score est inférieur à cette fraction du meilleur
@@ -54,20 +76,17 @@ class HybridSearchService:
         self._repository = repository
         self._lexical = lexical
         self._semantic = semantic
-        self._titles: list[tuple[str, str, str | None]] | None = None
 
     def _named_documents(self, raw: str) -> list[tuple[str, str]]:
         """Textes du corpus dont le titre (ou titre court) figure dans la question."""
-        if self._titles is None:
-            self._titles = self._repository.document_titles()
         folded = fold(raw)
         named = []
-        for official_id, title, short_title in self._titles:
-            for candidate in (title, short_title):
-                if candidate and fold(candidate) in folded:
-                    named.append((official_id, candidate))
-                    break
-        return named
+        for official_id, title, folded_title in _folded_titles(self._repository):
+            # Un titre plus long que la question ne peut pas y figurer.
+            if len(folded_title) <= len(folded) and folded_title in folded:
+                named.append((official_id, title))
+        # Un même texte peut être nommé par son titre et par son titre court.
+        return list(dict.fromkeys(named))
 
     def _exact_candidates(self, parsed: ParsedQuery, as_of: date) -> tuple[list[_Candidate], list[str], int]:
         notes: list[str] = []
